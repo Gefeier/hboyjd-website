@@ -1,0 +1,293 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>在线选配 | 湖北欧阳聚德汽车</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+SC:wght@300;400;500;700;900&family=Orbitron:wght@400;700;900&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="configurator.css">
+</head>
+<body>
+    <!-- 粒子背景 Canvas -->
+    <canvas id="particleCanvas"></canvas>
+
+    <!-- 公路层 -->
+    <div class="highway">
+        <div class="road">
+            <div class="road-line"></div>
+            <div class="road-line"></div>
+            <div class="road-line"></div>
+            <div class="road-line"></div>
+            <div class="road-line"></div>
+            <div class="road-line"></div>
+            <div class="road-line"></div>
+            <div class="road-line"></div>
+        </div>
+        <div class="road-glow"></div>
+    </div>
+
+    <!-- 顶部导航 -->
+    <nav class="config-nav">
+        <a href="index.html" class="nav-back">← 返回官网</a>
+        <div class="nav-logo">
+            <img src="assets/images/logo-white.png" alt="欧阳聚德" class="logo-img">
+        </div>
+        <div class="nav-steps" id="navSteps">
+            <span class="step-dot active" data-step="0">车型</span>
+            <span class="step-dot" data-step="1">规格</span>
+            <span class="step-dot" data-step="2">悬挂</span>
+            <span class="step-dot" data-step="3">颜色</span>
+            <span class="step-dot" data-step="4">提交</span>
+        </div>
+    </nav>
+
+    <!-- 车辆展示区 -->
+    <div class="vehicle-stage" id="vehicleStage">
+        <div class="vehicle-wrapper" id="vehicleWrapper">
+            <img src="assets/images/config-base.png" alt="车辆" id="vehicleImg" class="vehicle-img">
+        </div>
+        <!-- 车辆下方的光影反射 -->
+        <div class="vehicle-reflection" id="vehicleReflection">
+            <img src="assets/images/config-base.png" alt="" class="reflection-img" id="reflectionImg">
+        </div>
+        <!-- 车辆名称 -->
+        <div class="vehicle-label" id="vehicleLabel">
+            <span class="label-en">FLATBED SEMI-TRAILER</span>
+            <span class="label-zh">平板半挂车</span>
+        </div>
+        <!-- 配置标签 -->
+        <div class="config-tags" id="configTags">
+            <span class="tag">请选择配置</span>
+        </div>
+    </div>
+
+    <!-- 右侧毛玻璃选配面板 -->
+    <div class="config-panel" id="configPanel">
+        <div class="panel-handle" id="panelHandle"></div>
+
+        <!-- Step 0: 车型 -->
+        <div class="config-step active" data-step="0">
+            <div class="step-header">
+                <span class="step-number">01</span>
+                <h2>选择车型</h2>
+            </div>
+            <div class="type-grid">
+                <label class="type-option">
+                    <input type="radio" name="vehicleType" value="直梁平板" checked>
+                    <div class="type-inner">
+                        <img src="assets/images/product-flatbed.jpg" alt="">
+                        <span class="type-name">平板半挂车</span>
+                        <span class="type-desc">直梁平板 · 通用运输</span>
+                    </div>
+                </label>
+                <label class="type-option">
+                    <input type="radio" name="vehicleType" value="高低平板">
+                    <div class="type-inner">
+                        <img src="assets/images/product-lowbed.jpg" alt="">
+                        <span class="type-name">高低平板</span>
+                        <span class="type-desc">高低结构 · 工程机械</span>
+                    </div>
+                </label>
+                <label class="type-option">
+                    <input type="radio" name="vehicleType" value="自卸">
+                    <div class="type-inner">
+                        <img src="assets/images/product-dump.jpg" alt="">
+                        <span class="type-name">自卸半挂车</span>
+                        <span class="type-desc">液压翻转 · 散料运输</span>
+                    </div>
+                </label>
+                <label class="type-option">
+                    <input type="radio" name="vehicleType" value="骨架">
+                    <div class="type-inner">
+                        <img src="assets/images/product-crane.jpg" alt="">
+                        <span class="type-name">骨架车</span>
+                        <span class="type-desc">集装箱 · 专用运输</span>
+                    </div>
+                </label>
+                <label class="type-option">
+                    <input type="radio" name="vehicleType" value="仓栅">
+                    <div class="type-inner">
+                        <img src="assets/images/product-fence.jpg" alt="">
+                        <span class="type-name">仓栅半挂车</span>
+                        <span class="type-desc">栏板结构 · 农牧运输</span>
+                    </div>
+                </label>
+                <label class="type-option">
+                    <input type="radio" name="vehicleType" value="特种">
+                    <div class="type-inner">
+                        <img src="assets/images/product-special.jpg" alt="">
+                        <span class="type-name">特种车</span>
+                        <span class="type-desc">定制化 · 特殊需求</span>
+                    </div>
+                </label>
+            </div>
+        </div>
+
+        <!-- Step 1: 规格 -->
+        <div class="config-step" data-step="1">
+            <div class="step-header">
+                <span class="step-number">02</span>
+                <h2>车辆规格</h2>
+            </div>
+            <div class="config-group">
+                <label class="group-label">车身长度</label>
+                <div class="pill-row">
+                    <label class="pill"><input type="radio" name="length" value="13米"><span>13米</span></label>
+                    <label class="pill"><input type="radio" name="length" value="13.75米"><span>13.75米</span></label>
+                    <label class="pill"><input type="radio" name="length" value="14.6米"><span>14.6米</span></label>
+                    <label class="pill"><input type="radio" name="length" value="16米"><span>16米</span></label>
+                    <label class="pill"><input type="radio" name="length" value="其他"><span>其他</span></label>
+                </div>
+                <input type="text" class="text-input hidden" id="customLength" placeholder="请输入自定义长度">
+            </div>
+            <div class="config-group">
+                <label class="group-label">轴数</label>
+                <div class="pill-row">
+                    <label class="pill"><input type="radio" name="axles" value="2轴"><span>2轴</span></label>
+                    <label class="pill"><input type="radio" name="axles" value="3轴"><span>3轴</span></label>
+                    <label class="pill"><input type="radio" name="axles" value="4轴"><span>4轴</span></label>
+                </div>
+            </div>
+            <div class="config-group">
+                <label class="group-label">支腿类型</label>
+                <div class="pill-row">
+                    <label class="pill"><input type="radio" name="leg" value="28T单动"><span>28T 单动</span></label>
+                    <label class="pill"><input type="radio" name="leg" value="28T联动"><span>28T 联动</span></label>
+                    <label class="pill"><input type="radio" name="leg" value="55T液压"><span>55T 液压</span></label>
+                    <label class="pill"><input type="radio" name="leg" value="80T液压"><span>80T 液压</span></label>
+                </div>
+            </div>
+            <div class="config-group">
+                <label class="group-label">腹板厚度</label>
+                <div class="pill-row">
+                    <label class="pill"><input type="radio" name="webPlate" value="5mm"><span>5mm</span></label>
+                    <label class="pill"><input type="radio" name="webPlate" value="6mm"><span>6mm</span></label>
+                    <label class="pill"><input type="radio" name="webPlate" value="8mm"><span>8mm</span></label>
+                    <label class="pill"><input type="radio" name="webPlate" value="10mm"><span>10mm</span></label>
+                    <label class="pill"><input type="radio" name="webPlate" value="12mm"><span>12mm</span></label>
+                </div>
+            </div>
+        </div>
+
+        <!-- Step 2: 悬挂 -->
+        <div class="config-step" data-step="2">
+            <div class="step-header">
+                <span class="step-number">03</span>
+                <h2>悬挂与轮胎</h2>
+            </div>
+            <div class="config-group">
+                <label class="group-label">悬挂系统</label>
+                <div class="pill-row">
+                    <label class="pill"><input type="radio" name="suspension" value="普通钢板悬架"><span>普通钢板悬架</span></label>
+                    <label class="pill"><input type="radio" name="suspension" value="重型钢板悬架"><span>重型钢板悬架</span></label>
+                    <label class="pill"><input type="radio" name="suspension" value="空悬鼓刹"><span>空气悬挂 鼓刹</span></label>
+                    <label class="pill"><input type="radio" name="suspension" value="空悬碟刹"><span>空气悬挂 碟刹</span></label>
+                </div>
+            </div>
+            <div class="config-group">
+                <label class="group-label">轮胎规格</label>
+                <div class="pill-row">
+                    <label class="pill"><input type="radio" name="tire" value="12R22.5"><span>12R22.5</span></label>
+                    <label class="pill"><input type="radio" name="tire" value="11R22.5"><span>11R22.5</span></label>
+                    <label class="pill"><input type="radio" name="tire" value="295/60R22.5"><span>295/60R22.5</span></label>
+                    <label class="pill"><input type="radio" name="tire" value="275/70R22.5"><span>275/70R22.5</span></label>
+                </div>
+            </div>
+            <div class="config-group">
+                <label class="group-label">轮毂材质</label>
+                <div class="pill-row">
+                    <label class="pill"><input type="radio" name="hub" value="钢圈"><span>钢圈</span></label>
+                    <label class="pill"><input type="radio" name="hub" value="铝圈"><span>铝合金轮毂</span></label>
+                </div>
+            </div>
+            <div class="config-group">
+                <label class="group-label">车桥品牌</label>
+                <div class="pill-row">
+                    <label class="pill"><input type="radio" name="axleBrand" value="厂配"><span>厂标配置</span></label>
+                    <label class="pill"><input type="radio" name="axleBrand" value="富华"><span>富华</span></label>
+                    <label class="pill"><input type="radio" name="axleBrand" value="襄汽"><span>襄汽</span></label>
+                </div>
+            </div>
+        </div>
+
+        <!-- Step 3: 颜色 -->
+        <div class="config-step" data-step="3">
+            <div class="step-header">
+                <span class="step-number">04</span>
+                <h2>颜色与外观</h2>
+            </div>
+            <div class="config-group">
+                <label class="group-label">车身颜色</label>
+                <div class="color-grid">
+                    <label class="color-opt" title="聚德大红"><input type="radio" name="color" value="聚德大红 RAL3020"><span class="swatch" style="background:#c1272d"></span><span class="cname">聚德大红</span></label>
+                    <label class="color-opt" title="赤焰红"><input type="radio" name="color" value="赤焰红 RAL3000"><span class="swatch" style="background:#af2b1e"></span><span class="cname">赤焰红</span></label>
+                    <label class="color-opt" title="桔红"><input type="radio" name="color" value="桔红 RAL2017"><span class="swatch" style="background:#fa842b"></span><span class="cname">桔红</span></label>
+                    <label class="color-opt" title="聚德黄"><input type="radio" name="color" value="聚德黄色 RAL1007"><span class="swatch" style="background:#e88c00"></span><span class="cname">聚德黄</span></label>
+                    <label class="color-opt" title="白色"><input type="radio" name="color" value="白色 RAL9016"><span class="swatch" style="background:#f1f0ea"></span><span class="cname">白色</span></label>
+                    <label class="color-opt" title="银灰"><input type="radio" name="color" value="银灰 RAL7040"><span class="swatch" style="background:#9da1aa"></span><span class="cname">银灰</span></label>
+                    <label class="color-opt" title="淡蓝"><input type="radio" name="color" value="淡蓝色 RAL5012"><span class="swatch" style="background:#3b83bd"></span><span class="cname">淡蓝</span></label>
+                    <label class="color-opt" title="东岳蓝"><input type="radio" name="color" value="东岳蓝 RAL5002"><span class="swatch" style="background:#20214f"></span><span class="cname">东岳蓝</span></label>
+                    <label class="color-opt" title="苹果绿"><input type="radio" name="color" value="苹果绿 RAL6016"><span class="swatch" style="background:#1e5945"></span><span class="cname">苹果绿</span></label>
+                    <label class="color-opt" title="黑色"><input type="radio" name="color" value="黑色 RAL9005"><span class="swatch" style="background:#0a0a0a"></span><span class="cname">黑色</span></label>
+                    <label class="color-opt" title="其他"><input type="radio" name="color" value="其他"><span class="swatch other">?</span><span class="cname">其他</span></label>
+                </div>
+            </div>
+            <div class="config-group">
+                <label class="group-label">其他需求（选填）</label>
+                <textarea class="text-area" name="remarks" placeholder="篷布架、加高栏板、特殊尺寸等"></textarea>
+            </div>
+        </div>
+
+        <!-- Step 4: 提交 -->
+        <div class="config-step" data-step="4">
+            <div class="step-header">
+                <span class="step-number">05</span>
+                <h2>提交询价</h2>
+            </div>
+            <div class="summary-card" id="configSummary"></div>
+            <div class="config-group">
+                <label class="group-label">您的称呼 *</label>
+                <input type="text" class="text-input" name="customerName" placeholder="请输入姓名" required>
+            </div>
+            <div class="config-group">
+                <label class="group-label">联系电话 *</label>
+                <input type="tel" class="text-input" name="customerPhone" placeholder="请输入手机号" required>
+            </div>
+            <div class="config-group">
+                <label class="group-label">公司名称（选填）</label>
+                <input type="text" class="text-input" name="customerCompany" placeholder="请输入公司名称">
+            </div>
+            <div class="config-group">
+                <label class="group-label">需求台数</label>
+                <div class="pill-row">
+                    <label class="pill"><input type="radio" name="quantity" value="1台"><span>1台</span></label>
+                    <label class="pill"><input type="radio" name="quantity" value="2-5台"><span>2-5台</span></label>
+                    <label class="pill"><input type="radio" name="quantity" value="5-10台"><span>5-10台</span></label>
+                    <label class="pill"><input type="radio" name="quantity" value="10台以上"><span>10台以上</span></label>
+                </div>
+            </div>
+        </div>
+
+        <!-- 底部按钮 -->
+        <div class="panel-actions">
+            <button class="btn-prev" id="btnPrev" disabled>上一步</button>
+            <button class="btn-next" id="btnNext">下一步 →</button>
+            <button class="btn-submit hidden" id="btnSubmit">提交询价</button>
+        </div>
+    </div>
+
+    <!-- 成功弹窗 -->
+    <div class="modal-overlay hidden" id="successModal">
+        <div class="modal-box">
+            <div class="modal-icon">✓</div>
+            <h2>询价提交成功</h2>
+            <p>我们的销售团队将在 <strong>24小时内</strong> 与您联系</p>
+            <p class="modal-phone">紧急联系：<a href="tel:4001588106">400-1588-106</a></p>
+            <a href="index.html" class="btn-back">返回首页</a>
+        </div>
+    </div>
+
+    <script src="configurator.js"></script>
+</body>
+</html>
