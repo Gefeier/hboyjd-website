@@ -378,31 +378,129 @@ document.querySelectorAll('input[name="vehicleType"]').forEach(radio => {
     });
 });
 
-// ====== 颜色切换 — CSS滤镜变色 ======
-function setVehicleColor(colorVal) {
-    var filters = {
-        '聚德大红 RAL3020':   'none',
-        '赤焰红 RAL3000':     'brightness(0.8) contrast(1.1)',
-        '桔红 RAL2017':        'hue-rotate(20deg) saturate(1.3) brightness(1.05)',
-        '聚德黄色 RAL1007':   'hue-rotate(45deg) saturate(1.5) brightness(1.15)',
-        '白色 RAL9016':        'grayscale(1) brightness(2.8) contrast(0.6)',
-        '银灰 RAL7040':        'grayscale(1) brightness(1.4) contrast(0.9)',
-        '淡蓝色 RAL5012':     'hue-rotate(200deg) saturate(1.2) brightness(1.0)',
-        '东岳蓝 RAL5002':     'hue-rotate(230deg) saturate(1.5) brightness(0.6) contrast(1.1)',
-        '苹果绿 RAL6016':     'hue-rotate(140deg) saturate(0.9) brightness(0.7) contrast(1.1)',
-        '黑色 RAL9005':        'saturate(0.05) brightness(0.3) contrast(1.5)'
-    };
-    var f = filters[colorVal] || 'none';
+// ====== 颜色切换 — Canvas像素级HSL换色 ======
+// 目标色HSL值（只需要H和S，L从原图保留）
+var colorTargets = {
+    '聚德大红 RAL3020':   null,           // 原色不处理
+    '赤焰红 RAL3000':     { h: 1, s: 0.75, lMul: 0.85 },
+    '桔红 RAL2017':        { h: 20, s: 0.9, lMul: 1.0 },
+    '聚德黄色 RAL1007':   { h: 42, s: 0.95, lMul: 1.1 },
+    '白色 RAL9016':        { h: 0, s: 0.02, lMul: 1.9 },
+    '银灰 RAL7040':        { h: 220, s: 0.05, lMul: 1.2 },
+    '淡蓝色 RAL5012':     { h: 210, s: 0.6, lMul: 1.0 },
+    '东岳蓝 RAL5002':     { h: 238, s: 0.75, lMul: 0.55 },
+    '苹果绿 RAL6016':     { h: 160, s: 0.55, lMul: 0.65 },
+    '黑色 RAL9005':        { h: 0, s: 0.03, lMul: 0.3 }
+};
+
+// 原始图片像素数据缓存
+var originalPixels = null;
+var colorCanvas = document.createElement('canvas');
+var colorCtx = colorCanvas.getContext('2d', { willReadFrequently: true });
+
+// 加载原始图片像素
+var baseImg = new Image();
+baseImg.crossOrigin = 'anonymous';
+baseImg.onload = function() {
+    colorCanvas.width = baseImg.width;
+    colorCanvas.height = baseImg.height;
+    colorCtx.drawImage(baseImg, 0, 0);
+    originalPixels = colorCtx.getImageData(0, 0, colorCanvas.width, colorCanvas.height);
+};
+baseImg.src = 'assets/images/config-base.png';
+
+function rgbToHsl(r, g, b) {
+    r /= 255; g /= 255; b /= 255;
+    var max = Math.max(r, g, b), min = Math.min(r, g, b);
+    var h, s, l = (max + min) / 2;
+    if (max === min) { h = s = 0; }
+    else {
+        var d = max - min;
+        s = l > 0.5 ? d / (2 - max - min) : d / (max + min);
+        if (max === r) h = ((g - b) / d + (g < b ? 6 : 0)) / 6;
+        else if (max === g) h = ((b - r) / d + 2) / 6;
+        else h = ((r - g) / d + 4) / 6;
+    }
+    return [h * 360, s, l];
+}
+
+function hslToRgb(h, s, l) {
+    h /= 360;
+    var r, g, b;
+    if (s === 0) { r = g = b = l; }
+    else {
+        function hue2rgb(p, q, t) {
+            if (t < 0) t += 1; if (t > 1) t -= 1;
+            if (t < 1/6) return p + (q - p) * 6 * t;
+            if (t < 1/2) return q;
+            if (t < 2/3) return p + (q - p) * (2/3 - t) * 6;
+            return p;
+        }
+        var q = l < 0.5 ? l * (1 + s) : l + s - l * s;
+        var p = 2 * l - q;
+        r = hue2rgb(p, q, h + 1/3);
+        g = hue2rgb(p, q, h);
+        b = hue2rgb(p, q, h - 1/3);
+    }
+    return [Math.round(r * 255), Math.round(g * 255), Math.round(b * 255)];
+}
+
+function recolorVehicle(colorVal) {
+    if (!originalPixels) return;
+    var target = colorTargets[colorVal];
+
     var vImg = document.getElementById('vehicleImg');
     var rImg = document.getElementById('reflectionImg');
-    if (vImg) vImg.style.filter = 'drop-shadow(0 20px 60px rgba(37,99,235,0.15)) ' + f;
-    if (rImg) rImg.style.filter = 'blur(3px) ' + f;
+
+    if (!target) {
+        // 原色：恢复原图
+        vImg.src = 'assets/images/config-base.png';
+        rImg.src = 'assets/images/config-base.png';
+        vImg.style.filter = 'drop-shadow(0 20px 60px rgba(37,99,235,0.15))';
+        rImg.style.filter = 'blur(3px)';
+        return;
+    }
+
+    var imgData = new ImageData(
+        new Uint8ClampedArray(originalPixels.data),
+        originalPixels.width, originalPixels.height
+    );
+    var d = imgData.data;
+
+    for (var i = 0; i < d.length; i += 4) {
+        if (d[i+3] < 10) continue; // 跳过透明像素
+
+        var hsl = rgbToHsl(d[i], d[i+1], d[i+2]);
+        var h = hsl[0], s = hsl[1], l = hsl[2];
+
+        // 判断是否为"车身红色区域"：色相在红色范围(0-30 或 330-360)且饱和度>0.2
+        var isRed = (h < 30 || h > 330) && s > 0.2 && l > 0.08 && l < 0.92;
+
+        if (isRed) {
+            // 替换为目标颜色，保留亮度关系
+            var newH = target.h;
+            var newS = target.s;
+            var newL = Math.min(0.97, Math.max(0.02, l * target.lMul));
+
+            var rgb = hslToRgb(newH, newS, newL);
+            d[i] = rgb[0];
+            d[i+1] = rgb[1];
+            d[i+2] = rgb[2];
+        }
+    }
+
+    colorCtx.putImageData(imgData, 0, 0);
+    var dataUrl = colorCanvas.toDataURL('image/png');
+    vImg.src = dataUrl;
+    rImg.src = dataUrl;
+    vImg.style.filter = 'drop-shadow(0 20px 60px rgba(37,99,235,0.15))';
+    rImg.style.filter = 'blur(3px)';
 }
 
 // 绑定颜色事件
 document.querySelectorAll('input[name="color"]').forEach(function(radio) {
     radio.addEventListener('change', function() {
-        setVehicleColor(radio.value);
+        recolorVehicle(radio.value);
         var vImg = document.getElementById('vehicleImg');
         if (vImg) {
             vImg.style.transform = 'scale(1.02)';
