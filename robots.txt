@@ -1,0 +1,21 @@
+User-agent: *
+Allow: /
+Disallow: /.well-known/
+Disallow: /.git/
+
+User-agent: Baiduspider
+Allow: /
+
+User-agent: Sogou spider
+Allow: /
+
+User-agent: 360Spider
+Allow: /
+
+User-agent: Googlebot
+Allow: /
+
+User-agent: Bingbot
+Allow: /
+
+Sitemap: https://hboyjd.com/sitemap.xml
