@@ -20,7 +20,7 @@
     --gray-500: #64748b;
     --gray-700: #334155;
     --gray-900: #0f172a;
-    --font: 'Noto Sans SC', -apple-system, BlinkMacSystemFont, sans-serif;
+    --font: -apple-system, BlinkMacSystemFont, "PingFang SC", "HarmonyOS Sans SC", "Microsoft YaHei UI", "Microsoft YaHei", "Hiragino Sans GB", "Segoe UI", Helvetica, Arial, "Noto Sans SC", sans-serif;
     --radius: 12px;
     --shadow: 0 4px 24px rgba(0,0,0,0.08);
     --shadow-lg: 0 12px 48px rgba(0,0,0,0.12);
@@ -124,6 +124,43 @@ body {
 }
 
 .nav-links a:hover::after { width: 100%; }
+
+/* 语言切换按钮 */
+.lang-toggle {
+    display: flex;
+    align-items: center;
+    background: rgba(255,255,255,0.1);
+    border: 1px solid rgba(255,255,255,0.25);
+    border-radius: 20px;
+    padding: 4px;
+    cursor: pointer;
+    gap: 0;
+    margin-left: 12px;
+    transition: all 0.3s;
+}
+
+.lang-toggle:hover {
+    background: rgba(255,255,255,0.2);
+    border-color: rgba(255,255,255,0.4);
+}
+
+.lang-toggle span {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 32px;
+    height: 28px;
+    border-radius: 16px;
+    font-size: 12px;
+    font-weight: 600;
+    color: rgba(255,255,255,0.5);
+    transition: all 0.3s;
+}
+
+.lang-toggle span.active {
+    background: var(--blue-500);
+    color: var(--white);
+}
 
 .nav-cta {
     background: var(--blue-500);
@@ -677,6 +714,145 @@ body {
     font-weight: 500;
     color: var(--gray-700);
     text-align: center;
+}
+
+/* ====== 新闻动态 ====== */
+.news {
+    padding: 100px 0;
+    background: var(--white);
+}
+
+.news-columns {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 48px;
+}
+
+.news-column-header {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    padding-bottom: 14px;
+    border-bottom: 2px solid var(--navy-900);
+    margin-bottom: 8px;
+}
+
+.news-column-header h3 {
+    font-size: 17px;
+    font-weight: 700;
+    color: var(--navy-900);
+    letter-spacing: 1px;
+}
+
+.news-list {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+}
+
+.news-list a {
+    display: flex;
+    align-items: baseline;
+    gap: 10px;
+    padding: 12px 0;
+    text-decoration: none;
+    border-bottom: 1px dashed var(--gray-200);
+    transition: all 0.2s;
+}
+
+.news-list li:last-child a {
+    border-bottom: none;
+}
+
+.news-list a:hover .news-title {
+    color: var(--blue-500);
+}
+
+.news-list .news-dot {
+    width: 4px;
+    height: 4px;
+    border-radius: 50%;
+    background: var(--gray-500);
+    flex-shrink: 0;
+    margin-top: 7px;
+}
+
+.news-list a:hover .news-dot {
+    background: var(--blue-500);
+}
+
+.news-list .news-title {
+    flex: 1;
+    font-size: 14px;
+    color: var(--gray-700);
+    line-height: 1.5;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    transition: color 0.2s;
+}
+
+.news-list .news-date {
+    font-size: 12px;
+    color: var(--gray-500);
+    flex-shrink: 0;
+}
+
+.news-column-empty {
+    padding: 32px 0;
+    color: var(--gray-500);
+    font-size: 13px;
+}
+
+@media (max-width: 768px) {
+    .news-columns { grid-template-columns: 1fr; gap: 36px; }
+}
+
+/* ====== 联系方式增强 ====== */
+.social-links {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 6px;
+    margin-bottom: 6px;
+}
+
+.social-tag {
+    display: inline-block;
+    padding: 2px 10px;
+    font-size: 12px;
+    background: var(--gray-100);
+    color: var(--gray-700);
+    border-radius: 10px;
+    font-weight: 500;
+}
+
+.social-hint {
+    font-size: 12px !important;
+    color: var(--gray-500) !important;
+    margin: 0 !important;
+}
+
+/* ====== 地图导航链接 ====== */
+.map-links {
+    display: flex;
+    gap: 10px;
+    margin-top: 6px;
+}
+
+.map-link {
+    display: inline-block;
+    padding: 3px 12px;
+    font-size: 12px;
+    color: var(--blue-500);
+    border: 1px solid var(--blue-400);
+    border-radius: 14px;
+    text-decoration: none;
+    transition: all 0.2s;
+}
+
+.map-link:hover {
+    background: var(--blue-500);
+    color: var(--white);
 }
 
 /* ====== CTA ====== */
