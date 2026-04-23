@@ -38,7 +38,9 @@ SSH接入看 skill `website-deploy` 或 `aliyun-deploy`——走 `ssh.moiralili.
 | `robots.txt` | 爬虫规则（百度/搜狗/360/Google/Bing开）|
 | `news.json` | 新闻栏目数据（目前挂在首页）|
 
-**⚠️ 垃圾文件别动也别删**：`main 2.js`、`parts 2.html` 是iCloud同步冲突副本，等下次全量清理再处理（已gitignore考虑中）。
+**⚠️ 历史遗留（Git未管理）**：`news.json` 和 `parts-data.json` 本地有、生产有、**仓里没有**——当年手工上传到服务器未入库。如果你要改这两个文件，注意 `git pull` 不会拉新版，只能SSH到服务器直接改，或者本地改后 `scp` 上去。下次有精力统一时：把服务器版本作为权威拉回本地 → `git add` → 以后走正常流程。
+
+**⚠️ iCloud同步坑**：这个目录在iCloud Drive里，iCloud偶尔把文件同步成 `xxx 2.html` 冲突副本。`.gitignore` 已加 `* 2.*` / `* 3.*` 规则，不会再被误commit。但如果你发现关键文件突然"消失"，先找一下有没有带数字后缀的冲突副本。
 
 ## 当前状态（2026-04-21）
 
