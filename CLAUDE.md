@@ -10,7 +10,7 @@
 | 对外URL | https://hboyjd.com（HTTPS绿锁+HSTS）|
 | 备用URL | https://www.hboyjd.com |
 | 代码仓 | GitHub [Gefeier/hboyjd-website](https://github.com/Gefeier/hboyjd-website) · master |
-| 本地工作区 | `C:/Users/mac/iCloudDrive/欧阳聚德-官网/`（Windows墨主机）|
+| 本地工作区 | `G:/hboyjd-website/`（Windows墨主机。2026-04-23从iCloud迁移到G盘,避免iCloud冲突副本坑）|
 | 生产部署 | `/www/wwwroot/hboyjd.com/` 在 8.218.178.76 |
 | 负责墨 | Windows墨（主要）|
 | 对应计划 | #15 数字化转型：订单全流程数字化 + 企业官网重建 |
@@ -40,7 +40,7 @@ SSH接入看 skill `website-deploy` 或 `aliyun-deploy`——走 `ssh.moiralili.
 
 **⚠️ 历史遗留（Git未管理）**：`news.json` 和 `parts-data.json` 本地有、生产有、**仓里没有**——当年手工上传到服务器未入库。如果你要改这两个文件，注意 `git pull` 不会拉新版，只能SSH到服务器直接改，或者本地改后 `scp` 上去。下次有精力统一时：把服务器版本作为权威拉回本地 → `git add` → 以后走正常流程。
 
-**⚠️ iCloud同步坑**：这个目录在iCloud Drive里，iCloud偶尔把文件同步成 `xxx 2.html` 冲突副本。`.gitignore` 已加 `* 2.*` / `* 3.*` 规则，不会再被误commit。但如果你发现关键文件突然"消失"，先找一下有没有带数字后缀的冲突副本。
+**⚠️ 历史坑（已消除）**：2026-04-23前这个仓在iCloud Drive里（`C:/Users/mac/iCloudDrive/欧阳聚德-官网/`），被iCloud冲突副本坑过一次(parts.html被误删~3min)。现已迁到G盘，问题消除。`.gitignore` 里的 `* 2.*` 规则保留作防御性设置（其他机器挂iCloud时有用）。
 
 ## 当前状态（2026-04-21）
 
