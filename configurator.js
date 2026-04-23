@@ -284,11 +284,11 @@ const vehicleWrapper = document.getElementById('vehicleWrapper');
 
 const typeImages = {
     '直梁平板': 'assets/images/config-base.png',
-    '高低平板': 'assets/images/product-lowbed.jpg',
-    '自卸': 'assets/images/product-dump.jpg',
-    '骨架': 'assets/images/product-crane.jpg',
-    '仓栅': 'assets/images/product-fence.jpg',
-    '特种': 'assets/images/product-special.jpg'
+    '高低平板': 'assets/images/config-base-lowbed.png',
+    '自卸':    'assets/images/config-base-dump.png',
+    '骨架':    'assets/images/config-base-skeleton.png',
+    '仓栅':    'assets/images/config-base-fence.png',
+    '特种':    'assets/images/product-special.jpg'  // 特种暂用卡片图
 };
 
 // ====== 每车型规格 Schema（按车型动态渲染 Step1 / Step2） ======
@@ -490,6 +490,7 @@ document.querySelectorAll('input[name="vehicleType"]').forEach(radio => {
         const type = e.target.value;
         const src = typeImages[type];
         const label = typeLabels[type];
+        currentType = type;
 
         // 驶出 + 驶入动画
         vehicleWrapper.style.animation = 'none';
@@ -501,6 +502,8 @@ document.querySelectorAll('input[name="vehicleType"]').forEach(radio => {
             reflectionImg.src = src;
             vehicleLabel.querySelector('.label-en').textContent = label.en;
             vehicleLabel.querySelector('.label-zh').textContent = label.zh;
+            // 加载该车型的原始像素并应用当前颜色
+            loadPixelsForType(type, function() { recolorVehicle(getCurrentColor()); });
         }, 150);
 
         // 重新渲染规格项
@@ -524,21 +527,33 @@ var colorTargets = {
     '黑色 RAL9005':        { h: 0, s: 0.03, lMul: 0.3 }
 };
 
-// 原始图片像素数据缓存
-var originalPixels = null;
+// 原始图片像素数据缓存（按车型）
+var pixelCache = {};   // { '直梁平板': ImageData, ... }
+var currentType = '直梁平板';
 var colorCanvas = document.createElement('canvas');
 var colorCtx = colorCanvas.getContext('2d', { willReadFrequently: true });
 
-// 加载原始图片像素
-var baseImg = new Image();
-baseImg.crossOrigin = 'anonymous';
-baseImg.onload = function() {
-    colorCanvas.width = baseImg.width;
-    colorCanvas.height = baseImg.height;
-    colorCtx.drawImage(baseImg, 0, 0);
-    originalPixels = colorCtx.getImageData(0, 0, colorCanvas.width, colorCanvas.height);
-};
-baseImg.src = 'assets/images/config-base.png';
+// 懒加载当前车型的原始像素
+function loadPixelsForType(type, cb) {
+    if (pixelCache[type]) { if (cb) cb(pixelCache[type]); return; }
+    var src = typeImages[type];
+    // 特种或非 PNG 图不做像素缓存（不参与换色）
+    if (!src || !src.endsWith('.png')) { if (cb) cb(null); return; }
+    var img = new Image();
+    img.crossOrigin = 'anonymous';
+    img.onload = function() {
+        var c = document.createElement('canvas');
+        c.width = img.width; c.height = img.height;
+        var cx = c.getContext('2d', { willReadFrequently: true });
+        cx.drawImage(img, 0, 0);
+        try {
+            pixelCache[type] = cx.getImageData(0, 0, img.width, img.height);
+            if (cb) cb(pixelCache[type]);
+        } catch (e) { if (cb) cb(null); }
+    };
+    img.onerror = function() { if (cb) cb(null); };
+    img.src = src;
+}
 
 function rgbToHsl(r, g, b) {
     r /= 255; g /= 255; b /= 255;
@@ -577,25 +592,24 @@ function hslToRgb(h, s, l) {
 }
 
 function recolorVehicle(colorVal) {
-    if (!originalPixels) return;
     var target = colorTargets[colorVal];
-
     var vImg = document.getElementById('vehicleImg');
     var rImg = document.getElementById('reflectionImg');
+    var baseSrc = typeImages[currentType];
 
-    if (!target) {
-        // 原色：恢复原图
-        vImg.src = 'assets/images/config-base.png';
-        rImg.src = 'assets/images/config-base.png';
+    // 原色或无像素缓存（如特种车用卡片图）→ 直接显示原图
+    if (!target || !pixelCache[currentType]) {
+        vImg.src = baseSrc;
+        rImg.src = baseSrc;
         vImg.style.filter = 'drop-shadow(0 20px 60px rgba(37,99,235,0.15))';
         rImg.style.filter = 'blur(3px)';
         return;
     }
 
-    var imgData = new ImageData(
-        new Uint8ClampedArray(originalPixels.data),
-        originalPixels.width, originalPixels.height
-    );
+    var src = pixelCache[currentType];
+    colorCanvas.width = src.width;
+    colorCanvas.height = src.height;
+    var imgData = new ImageData(new Uint8ClampedArray(src.data), src.width, src.height);
     var d = imgData.data;
 
     for (var i = 0; i < d.length; i += 4) {
@@ -626,6 +640,12 @@ function recolorVehicle(colorVal) {
     rImg.src = dataUrl;
     vImg.style.filter = 'drop-shadow(0 20px 60px rgba(37,99,235,0.15))';
     rImg.style.filter = 'blur(3px)';
+}
+
+// 读取当前选中的颜色 value（没选默认红）
+function getCurrentColor() {
+    var r = document.querySelector('input[name="color"]:checked');
+    return r ? r.value : DEFAULT_COLOR;
 }
 
 // 绑定颜色事件
@@ -728,6 +748,7 @@ btnSubmit.addEventListener('click', () => {
 });
 
 // ====== 初始化 ======
-// 默认渲染"直梁平板"的规格
+// 默认渲染"直梁平板"的规格 + 预加载像素缓存
 renderSpecsForType('直梁平板');
+loadPixelsForType('直梁平板');
 updateTags();
