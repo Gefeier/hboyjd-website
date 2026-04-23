@@ -32,15 +32,20 @@
                 <img src="assets/images/logo-white.png" alt="欧阳聚德" class="logo-img">
             </a>
             <ul class="nav-links">
-                <li><a href="#home">首页</a></li>
-                <li><a href="#about">关于我们</a></li>
-                <li><a href="#products">产品中心</a></li>
-                <li><a href="parts.html">配件中心</a></li>
-                <li><a href="#advantages">核心优势</a></li>
-                <li><a href="#contact">联系我们</a></li>
-                <li><a href="https://srm.hboyjd.com" target="_blank" rel="noopener">供应商合作</a></li>
+                <li><a href="#home" data-en="Home">首页</a></li>
+                <li><a href="#about" data-en="About">关于我们</a></li>
+                <li><a href="#products" data-en="Products">产品中心</a></li>
+                <li><a href="parts.html" data-en="Parts">配件中心</a></li>
+                <li><a href="#advantages" data-en="Strengths">核心优势</a></li>
+                <li><a href="#news" data-en="News">新闻动态</a></li>
+                <li><a href="#contact" data-en="Contact">联系我们</a></li>
+                <li><a href="https://srm.hboyjd.com" target="_blank" rel="noopener" data-en="Suppliers">供应商合作</a></li>
             </ul>
-            <a href="configurator.html" class="nav-cta">在线选配 →</a>
+            <a href="configurator.html" class="nav-cta" data-en="Configure →">在线选配 →</a>
+            <button class="lang-toggle" id="langToggle" title="Switch Language">
+                <span class="lang-zh active">中</span>
+                <span class="lang-en">EN</span>
+            </button>
             <button class="nav-toggle" id="navToggle">
                 <span></span><span></span><span></span>
             </button>
@@ -51,16 +56,16 @@
     <section class="hero" id="home">
         <div class="hero-overlay"></div>
         <div class="hero-content">
-            <p class="hero-subtitle">DREAM ON THE ROAD · 为梦出发</p>
-            <h1 class="hero-title">半挂车研发制造专家</h1>
-            <p class="hero-desc">T700C高强度钢材 · 全系定制化生产 · 品质铸就未来</p>
+            <p class="hero-subtitle" data-en="DREAM ON THE ROAD">DREAM ON THE ROAD · 为梦出发</p>
+            <h1 class="hero-title" data-en="Semi-Trailer R&D & Manufacturing Expert">半挂车研发制造专家</h1>
+            <p class="hero-desc" data-en="T700C High-Strength Steel · Fully Customized Production · Quality Builds the Future">T700C高强度钢材 · 全系定制化生产 · 品质铸就未来</p>
             <div class="hero-actions">
-                <a href="configurator.html" class="btn btn-primary">在线选配车辆</a>
-                <a href="#products" class="btn btn-outline">查看产品</a>
+                <a href="configurator.html" class="btn btn-primary" data-en="Configure Your Trailer">在线选配车辆</a>
+                <a href="#products" class="btn btn-outline" data-en="View Products">查看产品</a>
             </div>
         </div>
         <div class="hero-scroll">
-            <span>向下滚动</span>
+            <span data-en="Scroll Down">向下滚动</span>
             <div class="scroll-indicator"></div>
         </div>
     </section>
@@ -71,23 +76,23 @@
             <div class="stats-grid">
                 <div class="stat-item">
                     <div class="stat-number" data-target="17">0</div>
-                    <div class="stat-unit">年+</div>
-                    <div class="stat-label">深耕半挂车制造</div>
+                    <div class="stat-unit" data-en="Years+">年+</div>
+                    <div class="stat-label" data-en="In Semi-Trailer Manufacturing">深耕半挂车制造</div>
                 </div>
                 <div class="stat-item">
                     <div class="stat-number" data-target="6">0</div>
-                    <div class="stat-unit">大系列</div>
-                    <div class="stat-label">覆盖主流车型</div>
+                    <div class="stat-unit" data-en="Series">大系列</div>
+                    <div class="stat-label" data-en="Covering All Major Models">覆盖主流车型</div>
                 </div>
                 <div class="stat-item">
                     <div class="stat-number" data-target="100">0</div>
                     <div class="stat-unit">%</div>
-                    <div class="stat-label">全定制化生产</div>
+                    <div class="stat-label" data-en="Fully Customized Production">全定制化生产</div>
                 </div>
                 <div class="stat-item">
                     <div class="stat-number" data-target="30">0</div>
-                    <div class="stat-unit">省+</div>
-                    <div class="stat-label">产品覆盖全国</div>
+                    <div class="stat-unit" data-en="Provinces+">省+</div>
+                    <div class="stat-label" data-en="Nationwide Coverage">产品覆盖全国</div>
                 </div>
             </div>
         </div>
@@ -98,7 +103,7 @@
         <div class="container">
             <div class="section-header">
                 <span class="section-tag">ABOUT US</span>
-                <h2 class="section-title">关于欧阳聚德</h2>
+                <h2 class="section-title" data-en="About Ouyang Jude">关于欧阳聚德</h2>
             </div>
             <div class="about-grid">
                 <div class="about-carousel">
@@ -120,14 +125,14 @@
                     </div>
                 </div>
                 <div class="about-content">
-                    <h3>做客户值得信任、员工值得自豪的企业</h3>
-                    <p>湖北欧阳聚德汽车有限公司位于湖北省枣阳市，专业从事半挂车的研发、生产与销售。公司拥有现代化生产车间，配备完整的专业化生产流水线，产品服务全国各地货运物流、工程建设等行业客户。</p>
-                    <p>公司采用T700C超高强度钢材，配合先进焊接工艺，实现整车轻量化与高强度的完美结合。坚持品质铸就未来的发展理念，以技术创新为驱动，持续提升产品质量和服务水平。</p>
+                    <h3 data-en="A Company Trusted by Customers, Proud for Employees">做客户值得信任、员工值得自豪的企业</h3>
+                    <p data-en="Hubei Ouyang Jude Automobile Co., Ltd., located in Zaoyang, Hubei Province, specializes in the R&D, manufacturing and sales of semi-trailers. Equipped with modern workshops and professional production lines, our products serve freight logistics and construction industries nationwide.">湖北欧阳聚德汽车有限公司位于湖北省枣阳市，专业从事半挂车的研发、生产与销售。公司拥有现代化生产车间，配备完整的专业化生产流水线，产品服务全国各地货运物流、工程建设等行业客户。</p>
+                    <p data-en="Using T700C ultra-high-strength steel with advanced welding technology, we achieve the perfect balance of lightweight design and high strength. Committed to quality-driven development, we continuously improve product quality and service through technological innovation.">公司采用T700C超高强度钢材，配合先进焊接工艺，实现整车轻量化与高强度的完美结合。坚持品质铸就未来的发展理念，以技术创新为驱动，持续提升产品质量和服务水平。</p>
                     <div class="about-tags">
-                        <span>CCC认证</span>
-                        <span>军标检验</span>
-                        <span>产学研合作</span>
-                        <span>T700C高强钢</span>
+                        <span data-en="CCC Certified">CCC认证</span>
+                        <span data-en="Military Standard">军标检验</span>
+                        <span data-en="Industry-Academia R&D">产学研合作</span>
+                        <span data-en="T700C Steel">T700C高强钢</span>
                     </div>
                 </div>
             </div>
@@ -139,86 +144,86 @@
         <div class="container">
             <div class="section-header">
                 <span class="section-tag">PRODUCTS</span>
-                <h2 class="section-title">产品中心</h2>
-                <p class="section-desc">全系列半挂车产品，支持100%定制化生产</p>
+                <h2 class="section-title" data-en="Products">产品中心</h2>
+                <p class="section-desc" data-en="Full range of semi-trailers, 100% customizable">全系列半挂车产品，支持100%定制化生产</p>
             </div>
             <div class="products-grid">
                 <div class="product-card">
                     <div class="product-img"><img src="assets/images/product-flatbed.jpg" alt="平板半挂车" loading="lazy"></div>
                     <div class="product-body">
-                        <h3>平板半挂车</h3>
-                        <p>直梁平板、高低平板、挖机板、超低平板等多种规格</p>
+                        <h3 data-en="Flatbed Semi-Trailer">平板半挂车</h3>
+                        <p data-en="Straight-beam, high-low, excavator and ultra-low flatbed options">直梁平板、高低平板、挖机板、超低平板等多种规格</p>
                         <ul class="product-specs">
-                            <li>13米 - 17.5米</li>
-                            <li>T700C高强钢</li>
-                            <li>支持全定制</li>
+                            <li data-en="13m - 17.5m">13米 - 17.5米</li>
+                            <li data-en="T700C Steel">T700C高强钢</li>
+                            <li data-en="Fully Customizable">支持全定制</li>
                         </ul>
-                        <a href="configurator.html" class="product-link">在线选配 →</a>
+                        <a href="configurator.html" class="product-link" data-en="Configure →">在线选配 →</a>
                     </div>
                 </div>
                 <div class="product-card">
                     <div class="product-img"><img src="assets/images/product-dump.jpg" alt="自卸半挂车" loading="lazy"></div>
                     <div class="product-body">
-                        <h3>自卸半挂车</h3>
-                        <p>后翻自卸、侧翻自卸、罐式后翻等，适用工程运输</p>
+                        <h3 data-en="Dump Semi-Trailer">自卸半挂车</h3>
+                        <p data-en="Rear dump, side dump, tank-type and more for construction transport">后翻自卸、侧翻自卸、罐式后翻等，适用工程运输</p>
                         <ul class="product-specs">
-                            <li>9米 - 13.6米</li>
-                            <li>多种翻转形式</li>
-                            <li>重载设计</li>
+                            <li data-en="9m - 13.6m">9米 - 13.6米</li>
+                            <li data-en="Multiple Dump Types">多种翻转形式</li>
+                            <li data-en="Heavy-Duty Design">重载设计</li>
                         </ul>
-                        <a href="configurator.html?type=dump" class="product-link">在线选配 →</a>
+                        <a href="configurator.html?type=dump" class="product-link" data-en="Configure →">在线选配 →</a>
                     </div>
                 </div>
                 <div class="product-card">
                     <div class="product-img"><img src="assets/images/product-fence.jpg" alt="仓栅半挂车" loading="lazy"></div>
                     <div class="product-body">
-                        <h3>仓栅半挂车</h3>
-                        <p>高栏、仓栏、散货仓栅等，适用多种货物运输</p>
+                        <h3 data-en="Fence Semi-Trailer">仓栅半挂车</h3>
+                        <p data-en="High-fence, warehouse-fence, bulk cargo types for various freight">高栏、仓栏、散货仓栅等，适用多种货物运输</p>
                         <ul class="product-specs">
-                            <li>多种栏高可选</li>
-                            <li>花栏/栅栏可定制</li>
-                            <li>带篷布架</li>
+                            <li data-en="Multiple Heights">多种栏高可选</li>
+                            <li data-en="Customizable Fence">花栏/栅栏可定制</li>
+                            <li data-en="With Tarpaulin Frame">带篷布架</li>
                         </ul>
-                        <a href="configurator.html?type=fence" class="product-link">在线选配 →</a>
+                        <a href="configurator.html?type=fence" class="product-link" data-en="Configure →">在线选配 →</a>
                     </div>
                 </div>
                 <div class="product-card">
                     <div class="product-img"><img src="assets/images/product-lowbed.jpg" alt="低平板半挂车" loading="lazy"></div>
                     <div class="product-body">
-                        <h3>低平板半挂车</h3>
-                        <p>大件运输、工程机械运输专用低平板</p>
+                        <h3 data-en="Low-Bed Semi-Trailer">低平板半挂车</h3>
+                        <p data-en="Specialized low-bed for heavy equipment and machinery transport">大件运输、工程机械运输专用低平板</p>
                         <ul class="product-specs">
-                            <li>12米 - 17.9米</li>
-                            <li>大鹅颈设计</li>
-                            <li>重载80T+</li>
+                            <li data-en="12m - 17.9m">12米 - 17.9米</li>
+                            <li data-en="Gooseneck Design">大鹅颈设计</li>
+                            <li data-en="Capacity 80T+">重载80T+</li>
                         </ul>
-                        <a href="configurator.html?type=lowbed" class="product-link">在线选配 →</a>
+                        <a href="configurator.html?type=lowbed" class="product-link" data-en="Configure →">在线选配 →</a>
                     </div>
                 </div>
                 <div class="product-card">
                     <div class="product-img"><img src="assets/images/product-crane.jpg" alt="随车吊" loading="lazy"></div>
                     <div class="product-body">
-                        <h3>随车起重运输车</h3>
-                        <p>随车吊、平板吊、折臂吊等多种起重配置</p>
+                        <h3 data-en="Truck-Mounted Crane">随车起重运输车</h3>
+                        <p data-en="Truck cranes, flatbed cranes, knuckle boom cranes and more">随车吊、平板吊、折臂吊等多种起重配置</p>
                         <ul class="product-specs">
-                            <li>多吨位可选</li>
-                            <li>折臂/直臂</li>
-                            <li>一车多用</li>
+                            <li data-en="Multiple Tonnages">多吨位可选</li>
+                            <li data-en="Knuckle / Straight Boom">折臂/直臂</li>
+                            <li data-en="Multi-Purpose">一车多用</li>
                         </ul>
-                        <a href="#contact" class="product-link">咨询定制 →</a>
+                        <a href="#contact" class="product-link" data-en="Inquire →">咨询定制 →</a>
                     </div>
                 </div>
                 <div class="product-card">
                     <div class="product-img"><img src="assets/images/product-special.jpg" alt="特种专用车" loading="lazy"></div>
                     <div class="product-body">
-                        <h3>特种专用车</h3>
-                        <p>高空作业车、全挂车、中置轴平板等特殊车型</p>
+                        <h3 data-en="Special Purpose Vehicles">特种专用车</h3>
+                        <p data-en="Aerial platforms, full trailers, center-axle flatbeds and more">高空作业车、全挂车、中置轴平板等特殊车型</p>
                         <ul class="product-specs">
-                            <li>按需定制</li>
-                            <li>工程专用</li>
-                            <li>非标设计</li>
+                            <li data-en="Made to Order">按需定制</li>
+                            <li data-en="Construction Grade">工程专用</li>
+                            <li data-en="Non-Standard Design">非标设计</li>
                         </ul>
-                        <a href="#contact" class="product-link">咨询定制 →</a>
+                        <a href="#contact" class="product-link" data-en="Inquire →">咨询定制 →</a>
                     </div>
                 </div>
             </div>
@@ -230,28 +235,28 @@
         <div class="container">
             <div class="section-header">
                 <span class="section-tag">ADVANTAGES</span>
-                <h2 class="section-title">核心优势</h2>
+                <h2 class="section-title" data-en="Core Strengths">核心优势</h2>
             </div>
             <div class="adv-grid">
                 <div class="adv-card">
                     <div class="adv-number">01</div>
-                    <h3>T700C高强钢材</h3>
-                    <p>采用T700C超高强度钢材，抗拉强度高达700MPa，整车自重更轻、承载更强、寿命更长。</p>
+                    <h3 data-en="T700C High-Strength Steel">T700C高强钢材</h3>
+                    <p data-en="Using T700C ultra-high-strength steel with 700MPa tensile strength — lighter weight, higher capacity, longer lifespan.">采用T700C超高强度钢材，抗拉强度高达700MPa，整车自重更轻、承载更强、寿命更长。</p>
                 </div>
                 <div class="adv-card">
                     <div class="adv-number">02</div>
-                    <h3>100%定制化</h3>
-                    <p>每一台车都根据客户需求量身定制，从尺寸、结构到配件，完全按照您的运输场景打造。</p>
+                    <h3 data-en="100% Customization">100%定制化</h3>
+                    <p data-en="Every trailer is tailor-made to your needs — from dimensions and structure to accessories, built for your exact transport scenario.">每一台车都根据客户需求量身定制，从尺寸、结构到配件，完全按照您的运输场景打造。</p>
                 </div>
                 <div class="adv-card">
                     <div class="adv-number">03</div>
-                    <h3>全流水线生产</h3>
-                    <p>现代化专业生产线，从下料到总装全程品控，确保每一台车都达到出厂标准。</p>
+                    <h3 data-en="Assembly Line Production">全流水线生产</h3>
+                    <p data-en="Modern professional production lines with full quality control from cutting to final assembly, ensuring every trailer meets factory standards.">现代化专业生产线，从下料到总装全程品控，确保每一台车都达到出厂标准。</p>
                 </div>
                 <div class="adv-card">
                     <div class="adv-number">04</div>
-                    <h3>快速交付</h3>
-                    <p>高效的生产调度系统，合理安排产能，缩短交付周期，让您的车辆尽快上路创收。</p>
+                    <h3 data-en="Fast Delivery">快速交付</h3>
+                    <p data-en="Efficient production scheduling system optimizes capacity and shortens delivery cycles, getting your trailer on the road faster.">高效的生产调度系统，合理安排产能，缩短交付周期，让您的车辆尽快上路创收。</p>
                 </div>
             </div>
         </div>
@@ -262,26 +267,39 @@
         <div class="container">
             <div class="section-header">
                 <span class="section-tag">HONORS</span>
-                <h2 class="section-title">荣誉资质</h2>
-                <p class="section-desc">品质铸就荣誉，实力赢得认可</p>
+                <h2 class="section-title" data-en="Honors & Certifications">荣誉资质</h2>
+                <p class="section-desc" data-en="Quality builds honor, strength earns recognition">品质铸就荣誉，实力赢得认可</p>
             </div>
             <div class="honors-grid">
                 <div class="honor-card">
                     <img src="assets/images/award-research.jpg" alt="产学研合作基地" loading="lazy">
-                    <p>湖北工业大学产学研合作基地</p>
+                    <p data-en="Hubei University of Technology R&D Partnership">湖北工业大学产学研合作基地</p>
                 </div>
                 <div class="honor-card">
                     <img src="assets/images/award-smart.jpg" alt="省级智能制造试点示范企业" loading="lazy">
-                    <p>省级智能制造试点示范企业</p>
+                    <p data-en="Provincial Smart Manufacturing Pilot Enterprise">省级智能制造试点示范企业</p>
                 </div>
                 <div class="honor-card">
                     <img src="assets/images/award-logistics.jpg" alt="全市物流行业星级诚信企业" loading="lazy">
-                    <p>全市物流行业星级诚信企业</p>
+                    <p data-en="Star-Rated Logistics Integrity Enterprise">全市物流行业星级诚信企业</p>
                 </div>
                 <div class="honor-card">
                     <img src="assets/images/award-marketing.jpg" alt="年度最佳数字营销创新奖" loading="lazy">
-                    <p>年度最佳数字营销创新奖</p>
+                    <p data-en="Best Digital Marketing Innovation Award">年度最佳数字营销创新奖</p>
                 </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- 新闻动态 -->
+    <section class="news" id="news">
+        <div class="container">
+            <div class="section-header">
+                <span class="section-tag">NEWS</span>
+                <h2 class="section-title" data-en="News & Updates">新闻动态</h2>
+            </div>
+            <div class="news-columns" id="newsColumns">
+                <!-- JS动态渲染三栏 -->
             </div>
         </div>
     </section>
@@ -290,9 +308,9 @@
     <section class="cta-section">
         <div class="container">
             <div class="cta-content">
-                <h2>像选手机一样选你的半挂车</h2>
-                <p>在线配置车型、尺寸、颜色、悬挂、轮胎等参数，一键提交询价</p>
-                <a href="configurator.html" class="btn btn-primary btn-lg">立即开始选配</a>
+                <h2 data-en="Configure Your Trailer Like a Smartphone">像选手机一样选你的半挂车</h2>
+                <p data-en="Choose model, size, color, suspension, tires and more — submit your inquiry in one click">在线配置车型、尺寸、颜色、悬挂、轮胎等参数，一键提交询价</p>
+                <a href="configurator.html" class="btn btn-primary btn-lg" data-en="Start Configuring">立即开始选配</a>
             </div>
         </div>
     </section>
@@ -302,19 +320,24 @@
         <div class="container">
             <div class="section-header">
                 <span class="section-tag">CONTACT</span>
-                <h2 class="section-title">联系我们</h2>
+                <h2 class="section-title" data-en="Contact Us">联系我们</h2>
             </div>
             <div class="contact-grid">
                 <div class="contact-left">
-                    <p class="contact-lead">我们期待与您合作，为您提供最优质的半挂车解决方案。</p>
+                    <p class="contact-lead" data-en="We look forward to partnering with you to provide the best semi-trailer solutions.">我们期待与您合作，为您提供最优质的半挂车解决方案。</p>
                     <div class="contact-info">
                         <div class="contact-item">
                             <div class="contact-icon">
                                 <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7z"/><circle cx="12" cy="9" r="2.5"/></svg>
                             </div>
                             <div>
-                                <h4>公司地址</h4>
-                                <p>湖北省枣阳市</p>
+                                <h4 data-en="Address">公司地址</h4>
+                                <p data-en="No.23 Development Avenue (G316), Zaoyang, Hubei, China">湖北省枣阳市发展大道23号（G316）</p>
+                                <div class="map-links">
+                                    <a href="https://surl.amap.com/5ckffrMqeQ4" target="_blank" class="map-link" data-en="Gaode">高德</a>
+                                    <a href="https://api.map.baidu.com/geocoder?address=湖北省枣阳市发展大道23号湖北欧阳聚德汽车有限公司&output=html" target="_blank" class="map-link" data-en="Baidu">百度</a>
+                                    <a href="https://www.google.com/maps/search/湖北欧阳聚德汽车有限公司" target="_blank" class="map-link">Google</a>
+                                </div>
                             </div>
                         </div>
                         <div class="contact-item">
@@ -322,8 +345,26 @@
                                 <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M22 16.92v3a2 2 0 01-2.18 2 19.79 19.79 0 01-8.63-3.07 19.5 19.5 0 01-6-6 19.79 19.79 0 01-3.07-8.67A2 2 0 014.11 2h3a2 2 0 012 1.72c.127.96.361 1.903.7 2.81a2 2 0 01-.45 2.11L8.09 9.91a16 16 0 006 6l1.27-1.27a2 2 0 012.11-.45c.907.339 1.85.573 2.81.7A2 2 0 0122 16.92z"/></svg>
                             </div>
                             <div>
-                                <h4>联系电话</h4>
-                                <p>13396121288</p>
+                                <h4 data-en="Phone">联系电话</h4>
+                                <p><a href="tel:13396121288" style="color:inherit;text-decoration:none;">13396121288</a></p>
+                            </div>
+                        </div>
+                        <div class="contact-item">
+                            <div class="contact-icon">
+                                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/></svg>
+                            </div>
+                            <div>
+                                <h4 data-en="Email">电子邮箱</h4>
+                                <p><a href="mailto:contact@hboyjd.com" style="color:inherit;text-decoration:none;">contact@hboyjd.com</a></p>
+                            </div>
+                        </div>
+                        <div class="contact-item">
+                            <div class="contact-icon">
+                                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M21 11.5a8.38 8.38 0 01-.9 3.8 8.5 8.5 0 01-7.6 4.7 8.38 8.38 0 01-3.8-.9L3 21l1.9-5.7a8.38 8.38 0 01-.9-3.8 8.5 8.5 0 014.7-7.6 8.38 8.38 0 013.8-.9h.5a8.48 8.48 0 018 8v.5z"/></svg>
+                            </div>
+                            <div>
+                                <h4>WhatsApp</h4>
+                                <p><a href="https://wa.me/8613396121288" target="_blank" style="color:inherit;text-decoration:none;">+86 133-9612-1288</a></p>
                             </div>
                         </div>
                         <div class="contact-item">
@@ -331,40 +372,46 @@
                                 <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><circle cx="12" cy="12" r="10"/><path d="M2 12h20"/><path d="M12 2a15.3 15.3 0 014 10 15.3 15.3 0 01-4 10 15.3 15.3 0 01-4-10 15.3 15.3 0 014-10z"/></svg>
                             </div>
                             <div>
-                                <h4>官方网站</h4>
+                                <h4 data-en="Website">官方网站</h4>
                                 <p>www.hboyjd.com</p>
                             </div>
                         </div>
                         <div class="contact-item">
                             <div class="contact-icon">
-                                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><rect x="5" y="2" width="14" height="20" rx="2"/><line x1="12" y1="18" x2="12.01" y2="18"/></svg>
+                                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><rect x="2" y="2" width="20" height="20" rx="5"/><path d="M16 11.37A4 4 0 1112.63 8 4 4 0 0116 11.37z"/><line x1="17.5" y1="6.5" x2="17.51" y2="6.5"/></svg>
                             </div>
                             <div>
-                                <h4>抖音 / 快手</h4>
-                                <p>搜索"欧阳聚德汽车"</p>
+                                <h4 data-en="Social Media">社交媒体</h4>
+                                <div class="social-links">
+                                    <span class="social-tag" data-en="Douyin">抖音</span>
+                                    <span class="social-tag">快手</span>
+                                    <span class="social-tag">TikTok</span>
+                                    <span class="social-tag" data-en="WeChat Official">微信公众号</span>
+                                </div>
+                                <p class="social-hint" data-en="Search &quot;欧阳聚德汽车&quot; or scan QR code below">搜索"欧阳聚德汽车"或扫描下方二维码</p>
                             </div>
                         </div>
                     </div>
                 </div>
                 <div class="contact-form">
-                    <h3>在线咨询</h3>
-                    <p class="form-desc">留下您的需求，我们将在24小时内与您联系</p>
+                    <h3 data-en="Online Inquiry">在线咨询</h3>
+                    <p class="form-desc" data-en="Leave your requirements, we'll contact you within 24 hours">留下您的需求，我们将在24小时内与您联系</p>
                     <form id="inquiryForm">
                         <div class="form-row">
-                            <input type="text" placeholder="您的姓名" required>
-                            <input type="tel" placeholder="联系电话" required>
+                            <input type="text" placeholder="您的姓名" data-en-placeholder="Your Name" required>
+                            <input type="tel" placeholder="联系电话" data-en-placeholder="Phone Number" required>
                         </div>
-                        <select>
+                        <select data-en-first="Select a model you're interested in">
                             <option value="">请选择感兴趣的车型</option>
-                            <option>平板半挂车</option>
-                            <option>自卸半挂车</option>
-                            <option>骨架集装箱车</option>
-                            <option>仓栅半挂车</option>
-                            <option>低平板半挂车</option>
-                            <option>特种专用车</option>
+                            <option data-en="Flatbed Semi-Trailer">平板半挂车</option>
+                            <option data-en="Dump Semi-Trailer">自卸半挂车</option>
+                            <option data-en="Skeleton Container Trailer">骨架集装箱车</option>
+                            <option data-en="Fence Semi-Trailer">仓栅半挂车</option>
+                            <option data-en="Low-Bed Semi-Trailer">低平板半挂车</option>
+                            <option data-en="Special Purpose Vehicle">特种专用车</option>
                         </select>
-                        <textarea placeholder="请描述您的需求（车型、尺寸、用途等）" rows="4"></textarea>
-                        <button type="submit" class="btn btn-primary">提交咨询</button>
+                        <textarea placeholder="请描述您的需求（车型、尺寸、用途等）" data-en-placeholder="Describe your needs (model, size, usage, etc.)" rows="4"></textarea>
+                        <button type="submit" class="btn btn-primary" data-en="Submit Inquiry">提交咨询</button>
                     </form>
                 </div>
             </div>
@@ -379,23 +426,23 @@
                     <div class="footer-logo">
                         <img src="assets/images/logo-white.png" alt="欧阳聚德" class="logo-img">
                     </div>
-                    <p>为梦出发 · Dream On The Road</p>
-                    <p class="footer-slogan">做客户值得信任、员工值得自豪的企业</p>
+                    <p data-en="Dream On The Road">为梦出发 · Dream On The Road</p>
+                    <p class="footer-slogan" data-en="A Company Trusted by Customers, Proud for Employees">做客户值得信任、员工值得自豪的企业</p>
                 </div>
                 <div class="footer-links">
-                    <h4>产品中心</h4>
-                    <a href="#">平板半挂车</a>
-                    <a href="#">自卸半挂车</a>
-                    <a href="#">骨架集装箱车</a>
-                    <a href="#">仓栅半挂车</a>
-                    <a href="#">低平板半挂车</a>
+                    <h4 data-en="Products">产品中心</h4>
+                    <a href="#" data-en="Flatbed Semi-Trailer">平板半挂车</a>
+                    <a href="#" data-en="Dump Semi-Trailer">自卸半挂车</a>
+                    <a href="#" data-en="Skeleton Container">骨架集装箱车</a>
+                    <a href="#" data-en="Fence Semi-Trailer">仓栅半挂车</a>
+                    <a href="#" data-en="Low-Bed Semi-Trailer">低平板半挂车</a>
                 </div>
                 <div class="footer-links">
-                    <h4>快速导航</h4>
-                    <a href="#about">关于我们</a>
-                    <a href="#advantages">核心优势</a>
-                    <a href="configurator.html">在线选配</a>
-                    <a href="#contact">联系我们</a>
+                    <h4 data-en="Quick Links">快速导航</h4>
+                    <a href="#about" data-en="About Us">关于我们</a>
+                    <a href="#advantages" data-en="Strengths">核心优势</a>
+                    <a href="configurator.html" data-en="Configure">在线选配</a>
+                    <a href="#contact" data-en="Contact">联系我们</a>
                 </div>
                 <div class="footer-links">
                     <h4>供应商中心</h4>
@@ -405,7 +452,7 @@
                 </div>
             </div>
             <div class="footer-bottom">
-                <p>&copy; 2025 湖北欧阳聚德汽车有限公司 版权所有</p>
+                <p data-en="&copy; 2025 Hubei Ouyang Jude Automobile Co., Ltd. All Rights Reserved.">&copy; 2025 湖北欧阳聚德汽车有限公司 版权所有</p>
             </div>
         </div>
     </footer>
