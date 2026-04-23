@@ -7,6 +7,11 @@
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+SC:wght@300;400;500;700;900&family=Orbitron:wght@400;700;900&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="configurator.css">
+    <link rel="icon" href="/favicon.ico" sizes="any">
+    <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png">
+    <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
+    <link rel="icon" type="image/png" sizes="192x192" href="/favicon-192x192.png">
+    <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
     <meta name="keywords" content="湖北欧阳聚德汽车,欧阳聚德,半挂车,平板半挂车,自卸半挂车,骨架车,仓栅车,半挂车厂家,襄阳半挂车,挂车定制,专用车,低平板半挂车,轻量化挂车">
     <meta name="author" content="湖北欧阳聚德汽车有限公司">
     <link rel="canonical" href="https://hboyjd.com/">
@@ -16,12 +21,12 @@
     <meta property="og:url" content="https://hboyjd.com/">
     <meta property="og:title" content="湖北欧阳聚德汽车有限公司 | 半挂车研发制造专家">
     <meta property="og:description" content="专业半挂车研发制造,平板/自卸/骨架/仓栅全系定制。湖北襄阳厂家直销。">
-    <meta property="og:image" content="https://hboyjd.com/assets/images/logo-white.png">
+    <meta property="og:image" content="https://hboyjd.com/favicon-512x512.png">
     <meta name="twitter:card" content="summary_large_image">
     <meta name="baidu-site-verification" content="codeva-PLACEHOLDER">
     <meta name="google-site-verification" content="ArDJRMJ5IezfJ2XFQBJrFrDQB7IdM1aQ1OC0nwjh7Tk">
     <meta name="msvalidate.01" content="PLACEHOLDER">
-    <script type="application/ld+json">{"@context":"https://schema.org","@type":"Organization","name":"湖北欧阳聚德汽车有限公司","url":"https://hboyjd.com","logo":"https://hboyjd.com/assets/images/logo-white.png","description":"专业半挂车研发制造,平板/自卸/骨架/仓栅全系定制","address":{"@type":"PostalAddress","addressCountry":"CN","addressRegion":"湖北","addressLocality":"襄阳"},"sameAs":[]}</script>
+    <script type="application/ld+json">{"@context":"https://schema.org","@type":"Organization","name":"湖北欧阳聚德汽车有限公司","url":"https://hboyjd.com","logo":"https://hboyjd.com/favicon-512x512.png","description":"专业半挂车研发制造,平板/自卸/骨架/仓栅全系定制","address":{"@type":"PostalAddress","addressCountry":"CN","addressRegion":"湖北","addressLocality":"襄阳"},"sameAs":[]}</script>
 </head>
 <body>
     <!-- 粒子背景 Canvas -->
@@ -139,92 +144,11 @@
             </div>
         </div>
 
-        <!-- Step 1: 规格 -->
-        <div class="config-step" data-step="1">
-            <div class="step-header">
-                <span class="step-number">02</span>
-                <h2>车辆规格</h2>
-            </div>
-            <div class="config-group">
-                <label class="group-label">车身长度</label>
-                <div class="pill-row">
-                    <label class="pill"><input type="radio" name="length" value="13米"><span>13米</span></label>
-                    <label class="pill"><input type="radio" name="length" value="13.75米"><span>13.75米</span></label>
-                    <label class="pill"><input type="radio" name="length" value="14.6米"><span>14.6米</span></label>
-                    <label class="pill"><input type="radio" name="length" value="16米"><span>16米</span></label>
-                    <label class="pill"><input type="radio" name="length" value="其他"><span>其他</span></label>
-                </div>
-                <input type="text" class="text-input hidden" id="customLength" placeholder="请输入自定义长度">
-            </div>
-            <div class="config-group">
-                <label class="group-label">轴数</label>
-                <div class="pill-row">
-                    <label class="pill"><input type="radio" name="axles" value="2轴"><span>2轴</span></label>
-                    <label class="pill"><input type="radio" name="axles" value="3轴"><span>3轴</span></label>
-                    <label class="pill"><input type="radio" name="axles" value="4轴"><span>4轴</span></label>
-                </div>
-            </div>
-            <div class="config-group">
-                <label class="group-label">支腿类型</label>
-                <div class="pill-row">
-                    <label class="pill"><input type="radio" name="leg" value="28T单动"><span>28T 单动</span></label>
-                    <label class="pill"><input type="radio" name="leg" value="28T联动"><span>28T 联动</span></label>
-                    <label class="pill"><input type="radio" name="leg" value="55T液压"><span>55T 液压</span></label>
-                    <label class="pill"><input type="radio" name="leg" value="80T液压"><span>80T 液压</span></label>
-                </div>
-            </div>
-            <div class="config-group">
-                <label class="group-label">腹板厚度</label>
-                <div class="pill-row">
-                    <label class="pill"><input type="radio" name="webPlate" value="5mm"><span>5mm</span></label>
-                    <label class="pill"><input type="radio" name="webPlate" value="6mm"><span>6mm</span></label>
-                    <label class="pill"><input type="radio" name="webPlate" value="8mm"><span>8mm</span></label>
-                    <label class="pill"><input type="radio" name="webPlate" value="10mm"><span>10mm</span></label>
-                    <label class="pill"><input type="radio" name="webPlate" value="12mm"><span>12mm</span></label>
-                </div>
-            </div>
-        </div>
+        <!-- Step 1: 规格（JS 按车型动态渲染） -->
+        <div class="config-step" data-step="1" id="specStep1"></div>
 
-        <!-- Step 2: 悬挂 -->
-        <div class="config-step" data-step="2">
-            <div class="step-header">
-                <span class="step-number">03</span>
-                <h2>悬挂与轮胎</h2>
-            </div>
-            <div class="config-group">
-                <label class="group-label">悬挂系统</label>
-                <div class="pill-row">
-                    <label class="pill"><input type="radio" name="suspension" value="普通钢板悬架"><span>普通钢板悬架</span></label>
-                    <label class="pill"><input type="radio" name="suspension" value="重型钢板悬架"><span>重型钢板悬架</span></label>
-                    <label class="pill"><input type="radio" name="suspension" value="空悬鼓刹"><span>空气悬挂 鼓刹</span></label>
-                    <label class="pill"><input type="radio" name="suspension" value="空悬碟刹"><span>空气悬挂 碟刹</span></label>
-                </div>
-            </div>
-            <div class="config-group">
-                <label class="group-label">轮胎规格</label>
-                <div class="pill-row">
-                    <label class="pill"><input type="radio" name="tire" value="12R22.5"><span>12R22.5</span></label>
-                    <label class="pill"><input type="radio" name="tire" value="11R22.5"><span>11R22.5</span></label>
-                    <label class="pill"><input type="radio" name="tire" value="295/60R22.5"><span>295/60R22.5</span></label>
-                    <label class="pill"><input type="radio" name="tire" value="275/70R22.5"><span>275/70R22.5</span></label>
-                </div>
-            </div>
-            <div class="config-group">
-                <label class="group-label">轮毂材质</label>
-                <div class="pill-row">
-                    <label class="pill"><input type="radio" name="hub" value="钢圈"><span>钢圈</span></label>
-                    <label class="pill"><input type="radio" name="hub" value="铝圈"><span>铝合金轮毂</span></label>
-                </div>
-            </div>
-            <div class="config-group">
-                <label class="group-label">车桥品牌</label>
-                <div class="pill-row">
-                    <label class="pill"><input type="radio" name="axleBrand" value="厂配"><span>厂标配置</span></label>
-                    <label class="pill"><input type="radio" name="axleBrand" value="富华"><span>富华</span></label>
-                    <label class="pill"><input type="radio" name="axleBrand" value="襄汽"><span>襄汽</span></label>
-                </div>
-            </div>
-        </div>
+        <!-- Step 2: 悬挂（JS 按车型动态渲染） -->
+        <div class="config-step" data-step="2" id="specStep2"></div>
 
         <!-- Step 3: 颜色 -->
         <div class="config-step" data-step="3">
