@@ -291,6 +291,76 @@ const typeImages = {
     '特种': 'assets/images/product-special.jpg'
 };
 
+// ====== 每车型规格 Schema（按车型动态渲染 Step1 / Step2） ======
+const COMMON = {
+    axles:      { name: 'axles',      label: '轴数',       options: ['2轴', '3轴', '4轴'] },
+    suspension: { name: 'suspension', label: '悬挂系统',   options: ['普通钢板悬架', '重型钢板悬架', '空气悬挂 鼓刹', '空气悬挂 碟刹'] },
+    tire:       { name: 'tire',       label: '轮胎规格',   options: ['12R22.5', '11R22.5', '295/60R22.5', '275/70R22.5'] },
+    hub:        { name: 'hub',        label: '轮毂材质',   options: ['钢圈', '铝合金轮毂'] },
+    axleBrand:  { name: 'axleBrand',  label: '车桥品牌',   options: ['厂标配置', '富华', '襄汽'] },
+    leg:        { name: 'leg',        label: '支腿类型',   options: ['28T 单动', '28T 联动', '55T 液压', '80T 液压'] },
+};
+
+const SPEC_SCHEMA = {
+    '直梁平板': {
+        step1: { title: '车辆规格', groups: [
+            { name: 'length',   label: '车身长度', options: ['13米', '13.75米', '14.6米', '16米', '其他'], custom: true },
+            COMMON.axles, COMMON.leg,
+            { name: 'webPlate', label: '腹板厚度', options: ['5mm', '6mm', '8mm', '10mm', '12mm'] },
+        ]},
+        step2: { title: '悬挂与轮胎', groups: [ COMMON.suspension, COMMON.tire, COMMON.hub, COMMON.axleBrand ]}
+    },
+    '高低平板': {
+        step1: { title: '车辆规格', groups: [
+            { name: 'length',     label: '车身长度', options: ['13米', '13.75米', '14.6米', '其他'], custom: true },
+            { name: 'gooseneck',  label: '鹅颈高度', options: ['标准 380mm', '加高 420mm'] },
+            { name: 'sinkDepth',  label: '下沉深度', options: ['0.8米', '1.0米', '1.2米'] },
+            COMMON.axles, COMMON.leg,
+            { name: 'ladder',     label: '爬梯', options: ['液压爬梯', '机械爬梯', '无'] },
+        ]},
+        step2: { title: '悬挂与轮胎', groups: [ COMMON.suspension, COMMON.tire, COMMON.hub, COMMON.axleBrand ]}
+    },
+    '自卸': {
+        step1: { title: '厢体与液压', groups: [
+            { name: 'length',    label: '厢体长度', options: ['7.8米', '8.6米', '9.6米', '其他'], custom: true },
+            { name: 'tipAngle',  label: '翻转角度', options: ['50°', '55°', '60°'] },
+            { name: 'cylinder',  label: '油缸规格', options: ['前顶 16吨', '前顶 20吨', '中顶 16吨'] },
+            { name: 'boardMat',  label: '厢板材质', options: ['普通钢板', '锰板', '高强度钢'] },
+            { name: 'rearDoor',  label: '后门类型', options: ['上翻门', '侧翻门', '双开门'] },
+        ]},
+        step2: { title: '悬挂与轮胎', groups: [ COMMON.axles, COMMON.suspension, COMMON.tire, COMMON.hub, COMMON.axleBrand ]}
+    },
+    '骨架': {
+        step1: { title: '集装箱规格', groups: [
+            { name: 'length',        label: '车身长度', options: ['12.5米', '13米', '14.6米', '其他'], custom: true },
+            { name: 'lockCount',     label: '箱锁数量', options: ['12把', '16把', '20把'] },
+            { name: 'containerType', label: '兼容箱型', options: ['20尺×1', '40尺×1', '45尺×1', '双20尺'] },
+            { name: 'frontLock',     label: '前移位锁', options: ['有', '无'] },
+            COMMON.leg,
+        ]},
+        step2: { title: '悬挂与轮胎', groups: [ COMMON.axles, COMMON.suspension, COMMON.tire, COMMON.hub, COMMON.axleBrand ]}
+    },
+    '仓栅': {
+        step1: { title: '栏板与车厢', groups: [
+            { name: 'length',        label: '车身长度', options: ['13米', '13.75米', '14.6米', '其他'], custom: true },
+            { name: 'fenceHeight',   label: '栏板高度', options: ['0.6米', '0.8米', '1.2米', '1.5米'] },
+            { name: 'fenceMat',      label: '栏板材质', options: ['花纹钢板', '镀锌板', '铝合金'] },
+            { name: 'fenceSegments', label: '栏板段数', options: ['6段', '8段', '10段'] },
+            { name: 'tarpFrame',     label: '篷布架',   options: ['有', '无'] },
+            { name: 'rearDoor',      label: '尾门类型', options: ['对开尾门', '上翻尾门', '无尾门'] },
+        ]},
+        step2: { title: '悬挂与轮胎', groups: [ COMMON.axles, COMMON.leg, COMMON.suspension, COMMON.tire, COMMON.hub, COMMON.axleBrand ]}
+    },
+    '特种': {
+        step1: { title: '需求描述', groups: [
+            { name: 'customUsage', label: '用途说明', type: 'textarea', placeholder: '例：高空作业车、随车吊、中置轴车架、全挂车等' },
+            { name: 'customLoad',  label: '载重需求', options: ['≤30吨', '30-50吨', '50-80吨', '80吨以上'] },
+            { name: 'length',      label: '预计长度', options: ['8米以内', '8-12米', '12-15米', '15米以上'] },
+        ]},
+        step2: { title: '悬挂与轮胎（可选）', groups: [ COMMON.axles, COMMON.suspension, COMMON.tire, COMMON.hub ]}
+    }
+};
+
 // 颜色 → CSS滤镜映射（基于红色基础图，hue≈0°）
 // 红色是原色，其他颜色从红色出发偏移
 const colorFilters = {
@@ -355,6 +425,65 @@ document.querySelectorAll('.step-dot').forEach(dot => {
     });
 });
 
+// ====== 动态规格渲染 ======
+function renderSpecStep(stepIndex, schema, stepNumberStr) {
+    const container = document.getElementById('specStep' + stepIndex);
+    if (!container) return;
+    let html = `<div class="step-header"><span class="step-number">${stepNumberStr}</span><h2>${schema.title}</h2></div>`;
+    schema.groups.forEach(g => {
+        if (g.type === 'textarea') {
+            html += `<div class="config-group"><label class="group-label">${g.label}</label>`
+                 + `<textarea class="text-area" name="${g.name}" placeholder="${g.placeholder || ''}"></textarea></div>`;
+        } else {
+            html += `<div class="config-group"><label class="group-label">${g.label}</label><div class="pill-row">`;
+            g.options.forEach(opt => {
+                html += `<label class="pill"><input type="radio" name="${g.name}" value="${opt}"><span>${opt}</span></label>`;
+            });
+            html += `</div>`;
+            if (g.custom) {
+                html += `<input type="text" class="text-input hidden" data-custom-for="${g.name}" placeholder="请输入自定义${g.label}">`;
+            }
+            html += `</div>`;
+        }
+    });
+    container.innerHTML = html;
+}
+
+function renderSpecsForType(type) {
+    const schema = SPEC_SCHEMA[type] || SPEC_SCHEMA['直梁平板'];
+    renderSpecStep(1, schema.step1, '02');
+    renderSpecStep(2, schema.step2, '03');
+    bindDynamicFieldEvents();
+}
+
+function bindDynamicFieldEvents() {
+    // 规格/悬挂区所有新渲染的 radio 和 textarea 绑定更新
+    const specInputs = document.querySelectorAll(
+        '#specStep1 input[type="radio"], #specStep2 input[type="radio"], ' +
+        '#specStep1 textarea, #specStep2 textarea'
+    );
+    specInputs.forEach(el => {
+        el.addEventListener('change', updateTags);
+        el.addEventListener('input', updateTags);
+        if (el.type === 'radio') {
+            el.addEventListener('change', (e) => {
+                const customInput = document.querySelector(`input[data-custom-for="${e.target.name}"]`);
+                if (!customInput) return;
+                if (e.target.value === '其他') {
+                    customInput.classList.remove('hidden');
+                    customInput.focus();
+                } else {
+                    customInput.classList.add('hidden');
+                }
+            });
+        }
+    });
+    // 自定义输入框实时更新
+    document.querySelectorAll('input[data-custom-for]').forEach(i => {
+        i.addEventListener('input', updateTags);
+    });
+}
+
 // ====== 车型切换动画 ======
 document.querySelectorAll('input[name="vehicleType"]').forEach(radio => {
     radio.addEventListener('change', (e) => {
@@ -374,6 +503,8 @@ document.querySelectorAll('input[name="vehicleType"]').forEach(radio => {
             vehicleLabel.querySelector('.label-zh').textContent = label.zh;
         }, 150);
 
+        // 重新渲染规格项
+        renderSpecsForType(type);
         updateTags();
     });
 });
@@ -510,28 +641,42 @@ document.querySelectorAll('input[name="color"]').forEach(function(radio) {
     });
 });
 
-// ====== 所有选项变化 ======
-document.querySelectorAll('input[type="radio"]').forEach(radio => {
-    if (radio.name !== 'color') {
-        radio.addEventListener('change', updateTags);
-    }
+// ====== 顶层静态 radio 变化绑定（vehicleType / color / quantity） ======
+document.querySelectorAll('input[name="vehicleType"], input[name="quantity"]').forEach(radio => {
+    radio.addEventListener('change', updateTags);
 });
 
-document.querySelectorAll('input[name="length"]').forEach(radio => {
-    radio.addEventListener('change', (e) => {
-        const el = document.getElementById('customLength');
-        if (e.target.value === '其他') { el.classList.remove('hidden'); el.focus(); }
-        else el.classList.add('hidden');
+// ====== 动态规格数据收集 ======
+function collectSpecs() {
+    const specs = {};
+    document.querySelectorAll(
+        '#specStep1 input[type="radio"]:checked, #specStep2 input[type="radio"]:checked'
+    ).forEach(r => {
+        let value = r.value;
+        if (value === '其他') {
+            const custom = document.querySelector(`input[data-custom-for="${r.name}"]`);
+            if (custom && custom.value.trim()) value = custom.value.trim();
+        }
+        const group = r.closest('.config-group');
+        const label = group?.querySelector('.group-label')?.textContent || r.name;
+        specs[label] = value;
     });
-});
+    document.querySelectorAll('#specStep1 textarea, #specStep2 textarea').forEach(t => {
+        if (t.value.trim()) {
+            const label = t.closest('.config-group')?.querySelector('.group-label')?.textContent || t.name;
+            specs[label] = t.value.trim();
+        }
+    });
+    return specs;
+}
 
 function updateTags() {
     const s = getSelections();
     const tags = [];
     if (s.vehicleType) tags.push(typeLabels[s.vehicleType]?.zh || s.vehicleType);
-    if (s.length) tags.push(s.length);
-    if (s.axles) tags.push(s.axles);
-    if (s.suspension) tags.push(s.suspension);
+    // 取前3个规格展示
+    const specVals = Object.values(s.specs).filter(Boolean).slice(0, 3);
+    specVals.forEach(v => tags.push(v));
     if (s.color) tags.push(s.color.split(' ')[0]);
     if (tags.length === 0) tags.push('请选择配置');
 
@@ -544,16 +689,9 @@ function getSelections() {
         const el = document.querySelector(`input[name="${name}"]:checked`);
         return el ? el.value : '';
     };
-    let length = get('length');
-    if (length === '其他') {
-        const custom = document.getElementById('customLength').value;
-        if (custom) length = custom;
-    }
     return {
         vehicleType: get('vehicleType'),
-        length, axles: get('axles'), leg: get('leg'),
-        webPlate: get('webPlate'), suspension: get('suspension'),
-        tire: get('tire'), hub: get('hub'), axleBrand: get('axleBrand'),
+        specs: collectSpecs(),
         color: get('color'),
         remarks: document.querySelector('textarea[name="remarks"]')?.value || '',
         customerName: document.querySelector('input[name="customerName"]')?.value || '',
@@ -566,13 +704,10 @@ function getSelections() {
 function buildSummary() {
     const s = getSelections();
     const label = typeLabels[s.vehicleType]?.zh || s.vehicleType || '未选择';
-    const rows = [
-        ['车型', label], ['车身长度', s.length || '未选择'],
-        ['轴数', s.axles || '未选择'], ['支腿', s.leg || '未选择'],
-        ['腹板厚度', s.webPlate || '未选择'], ['悬挂系统', s.suspension || '未选择'],
-        ['轮胎规格', s.tire || '未选择'], ['轮毂', s.hub || '未选择'],
-        ['车桥', s.axleBrand || '未选择'], ['车身颜色', s.color?.split(' ')[0] || '未选择'],
-    ];
+    const rows = [['车型', label]];
+    Object.entries(s.specs).forEach(([k, v]) => rows.push([k, v || '未选择']));
+    rows.push(['车身颜色', s.color?.split(' ')[0] || '未选择']);
+    if (s.quantity) rows.push(['需求台数', s.quantity]);
     if (s.remarks) rows.push(['特殊需求', s.remarks]);
 
     document.getElementById('configSummary').innerHTML = `
@@ -592,5 +727,7 @@ btnSubmit.addEventListener('click', () => {
     document.getElementById('successModal').classList.remove('hidden');
 });
 
-// 初始化 — 红色是基础图原色，不需要滤镜
+// ====== 初始化 ======
+// 默认渲染"直梁平板"的规格
+renderSpecsForType('直梁平板');
 updateTags();

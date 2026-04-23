@@ -525,6 +525,16 @@ body::after {
 }
 .summary-row .label { color: var(--text-dim); }
 .summary-row .value { font-weight: 600; }
+.summary-note {
+    font-size: 12px;
+    color: var(--text-dim);
+    margin: -12px 0 20px;
+    padding: 8px 12px;
+    background: rgba(37, 99, 235, 0.08);
+    border-left: 2px solid var(--cyan);
+    border-radius: 4px;
+    line-height: 1.5;
+}
 
 /* ====== 底部按钮 ====== */
 .panel-actions {
