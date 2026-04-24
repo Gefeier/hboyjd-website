@@ -805,6 +805,14 @@ btnSubmit.addEventListener('click', () => {
         if (typeof _hmt !== 'undefined') {
             _hmt.push(['_trackEvent', 'configurator', 'submit', s.vehicleType]);
         }
+        // Google Analytics 4 事件上报（如已接入）
+        if (typeof gtag !== 'undefined') {
+            gtag('event', 'inquiry_submit', {
+                vehicle_type: s.vehicleType || 'unknown',
+                color: (s.color || '').split(' ')[0] || 'unknown',
+                quantity: s.quantity || 'unknown'
+            });
+        }
     }).catch(err => {
         console.error('[inquiry] submit failed:', err);
         alert('提交失败：' + (err.message || '网络异常') + '\n\n您也可以直接拨打销售热线 400-1588-106');
