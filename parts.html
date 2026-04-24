@@ -7,7 +7,7 @@
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+SC:wght@300;400;500;700;900&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="style.css">
-    <link rel="stylesheet" href="parts.css">
+    <link rel="stylesheet" href="parts.css?v=20260424b">
     <link rel="icon" href="/favicon.ico" sizes="any">
     <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png">
     <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
@@ -73,6 +73,40 @@
         <div class="container">
             <h1>配件中心</h1>
             <p>原厂品质配件，为您的车辆保驾护航</p>
+        </div>
+    </section>
+
+    <!-- 配件位置导览（v0 侧视图热点 · 仓栏车型） -->
+    <section class="parts-map">
+        <div class="container">
+            <div class="map-intro">
+                <h2>配件位置导览</h2>
+                <p>点击车辆上的蓝色标记，跳转查看该位置的配件</p>
+            </div>
+            <div class="map-wrap">
+                <img src="assets/images/config-base-fence.png" alt="整车配件分布示意图" class="map-img" loading="lazy">
+                <!-- 合页: 仓栏门板接缝处 -->
+                <button class="hotspot" style="left: 22%; top: 42%;" data-target="hinges" type="button">
+                    <span class="hotspot-dot"></span>
+                    <span class="hotspot-label">合页</span>
+                </button>
+                <!-- 侧标灯: 栏板立柱之间 -->
+                <button class="hotspot" style="left: 10%; top: 35%;" data-target="side-lamp" type="button">
+                    <span class="hotspot-dot"></span>
+                    <span class="hotspot-label">侧标灯</span>
+                </button>
+                <!-- 反射器: 车尾侧部 -->
+                <button class="hotspot" style="left: 4%; top: 62%;" data-target="reflector" type="button">
+                    <span class="hotspot-dot"></span>
+                    <span class="hotspot-label">反射器</span>
+                </button>
+                <!-- 前位灯/大灯: 牵引车车头 -->
+                <button class="hotspot" style="left: 87%; top: 55%;" data-target="front-lamp" type="button">
+                    <span class="hotspot-dot"></span>
+                    <span class="hotspot-label">前位灯</span>
+                </button>
+            </div>
+            <p class="map-hint">※ 暂展示仓栅车型侧视角度配件位置，后续增加车前 / 车后视角覆盖全系列</p>
         </div>
     </section>
 
@@ -295,6 +329,24 @@
                 if (cat === 'lighting' && filter !== 'hinges') { s.style.display = ''; return; }
                 s.style.display = 'none';
             });
+        });
+    });
+
+    // 配件位置导览热点: 点击跳到对应分类
+    document.querySelectorAll('.hotspot').forEach(h => {
+        h.addEventListener('click', () => {
+            const target = h.dataset.target;
+            const filterBtn = document.querySelector(`.filter-btn[data-filter="${target}"]`);
+            if (filterBtn) filterBtn.click();
+            // 滚动到对应 section 或子分类标题
+            const anchor = target === 'hinges'
+                ? document.querySelector('[data-category="hinges"]')
+                : document.querySelector(`.sub-category[data-sub="${target}"]`);
+            if (anchor) {
+                setTimeout(() => {
+                    anchor.scrollIntoView({ behavior: 'smooth', block: 'start' });
+                }, 120);
+            }
         });
     });
     </script>

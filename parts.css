@@ -20,6 +20,125 @@
     color: rgba(255,255,255,0.6);
 }
 
+/* ============================================
+   配件位置导览 (热点图 v0 · 仓栏车侧视)
+   ============================================ */
+.parts-map {
+    padding: 56px 0 32px;
+    background: linear-gradient(180deg, #050508 0%, #0a0f1a 100%);
+    color: #fff;
+}
+.map-intro {
+    text-align: center;
+    margin-bottom: 24px;
+}
+.map-intro h2 {
+    font-size: 28px;
+    font-weight: 900;
+    color: #fff;
+    margin-bottom: 6px;
+}
+.map-intro p {
+    color: rgba(255, 255, 255, 0.55);
+    font-size: 13px;
+}
+.map-wrap {
+    position: relative;
+    max-width: 960px;
+    margin: 0 auto;
+    border-radius: 14px;
+    overflow: hidden;
+    background: #000;
+    box-shadow: 0 12px 40px rgba(0, 0, 0, 0.4);
+}
+.map-img {
+    width: 100%;
+    height: auto;
+    display: block;
+}
+.map-hint {
+    text-align: center;
+    color: rgba(255, 255, 255, 0.4);
+    font-size: 12px;
+    margin-top: 16px;
+}
+
+/* 热点按钮 */
+.hotspot {
+    position: absolute;
+    transform: translate(-50%, -50%);
+    background: transparent;
+    border: none;
+    cursor: pointer;
+    padding: 0;
+    z-index: 2;
+}
+.hotspot-dot {
+    display: block;
+    width: 16px;
+    height: 16px;
+    background: #2563eb;
+    border: 2px solid #fff;
+    border-radius: 50%;
+    box-shadow: 0 0 0 0 rgba(37, 99, 235, 0.7);
+    animation: hotspotPulse 1.8s ease-out infinite;
+    transition: transform 0.2s, background 0.2s;
+}
+@keyframes hotspotPulse {
+    0%   { box-shadow: 0 0 0 0 rgba(37, 99, 235, 0.7); }
+    70%  { box-shadow: 0 0 0 16px rgba(37, 99, 235, 0); }
+    100% { box-shadow: 0 0 0 0 rgba(37, 99, 235, 0); }
+}
+.hotspot-label {
+    position: absolute;
+    left: 50%;
+    bottom: calc(100% + 10px);
+    transform: translateX(-50%);
+    white-space: nowrap;
+    background: rgba(255, 255, 255, 0.96);
+    color: #0a0f1a;
+    font-size: 12px;
+    font-weight: 700;
+    padding: 5px 12px;
+    border-radius: 14px;
+    opacity: 0;
+    transition: opacity 0.2s, transform 0.2s;
+    pointer-events: none;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
+}
+.hotspot-label::after {
+    content: '';
+    position: absolute;
+    top: 100%;
+    left: 50%;
+    transform: translateX(-50%);
+    border: 5px solid transparent;
+    border-top-color: rgba(255, 255, 255, 0.96);
+}
+.hotspot:hover .hotspot-dot,
+.hotspot:focus .hotspot-dot {
+    background: #3b82f6;
+    transform: scale(1.25);
+}
+.hotspot:hover .hotspot-label,
+.hotspot:focus .hotspot-label {
+    opacity: 1;
+}
+
+@media (max-width: 768px) {
+    .parts-map { padding: 36px 0 20px; }
+    .map-intro h2 { font-size: 22px; }
+    .map-intro p { font-size: 12px; }
+    .hotspot-dot { width: 14px; height: 14px; }
+    /* 手机上 label 常显(hover 不好用),字号缩小 */
+    .hotspot-label {
+        opacity: 1;
+        font-size: 10px;
+        padding: 3px 8px;
+    }
+    .map-hint { font-size: 11px; padding: 0 16px; }
+}
+
 /* 筛选栏 */
 .parts-filter {
     background: var(--white);
