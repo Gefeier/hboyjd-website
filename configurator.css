@@ -691,17 +691,26 @@ body::after {
     .label-en { font-size: 8px; letter-spacing: 2px; }
     .config-tags { display: none; }
 
-    /* 配置面板退到车下面 */
+    /* 配置面板退到车下面
+       用 100dvh 代替 100vh —— iOS Safari 动态工具栏吃视口 100vh 算不准 */
     .config-panel {
         width: 100%;
         max-width: none;
         top: calc(64px + 35vh);
-        height: calc(100vh - 64px - 35vh);
+        height: calc(100dvh - 64px - 35vh);
         border-left: none;
         border-top: 1px solid var(--glass-border);
     }
     .panel-handle { display: block; }
     .highway { height: 25vh; }
+
+    /* 平板/手机的 step 内容要为底部按钮条留足空间 */
+    .config-step { padding-bottom: 200px; }
+
+    /* 按钮条适配 iOS 底部安全区 (Home Indicator 横条) */
+    .panel-actions {
+        padding-bottom: calc(20px + env(safe-area-inset-bottom, 0px));
+    }
 }
 
 @media (max-width: 480px) {
@@ -709,12 +718,14 @@ body::after {
     .vehicle-stage { height: 32vh; }
     .config-panel {
         top: calc(64px + 32vh);
-        height: calc(100vh - 64px - 32vh);
+        height: calc(100dvh - 64px - 32vh);
     }
     .nav-steps { display: none; }
     .config-nav { padding: 0 16px; }
-    .config-step { padding: 24px 20px 140px; }
-    .panel-actions { padding: 16px 20px; }
+    .config-step { padding: 24px 20px 220px; }
+    .panel-actions {
+        padding: 16px 20px calc(16px + env(safe-area-inset-bottom, 0px));
+    }
     .type-grid { grid-template-columns: 1fr; }
     .color-grid { grid-template-columns: repeat(4, 1fr); }
     .label-zh { font-size: 16px; }
