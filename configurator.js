@@ -736,54 +736,18 @@ function buildSummary() {
     `;
 }
 
-// ====== 提交询价 → 钉钉推送 ======
-function buildDingtalkPayload(s) {
-    const label = typeLabels[s.vehicleType]?.zh || s.vehicleType || '未选';
-    const colorName = s.color ? s.color.split(' ')[0] : '未选';
-    const specLines = Object.entries(s.specs).map(([k, v]) => `- **${k}**：${v}`).join('\n');
-    const ts = new Date().toLocaleString('zh-CN', { hour12: false });
-
-    // 消息必须包含"官网询价"关键词(机器人白名单)
-    const markdown = [
-        `### 🚛 官网询价 · 新线索`,
-        ``,
-        `**联系人**：${s.customerName}　|　**电话**：${s.customerPhone}`,
-        s.customerCompany ? `**公司**：${s.customerCompany}` : '',
-        `**需求台数**：${s.quantity || '未选'}`,
-        ``,
-        `---`,
-        ``,
-        `**车型**：${label}　|　**车身颜色**：${colorName}`,
-        ``,
-        `**规格配置**：`,
-        specLines || '- （客户未选规格）',
-        s.remarks ? `\n**特殊需求**：${s.remarks}` : '',
-        ``,
-        `---`,
-        `⏱ ${ts} · 请于 24 小时内回访`,
-    ].filter(Boolean).join('\n');
-
-    return {
-        msgtype: 'markdown',
-        markdown: {
-            title: `官网询价：${s.customerName} · ${label}`,
-            text: markdown
-        },
-        at: { isAtAll: false }
-    };
-}
-
+// ====== 提交询价 → 发原始数据给后端 ======
+// 后端 Flask (/opt/inquiry-proxy) 负责查 IP 地理 + 手机号归属 + 拼 markdown + 转钉钉
 async function submitInquiry(s) {
-    const payload = buildDingtalkPayload(s);
     const res = await fetch('/api/inquiry', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify(payload)
+        body: JSON.stringify(s)  // 直接发 getSelections() 的原始对象
     });
     if (!res.ok) throw new Error('服务异常 HTTP ' + res.status);
     const data = await res.json().catch(() => ({}));
     if (data.errcode !== 0 && data.errcode !== undefined) {
-        throw new Error(data.errmsg || '钉钉推送失败');
+        throw new Error(data.errmsg || '推送失败');
     }
     return data;
 }
