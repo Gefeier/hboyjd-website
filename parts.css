@@ -192,6 +192,27 @@
     background: #1d4ed8;
     box-shadow: 0 6px 24px rgba(37,99,235,0.4);
 }
+.cta-row {
+    display: flex;
+    gap: 14px;
+    justify-content: center;
+    flex-wrap: wrap;
+}
+.cta-whatsapp {
+    display: inline-block;
+    padding: 16px 36px;
+    background: #25d366;
+    color: #fff;
+    font-size: 18px;
+    font-weight: 700;
+    border-radius: 32px;
+    text-decoration: none;
+    transition: background 0.2s, box-shadow 0.2s;
+}
+.cta-whatsapp:hover {
+    background: #1fba58;
+    box-shadow: 0 6px 24px rgba(37,211,102,0.4);
+}
 
 /* 导航active状态 */
 .nav-links a.active {
