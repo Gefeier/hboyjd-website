@@ -666,23 +666,56 @@ body::after {
 .btn-back:hover { box-shadow: 0 0 40px rgba(37,99,235,0.5); }
 
 /* ====== 响应式 ====== */
+/* 平板/手机：顶部固定小车预览 (35vh) + 下面配置面板 (65vh 可滚) */
 @media (max-width: 1024px) {
-    .vehicle-stage { display: none; }
+    .vehicle-stage {
+        position: fixed;
+        top: 64px;
+        left: 0;
+        width: 100%;
+        height: 35vh;
+        z-index: 5;
+        padding: 8px 0;
+        /* 背景用半透明深色,让换色时有对比; 不用 backdrop-filter 省性能 */
+        background: rgba(5, 5, 8, 0.92);
+        border-bottom: 1px solid var(--glass-border);
+    }
+    .vehicle-wrapper {
+        width: 92%;
+        max-width: 520px;
+    }
+    .vehicle-reflection { display: none; }
+    /* 车型标签在小屏上缩小 */
+    .vehicle-label { bottom: 6%; left: 4%; }
+    .label-zh { font-size: 18px; }
+    .label-en { font-size: 8px; letter-spacing: 2px; }
+    .config-tags { display: none; }
+
+    /* 配置面板退到车下面 */
     .config-panel {
         width: 100%;
         max-width: none;
-        top: 64px;
+        top: calc(64px + 35vh);
+        height: calc(100vh - 64px - 35vh);
         border-left: none;
+        border-top: 1px solid var(--glass-border);
     }
     .panel-handle { display: block; }
     .highway { height: 25vh; }
 }
 
 @media (max-width: 480px) {
+    /* 手机屏车区再缩一点给配置多留空间 */
+    .vehicle-stage { height: 32vh; }
+    .config-panel {
+        top: calc(64px + 32vh);
+        height: calc(100vh - 64px - 32vh);
+    }
     .nav-steps { display: none; }
     .config-nav { padding: 0 16px; }
     .config-step { padding: 24px 20px 140px; }
     .panel-actions { padding: 16px 20px; }
     .type-grid { grid-template-columns: 1fr; }
     .color-grid { grid-template-columns: repeat(4, 1fr); }
+    .label-zh { font-size: 16px; }
 }
