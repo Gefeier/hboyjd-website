@@ -12,18 +12,6 @@
     "url": "http://mp.weixin.qq.com/s?__biz=MzUzMjE3NTM5Mw==&mid=2247516793&idx=1&sn=be9f6361a3ab6851d084cdb5abd6a0c7&chksm=fab58d37cdc20421c67bd1beec269e60fd2c085bbda1cab05a88fb8dc18a1657d8d6330ea5a2#rd"
   },
   {
-    "id": 2,
-    "title": "T700C高强钢材：为什么我们的半挂车更轻更强",
-    "title_en": "T700C Steel: Why Our Trailers Are Lighter and Stronger",
-    "summary": "",
-    "summary_en": "",
-    "date": "2026-03-25",
-    "category": "tech",
-    "category_label": "技术分享",
-    "category_label_en": "Tech Insights",
-    "url": ""
-  },
-  {
     "id": 3,
     "title": "2026年半挂车行业新规解读：对运输企业的影响",
     "title_en": "2026 Semi-Trailer Policy: Impact on Transport Companies",
@@ -66,9 +54,9 @@
     "summary": "政企联动保安全！南城办事处书记李小奎实地探访欧阳聚德，释放重要信号",
     "summary_en": "",
     "date": "2026-03-12",
-    "category": "company",
-    "category_label": "公司动态",
-    "category_label_en": "Company News",
+    "category": "case",
+    "category_label": "客户案例",
+    "category_label_en": "Customer Stories",
     "url": "http://mp.weixin.qq.com/s?__biz=MzUzMjE3NTM5Mw==&mid=2247516511&idx=1&sn=0d8355f7eb9903f1b00411c3f4dcec22&chksm=fab58e11cdc20707b2fa10d1c02262f13c74c2ece8e9aff3b63822f2941556990f5505407891#rd"
   },
   {
@@ -84,18 +72,6 @@
     "url": ""
   },
   {
-    "id": 8,
-    "title": "轻量化半挂车如何降低运营成本",
-    "title_en": "How Lightweight Trailers Reduce Operating Costs",
-    "summary": "",
-    "summary_en": "",
-    "date": "2026-03-10",
-    "category": "tech",
-    "category_label": "技术分享",
-    "category_label_en": "Tech Insights",
-    "url": ""
-  },
-  {
     "id": 7,
     "title": "全国高速公路货车通行费优惠政策延续",
     "title_en": "National Highway Truck Toll Discount Policy Extended",
@@ -105,30 +81,6 @@
     "category": "industry",
     "category_label": "行业资讯",
     "category_label_en": "Industry News",
-    "url": ""
-  },
-  {
-    "id": 9,
-    "title": "半挂车悬挂系统选择指南：空气悬挂vs机械悬挂",
-    "title_en": "Trailer Suspension Guide: Air vs Mechanical",
-    "summary": "",
-    "summary_en": "",
-    "date": "2026-03-05",
-    "category": "tech",
-    "category_label": "技术分享",
-    "category_label_en": "Tech Insights",
-    "url": ""
-  },
-  {
-    "id": 12,
-    "title": "焊接工艺对半挂车使用寿命的影响",
-    "title_en": "Impact of Welding Technology on Trailer Lifespan",
-    "summary": "",
-    "summary_en": "",
-    "date": "2026-02-15",
-    "category": "tech",
-    "category_label": "技术分享",
-    "category_label_en": "Tech Insights",
     "url": ""
   },
   {
@@ -142,5 +94,41 @@
     "category_label": "公司动态",
     "category_label_en": "Company News",
     "url": "http://mp.weixin.qq.com/s?__biz=MzUzMjE3NTM5Mw==&mid=2247515516&idx=1&sn=b71e774ed459aee75c7f445567ddcb17&chksm=fab5b232cdc23b2433f77ba26aaa80a2739091ee1dcc4745636f27fe1a2453331303305c095b#rd"
+  },
+  {
+    "id": "wx-lceT2SU1nbvG",
+    "title": "又是发钱的一天",
+    "title_en": "",
+    "summary": "唉呀妈呀，好多钱呀！",
+    "summary_en": "",
+    "date": "2025-08-01",
+    "category": "company",
+    "category_label": "公司动态",
+    "category_label_en": "Company News",
+    "url": "http://mp.weixin.qq.com/s?__biz=MzUzMjE3NTM5Mw==&mid=2247514131&idx=1&sn=5cac33fab6fce7c492698472b0cabd2f&chksm=fab5b75dcdc23e4bb7180efcef160e66d7d357d1a41d71b9ce7024335d582d6950caa6529d23#rd"
+  },
+  {
+    "id": "wx-ZckfmE8FrF4F",
+    "title": "跨国合作再启新程！非洲贝宁商客莅临欧阳聚德，共绘国际汽车贸易新蓝图！",
+    "title_en": "",
+    "summary": "热烈欢迎非洲贝宁商客来厂洽谈！",
+    "summary_en": "",
+    "date": "2025-07-22",
+    "category": "case",
+    "category_label": "客户案例",
+    "category_label_en": "Customer Stories",
+    "url": "http://mp.weixin.qq.com/s?__biz=MzUzMjE3NTM5Mw==&mid=2247513958&idx=1&sn=42b6f29386f7fa669f7f490c2c38bbd9&chksm=fab5b828cdc2313e3b3efc543f9b8dc6d33ed5fb884eb413dc7f3e8f801101de9e901848a5e6#rd"
+  },
+  {
+    "id": "wx-trWvt8_Csl1h",
+    "title": "市委组织部、社工部领导莅临我司党支部调研指导，共话党建高质量发展",
+    "title_en": "",
+    "summary": "2025年3月19日，市委组织部黄部长、社工部任部长一行莅临欧阳聚德党支部开展实地调研指导。",
+    "summary_en": "",
+    "date": "2025-03-19",
+    "category": "case",
+    "category_label": "客户案例",
+    "category_label_en": "Customer Stories",
+    "url": "http://mp.weixin.qq.com/s?__biz=MzUzMjE3NTM5Mw==&mid=2247511204&idx=1&sn=ced26f599ed580ab35ebe71539db1aec&chksm=fab5a3eacdc22afca2b4abef6b4f51c08ae30e443c2049eb64d04386fbb5fa2c1f24b3cffe51#rd"
   }
 ]
