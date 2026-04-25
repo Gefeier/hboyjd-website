@@ -84,7 +84,7 @@ document.querySelectorAll('.stats, .about, .products, .advantages, .news, .cta-s
     const categories = [
         { key: 'industry', zh: '行业资讯', en: 'Industry News' },
         { key: 'company', zh: '公司动态', en: 'Company News' },
-        { key: 'tech', zh: '技术分享', en: 'Tech Insights' }
+        { key: 'case', zh: '客户案例', en: 'Customer Stories' }
     ];
 
     let allNews = [];
