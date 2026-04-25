@@ -107,7 +107,7 @@ document.querySelectorAll('.stats, .about, .products, .advantages, .news, .cta-s
                     <li><a href="${n.url || '#'}" ${n.url ? 'target="_blank"' : ''}>
                         <span class="news-dot"></span>
                         <span class="news-title">${isEn ? n.title_en : n.title}</span>
-                        <span class="news-date">${n.date.slice(5)}</span>
+                        <span class="news-date">${n.date}</span>
                     </a></li>`).join('')}</ul>`
                 : `<div class="news-column-empty">${isEn ? 'Coming soon' : '即将更新'}</div>`;
 
