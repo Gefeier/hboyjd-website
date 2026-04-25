@@ -1138,6 +1138,21 @@ body {
     .stat-number { font-size: 36px; }
 }
 
+/* ====== Hero 背景视频 ====== */
+.hero-video {
+    position: absolute;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    z-index: 0;
+    /* 视频载入前显示 poster,载入后无缝替换 */
+}
+@media (max-width: 768px) {
+    /* 移动端不加载视频,节省流量,沿用 .hero 的 background-image fallback */
+    .hero-video { display: none; }
+}
+
 /* ====== 企业宣传片 ====== */
 .promo-video {
     padding: 100px 0;
