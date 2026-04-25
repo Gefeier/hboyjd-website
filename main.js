@@ -89,7 +89,8 @@ document.querySelectorAll('.stats, .about, .products, .advantages, .news, .cta-s
 
     let allNews = [];
 
-    fetch('news.json')
+    // 加时间戳破缓存,新闻栏内容由公众号自动同步,客户首次/刷新都拿最新
+    fetch('news.json?t=' + Date.now())
         .then(r => r.json())
         .then(data => {
             allNews = data.sort((a, b) => b.date.localeCompare(a.date));
