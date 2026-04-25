@@ -82,9 +82,9 @@ document.querySelectorAll('.stats, .about, .products, .advantages, .news, .cta-s
     if (!container) return;
 
     const categories = [
-        { key: 'industry', zh: '行业资讯', en: 'Industry News' },
         { key: 'company', zh: '公司动态', en: 'Company News' },
-        { key: 'case', zh: '客户案例', en: 'Customer Stories' }
+        { key: 'case', zh: '客户案例', en: 'Customer Stories' },
+        { key: 'gov', zh: '党政动态', en: 'Government & Party' }
     ];
 
     let allNews = [];
