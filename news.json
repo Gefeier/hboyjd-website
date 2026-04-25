@@ -1,17 +1,5 @@
 [
   {
-    "id": 1,
-    "title": "欧阳聚德官网全新上线",
-    "title_en": "Ouyang Jude Official Website Launched",
-    "summary": "全新官方网站正式上线，提供在线车型选配等功能。",
-    "summary_en": "Brand-new official website is now live with online vehicle configuration.",
-    "date": "2026-03-28",
-    "category": "company",
-    "category_label": "公司动态",
-    "category_label_en": "Company News",
-    "url": ""
-  },
-  {
     "id": 2,
     "title": "T700C高强钢材：为什么我们的半挂车更轻更强",
     "title_en": "T700C Steel: Why Our Trailers Are Lighter and Stronger",
@@ -33,18 +21,6 @@
     "category": "industry",
     "category_label": "行业资讯",
     "category_label_en": "Industry News",
-    "url": ""
-  },
-  {
-    "id": 4,
-    "title": "全定制化生产：从选配到交付的全流程体验",
-    "title_en": "Full Customization: From Configuration to Delivery",
-    "summary": "",
-    "summary_en": "",
-    "date": "2026-03-15",
-    "category": "company",
-    "category_label": "公司动态",
-    "category_label_en": "Company News",
     "url": ""
   },
   {
@@ -72,18 +48,6 @@
     "url": ""
   },
   {
-    "id": 7,
-    "title": "全国高速公路货车通行费优惠政策延续",
-    "title_en": "National Highway Truck Toll Discount Policy Extended",
-    "summary": "",
-    "summary_en": "",
-    "date": "2026-03-08",
-    "category": "industry",
-    "category_label": "行业资讯",
-    "category_label_en": "Industry News",
-    "url": ""
-  },
-  {
     "id": 8,
     "title": "轻量化半挂车如何降低运营成本",
     "title_en": "How Lightweight Trailers Reduce Operating Costs",
@@ -93,6 +57,18 @@
     "category": "tech",
     "category_label": "技术分享",
     "category_label_en": "Tech Insights",
+    "url": ""
+  },
+  {
+    "id": 7,
+    "title": "全国高速公路货车通行费优惠政策延续",
+    "title_en": "National Highway Truck Toll Discount Policy Extended",
+    "summary": "",
+    "summary_en": "",
+    "date": "2026-03-08",
+    "category": "industry",
+    "category_label": "行业资讯",
+    "category_label_en": "Industry News",
     "url": ""
   },
   {
@@ -108,30 +84,6 @@
     "url": ""
   },
   {
-    "id": 10,
-    "title": "欧阳聚德通过省级绿色工厂认定",
-    "title_en": "Ouyang Jude Certified as Provincial Green Factory",
-    "summary": "",
-    "summary_en": "",
-    "date": "2026-03-01",
-    "category": "company",
-    "category_label": "公司动态",
-    "category_label_en": "Company News",
-    "url": ""
-  },
-  {
-    "id": 11,
-    "title": "欧阳聚德与湖北工业大学深化产学研合作",
-    "title_en": "Ouyang Jude Deepens R&D Partnership with Hubei University of Technology",
-    "summary": "",
-    "summary_en": "",
-    "date": "2026-02-20",
-    "category": "company",
-    "category_label": "公司动态",
-    "category_label_en": "Company News",
-    "url": ""
-  },
-  {
     "id": 12,
     "title": "焊接工艺对半挂车使用寿命的影响",
     "title_en": "Impact of Welding Technology on Trailer Lifespan",
@@ -142,5 +94,53 @@
     "category_label": "技术分享",
     "category_label_en": "Tech Insights",
     "url": ""
+  },
+  {
+    "id": "wx-tBE0pOjCyLUa",
+    "title": "æ¬§é³èå¾·ï½ææ£åè¯ï¼ç±æä¸ç",
+    "title_en": "",
+    "summary": "æ¬§é³èå¾·åå·¥å¸®å©è¿è·¯å¡åã­æ¡æè½è´§ç©ï¼å¾å°äºå¹¿å¤§ç½ååå¡åæåä»¬çä¸è´æ¯æä¸å¤§å",
+    "summary_en": "",
+    "date": "2021-11-23",
+    "category": "company",
+    "category_label": "公司动态",
+    "category_label_en": "Company News",
+    "url": "http://mp.weixin.qq.com/s?__biz=MzUzMjE3NTM5Mw==&mid=100014652&idx=1&sn=3fe888526324c8a0af17815152f9cd59&chksm=7ab5f5724dc27c64da9c9cb9925687542630933b8d99d001e98742bcc22d6bd8a4aa393f8028#rd"
+  },
+  {
+    "id": "wx-to3e1cuuaKtT",
+    "title": "æ¬§é³èå¾· | èåçæäºä¹éå ç¯",
+    "title_en": "",
+    "summary": "æä»¬ç¼ççå°çï¼å¾å¾åªæ¯æµ®åºæ°´é¢çå°æ£±ï¼å°å±±ä¸é¢çå·¨å¤§äºå®ï¼æ´æå±±åæµ·ç©¿éè§å¬ï¼",
+    "summary_en": "",
+    "date": "2021-11-22",
+    "category": "company",
+    "category_label": "公司动态",
+    "category_label_en": "Company News",
+    "url": "http://mp.weixin.qq.com/s?__biz=MzUzMjE3NTM5Mw==&mid=100014531&idx=1&sn=7b56c6db5d033113bdd59ad6782acd78&chksm=7ab5f68d4dc27f9ba386723cda4734187d5a5bce1bf28c3de8e08197f8dcc827daa4040cf826#rd"
+  },
+  {
+    "id": "wx-yL6FP1-40e1G",
+    "title": "13ç±³æ ç®±å¨æ°ä¸è£äº¤è½¦å®æ¯ï¼ä¹°æè½¦å°±éæ¹åæ¬§é³èå¾·",
+    "title_en": "",
+    "summary": "æ­åèµµæ»13ç±³æ ç®±å¨æ°ä¸è£æè½¦åºåï¼é©¬è¾¾ä¸åï¼é»éä¸ä¸¤ï¼\næ¬§é³èå¾·ä¸»è¦çäº§çäº§åæï¼",
+    "summary_en": "",
+    "date": "2021-11-21",
+    "category": "company",
+    "category_label": "公司动态",
+    "category_label_en": "Company News",
+    "url": "http://mp.weixin.qq.com/s?__biz=MzUzMjE3NTM5Mw==&mid=100014517&idx=1&sn=b460216fe4ae6350efcc939085cbc3a0&chksm=7ab5f6fb4dc27fed48fae9b8064b5baed40e4d1168ddbed14d0bea150eb329c99b2a92fd0c8e#rd"
+  },
+  {
+    "id": "wx-nHpK3HuMcO_5",
+    "title": "âç°è½¦ä¼æ ï½13.75ç±³Ã3ç±³å®½ä½å¹³æ¿åæè½¦ç°è½¦ç°æ·åå®¶ç´é",
+    "title_en": "",
+    "summary": "æ¬§é³èå¾·ç°æå¨æ°ãç¹ä»·13.75ç±³å¹³æ¿åºå®ï¼æ¬¢è¿å¡åä»¬æ¥çµå¨è¯¢ï¼æ¥åçè½¦~",
+    "summary_en": "",
+    "date": "2021-11-19",
+    "category": "company",
+    "category_label": "公司动态",
+    "category_label_en": "Company News",
+    "url": "http://mp.weixin.qq.com/s?__biz=MzUzMjE3NTM5Mw==&mid=100014500&idx=1&sn=f3189a4fa797ab854818807899c9c88d&chksm=7ab5f6ea4dc27ffc8556cc0cf882703b05a8cfd4add06a8d003c4a2bedc81636bafd93f4c63b#rd"
   }
 ]
