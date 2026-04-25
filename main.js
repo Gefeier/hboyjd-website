@@ -1,3 +1,20 @@
+// ====== Hero 视频延迟加载 ======
+// 首屏立刻显示 poster,等页面 load 完后再下载视频,避免阻塞首屏
+window.addEventListener('load', () => {
+    const video = document.querySelector('.hero-video');
+    if (!video || !video.dataset.src) return;
+    // 移动端 .hero-video display:none,跳过加载
+    if (getComputedStyle(video).display === 'none') return;
+    const source = document.createElement('source');
+    source.src = video.dataset.src;
+    source.type = 'video/mp4';
+    video.appendChild(source);
+    video.load();
+    // autoplay 浏览器策略:muted+playsinline 一般允许自动播放
+    const playPromise = video.play();
+    if (playPromise) playPromise.catch(() => { /* 用户手动触发 */ });
+});
+
 // ====== 导航栏滚动效果 ======
 const navbar = document.getElementById('navbar');
 window.addEventListener('scroll', () => {
