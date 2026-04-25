@@ -63,6 +63,9 @@ SSH接入看 skill `website-deploy` 或 `aliyun-deploy`——走 `ssh.moiralili.
 - **配件中心热点图 v0**（4/24）：Hero 下加"配件位置导览"section,复用 `config-base-fence.png` 做侧视基图,4 热点(合页/侧标灯/反射器/前位灯)脉冲圆点,点击激活筛选 Tab + smoothScroll 跳分类锚点
 - **首页图性能优化**（4/24）：Pillow `quality=85 + progressive + optimize`,`factory-gate.jpg` 6.2MB→460KB、`product-flatbed.jpg` 3.9MB→330KB,总省 86%(9.2MB),首页 4G 加载 ~10s→~1-2s;删 `team.jpg` 8.58MB 孤儿文件
 - **#55 销售物料赋能计划立项**（4/24）：v1 做 1 款车型单页规格书 PDF(ReportLab 生成,A4 双面 8 页内),v2 其余 3 款+官网下载漏斗,v3 公司综合画册
+- **WhatsApp 降权 + 抖音升位**（4/25）：3 页主 CTA 换抖音 `@hboyjd888`(短链 `https://v.douyin.com/T0RnzixERIQ/`),WhatsApp 降级"海外咨询(Overseas)";国内客户主流量从此进抖音,海外保留 WhatsApp
+- **nginx 301 救 Google 老索引**（4/25）：老 PHP 站时代 `/news\d+\.html` 还在 Google 索引,客户搜公司名点过去 404 流失。加 301 → `/#news`,`/wap` → `/`;丽爸接的几个外贸询盘可能就是这条路径(经过站但 404 只记住公司名打电话)
+- **公众号文章自动同步官网**（4/25）：AppID `wx7d4a5c9e358f05ec`,凭证存 `/etc/wechat-oa/credentials.env`(root 600);`/opt/wechat-sync/sync.py` 拉素材→news.json→git push;首次同步 4 篇覆盖公司动态(commit 960df1d)。**业务事实**:公众号 674 篇但 2021-11 后停更,需推动市场部恢复内容运营
 
 **待做**：
 1. 产品详情页（平板/自卸/骨架/仓栅 四款，每页单独meta+sitemap）
@@ -74,6 +77,9 @@ SSH接入看 skill `website-deploy` 或 `aliyun-deploy`——走 `ssh.moiralili.
 7. 爱企查官网字段改 hboyjd.com（等备案过）
 8. 配件热点图 v1：让澜心画车前/车后视角基图,覆盖后尾灯/牌照灯/集装箱合页（侧视看不到的件）
 9. #55 v1 PDF 样板：等丽丽选车型 + 补销售话术卖点 + 客户案例 + 资质扫描对外范围
+10. **公众号同步挂 cron**(每天早 8 点跑 `/opt/wechat-sync/sync.py`)——脚本已上线但还没自动化,现在手动跑
+11. **推动市场部恢复公众号内容运营**(2021-11 后停更,即使有同步脚本也没新内容可拉)
+12. **更新 docx 公众号凭证流程**:2025-12-01 后入口迁到微信开发者平台,老路径"基本配置"已失效
 
 ## 给接手墨：从哪下手
 
