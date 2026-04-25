@@ -66,6 +66,11 @@ SSH接入看 skill `website-deploy` 或 `aliyun-deploy`——走 `ssh.moiralili.
 - **WhatsApp 降权 + 抖音升位**（4/25）：3 页主 CTA 换抖音 `@hboyjd888`(短链 `https://v.douyin.com/T0RnzixERIQ/`),WhatsApp 降级"海外咨询(Overseas)";国内客户主流量从此进抖音,海外保留 WhatsApp
 - **nginx 301 救 Google 老索引**（4/25）：老 PHP 站时代 `/news\d+\.html` 还在 Google 索引,客户搜公司名点过去 404 流失。加 301 → `/#news`,`/wap` → `/`;丽爸接的几个外贸询盘可能就是这条路径(经过站但 404 只记住公司名打电话)
 - **公众号文章自动同步官网**（4/25）：AppID `wx7d4a5c9e358f05ec`,凭证存 `/etc/wechat-oa/credentials.env`(root 600);`/opt/wechat-sync/sync.py` 拉素材→news.json→git push;首次同步 4 篇覆盖公司动态(commit 960df1d)。**业务事实**:公众号 674 篇但 2021-11 后停更,需推动市场部恢复内容运营
+- **首页新闻 3 栏重构**（4/25）：行业资讯/技术分享 → 党政动态/公司动态/客户案例,sync.py 双 API 合并(freepublish + material)按关键词路由 case>gov>company,客户案例时间窗口限制 ≤2 年
+- **企业宣传片点播版**（4/25）：about 区后新增 `.promo-video` section,源 57s 砍前 35s 黑场 trim 37-57s 共 20s,H.264 720p CRF24 → 3.6MB(原 41MB),poster 取 40s 大楼帧 140KB,`preload=metadata` 不阻塞首屏
+- **首页 hero 航拍背景视频**（4/25）：丽丽 17:14-17:20 大疆 4K HEVC 三段(540 主楼+542 车阵+538 屋顶OYJD),叙事序 538→540→542,xfade+首尾黑场,720p H.264 CRF25 静音 78s/14MB(源 1.15GB,省 99%);`preload="none"+data-src` JS `window.load` 后注入 source,首屏 LCP 不被视频阻塞;移动端 `display:none` 沿用 `factory-gate.jpg` fallback
+- **手机端横向溢出全站修复**（4/25）：Playwright 320/375px 三页扫雷。**真凶**:`.news-columns grid-template-columns: 1fr` 等同 `minmax(auto, 1fr)`,被 `white-space: nowrap` 长标题撑成 553px(viewport 仅 375)。改 `repeat(3, minmax(0, 1fr))` 桌面+mobile 媒体查询同步。configurator vehicle-stage mobile 加 `overflow: hidden` 裁 driveIn 入场动画外溢;config-step animation 加 `both` fill-mode。全局兜底:`html/body { width:100%; max-width:100vw }` + `img/video/iframe { max-width:100% }`
+- **访客分析周报脚本**（4/25）：`/opt/visitor-report/weekly_visitor_report.py` 读 `/www/wwwlogs/hboyjd.com.log`,排除内部 IP+爬虫+静态资源+4xx,通过 `ip-api.com` 查地理(45/min),输出 markdown 周报(国家分布/热门页/高意向访客 ≥ 5 次或看过选配/配件)。内部 IP 列表 `/opt/visitor-report/internal_ips.txt`(每行一个,需丽丽补充)
 
 **待做**：
 1. 产品详情页（平板/自卸/骨架/仓栅 四款，每页单独meta+sitemap）
@@ -98,6 +103,8 @@ SSH接入看 skill `website-deploy` 或 `aliyun-deploy`——走 `ssh.moiralili.
 - **改动完毕** → `work_log(plan_id=15, action=..., content=...)` ≤300字；`board_post(plan_id=15, summary=..., source=...)` ≤50字
 - **不要替公司加虚假资质**（ISO 9001/XX认证等），除非丽丽明确说"我们有"。民用厂家夸大资质=虚假宣传。
 - **前端 JS/CSS 改完要 bump `?v=`**（如 `configurator.js?v=20260424b`）否则浏览器缓存顽固，客户看到旧版。命名约定：`v=YYYYMMDD` + 字母小版本。
+- **CSS Grid 列宽避坑**：任何 grid 列子元素含 `white-space: nowrap` / 长 URL / 长不可分中文，**必须** `grid-template-columns: minmax(0, 1fr)` 或 `repeat(N, minmax(0, 1fr))`。不要写裸 `1fr`（等于 `minmax(auto, 1fr)`，auto 会被 min-content 撑爆容器）。这是 4/25 新闻区"手机看不全"的根因。
+- **Hero 背景视频性能要点**：`preload="none"` + `data-src` + JS `window.load` 后插入 `<source>`，避免 autoplay 阻塞首屏 LCP。移动端 `display:none` 走静态图 fallback。压缩用 H.264 720p CRF25 maxrate1.8M 静音，控制在 ≤15MB。
 - **对外可见的测试消息不要写"墨"/"丽丽"**（钉钉群、服务器日志、公开 commit 等场合）。对外身份是 **Moira**，测试统一用 "Moira 联调" 之类中性称呼。墨和丽丽是内部对话用。
 - **实拍 vs AI 渲染图分工**（4/24 定）：
   - 首页产品卡 → **实拍** `product-*.jpg`（B2B 客户看"产品中心"要真实感,每张场景不同有辨识度）
