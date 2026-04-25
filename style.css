@@ -742,7 +742,7 @@ img, video, iframe, table, pre, code {
 
 .news-columns {
     display: grid;
-    grid-template-columns: repeat(3, 1fr);
+    grid-template-columns: repeat(3, minmax(0, 1fr));
     gap: 48px;
 }
 
@@ -823,7 +823,7 @@ img, video, iframe, table, pre, code {
 }
 
 @media (max-width: 768px) {
-    .news-columns { grid-template-columns: 1fr; gap: 36px; }
+    .news-columns { grid-template-columns: minmax(0, 1fr); gap: 36px; }
 }
 
 /* ====== 联系方式增强 ====== */
