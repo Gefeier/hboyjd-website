@@ -12,39 +12,15 @@
     "url": "http://mp.weixin.qq.com/s?__biz=MzUzMjE3NTM5Mw==&mid=2247516793&idx=1&sn=be9f6361a3ab6851d084cdb5abd6a0c7&chksm=fab58d37cdc20421c67bd1beec269e60fd2c085bbda1cab05a88fb8dc18a1657d8d6330ea5a2#rd"
   },
   {
-    "id": 3,
-    "title": "2026年半挂车行业新规解读：对运输企业的影响",
-    "title_en": "2026 Semi-Trailer Policy: Impact on Transport Companies",
-    "summary": "",
-    "summary_en": "",
-    "date": "2026-03-20",
-    "category": "industry",
-    "category_label": "行业资讯",
-    "category_label_en": "Industry News",
-    "url": ""
-  },
-  {
-    "id": 5,
-    "title": "交通运输部：加强危险货物运输车辆安全管理",
-    "title_en": "Ministry of Transport: Strengthening Hazardous Cargo Vehicle Safety",
-    "summary": "",
-    "summary_en": "",
-    "date": "2026-03-18",
-    "category": "industry",
-    "category_label": "行业资讯",
-    "category_label_en": "Industry News",
-    "url": ""
-  },
-  {
     "id": "wx-flJXCnG8m0GA",
     "title": "红金辉映战春潮！欧阳聚德2025党建“复盘”暨2026“冲锋号”吹响",
     "title_en": "",
     "summary": "刀刃向内查痛点，凝心聚力启新程欧阳聚德党支部2025年度组织生活会全记录",
     "summary_en": "",
     "date": "2026-03-12",
-    "category": "company",
-    "category_label": "公司动态",
-    "category_label_en": "Company News",
+    "category": "gov",
+    "category_label": "党政动态",
+    "category_label_en": "Government & Party",
     "url": "http://mp.weixin.qq.com/s?__biz=MzUzMjE3NTM5Mw==&mid=2247516540&idx=1&sn=841dc6407c9f14ad586d625fa77cece7&chksm=fab58e32cdc207249315a0a7d0de8f318dc345aefa33fff79a8c28ab94e576a31be5b994f795#rd"
   },
   {
@@ -54,34 +30,10 @@
     "summary": "政企联动保安全！南城办事处书记李小奎实地探访欧阳聚德，释放重要信号",
     "summary_en": "",
     "date": "2026-03-12",
-    "category": "case",
-    "category_label": "客户案例",
-    "category_label_en": "Customer Stories",
+    "category": "gov",
+    "category_label": "党政动态",
+    "category_label_en": "Government & Party",
     "url": "http://mp.weixin.qq.com/s?__biz=MzUzMjE3NTM5Mw==&mid=2247516511&idx=1&sn=0d8355f7eb9903f1b00411c3f4dcec22&chksm=fab58e11cdc20707b2fa10d1c02262f13c74c2ece8e9aff3b63822f2941556990f5505407891#rd"
-  },
-  {
-    "id": 6,
-    "title": "柴油价格波动对物流行业的影响分析",
-    "title_en": "Diesel Price Fluctuation Impact on Logistics Industry",
-    "summary": "",
-    "summary_en": "",
-    "date": "2026-03-12",
-    "category": "industry",
-    "category_label": "行业资讯",
-    "category_label_en": "Industry News",
-    "url": ""
-  },
-  {
-    "id": 7,
-    "title": "全国高速公路货车通行费优惠政策延续",
-    "title_en": "National Highway Truck Toll Discount Policy Extended",
-    "summary": "",
-    "summary_en": "",
-    "date": "2026-03-08",
-    "category": "industry",
-    "category_label": "行业资讯",
-    "category_label_en": "Industry News",
-    "url": ""
   },
   {
     "id": "wx-z-AIBEtxukFZ",
@@ -108,6 +60,18 @@
     "url": "http://mp.weixin.qq.com/s?__biz=MzUzMjE3NTM5Mw==&mid=2247514131&idx=1&sn=5cac33fab6fce7c492698472b0cabd2f&chksm=fab5b75dcdc23e4bb7180efcef160e66d7d357d1a41d71b9ce7024335d582d6950caa6529d23#rd"
   },
   {
+    "id": "wx-d4_5e-_avyIo",
+    "title": "2.2万，2.2万，2.2万平板上装，特价现车",
+    "title_en": "",
+    "summary": "2.2万平板上装，带轮胎4.9万，，全新特价现车         湖北欧阳聚德汽车有限公司成立于2017年11",
+    "summary_en": "",
+    "date": "2025-07-22",
+    "category": "company",
+    "category_label": "公司动态",
+    "category_label_en": "Company News",
+    "url": "http://mp.weixin.qq.com/s?__biz=MzUzMjE3NTM5Mw==&mid=2247513839&idx=1&sn=faccbd84f05605bc1bd68ee112794ff7&chksm=fab5b9a1cdc230b774906ff7ea7db98cc1b8ae0843b4655f84fb481110f29945674817d9b243#rd"
+  },
+  {
     "id": "wx-ZckfmE8FrF4F",
     "title": "跨国合作再启新程！非洲贝宁商客莅临欧阳聚德，共绘国际汽车贸易新蓝图！",
     "title_en": "",
@@ -120,16 +84,28 @@
     "url": "http://mp.weixin.qq.com/s?__biz=MzUzMjE3NTM5Mw==&mid=2247513958&idx=1&sn=42b6f29386f7fa669f7f490c2c38bbd9&chksm=fab5b828cdc2313e3b3efc543f9b8dc6d33ed5fb884eb413dc7f3e8f801101de9e901848a5e6#rd"
   },
   {
-    "id": "wx-trWvt8_Csl1h",
-    "title": "市委组织部、社工部领导莅临我司党支部调研指导，共话党建高质量发展",
+    "id": "wx-foJDvP7Ka0PW",
+    "title": "聚德匠心，红色领航——欧阳聚德党支部主题党员会议召开",
     "title_en": "",
-    "summary": "2025年3月19日，市委组织部黄部长、社工部任部长一行莅临欧阳聚德党支部开展实地调研指导。",
+    "summary": "欧阳聚德党支部主题党员会议顺利召开",
     "summary_en": "",
-    "date": "2025-03-19",
-    "category": "case",
-    "category_label": "客户案例",
-    "category_label_en": "Customer Stories",
-    "url": "http://mp.weixin.qq.com/s?__biz=MzUzMjE3NTM5Mw==&mid=2247511204&idx=1&sn=ced26f599ed580ab35ebe71539db1aec&chksm=fab5a3eacdc22afca2b4abef6b4f51c08ae30e443c2049eb64d04386fbb5fa2c1f24b3cffe51#rd"
+    "date": "2025-07-04",
+    "category": "gov",
+    "category_label": "党政动态",
+    "category_label_en": "Government & Party",
+    "url": "http://mp.weixin.qq.com/s?__biz=MzUzMjE3NTM5Mw==&mid=2247513495&idx=1&sn=64e2282328055d5b7a93eeb47bd5e8df&chksm=fab5bad9cdc233cffff67bc1df00ceec5b90a844b1818b6d69b5ab3cfd35112124260d558d80#rd"
+  },
+  {
+    "id": "wx-saXw8hUYxiHQ",
+    "title": "国家安全，我们共同守护！",
+    "title_en": "",
+    "summary": "国家安全，人人有责。让我们携手共进，共同守护国家安全，为实现中华民族伟大复兴的中国梦贡献我们的智慧和力量！",
+    "summary_en": "",
+    "date": "2025-04-15",
+    "category": "gov",
+    "category_label": "党政动态",
+    "category_label_en": "Government & Party",
+    "url": "http://mp.weixin.qq.com/s?__biz=MzUzMjE3NTM5Mw==&mid=2247511804&idx=1&sn=cf575115e7b604c25f3130552a1c2c72&chksm=fab5a1b2cdc228a491ef342631fb97b5cc709683587bc974a47b0e9b4240a751bc09d8f4c6dc#rd"
   },
   {
     "id": "wx-6sWhw3cuHNr2",
