@@ -6,8 +6,11 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>湖北欧阳聚德汽车有限公司 | 半挂车研发制造专家</title>
     <meta name="description" content="湖北欧阳聚德汽车有限公司，专业从事半挂车研发、生产与销售。平板半挂车、自卸半挂车、骨架车、仓栅车，支持全系定制。">
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+SC:wght@300;400;500;700;900&display=swap" rel="stylesheet">
+    <link rel="preconnect" href="https://fonts.googleapis.com" crossorigin>
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <!-- 字体异步加载:media=print 让浏览器低优先下载,onload 切回 all 应用 -->
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Noto+Sans+SC:wght@300;400;500;700;900&display=swap" media="print" onload="this.media='all'">
+    <noscript><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Noto+Sans+SC:wght@300;400;500;700;900&display=swap"></noscript>
     <link rel="stylesheet" href="style.css?v=20260428a">
     <!-- LCP preload: 首屏背景按设备走对应格式/尺寸 -->
     <link rel="preload" as="image" href="assets/images/factory-gate-768.webp" type="image/webp" media="(max-width: 768px)" fetchpriority="high">
@@ -138,7 +141,7 @@
             <div class="about-grid">
                 <div class="about-carousel">
                     <div class="carousel-track">
-                        <picture><source type="image/webp" srcset="assets/images/team-trucks.webp"><img src="assets/images/team-trucks.jpg" alt="欧阳聚德团队" class="carousel-slide active" loading="lazy" decoding="async"></picture>
+                        <picture><source type="image/webp" srcset="assets/images/team-trucks.webp"><img src="assets/images/team-trucks.jpg" alt="欧阳聚德团队" class="carousel-slide active" fetchpriority="high" decoding="async"></picture>
                         <picture><source type="image/webp" srcset="assets/images/lab-testing.webp"><img src="assets/images/lab-testing.jpg" alt="品质检测实验室" class="carousel-slide" loading="lazy" decoding="async"></picture>
                         <picture><source type="image/webp" srcset="assets/images/team-assembly.webp"><img src="assets/images/team-assembly.jpg" alt="团队集合" class="carousel-slide" loading="lazy" decoding="async"></picture>
                     </div>
@@ -534,6 +537,6 @@
         </div>
     </footer>
 
-    <script src="main.js?v=20260425h"></script>
+    <script src="main.js?v=20260428b" defer></script>
 </body>
 </html>
