@@ -1,13 +1,17 @@
 <!DOCTYPE html>
 <html lang="zh-CN">
 <head>
+<!-- IMG_OPTIMIZED -->
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>湖北欧阳聚德汽车有限公司 | 半挂车研发制造专家</title>
     <meta name="description" content="湖北欧阳聚德汽车有限公司，专业从事半挂车研发、生产与销售。平板半挂车、自卸半挂车、骨架车、仓栅车，支持全系定制。">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+SC:wght@300;400;500;700;900&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="style.css?v=20260425j">
+    <link rel="stylesheet" href="style.css?v=20260428a">
+    <!-- LCP preload: 首屏背景按设备走对应格式/尺寸 -->
+    <link rel="preload" as="image" href="assets/images/factory-gate-768.webp" type="image/webp" media="(max-width: 768px)" fetchpriority="high">
+    <link rel="preload" as="image" href="assets/images/factory-gate.webp" type="image/webp" media="(min-width: 769px)" fetchpriority="high">
     <link rel="icon" href="/favicon.ico" sizes="any">
     <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png">
     <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
@@ -134,9 +138,9 @@
             <div class="about-grid">
                 <div class="about-carousel">
                     <div class="carousel-track">
-                        <img src="assets/images/team-trucks.jpg" alt="欧阳聚德团队" class="carousel-slide active">
-                        <img src="assets/images/lab-testing.jpg" alt="品质检测实验室" class="carousel-slide">
-                        <img src="assets/images/team-assembly.jpg" alt="团队集合" class="carousel-slide">
+                        <picture><source type="image/webp" srcset="assets/images/team-trucks.webp"><img src="assets/images/team-trucks.jpg" alt="欧阳聚德团队" class="carousel-slide active" loading="lazy" decoding="async"></picture>
+                        <picture><source type="image/webp" srcset="assets/images/lab-testing.webp"><img src="assets/images/lab-testing.jpg" alt="品质检测实验室" class="carousel-slide" loading="lazy" decoding="async"></picture>
+                        <picture><source type="image/webp" srcset="assets/images/team-assembly.webp"><img src="assets/images/team-assembly.jpg" alt="团队集合" class="carousel-slide" loading="lazy" decoding="async"></picture>
                     </div>
                     <button class="carousel-arrow carousel-prev">
                         <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M15 18l-6-6 6-6"/></svg>
@@ -193,7 +197,7 @@
             </div>
             <div class="products-grid">
                 <div class="product-card">
-                    <div class="product-img"><img src="assets/images/product-flatbed.jpg" alt="平板半挂车" loading="lazy"></div>
+                    <div class="product-img"><picture><source type="image/webp" srcset="assets/images/product-flatbed-768.webp 768w, assets/images/product-flatbed.webp 1600w" sizes="(max-width: 768px) 100vw, 1200px"><source type="image/jpeg" srcset="assets/images/product-flatbed-768.jpg 768w, assets/images/product-flatbed.jpg 1600w" sizes="(max-width: 768px) 100vw, 1200px"><img src="assets/images/product-flatbed.jpg" alt="平板半挂车" loading="lazy"></picture></div>
                     <div class="product-body">
                         <h3 data-en="Flatbed Semi-Trailer">平板半挂车</h3>
                         <p data-en="Straight-beam, high-low, excavator and ultra-low flatbed options">直梁平板、高低平板、挖机板、超低平板等多种规格</p>
@@ -206,7 +210,7 @@
                     </div>
                 </div>
                 <div class="product-card">
-                    <div class="product-img"><img src="assets/images/product-dump.jpg" alt="自卸半挂车" loading="lazy"></div>
+                    <div class="product-img"><picture><source type="image/webp" srcset="assets/images/product-dump.webp"><img src="assets/images/product-dump.jpg" alt="自卸半挂车" loading="lazy"></picture></div>
                     <div class="product-body">
                         <h3 data-en="Dump Semi-Trailer">自卸半挂车</h3>
                         <p data-en="Rear dump, side dump, tank-type and more for construction transport">后翻自卸、侧翻自卸、罐式后翻等，适用工程运输</p>
@@ -219,7 +223,7 @@
                     </div>
                 </div>
                 <div class="product-card">
-                    <div class="product-img"><img src="assets/images/product-fence.jpg" alt="仓栅半挂车" loading="lazy"></div>
+                    <div class="product-img"><picture><source type="image/webp" srcset="assets/images/product-fence.webp"><img src="assets/images/product-fence.jpg" alt="仓栅半挂车" loading="lazy"></picture></div>
                     <div class="product-body">
                         <h3 data-en="Fence Semi-Trailer">仓栅半挂车</h3>
                         <p data-en="High-fence, warehouse-fence, bulk cargo types for various freight">高栏、仓栏、散货仓栅等，适用多种货物运输</p>
@@ -232,7 +236,7 @@
                     </div>
                 </div>
                 <div class="product-card">
-                    <div class="product-img"><img src="assets/images/product-lowbed.jpg" alt="低平板半挂车" loading="lazy"></div>
+                    <div class="product-img"><picture><source type="image/webp" srcset="assets/images/product-lowbed-768.webp 768w, assets/images/product-lowbed.webp 1600w" sizes="(max-width: 768px) 100vw, 1200px"><source type="image/jpeg" srcset="assets/images/product-lowbed-768.jpg 768w, assets/images/product-lowbed.jpg 1600w" sizes="(max-width: 768px) 100vw, 1200px"><img src="assets/images/product-lowbed.jpg" alt="低平板半挂车" loading="lazy"></picture></div>
                     <div class="product-body">
                         <h3 data-en="Low-Bed Semi-Trailer">低平板半挂车</h3>
                         <p data-en="Specialized low-bed for heavy equipment and machinery transport">大件运输、工程机械运输专用低平板</p>
@@ -245,7 +249,7 @@
                     </div>
                 </div>
                 <div class="product-card">
-                    <div class="product-img"><img src="assets/images/product-crane.jpg" alt="随车吊" loading="lazy"></div>
+                    <div class="product-img"><picture><source type="image/webp" srcset="assets/images/product-crane.webp"><img src="assets/images/product-crane.jpg" alt="随车吊" loading="lazy"></picture></div>
                     <div class="product-body">
                         <h3 data-en="Truck-Mounted Crane">随车起重运输车</h3>
                         <p data-en="Truck cranes, flatbed cranes, knuckle boom cranes and more">随车吊、平板吊、折臂吊等多种起重配置</p>
@@ -258,7 +262,7 @@
                     </div>
                 </div>
                 <div class="product-card">
-                    <div class="product-img"><img src="assets/images/product-special.jpg" alt="特种专用车" loading="lazy"></div>
+                    <div class="product-img"><picture><source type="image/webp" srcset="assets/images/product-special.webp"><img src="assets/images/product-special.jpg" alt="特种专用车" loading="lazy"></picture></div>
                     <div class="product-body">
                         <h3 data-en="Special Purpose Vehicles">特种专用车</h3>
                         <p data-en="Aerial platforms, full trailers, center-axle flatbeds and more">高空作业车、全挂车、中置轴平板等特殊车型</p>
@@ -316,19 +320,19 @@
             </div>
             <div class="honors-grid">
                 <div class="honor-card">
-                    <img src="assets/images/award-research.jpg" alt="产学研合作基地" loading="lazy">
+                    <picture><source type="image/webp" srcset="assets/images/award-research.webp"><img src="assets/images/award-research.jpg" alt="产学研合作基地" loading="lazy"></picture>
                     <p data-en="Hubei University of Technology R&D Partnership">湖北工业大学产学研合作基地</p>
                 </div>
                 <div class="honor-card">
-                    <img src="assets/images/award-smart.jpg" alt="省级智能制造试点示范企业" loading="lazy">
+                    <picture><source type="image/webp" srcset="assets/images/award-smart.webp"><img src="assets/images/award-smart.jpg" alt="省级智能制造试点示范企业" loading="lazy"></picture>
                     <p data-en="Provincial Smart Manufacturing Pilot Enterprise">省级智能制造试点示范企业</p>
                 </div>
                 <div class="honor-card">
-                    <img src="assets/images/award-logistics.jpg" alt="全市物流行业星级诚信企业" loading="lazy">
+                    <picture><source type="image/webp" srcset="assets/images/award-logistics.webp"><img src="assets/images/award-logistics.jpg" alt="全市物流行业星级诚信企业" loading="lazy"></picture>
                     <p data-en="Star-Rated Logistics Integrity Enterprise">全市物流行业星级诚信企业</p>
                 </div>
                 <div class="honor-card">
-                    <img src="assets/images/award-marketing.jpg" alt="年度最佳数字营销创新奖" loading="lazy">
+                    <picture><source type="image/webp" srcset="assets/images/award-marketing.webp"><img src="assets/images/award-marketing.jpg" alt="年度最佳数字营销创新奖" loading="lazy"></picture>
                     <p data-en="Best Digital Marketing Innovation Award">年度最佳数字营销创新奖</p>
                 </div>
             </div>

@@ -1,6 +1,7 @@
 <!DOCTYPE html>
 <html lang="zh-CN">
 <head>
+<!-- IMG_OPTIMIZED -->
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>关于欧阳聚德 | 17 年深耕半挂车研发制造 · 湖北襄阳</title>
@@ -9,8 +10,11 @@
     <meta name="author" content="湖北欧阳聚德汽车有限公司">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+SC:wght@300;400;500;700;900&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="style.css?v=20260425j">
-    <link rel="stylesheet" href="about.css?v=20260426a">
+    <link rel="stylesheet" href="style.css?v=20260428a">
+    <link rel="stylesheet" href="about.css?v=20260428a">
+    <!-- LCP preload: about hero 背景 -->
+    <link rel="preload" as="image" href="assets/images/about/about-gate-768.webp" type="image/webp" media="(max-width: 768px)" fetchpriority="high">
+    <link rel="preload" as="image" href="assets/images/about/about-gate.webp" type="image/webp" media="(min-width: 769px)" fetchpriority="high">
     <link rel="icon" href="/favicon.ico" sizes="any">
     <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png">
     <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
@@ -168,21 +172,21 @@
             </div>
             <div class="honors-wall-grid">
                 <figure class="honor-figure honor-feature">
-                    <img src="assets/images/about/award-smart-mfg-2024.jpg" alt="湖北省级智能制造试点示范企业 2024" loading="lazy">
+                    <picture><source type="image/webp" srcset="assets/images/about/award-smart-mfg-2024.webp"><img src="assets/images/about/award-smart-mfg-2024.jpg" alt="湖北省级智能制造试点示范企业 2024" loading="lazy"></picture>
                     <figcaption>
                         <strong data-en="Provincial Smart Manufacturing Pilot Enterprise">省级智能制造试点示范企业</strong>
                         <span data-en="Hubei Department of Economy & IT · Feb 2024">湖北省经济和信息化厅 · 2024 年 2 月</span>
                     </figcaption>
                 </figure>
                 <figure class="honor-figure">
-                    <img src="assets/images/about/award-research-2021.jpg" alt="湖北工业大学产学研合作基地" loading="lazy">
+                    <picture><source type="image/webp" srcset="assets/images/about/award-research-2021.webp"><img src="assets/images/about/award-research-2021.jpg" alt="湖北工业大学产学研合作基地" loading="lazy"></picture>
                     <figcaption>
                         <strong data-en="Industry-Academia R&D Partnership">产学研合作基地</strong>
                         <span data-en="Hubei University of Technology · Sep 2021">湖北工业大学 · 2021 年 9 月</span>
                     </figcaption>
                 </figure>
                 <figure class="honor-figure">
-                    <img src="assets/images/about/award-shaanxi-2017.jpg" alt="陕汽重卡 2017 年度湖北区域市场突破奖" loading="lazy">
+                    <picture><source type="image/webp" srcset="assets/images/about/award-shaanxi-2017.webp"><img src="assets/images/about/award-shaanxi-2017.jpg" alt="陕汽重卡 2017 年度湖北区域市场突破奖" loading="lazy"></picture>
                     <figcaption>
                         <strong data-en="Shaanxi Heavy Duty 2017 Hubei Market Breakthrough Award">陕汽重卡市场突破奖</strong>
                         <span data-en="Shaanxi Heavy Duty Automobile · 2018">陕西重型汽车有限公司 · 2018 年</span>
@@ -201,12 +205,12 @@
                 <p class="section-desc" data-en="Behind every trailer is a team that gathers at sunrise and rallies at year-end">每一台车背后,是日出集会、年终集结的同一群人</p>
             </div>
             <div class="ft-grid">
-                <figure class="ft-tile ft-large"><img src="assets/images/about/about-gate.jpg" alt="厂区大门" loading="lazy"><figcaption data-en="Main gate · OYJD AUTOMOBILE">厂区大门 · OYJD AUTOMOBILE</figcaption></figure>
-                <figure class="ft-tile"><img src="assets/images/about/staff-rally.jpg" alt="员工晨会" loading="lazy"><figcaption data-en="Morning rally">员工晨会</figcaption></figure>
-                <figure class="ft-tile"><img src="assets/images/about/team-rally.jpg" alt="年终集合" loading="lazy"><figcaption data-en="Year-end rally with Shacman trucks">年终集合 · 陕汽车头</figcaption></figure>
-                <figure class="ft-tile"><img src="assets/images/about/team-trip-2020.jpg" alt="2020 三峡员工旅行" loading="lazy"><figcaption data-en="2020 Yangtze Three Gorges trip">2020 三峡员工旅行</figcaption></figure>
-                <figure class="ft-tile"><img src="assets/images/about/team-training.jpg" alt="管理培训凝聚聚德心" loading="lazy"><figcaption data-en="Management training: 'Unite the Jude Heart'">管理培训 · 凝聚聚德心</figcaption></figure>
-                <figure class="ft-tile"><img src="assets/images/about/party-volunteer.jpg" alt="党员志愿者" loading="lazy"><figcaption data-en="Party member volunteers serving the community">党员志愿者 · 服务社区</figcaption></figure>
+                <figure class="ft-tile ft-large"><picture><source type="image/webp" srcset="assets/images/about/about-gate-768.webp 768w, assets/images/about/about-gate.webp 1600w" sizes="(max-width: 768px) 100vw, 1200px"><source type="image/jpeg" srcset="assets/images/about/about-gate-768.jpg 768w, assets/images/about/about-gate.jpg 1600w" sizes="(max-width: 768px) 100vw, 1200px"><img src="assets/images/about/about-gate.jpg" alt="厂区大门" loading="lazy"></picture><figcaption data-en="Main gate · OYJD AUTOMOBILE">厂区大门 · OYJD AUTOMOBILE</figcaption></figure>
+                <figure class="ft-tile"><picture><source type="image/webp" srcset="assets/images/about/staff-rally-768.webp 768w, assets/images/about/staff-rally.webp 1600w" sizes="(max-width: 768px) 100vw, 1200px"><source type="image/jpeg" srcset="assets/images/about/staff-rally-768.jpg 768w, assets/images/about/staff-rally.jpg 1600w" sizes="(max-width: 768px) 100vw, 1200px"><img src="assets/images/about/staff-rally.jpg" alt="员工晨会" loading="lazy"></picture><figcaption data-en="Morning rally">员工晨会</figcaption></figure>
+                <figure class="ft-tile"><picture><source type="image/webp" srcset="assets/images/about/team-rally.webp"><img src="assets/images/about/team-rally.jpg" alt="年终集合" loading="lazy"></picture><figcaption data-en="Year-end rally with Shacman trucks">年终集合 · 陕汽车头</figcaption></figure>
+                <figure class="ft-tile"><picture><source type="image/webp" srcset="assets/images/about/team-trip-2020-768.webp 768w, assets/images/about/team-trip-2020.webp 1600w" sizes="(max-width: 768px) 100vw, 1200px"><source type="image/jpeg" srcset="assets/images/about/team-trip-2020-768.jpg 768w, assets/images/about/team-trip-2020.jpg 1600w" sizes="(max-width: 768px) 100vw, 1200px"><img src="assets/images/about/team-trip-2020.jpg" alt="2020 三峡员工旅行" loading="lazy"></picture><figcaption data-en="2020 Yangtze Three Gorges trip">2020 三峡员工旅行</figcaption></figure>
+                <figure class="ft-tile"><picture><source type="image/webp" srcset="assets/images/about/team-training-768.webp 768w, assets/images/about/team-training.webp 1600w" sizes="(max-width: 768px) 100vw, 1200px"><source type="image/jpeg" srcset="assets/images/about/team-training-768.jpg 768w, assets/images/about/team-training.jpg 1600w" sizes="(max-width: 768px) 100vw, 1200px"><img src="assets/images/about/team-training.jpg" alt="管理培训凝聚聚德心" loading="lazy"></picture><figcaption data-en="Management training: 'Unite the Jude Heart'">管理培训 · 凝聚聚德心</figcaption></figure>
+                <figure class="ft-tile"><picture><source type="image/webp" srcset="assets/images/about/party-volunteer.webp"><img src="assets/images/about/party-volunteer.jpg" alt="党员志愿者" loading="lazy"></picture><figcaption data-en="Party member volunteers serving the community">党员志愿者 · 服务社区</figcaption></figure>
             </div>
         </div>
     </section>
@@ -220,21 +224,21 @@
             </div>
             <div class="pp-grid">
                 <a class="pp-card" href="/#products">
-                    <img src="assets/images/about/product-fence.jpg" alt="仓栅半挂车" loading="lazy">
+                    <picture><source type="image/webp" srcset="assets/images/about/product-fence-768.webp 768w, assets/images/about/product-fence.webp 1600w" sizes="(max-width: 768px) 100vw, 1200px"><source type="image/jpeg" srcset="assets/images/about/product-fence-768.jpg 768w, assets/images/about/product-fence.jpg 1600w" sizes="(max-width: 768px) 100vw, 1200px"><img src="assets/images/about/product-fence.jpg" alt="仓栅半挂车" loading="lazy"></picture>
                     <div class="pp-overlay">
                         <h3 data-en="Fence Semi-Trailer">仓栅半挂车</h3>
                         <p data-en="High-fence, warehouse-fence, bulk cargo">高栏 / 仓栏 / 散货</p>
                     </div>
                 </a>
                 <a class="pp-card" href="/#products">
-                    <img src="assets/images/about/product-dump-fleet.jpg" alt="自卸半挂车" loading="lazy">
+                    <picture><source type="image/webp" srcset="assets/images/about/product-dump-fleet.webp"><img src="assets/images/about/product-dump-fleet.jpg" alt="自卸半挂车" loading="lazy"></picture>
                     <div class="pp-overlay">
                         <h3 data-en="Dump Semi-Trailer">自卸半挂车</h3>
                         <p data-en="Rear/side dump, heavy-duty">后翻 / 侧翻 / 重载</p>
                     </div>
                 </a>
                 <a class="pp-card" href="/#products">
-                    <img src="assets/images/about/product-crane.jpg" alt="随车起重运输车" loading="lazy">
+                    <picture><source type="image/webp" srcset="assets/images/about/product-crane.webp"><img src="assets/images/about/product-crane.jpg" alt="随车起重运输车" loading="lazy"></picture>
                     <div class="pp-overlay">
                         <h3 data-en="Truck-Mounted Crane">随车起重运输车</h3>
                         <p data-en="Knuckle / straight boom">折臂 / 直臂</p>

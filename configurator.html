@@ -1,6 +1,7 @@
 <!DOCTYPE html>
 <html lang="zh-CN">
 <head>
+<!-- IMG_OPTIMIZED -->
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>在线选配 | 湖北欧阳聚德汽车</title>
@@ -83,11 +84,11 @@
     <!-- 车辆展示区 -->
     <div class="vehicle-stage" id="vehicleStage">
         <div class="vehicle-wrapper" id="vehicleWrapper">
-            <img src="assets/images/config-base.png" alt="车辆" id="vehicleImg" class="vehicle-img">
+            <picture><source type="image/webp" srcset="assets/images/config-base.webp"><img src="assets/images/config-base.png" alt="车辆" id="vehicleImg" class="vehicle-img" loading="lazy" decoding="async"></picture>
         </div>
         <!-- 车辆下方的光影反射 -->
         <div class="vehicle-reflection" id="vehicleReflection">
-            <img src="assets/images/config-base.png" alt="" class="reflection-img" id="reflectionImg">
+            <picture><source type="image/webp" srcset="assets/images/config-base.webp"><img src="assets/images/config-base.png" alt="" class="reflection-img" id="reflectionImg" loading="lazy" decoding="async"></picture>
         </div>
         <!-- 车辆名称 -->
         <div class="vehicle-label" id="vehicleLabel">
@@ -114,7 +115,7 @@
                 <label class="type-option">
                     <input type="radio" name="vehicleType" value="直梁平板" checked>
                     <div class="type-inner">
-                        <img src="assets/images/config-base.png" alt="平板半挂车">
+                        <picture><source type="image/webp" srcset="assets/images/config-base.webp"><img src="assets/images/config-base.png" alt="平板半挂车" loading="lazy" decoding="async"></picture>
                         <span class="type-name">平板半挂车</span>
                         <span class="type-desc">直梁平板 · 通用运输</span>
                     </div>
@@ -122,7 +123,7 @@
                 <label class="type-option">
                     <input type="radio" name="vehicleType" value="高低平板">
                     <div class="type-inner">
-                        <img src="assets/images/config-base-lowbed.png" alt="高低平板">
+                        <picture><source type="image/webp" srcset="assets/images/config-base-lowbed-768.webp 768w, assets/images/config-base-lowbed.webp 1600w" sizes="(max-width: 768px) 100vw, 1200px"><source type="image/jpeg" srcset="assets/images/config-base-lowbed-768.jpg 768w, assets/images/config-base-lowbed.png 1600w" sizes="(max-width: 768px) 100vw, 1200px"><img src="assets/images/config-base-lowbed.png" alt="高低平板" loading="lazy" decoding="async"></picture>
                         <span class="type-name">高低平板</span>
                         <span class="type-desc">高低结构 · 工程机械</span>
                     </div>
@@ -130,7 +131,7 @@
                 <label class="type-option">
                     <input type="radio" name="vehicleType" value="自卸">
                     <div class="type-inner">
-                        <img src="assets/images/config-base-dump.png" alt="自卸半挂车">
+                        <picture><source type="image/webp" srcset="assets/images/config-base-dump-768.webp 768w, assets/images/config-base-dump.webp 1600w" sizes="(max-width: 768px) 100vw, 1200px"><source type="image/jpeg" srcset="assets/images/config-base-dump-768.jpg 768w, assets/images/config-base-dump.png 1600w" sizes="(max-width: 768px) 100vw, 1200px"><img src="assets/images/config-base-dump.png" alt="自卸半挂车" loading="lazy" decoding="async"></picture>
                         <span class="type-name">自卸半挂车</span>
                         <span class="type-desc">液压翻转 · 散料运输</span>
                     </div>
@@ -138,7 +139,7 @@
                 <label class="type-option">
                     <input type="radio" name="vehicleType" value="骨架">
                     <div class="type-inner">
-                        <img src="assets/images/config-base-skeleton.png" alt="骨架车">
+                        <picture><source type="image/webp" srcset="assets/images/config-base-skeleton-768.webp 768w, assets/images/config-base-skeleton.webp 1600w" sizes="(max-width: 768px) 100vw, 1200px"><source type="image/jpeg" srcset="assets/images/config-base-skeleton-768.jpg 768w, assets/images/config-base-skeleton.png 1600w" sizes="(max-width: 768px) 100vw, 1200px"><img src="assets/images/config-base-skeleton.png" alt="骨架车" loading="lazy" decoding="async"></picture>
                         <span class="type-name">骨架车</span>
                         <span class="type-desc">集装箱 · 专用运输</span>
                     </div>
@@ -146,7 +147,7 @@
                 <label class="type-option">
                     <input type="radio" name="vehicleType" value="仓栅">
                     <div class="type-inner">
-                        <img src="assets/images/config-base-fence.png" alt="仓栅半挂车">
+                        <picture><source type="image/webp" srcset="assets/images/config-base-fence-768.webp 768w, assets/images/config-base-fence.webp 1600w" sizes="(max-width: 768px) 100vw, 1200px"><source type="image/jpeg" srcset="assets/images/config-base-fence-768.jpg 768w, assets/images/config-base-fence.png 1600w" sizes="(max-width: 768px) 100vw, 1200px"><img src="assets/images/config-base-fence.png" alt="仓栅半挂车" loading="lazy" decoding="async"></picture>
                         <span class="type-name">仓栅半挂车</span>
                         <span class="type-desc">栏板结构 · 农牧运输</span>
                     </div>

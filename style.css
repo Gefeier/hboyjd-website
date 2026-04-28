@@ -221,6 +221,11 @@ img, video, iframe, table, pre, code {
     align-items: center;
     justify-content: center;
     background: url('assets/images/factory-gate.jpg') center/cover no-repeat;
+    background-image: image-set(
+        url('assets/images/factory-gate-768.webp') type('image/webp') 1x,
+        url('assets/images/factory-gate.webp') type('image/webp') 2x,
+        url('assets/images/factory-gate.jpg') type('image/jpeg')
+    );
     text-align: center;
 }
 

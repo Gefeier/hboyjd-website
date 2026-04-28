@@ -8,3 +8,7 @@
 
 # PDF 渲染源图(只用于挑选,不上线)
 assets/images/about-source/
+
+# 本地编辑器备份/Claude 私有
+*.bak
+.claude/

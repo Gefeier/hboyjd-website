@@ -1,0 +1,884 @@
+[
+  {
+    "name": "集装箱后门合页",
+    "en": "Container Door Hinge",
+    "specs": [
+      [
+        "编码 Code",
+        "JD220109010002"
+      ],
+      [
+        "规格 Spec",
+        "350mm"
+      ],
+      [
+        "适用 Apply",
+        "集装箱后门"
+      ]
+    ],
+    "n_imgs": 0,
+    "section": "hinges",
+    "category": "",
+    "images": []
+  },
+  {
+    "name": "仓栏后门合页",
+    "en": "Fence Trailer Door Hinge",
+    "specs": [
+      [
+        "编码 Code",
+        "JD220109010003"
+      ],
+      [
+        "规格 Spec",
+        "260mm"
+      ],
+      [
+        "适用 Apply",
+        "仓栏后门"
+      ]
+    ],
+    "n_imgs": 0,
+    "section": "hinges",
+    "category": "",
+    "images": []
+  },
+  {
+    "name": "压筋合页",
+    "en": "Ribbed Hinge",
+    "specs": [
+      [
+        "编码 Code",
+        "JD220109010004"
+      ],
+      [
+        "规格 Spec",
+        "-"
+      ],
+      [
+        "适用 Apply",
+        "仓栏墙板 / 栏板 / 侧翻后门"
+      ]
+    ],
+    "n_imgs": 0,
+    "section": "hinges",
+    "category": "",
+    "images": []
+  },
+  {
+    "name": "杂物栏合页",
+    "en": "Utility Rack Hinge",
+    "specs": [
+      [
+        "编码 Code",
+        "JD220109010010"
+      ],
+      [
+        "规格 Spec",
+        "-"
+      ],
+      [
+        "适用 Apply",
+        "杂物栏"
+      ]
+    ],
+    "n_imgs": 0,
+    "section": "hinges",
+    "category": "",
+    "images": []
+  },
+  {
+    "name": "蝴蝶合页",
+    "en": "Butterfly Hinge",
+    "specs": [
+      [
+        "编码 Code",
+        "JD220109010006"
+      ],
+      [
+        "规格 Spec",
+        "铁"
+      ],
+      [
+        "适用 Apply",
+        "仓栏墙板 / 栏板"
+      ]
+    ],
+    "n_imgs": 0,
+    "section": "hinges",
+    "category": "",
+    "images": []
+  },
+  {
+    "name": "斯太尔压筋合页",
+    "en": "Steyr Ribbed Hinge",
+    "specs": [
+      [
+        "编码 Code",
+        "JD220109010009"
+      ],
+      [
+        "规格 Spec",
+        "分左右"
+      ],
+      [
+        "适用 Apply",
+        "平板前横头"
+      ]
+    ],
+    "n_imgs": 0,
+    "section": "hinges",
+    "category": "",
+    "images": []
+  },
+  {
+    "name": "七字锻打合页",
+    "en": "7-Shape Forged Hinge",
+    "specs": [
+      [
+        "编码 Code",
+        "JD220109010005"
+      ],
+      [
+        "规格 Spec",
+        "七字"
+      ],
+      [
+        "适用 Apply",
+        "仓栏花栏"
+      ]
+    ],
+    "n_imgs": 0,
+    "section": "hinges",
+    "category": "",
+    "images": []
+  },
+  {
+    "name": "高栏转轴合页",
+    "en": "High Fence Pivot Hinge",
+    "specs": [
+      [
+        "编码 Code",
+        "JD220109010012"
+      ],
+      [
+        "规格 Spec",
+        "插销式"
+      ],
+      [
+        "适用 Apply",
+        "墙板"
+      ]
+    ],
+    "n_imgs": 0,
+    "section": "hinges",
+    "category": "",
+    "images": []
+  },
+  {
+    "name": "三爪铸钢合页",
+    "en": "3-Claw Cast Steel Hinge",
+    "specs": [
+      [
+        "编码 Code",
+        "JD220109010014"
+      ],
+      [
+        "规格 Spec",
+        "三爪大转轴"
+      ],
+      [
+        "适用 Apply",
+        "仓栏（拉废铁）"
+      ]
+    ],
+    "n_imgs": 0,
+    "section": "hinges",
+    "category": "",
+    "images": []
+  },
+  {
+    "name": "铝工具箱门合页",
+    "en": "Aluminum Toolbox Hinge",
+    "specs": [
+      [
+        "编码 Code",
+        "JD220109010011"
+      ],
+      [
+        "规格 Spec",
+        "平合页"
+      ],
+      [
+        "适用 Apply",
+        "铝工具箱门"
+      ]
+    ],
+    "n_imgs": 0,
+    "section": "hinges",
+    "category": "",
+    "images": []
+  },
+  {
+    "name": "铁工具箱门合页",
+    "en": "Steel Toolbox Hinge",
+    "specs": [
+      [
+        "编码 Code",
+        "JD220109010016"
+      ],
+      [
+        "规格 Spec",
+        "铁平合页"
+      ],
+      [
+        "适用 Apply",
+        "铁工具箱门"
+      ]
+    ],
+    "n_imgs": 0,
+    "section": "hinges",
+    "category": "",
+    "images": []
+  },
+  {
+    "name": "快开合页",
+    "en": "Quick-Open Hinge",
+    "specs": [
+      [
+        "编码 Code",
+        "JD220109010018"
+      ],
+      [
+        "规格 Spec",
+        "组合式快开"
+      ],
+      [
+        "适用 Apply",
+        "各车型（按需）"
+      ]
+    ],
+    "n_imgs": 0,
+    "section": "hinges",
+    "category": "",
+    "images": []
+  },
+  {
+    "name": "加大宽合页",
+    "en": "Wide Hinge (Export)",
+    "specs": [
+      [
+        "编码 Code",
+        "JD220109010015"
+      ],
+      [
+        "规格 Spec",
+        "120×120×6mm"
+      ],
+      [
+        "适用 Apply",
+        "外贸侧翻"
+      ]
+    ],
+    "n_imgs": 0,
+    "section": "hinges",
+    "category": "",
+    "images": []
+  },
+  {
+    "name": "加厚平合页",
+    "en": "Thickened Flat Hinge",
+    "specs": [
+      [
+        "编码 Code",
+        "JD220109010022"
+      ],
+      [
+        "规格 Spec",
+        "106×106×5.75mm"
+      ],
+      [
+        "适用 Apply",
+        "仓栏（拉粮食）"
+      ]
+    ],
+    "n_imgs": 0,
+    "section": "hinges",
+    "category": "",
+    "images": []
+  },
+  {
+    "name": "新款压筋合页",
+    "en": "New Ribbed Hinge",
+    "specs": [
+      [
+        "编码 Code",
+        "JD220109010024"
+      ],
+      [
+        "规格 Spec",
+        "130mm"
+      ],
+      [
+        "适用 Apply",
+        "仓栏大开门 / 集装箱侧门"
+      ]
+    ],
+    "n_imgs": 0,
+    "section": "hinges",
+    "category": "",
+    "images": []
+  },
+  {
+    "name": "侧翻门挡板（双片）",
+    "en": "Side-Tip Door Stop (Dual)",
+    "specs": [
+      [
+        "编码 Code",
+        "JD220109060286"
+      ],
+      [
+        "规格 Spec",
+        "120mm"
+      ],
+      [
+        "适用 Apply",
+        "侧翻墙板"
+      ]
+    ],
+    "n_imgs": 0,
+    "section": "hinges",
+    "category": "",
+    "images": []
+  },
+  {
+    "name": "国标集装箱锻造合页",
+    "en": "GB Container Forged Hinge",
+    "specs": [
+      [
+        "编码 Code",
+        "JD220109010021"
+      ],
+      [
+        "规格 Spec",
+        "150mm 镀锌"
+      ],
+      [
+        "适用 Apply",
+        "集装箱专用"
+      ]
+    ],
+    "n_imgs": 0,
+    "section": "hinges",
+    "category": "",
+    "images": []
+  },
+  {
+    "name": "侧标志灯/侧回复反射器",
+    "en": "Side Marker/Reflector",
+    "specs": [
+      [
+        "型号 Model",
+        "WA-09027"
+      ],
+      [
+        "编码 Code",
+        "JD220102020045"
+      ],
+      [
+        "适用 Apply",
+        "公告车用件"
+      ]
+    ],
+    "n_imgs": 0,
+    "section": "lighting",
+    "category": "侧标灯系列",
+    "images": []
+  },
+  {
+    "name": "边灯",
+    "en": "Side Lamp",
+    "specs": [
+      [
+        "型号 Model",
+        "153"
+      ],
+      [
+        "编码 Code",
+        "JD220102020007"
+      ],
+      [
+        "适用 Apply",
+        "挂车通用件"
+      ]
+    ],
+    "n_imgs": 0,
+    "section": "lighting",
+    "category": "侧标灯系列",
+    "images": []
+  },
+  {
+    "name": "侧标志灯 (LED)",
+    "en": "Side Marker LED",
+    "specs": [
+      [
+        "型号 Model",
+        "MX-013LED"
+      ],
+      [
+        "编码 Code",
+        "JD220102020011"
+      ],
+      [
+        "适用 Apply",
+        "骨架车"
+      ]
+    ],
+    "n_imgs": 0,
+    "section": "lighting",
+    "category": "侧标灯系列",
+    "images": []
+  },
+  {
+    "name": "边灯",
+    "en": "Side Lamp",
+    "specs": [
+      [
+        "型号 Model",
+        "NG09027"
+      ],
+      [
+        "编码 Code",
+        "JD220102020016"
+      ],
+      [
+        "适用 Apply",
+        "公告车用件"
+      ]
+    ],
+    "n_imgs": 0,
+    "section": "lighting",
+    "category": "侧标灯系列",
+    "images": []
+  },
+  {
+    "name": "边灯（带照地/转向）",
+    "en": "Side Lamp w/ Ground Light",
+    "specs": [
+      [
+        "型号 Model",
+        "HY-05"
+      ],
+      [
+        "编码 Code",
+        "JD220102020037"
+      ],
+      [
+        "适用 Apply",
+        "钩机板公告车"
+      ]
+    ],
+    "n_imgs": 0,
+    "section": "lighting",
+    "category": "侧标灯系列",
+    "images": []
+  },
+  {
+    "name": "三角形回复反射器",
+    "en": "Triangle Reflector",
+    "specs": [
+      [
+        "型号 Model",
+        "NG04002"
+      ],
+      [
+        "编码 Code",
+        "JD220102020014"
+      ],
+      [
+        "适用 Apply",
+        "公告/检查车"
+      ]
+    ],
+    "n_imgs": 0,
+    "section": "lighting",
+    "category": "三角回复反射器",
+    "images": []
+  },
+  {
+    "name": "三角反射板",
+    "en": "Reflector Plate",
+    "specs": [
+      [
+        "型号 Model",
+        "-"
+      ],
+      [
+        "编码 Code",
+        "JD220102020013"
+      ],
+      [
+        "适用 Apply",
+        "挂车通用"
+      ]
+    ],
+    "n_imgs": 0,
+    "section": "lighting",
+    "category": "三角回复反射器",
+    "images": []
+  },
+  {
+    "name": "前位灯",
+    "en": "Front Position Lamp",
+    "specs": [
+      [
+        "型号 Model",
+        "NG09001/NG09002"
+      ],
+      [
+        "编码 Code",
+        "JD220102020023"
+      ],
+      [
+        "适用 Apply",
+        "公告车用件"
+      ]
+    ],
+    "n_imgs": 0,
+    "section": "lighting",
+    "category": "前位灯 / 前回复反射器",
+    "images": []
+  },
+  {
+    "name": "前位灯/前回复反射器",
+    "en": "Front Lamp/Reflector",
+    "specs": [
+      [
+        "型号 Model",
+        "MX-053LEDB"
+      ],
+      [
+        "编码 Code",
+        "JD220102020024"
+      ],
+      [
+        "适用 Apply",
+        "挂车通用"
+      ]
+    ],
+    "n_imgs": 0,
+    "section": "lighting",
+    "category": "前位灯 / 前回复反射器",
+    "images": []
+  },
+  {
+    "name": "前回复反射器",
+    "en": "Front Reflector",
+    "specs": [
+      [
+        "型号 Model",
+        "NG04001"
+      ],
+      [
+        "编码 Code",
+        "JD220102020015"
+      ],
+      [
+        "适用 Apply",
+        "所有车型"
+      ]
+    ],
+    "n_imgs": 0,
+    "section": "lighting",
+    "category": "前位灯 / 前回复反射器",
+    "images": []
+  },
+  {
+    "name": "牌照灯",
+    "en": "License Plate Lamp",
+    "specs": [
+      [
+        "型号 Model",
+        "NG06002"
+      ],
+      [
+        "编码 Code",
+        "JD220102020018"
+      ],
+      [
+        "适用 Apply",
+        "公告车用件"
+      ]
+    ],
+    "n_imgs": 0,
+    "section": "lighting",
+    "category": "牌照灯",
+    "images": []
+  },
+  {
+    "name": "牌照灯（圆）",
+    "en": "License Lamp (Round)",
+    "specs": [
+      [
+        "型号 Model",
+        "圆"
+      ],
+      [
+        "编码 Code",
+        "JD220102020006"
+      ],
+      [
+        "适用 Apply",
+        "挂车通用件"
+      ]
+    ],
+    "n_imgs": 0,
+    "section": "lighting",
+    "category": "牌照灯",
+    "images": []
+  },
+  {
+    "name": "雾灯（LED红）",
+    "en": "Fog Lamp LED Red",
+    "specs": [
+      [
+        "型号 Model",
+        "LED红"
+      ],
+      [
+        "编码 Code",
+        "JD220102020005"
+      ],
+      [
+        "适用 Apply",
+        "挂车通用件"
+      ]
+    ],
+    "n_imgs": 0,
+    "section": "lighting",
+    "category": "后雾灯",
+    "images": []
+  },
+  {
+    "name": "雾灯（4寸圆）",
+    "en": "Fog Lamp 4-inch",
+    "specs": [
+      [
+        "型号 Model",
+        "WA-08057"
+      ],
+      [
+        "编码 Code",
+        "JD220102020035"
+      ],
+      [
+        "适用 Apply",
+        "公告车用件"
+      ]
+    ],
+    "n_imgs": 0,
+    "section": "lighting",
+    "category": "后雾灯",
+    "images": []
+  },
+  {
+    "name": "雾灯（方形3C）",
+    "en": "Fog Lamp Square",
+    "specs": [
+      [
+        "型号 Model",
+        "3C-南挂"
+      ],
+      [
+        "编码 Code",
+        "JD220102020017"
+      ],
+      [
+        "适用 Apply",
+        "公告车用件"
+      ]
+    ],
+    "n_imgs": 0,
+    "section": "lighting",
+    "category": "后雾灯",
+    "images": []
+  },
+  {
+    "name": "示廓灯（红）",
+    "en": "Clearance Red",
+    "specs": [
+      [
+        "型号 Model",
+        "NG07001R"
+      ],
+      [
+        "编码 Code",
+        "JD220102020019"
+      ],
+      [
+        "适用 Apply",
+        "公告车用件"
+      ]
+    ],
+    "n_imgs": 0,
+    "section": "lighting",
+    "category": "示廓灯",
+    "images": []
+  },
+  {
+    "name": "示廓灯（白）",
+    "en": "Clearance White",
+    "specs": [
+      [
+        "型号 Model",
+        "NG07001W"
+      ],
+      [
+        "编码 Code",
+        "JD220102020020"
+      ],
+      [
+        "适用 Apply",
+        "公告车用件"
+      ]
+    ],
+    "n_imgs": 0,
+    "section": "lighting",
+    "category": "示廓灯",
+    "images": []
+  },
+  {
+    "name": "骨架公告前示廓灯",
+    "en": "Skeleton Front",
+    "specs": [
+      [
+        "型号 Model",
+        "WA-08127W"
+      ],
+      [
+        "编码 Code",
+        "JD220102020050"
+      ],
+      [
+        "适用 Apply",
+        "骨架车公告车"
+      ]
+    ],
+    "n_imgs": 0,
+    "section": "lighting",
+    "category": "示廓灯",
+    "images": []
+  },
+  {
+    "name": "骨架公告后示廓灯",
+    "en": "Skeleton Rear",
+    "specs": [
+      [
+        "型号 Model",
+        "WA-08127R"
+      ],
+      [
+        "编码 Code",
+        "JD220102020051"
+      ],
+      [
+        "适用 Apply",
+        "骨架车公告车"
+      ]
+    ],
+    "n_imgs": 0,
+    "section": "lighting",
+    "category": "示廓灯",
+    "images": []
+  },
+  {
+    "name": "后组合尾灯",
+    "en": "Rear Combo Lamp",
+    "specs": [
+      [
+        "型号 Model",
+        "WA-08017"
+      ],
+      [
+        "编码 Code",
+        "JD220102020033"
+      ],
+      [
+        "适用 Apply",
+        "钩机板/中置轴"
+      ]
+    ],
+    "n_imgs": 0,
+    "section": "lighting",
+    "category": "后尾灯",
+    "images": []
+  },
+  {
+    "name": "尾灯",
+    "en": "Tail Lamp",
+    "specs": [
+      [
+        "型号 Model",
+        "WA-08047"
+      ],
+      [
+        "编码 Code",
+        "JD220102020038"
+      ],
+      [
+        "适用 Apply",
+        "常规订单"
+      ]
+    ],
+    "n_imgs": 0,
+    "section": "lighting",
+    "category": "后尾灯",
+    "images": []
+  },
+  {
+    "name": "小三联合后组合灯",
+    "en": "3-Round Combo Lamp",
+    "specs": [
+      [
+        "型号 Model",
+        "WA-0436"
+      ],
+      [
+        "编码 Code",
+        "-"
+      ],
+      [
+        "适用 Apply",
+        "常规半挂车型"
+      ]
+    ],
+    "n_imgs": 0,
+    "section": "lighting",
+    "category": "后尾灯",
+    "images": []
+  },
+  {
+    "name": "后尾灯（中集型）",
+    "en": "Tail Lamp CIMC",
+    "specs": [
+      [
+        "型号 Model",
+        "中集"
+      ],
+      [
+        "编码 Code",
+        "JD220102020010"
+      ],
+      [
+        "适用 Apply",
+        "后翻车型"
+      ]
+    ],
+    "n_imgs": 1,
+    "section": "lighting",
+    "category": "后尾灯",
+    "images": [
+      "assets/images/parts/part_001.jpg"
+    ]
+  }
+]
