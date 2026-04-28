@@ -212,6 +212,17 @@ img, video, iframe, table, pre, code {
     transition: 0.3s;
 }
 
+/* 汉堡按钮变 X 状(打开抽屉时) */
+.navbar.mobile-open .nav-toggle span:nth-child(1) {
+    transform: translateY(7px) rotate(45deg);
+}
+.navbar.mobile-open .nav-toggle span:nth-child(2) {
+    opacity: 0;
+}
+.navbar.mobile-open .nav-toggle span:nth-child(3) {
+    transform: translateY(-7px) rotate(-45deg);
+}
+
 /* ====== Hero ====== */
 .hero {
     position: relative;
@@ -1137,17 +1148,77 @@ img, video, iframe, table, pre, code {
 }
 
 /* ====== 响应式 ====== */
-/* 单独提升 nav 折叠断点到 1023px:
-   覆盖 iOS Safari "请求桌面网站"模式(伪装 ~980px) + iPad 竖屏(768px) + 所有手机
-   避免 8 个 nav 项被挤成竖排单字。其他内容仍走 768px 断点。 */
+/* nav 折叠断点 1023px:覆盖 Safari 桌面模式(980px) + iPad 竖屏 + 所有手机。
+   其他内容仍走 768px 断点。 */
 @media (max-width: 1023px) {
-    .nav-links, .nav-cta { display: none; }
-    .nav-toggle { display: flex; }
+    /* 默认折叠:nav-links 隐藏,nav-cta 隐藏,显示汉堡 */
+    .nav-links {
+        display: flex;
+        flex-direction: column;
+        position: fixed;
+        top: 0;
+        right: 0;
+        width: 78%;
+        max-width: 360px;
+        height: 100vh;
+        height: 100dvh;
+        background: rgba(8, 14, 28, 0.97);
+        backdrop-filter: blur(20px);
+        -webkit-backdrop-filter: blur(20px);
+        padding: 88px 24px 32px;
+        gap: 0;
+        transform: translateX(100%);
+        transition: transform 0.32s cubic-bezier(0.4, 0, 0.2, 1);
+        z-index: 999;
+        box-shadow: -8px 0 32px rgba(0, 0, 0, 0.3);
+        overflow-y: auto;
+    }
+    .nav-links li {
+        list-style: none;
+        border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+    }
+    .nav-links a {
+        display: block;
+        padding: 18px 4px;
+        font-size: 16px;
+        color: rgba(255, 255, 255, 0.92);
+        letter-spacing: 1.5px;
+    }
+    .nav-cta {
+        display: none;
+    }
+    .nav-toggle {
+        display: flex;
+        position: relative;
+        z-index: 1001;
+    }
+    /* 抽屉打开:滑入。!important 保护抽屉切换不被其他 transform 规则覆盖 */
+    .navbar.mobile-open .nav-links {
+        transform: translateX(0) !important;
+    }
+    /* 抽屉打开:遮罩层 */
+    .navbar.mobile-open::before {
+        content: '';
+        position: fixed;
+        inset: 0;
+        background: rgba(0, 0, 0, 0.5);
+        z-index: 998;
+        animation: navFadeIn 0.3s ease;
+    }
+}
+/* 打开时禁止 body 滚动 — 1023px 之外不应用 */
+@media (max-width: 1023px) {
+    body.nav-locked { overflow: hidden; }
+}
+
+/* 抽屉遮罩淡入 keyframes 必须在 @media 外才能被引用 */
+@keyframes navFadeIn {
+    from { opacity: 0; }
+    to { opacity: 1; }
 }
 
 @media (max-width: 768px) {
-    .nav-links, .nav-cta { display: none; }
-    .nav-toggle { display: flex; }
+    /* nav 折叠规则已移到 1023px 块,这里不再重复定义,避免覆盖抽屉 display:flex */
 
     .stats-grid { grid-template-columns: repeat(2, 1fr); }
     .about-grid { grid-template-columns: 1fr; }

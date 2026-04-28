@@ -150,11 +150,56 @@ document.getElementById('inquiryForm')?.addEventListener('submit', function(e) {
     this.reset();
 });
 
-// ====== 移动端导航 ======
-document.getElementById('navToggle')?.addEventListener('click', function() {
+// ====== 移动端导航(汉堡菜单滑下) ======
+(function() {
+    const toggle = document.getElementById('navToggle');
     const links = document.querySelector('.nav-links');
-    links.style.display = links.style.display === 'flex' ? 'none' : 'flex';
-});
+    const navbar = document.querySelector('.navbar');
+    if (!toggle || !links || !navbar) return;
+
+    // 清掉历史 inline style 残留(老版 main.js 留的)
+    links.style.removeProperty('display');
+
+    function close() {
+        navbar.classList.remove('mobile-open');
+        document.body.classList.remove('nav-locked');
+        toggle.setAttribute('aria-expanded', 'false');
+        // 兜底:某些情况下 CSS class 切换不生效,直接 inline 控制 transform
+        if (window.innerWidth <= 1023) {
+            links.style.setProperty('transform', 'translateX(100%)', 'important');
+        } else {
+            links.style.removeProperty('transform');
+        }
+    }
+    function open() {
+        navbar.classList.add('mobile-open');
+        document.body.classList.add('nav-locked');
+        toggle.setAttribute('aria-expanded', 'true');
+        if (window.innerWidth <= 1023) {
+            links.style.setProperty('transform', 'translateX(0)', 'important');
+        }
+    }
+
+    toggle.addEventListener('click', function(e) {
+        e.stopPropagation();
+        navbar.classList.contains('mobile-open') ? close() : open();
+    });
+
+    // 点击菜单内任何链接 → 关闭抽屉
+    links.addEventListener('click', function(e) {
+        if (e.target.tagName === 'A') close();
+    });
+
+    // 点击抽屉外部 → 关闭
+    document.addEventListener('click', function(e) {
+        if (navbar.classList.contains('mobile-open') && !navbar.contains(e.target)) close();
+    });
+
+    // viewport 拉宽到桌面 → 关闭(避免状态残留)
+    window.addEventListener('resize', function() {
+        if (window.innerWidth > 1023) close();
+    });
+})();
 
 // ====== 中英文切换 ======
 (function() {
