@@ -121,9 +121,9 @@ document.querySelectorAll('.stats, .about, .products, .advantages, .news, .cta-s
             const items = allNews.filter(n => n.category === cat.key);
             const listHTML = items.length > 0
                 ? `<ul class="news-list">${items.map(n => `
-                    <li><a href="${n.url || '#'}" ${n.url ? 'target="_blank"' : ''}>
+                    <li><a href="${n.url || '#'}" data-news-id="${n.id || ''}" class="news-link">
                         <span class="news-dot"></span>
-                        <span class="news-title">${isEn ? n.title_en : n.title}</span>
+                        <span class="news-title">${isEn ? n.title_en || n.title : n.title}</span>
                         <span class="news-date">${n.date}</span>
                     </a></li>`).join('')}</ul>`
                 : `<div class="news-column-empty">${isEn ? 'Coming soon' : '即将更新'}</div>`;
@@ -135,6 +135,61 @@ document.querySelectorAll('.stats, .about, .products, .advantages, .news, .cta-s
                 ${listHTML}
             </div>`;
         }).join('');
+
+        // 绑定 news-link → 拦截 → 打开 lightbox
+        container.querySelectorAll('.news-link').forEach(a => {
+            a.addEventListener('click', (e) => {
+                const id = a.dataset.newsId;
+                const news = allNews.find(n => n.id === id);
+                if (!news || !news.url) return;  // 没 url 就让默认 # 跳
+                e.preventDefault();
+                openNewsLightbox(news, isEn);
+            });
+        });
+    }
+
+    function openNewsLightbox(news, isEn) {
+        const title = isEn ? (news.title_en || news.title) : news.title;
+        const summary = isEn ? (news.summary_en || news.summary) : news.summary;
+        const cover = news.cover ? `<div class="news-lb-cover" style="background-image:url('${news.cover}')"></div>` : '';
+        const lb = document.createElement('div');
+        lb.className = 'news-lightbox';
+        lb.innerHTML = `
+            <div class="news-lb-backdrop"></div>
+            <div class="news-lb-card" role="dialog" aria-label="${title}">
+                <button class="news-lb-close" type="button" aria-label="关闭">×</button>
+                ${cover}
+                <div class="news-lb-body">
+                    <div class="news-lb-meta">
+                        <span class="news-lb-cat">${news.category_label || ''}</span>
+                        <span class="news-lb-date">${news.date}</span>
+                    </div>
+                    <h3 class="news-lb-title">${title}</h3>
+                    ${summary ? `<p class="news-lb-summary">${summary}</p>` : ''}
+                    <div class="news-lb-actions">
+                        <a href="${news.url}" target="_blank" rel="noopener noreferrer" class="btn btn-primary">
+                            ${isEn ? 'Read Full Article →' : '阅读全文(公众号)→'}
+                        </a>
+                        <button type="button" class="btn btn-outline news-lb-cancel">
+                            ${isEn ? 'Close' : '关闭'}
+                        </button>
+                    </div>
+                </div>
+            </div>`;
+        document.body.appendChild(lb);
+        document.body.style.overflow = 'hidden';
+        requestAnimationFrame(() => lb.classList.add('is-open'));
+
+        const close = () => {
+            lb.classList.remove('is-open');
+            setTimeout(() => { lb.remove(); document.body.style.overflow = ''; }, 240);
+        };
+        lb.querySelector('.news-lb-close').addEventListener('click', close);
+        lb.querySelector('.news-lb-cancel').addEventListener('click', close);
+        lb.querySelector('.news-lb-backdrop').addEventListener('click', close);
+        document.addEventListener('keydown', function esc(ev) {
+            if (ev.key === 'Escape') { close(); document.removeEventListener('keydown', esc); }
+        });
     }
 
     // 语言切换时重新渲染
@@ -257,4 +312,48 @@ document.getElementById('inquiryForm')?.addEventListener('submit', function(e) {
             ? 'Hubei Ouyang Jude Automobile | Semi-Trailer Expert'
             : '湖北欧阳聚德汽车有限公司 | 半挂车研发制造专家';
     });
+})();
+
+/* ====== 滚动渐显:IntersectionObserver fade-up,带 stagger ====== */
+(function () {
+    if (!('IntersectionObserver' in window)) return;
+
+    const selectors = [
+        '.stat-item',
+        '.timeline-item',
+        '.tech-card',
+        '.member-block',
+        '.advantage-block',
+        '.market-block',
+        '.contribution-block',
+        '.honor-figure',
+        '.ft-tile',
+        '.pp-card',
+        '.trinity-item',
+        '.section-header',
+        '.about-carousel',
+        '.about-content',
+        '.advantage-card',
+        '.news-column',
+        '.mission-text',
+        '.mission-tags',
+        '.cta-content'
+    ];
+    const els = document.querySelectorAll(selectors.join(','));
+    els.forEach((el) => el.classList.add('reveal'));
+
+    const observer = new IntersectionObserver((entries) => {
+        entries.forEach((entry) => {
+            if (!entry.isIntersecting) return;
+            // stagger:同父级内的兄弟元素错峰 60ms,上限 8 个
+            const parent = entry.target.parentElement;
+            const siblings = parent ? [...parent.children].filter((c) => c.classList.contains('reveal')) : [];
+            const idx = siblings.indexOf(entry.target);
+            const delay = idx >= 0 ? Math.min(idx, 8) * 60 : 0;
+            setTimeout(() => entry.target.classList.add('is-visible'), delay);
+            observer.unobserve(entry.target);
+        });
+    }, { threshold: 0.12, rootMargin: '0px 0px -40px 0px' });
+
+    els.forEach((el) => observer.observe(el));
 })();

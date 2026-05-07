@@ -147,47 +147,52 @@
     font-weight: 500;
 }
 
-/* ----- 三件套:使命/愿景/价值观 ----- */
+/* ----- 三件套:使命/愿景/价值观(纯文字三列,无装饰卡) ----- */
 .mission-trinity {
     display: grid;
     grid-template-columns: repeat(3, minmax(0, 1fr));
-    gap: 20px;
-    margin: 48px auto 0;
+    gap: 36px;
+    margin: 56px auto 0;
+    padding-top: 36px;
+    border-top: 1px solid var(--gray-200);
     max-width: 900px;
 }
-.trinity-card {
-    padding: 28px 24px;
-    background: linear-gradient(180deg, #fbfcff 0%, #f3f6fc 100%);
-    border: 1px solid var(--blue-200, #b8cdf3);
-    border-radius: 12px;
+.trinity-item {
     text-align: center;
-    transition: all 0.3s;
-}
-.trinity-card:hover {
-    transform: translateY(-4px);
-    box-shadow: 0 8px 24px rgba(37, 84, 166, 0.12);
-    border-color: var(--blue-500);
 }
 .trinity-label {
     font-size: 12px;
     letter-spacing: 4px;
-    color: var(--blue-600, #1d4185);
+    color: var(--blue-500);
     font-weight: 700;
     margin-bottom: 14px;
+    text-transform: uppercase;
 }
-.trinity-card p {
+.trinity-item p {
     font-size: 15px;
-    line-height: 1.7;
+    line-height: 1.75;
     color: var(--navy-900);
     margin: 0;
     font-weight: 500;
+}
+@media (max-width: 768px) {
+    .mission-trinity { grid-template-columns: 1fr; gap: 28px; padding-top: 28px; }
 }
 
 /* ----- 硬实力数字看板 ----- */
 .about-stats {
     padding: 100px 0;
-    background: linear-gradient(180deg, #0a1129 0%, #142046 100%);
     color: white;
+    background:
+        linear-gradient(180deg, rgba(8, 14, 28, 0.92) 0%, rgba(15, 32, 53, 0.95) 100%),
+        url('assets/images/about/factory-cutting-line.webp') center/cover no-repeat fixed;
+}
+@media (max-width: 768px) {
+    .about-stats {
+        background:
+            linear-gradient(180deg, rgba(8, 14, 28, 0.94) 0%, rgba(15, 32, 53, 0.96) 100%),
+            url('assets/images/about/factory-cutting-line.webp') center/cover no-repeat;
+    }
 }
 .about-stats .section-tag,
 .about-stats .section-title,
@@ -197,50 +202,61 @@
 .about-stats .section-title { color: white; }
 .about-stats .section-desc { color: rgba(255,255,255,0.7); }
 .about-stats .section-tag { color: rgba(135,170,235,0.9); }
-.stats-figures {
-    display: grid;
-    grid-template-columns: repeat(4, minmax(0, 1fr));
-    gap: 24px;
-    margin-top: 48px;
+/* about-stats: 用主页 stat-item 风格,8 个数字 4 列裸排,无卡片背景 */
+.about-stats-grid {
+    grid-template-columns: repeat(4, 1fr);
+    gap: 48px 32px;
+    margin-top: 56px;
 }
-.figure-item {
-    padding: 28px 20px;
-    background: rgba(255, 255, 255, 0.04);
-    border: 1px solid rgba(255, 255, 255, 0.08);
-    border-radius: 12px;
+.about-stats-grid .stat-item {
+    padding: 8px 0;
     text-align: center;
-    transition: all 0.3s;
 }
-.figure-item:hover {
-    background: rgba(255, 255, 255, 0.07);
-    transform: translateY(-3px);
-    border-color: rgba(135, 170, 235, 0.4);
-}
-.figure-num {
-    font-size: 38px;
-    font-weight: 800;
-    line-height: 1;
-    color: white;
+.about-stats-grid .stat-number {
+    font-size: 44px;
+    font-weight: 900;
+    color: var(--blue-300);
     letter-spacing: -1px;
-    margin-bottom: 12px;
+    line-height: 1;
     font-variant-numeric: tabular-nums;
 }
-.figure-unit {
+.about-stats-grid .stat-unit {
     font-size: 22px;
-    font-weight: 600;
-    color: rgba(135, 170, 235, 0.95);
+    color: var(--blue-400);
     margin-left: 2px;
+    font-weight: 600;
 }
-.figure-label {
+.about-stats-grid .stat-label {
+    color: rgba(255, 255, 255, 0.65);
     font-size: 13px;
-    color: rgba(255, 255, 255, 0.75);
-    line-height: 1.5;
+    margin-top: 12px;
+    line-height: 1.55;
+    letter-spacing: 0.5px;
+}
+@media (max-width: 768px) {
+    .about-stats-grid { grid-template-columns: repeat(2, 1fr); gap: 36px 16px; }
+    .about-stats-grid .stat-number { font-size: 34px; }
 }
 
-/* ----- 技术与产学研 ----- */
+/* ----- 技术与产学研(厂区背景 + 毛玻璃卡) ----- */
 .about-tech {
     padding: 100px 0;
-    background: var(--white);
+    position: relative;
+    color: white;
+    background:
+        linear-gradient(180deg, rgba(8, 14, 28, 0.88) 0%, rgba(15, 32, 53, 0.92) 100%),
+        url('assets/images/about/team-rally.webp') center/cover no-repeat fixed;
+}
+.about-tech .section-tag { color: rgba(135, 170, 235, 0.9); }
+.about-tech .section-title { color: white; }
+.about-tech .section-desc { color: rgba(255, 255, 255, 0.75); }
+@media (max-width: 768px) {
+    /* mobile fixed 滚动卡顿,改 scroll */
+    .about-tech {
+        background:
+            linear-gradient(180deg, rgba(8, 14, 28, 0.9) 0%, rgba(15, 32, 53, 0.94) 100%),
+            url('assets/images/about/team-rally.webp') center/cover no-repeat;
+    }
 }
 .tech-grid {
     display: grid;
@@ -253,27 +269,29 @@
 }
 .tech-card {
     padding: 32px 28px;
-    background: white;
-    border: 1px solid var(--gray-200);
+    background: rgba(255, 255, 255, 0.06);
+    backdrop-filter: blur(20px) saturate(160%);
+    -webkit-backdrop-filter: blur(20px) saturate(160%);
+    border: 1px solid rgba(255, 255, 255, 0.14);
     border-radius: 12px;
     transition: all 0.3s;
     position: relative;
 }
 .tech-card:hover {
-    transform: translateY(-3px);
-    box-shadow: 0 8px 24px rgba(0, 0, 0, 0.06);
-    border-color: var(--blue-300, #6c8fd1);
+    background: rgba(255, 255, 255, 0.1);
+    border-color: rgba(135, 170, 235, 0.5);
 }
 .tech-card-eyebrow {
     font-size: 11px;
     letter-spacing: 3px;
-    color: var(--blue-600, #1d4185);
+    color: var(--blue-300);
     font-weight: 700;
     margin-bottom: 12px;
+    text-transform: uppercase;
 }
 .tech-card h3 {
     font-size: 18px;
-    color: var(--navy-900);
+    color: white;
     margin-bottom: 16px;
     font-weight: 700;
 }
@@ -284,7 +302,7 @@
 }
 .tech-list li {
     font-size: 14px;
-    color: var(--gray-700);
+    color: rgba(255, 255, 255, 0.85);
     line-height: 1.8;
     padding-left: 18px;
     position: relative;
@@ -293,69 +311,60 @@
     content: '·';
     position: absolute;
     left: 6px;
-    color: var(--blue-500);
+    color: var(--blue-300);
     font-weight: 800;
     font-size: 18px;
     line-height: 1.4;
 }
 .tech-stat {
     font-size: 14px;
-    color: var(--gray-700);
+    color: rgba(255, 255, 255, 0.75);
     margin: 0;
     padding-top: 12px;
-    border-top: 1px solid var(--gray-100, #f0f3f8);
+    border-top: 1px solid rgba(255, 255, 255, 0.1);
 }
 .tech-stat strong {
-    color: var(--blue-600, #1d4185);
+    color: var(--blue-300);
 }
-.tech-highlight {
-    background: linear-gradient(135deg, #fff8e6 0%, #fffbf2 100%);
-    border-color: #f4c768;
-}
-.tech-highlight .tech-card-eyebrow {
-    color: #b8761c;
-}
-.tech-highlight h3 {
-    color: #905c14;
-}
-.tech-highlight p {
-    font-size: 15px;
-    line-height: 1.7;
-    color: #6b4710;
+/* tech-card 中"折臂式随车吊"那一张:深底白字 */
+.tech-card > p {
+    font-size: 14px;
+    line-height: 1.75;
+    color: rgba(255, 255, 255, 0.85);
     margin: 0;
 }
-.tech-highlight strong {
-    color: #b8761c;
+.tech-card > p strong {
+    color: var(--blue-300);
 }
 
-/* ----- 创始人卡片 ----- */
+/* ----- 创始人:纯文字段落,无装饰卡 ----- */
 .founder-card {
     margin: 56px auto 0;
     max-width: 900px;
-    padding: 32px 36px;
-    background: linear-gradient(135deg, #f5f7fa 0%, #eef4ff 100%);
-    border-left: 4px solid var(--blue-500);
-    border-radius: 8px;
+    padding-top: 36px;
+    border-top: 1px solid var(--gray-200);
 }
 .founder-eyebrow {
-    font-size: 11px;
+    font-size: 12px;
     letter-spacing: 4px;
-    color: var(--blue-600, #1d4185);
+    color: var(--blue-500);
     font-weight: 700;
-    margin-bottom: 8px;
+    margin-bottom: 10px;
+    text-transform: uppercase;
 }
 .founder-name {
-    font-size: 24px;
+    font-size: 22px;
     color: var(--navy-900);
-    margin: 0 0 12px;
-    font-weight: 700;
-    letter-spacing: 2px;
+    margin: 0 0 14px;
+    font-weight: 800;
+    letter-spacing: 1px;
 }
 .founder-bio {
     font-size: 15px;
-    line-height: 1.8;
+    line-height: 1.85;
     color: var(--gray-700);
     margin: 0;
+    max-width: 720px;
 }
 
 /* ----- Timeline ----- */
@@ -434,13 +443,6 @@
     color: var(--gray-600, #5a6478);
     line-height: 1.7;
 }
-.timeline-highlight {
-    background: linear-gradient(135deg, #fff8e6 0%, #fffbf2 100%);
-    border-color: #f4c768;
-}
-.timeline-highlight h3 {
-    color: #b8761c;
-}
 
 /* ----- Honors Wall ----- */
 .honors-wall {
@@ -448,26 +450,26 @@
     background: var(--white);
 }
 .honors-wall-grid {
-    display: grid;
-    grid-template-columns: 2fr 1fr 1fr;
-    grid-template-rows: 1fr 1fr;
-    gap: 16px;
+    display: flex;
+    flex-wrap: wrap;
+    gap: 20px;
+    justify-content: center;
     margin-top: 48px;
     max-width: 1100px;
     margin-left: auto;
     margin-right: auto;
 }
 .honor-figure {
+    flex: 0 0 calc((100% - 40px) / 3);
     margin: 0;
     position: relative;
     overflow: hidden;
-    border-radius: 12px;
+    border-radius: 8px;
     background: var(--gray-100);
     aspect-ratio: 4 / 3;
 }
-.honor-feature {
-    grid-row: span 2;
-    aspect-ratio: 1 / 1;
+@media (max-width: 768px) {
+    .honor-figure { flex: 0 0 100%; }
 }
 .honor-figure img {
     width: 100%;
@@ -501,25 +503,32 @@
     background: linear-gradient(180deg, white 0%, var(--gray-50, #f5f7fa) 100%);
 }
 .ft-grid {
-    display: grid;
-    grid-template-columns: repeat(3, 1fr);
-    grid-auto-rows: 200px;
+    display: flex;
+    flex-wrap: wrap;
     gap: 12px;
+    justify-content: center;
     margin-top: 48px;
     max-width: 1200px;
     margin-left: auto;
     margin-right: auto;
 }
 .ft-tile {
+    flex: 0 0 calc((100% - 24px) / 3);
+    height: 240px;
     margin: 0;
     position: relative;
     overflow: hidden;
     border-radius: 10px;
     background: var(--gray-200);
 }
+/* about-gate 第一张厂区大门做大图(2 倍宽 2 倍高) */
 .ft-large {
-    grid-column: span 2;
-    grid-row: span 2;
+    flex: 0 0 calc((100% - 24px) * 2 / 3 + 12px);
+    height: calc(240px * 2 + 12px);
+}
+@media (max-width: 768px) {
+    .ft-tile { flex: 0 0 100%; height: 200px; }
+    .ft-large { flex: 0 0 100%; height: 280px; }
 }
 .ft-tile img {
     width: 100%;
@@ -713,4 +722,327 @@
 @media (max-width: 480px) {
     .about-hero-title { font-size: 32px; }
     .mission-headline { font-size: 18px; }
+}
+
+/* ====== 核心成员 双段 (欧德发 + 李涛教授) ====== */
+.core-members {
+    max-width: 900px;
+    margin: 56px auto 0;
+    padding-top: 36px;
+    border-top: 1px solid var(--gray-200);
+}
+/* core-members 在 about-tech 深底背景里:文字反白 */
+.about-tech .core-members { border-top-color: rgba(255, 255, 255, 0.15); }
+.about-tech .member-eyebrow { color: var(--blue-300); }
+.about-tech .member-name { color: white; }
+.about-tech .member-bio { color: rgba(255, 255, 255, 0.85); }
+
+/* 创始人/学术顾问肖像 */
+.member-portrait {
+    margin: 0 0 22px;
+    border-radius: 8px;
+    overflow: hidden;
+    aspect-ratio: 4 / 3;
+    background: rgba(255, 255, 255, 0.05);
+    max-width: 360px;
+}
+.member-portrait img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    object-position: center top;
+}
+/* 李涛教授证件照 = 90x145 小图,等比展示不强制放大 */
+.member-portrait-small {
+    aspect-ratio: 90 / 145;
+    max-width: 144px;
+}
+.member-portrait-small img {
+    object-position: center;
+}
+
+/* tech-card 内嵌产品配图(折臂随车吊那一张用) */
+.tech-card-img {
+    margin: 0 0 16px;
+    border-radius: 8px;
+    overflow: hidden;
+    aspect-ratio: 16 / 9;
+    background: rgba(255, 255, 255, 0.04);
+}
+.tech-card-img img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    transition: transform 0.5s;
+}
+.tech-card:hover .tech-card-img img {
+    transform: scale(1.04);
+}
+.member-block {
+    /* 纯文字段落,无装饰 */
+}
+.member-eyebrow {
+    font-size: 12px;
+    letter-spacing: 4px;
+    color: var(--blue-500);
+    font-weight: 700;
+    margin-bottom: 10px;
+    text-transform: uppercase;
+}
+.member-name {
+    font-size: 22px;
+    color: var(--navy-900);
+    margin: 0 0 14px;
+    font-weight: 800;
+    letter-spacing: 1px;
+}
+.member-bio {
+    font-size: 15px;
+    line-height: 1.85;
+    color: var(--gray-700);
+    margin: 0;
+}
+@media (max-width: 768px) {
+    .core-members { grid-template-columns: 1fr; gap: 36px; }
+}
+
+/* ====== 竞争优势(深底,跟主页 stats 节奏一致) ====== */
+.advantages-section {
+    padding: 100px 0;
+    background: var(--navy-900);
+    color: white;
+}
+.advantages-section .section-tag { color: rgba(135, 170, 235, 0.9); }
+.advantages-section .section-title { color: white; }
+.advantages-section .section-desc { color: rgba(255, 255, 255, 0.7); }
+.advantage-grid {
+    display: grid;
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    gap: 40px;
+    margin-top: 56px;
+    max-width: 1100px;
+    margin-left: auto;
+    margin-right: auto;
+}
+.advantage-block {
+    /* 纯文字三列,深底白字 */
+}
+.advantage-eyebrow {
+    font-size: 12px;
+    letter-spacing: 4px;
+    color: var(--blue-300);
+    font-weight: 700;
+    margin-bottom: 14px;
+    text-transform: uppercase;
+}
+.advantage-block h3 {
+    font-size: 20px;
+    color: white;
+    font-weight: 700;
+    margin: 0 0 14px;
+    line-height: 1.4;
+}
+.advantage-block p {
+    font-size: 14px;
+    color: rgba(255, 255, 255, 0.75);
+    line-height: 1.85;
+    margin: 0;
+}
+@media (max-width: 768px) {
+    .advantage-grid { grid-template-columns: 1fr; gap: 36px; }
+}
+
+/* ====== 市场版图(浅底) ====== */
+.market-reach {
+    padding: 100px 0;
+    background: var(--white);
+}
+.market-grid {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 40px;
+    margin-top: 56px;
+    max-width: 1000px;
+    margin-left: auto;
+    margin-right: auto;
+}
+.market-block {
+    padding: 36px 32px;
+    background: var(--gray-50);
+    border-radius: 8px;
+    border-top: 3px solid var(--blue-500);
+}
+.market-overseas {
+    border-top-color: var(--gold);
+}
+.market-eyebrow {
+    font-size: 12px;
+    letter-spacing: 4px;
+    color: var(--blue-500);
+    font-weight: 700;
+    margin-bottom: 16px;
+    text-transform: uppercase;
+}
+.market-overseas .market-eyebrow { color: var(--gold); }
+.market-headline {
+    line-height: 1;
+    margin-bottom: 14px;
+}
+.market-num {
+    font-size: 56px;
+    font-weight: 900;
+    color: var(--navy-900);
+    letter-spacing: -1px;
+    font-variant-numeric: tabular-nums;
+}
+.market-overseas .market-num {
+    font-size: 32px;
+    color: var(--navy-900);
+    letter-spacing: 4px;
+}
+.market-unit {
+    font-size: 28px;
+    color: var(--blue-500);
+    font-weight: 700;
+    margin-left: 4px;
+}
+.market-label {
+    font-size: 14px;
+    color: var(--gray-700);
+    font-weight: 600;
+    margin: 0 0 18px;
+    letter-spacing: 0.5px;
+}
+.market-detail {
+    font-size: 14px;
+    color: var(--gray-700);
+    line-height: 1.85;
+    margin: 0;
+}
+@media (max-width: 768px) {
+    .market-grid { grid-template-columns: 1fr; gap: 24px; }
+}
+
+/* ====== 社会贡献(浅底) ====== */
+.social-contribution {
+    padding: 100px 0;
+    background: var(--gray-50, #f5f7fa);
+}
+.contribution-grid {
+    display: grid;
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    gap: 32px;
+    margin-top: 56px;
+    max-width: 1100px;
+    margin-left: auto;
+    margin-right: auto;
+}
+.contribution-block {
+    padding: 28px 24px;
+    background: white;
+    border-radius: 8px;
+    border-left: 3px solid var(--blue-400);
+}
+.contribution-eyebrow {
+    font-size: 12px;
+    letter-spacing: 4px;
+    color: var(--blue-500);
+    font-weight: 700;
+    margin-bottom: 12px;
+    text-transform: uppercase;
+}
+.contribution-block p {
+    font-size: 14px;
+    line-height: 1.85;
+    color: var(--gray-700);
+    margin: 0;
+}
+.contribution-gallery {
+    display: grid;
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    gap: 12px;
+    margin-top: 36px;
+    max-width: 1100px;
+    margin-left: auto;
+    margin-right: auto;
+}
+.contribution-gallery figure {
+    margin: 0;
+    aspect-ratio: 4 / 3;
+    overflow: hidden;
+    border-radius: 6px;
+    background: var(--gray-200);
+}
+.contribution-gallery img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    transition: transform 0.5s;
+}
+.contribution-gallery figure:hover img {
+    transform: scale(1.04);
+}
+@media (max-width: 768px) {
+    .contribution-grid { grid-template-columns: 1fr; gap: 20px; }
+    .contribution-gallery { grid-template-columns: repeat(2, 1fr); }
+}
+
+/* ====== 专利墙(浅底,12 张证书 4x3 网格) ====== */
+.patents-wall {
+    padding: 100px 0;
+    background: linear-gradient(180deg, var(--white) 0%, var(--gray-50, #f5f7fa) 100%);
+}
+.patents-grid {
+    display: grid;
+    grid-template-columns: repeat(6, minmax(0, 1fr));
+    gap: 16px;
+    margin-top: 56px;
+    max-width: 1200px;
+    margin-left: auto;
+    margin-right: auto;
+}
+.patent-cert {
+    margin: 0;
+    aspect-ratio: 345 / 474;
+    overflow: hidden;
+    border-radius: 4px;
+    background: var(--gray-100);
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.06);
+    transition: transform 0.3s, box-shadow 0.3s;
+}
+.patent-cert:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 8px 20px rgba(0, 0, 0, 0.12);
+}
+.patent-cert img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+.patents-note {
+    text-align: center;
+    margin-top: 36px;
+    font-size: 13px;
+    color: var(--gray-500);
+    letter-spacing: 1px;
+}
+@media (max-width: 768px) {
+    .patents-grid { grid-template-columns: repeat(3, 1fr); gap: 10px; }
+}
+
+/* ====== CTA slogan + tagline ====== */
+.cta-slogan {
+    font-size: 14px;
+    letter-spacing: 6px;
+    color: var(--blue-300);
+    font-weight: 600;
+    text-transform: uppercase;
+    margin: 0 0 18px;
+}
+.cta-tagline {
+    font-size: 13px;
+    letter-spacing: 4px;
+    color: rgba(255, 255, 255, 0.55);
+    margin: 36px 0 0;
+    font-style: italic;
 }

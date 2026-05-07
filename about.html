@@ -10,10 +10,15 @@
     <meta name="author" content="湖北欧阳聚德汽车有限公司">
     <link rel="preconnect" href="https://fonts.googleapis.com" crossorigin>
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link rel="preconnect" href="https://chinese-fonts-cdn.deno.dev" crossorigin>
+    <!-- OPPO Sans (跟陕汽对齐) + Noto Sans SC fallback -->
+    <link rel="stylesheet" href="https://chinese-fonts-cdn.deno.dev/packages/opposans/dist/OPPOSans-Regular/result.css" media="print" onload="this.media='all'">
+    <link rel="stylesheet" href="https://chinese-fonts-cdn.deno.dev/packages/opposans/dist/OPPOSans-Bold/result.css" media="print" onload="this.media='all'">
+    <link rel="stylesheet" href="https://chinese-fonts-cdn.deno.dev/packages/opposans/dist/OPPOSans-Heavy/result.css" media="print" onload="this.media='all'">
     <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Noto+Sans+SC:wght@300;400;500;700;900&display=swap" media="print" onload="this.media='all'">
     <noscript><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Noto+Sans+SC:wght@300;400;500;700;900&display=swap"></noscript>
-    <link rel="stylesheet" href="style.css?v=20260428e">
-    <link rel="stylesheet" href="about.css?v=20260428b">
+    <link rel="stylesheet" href="style.css?v=20260507b">
+    <link rel="stylesheet" href="about.css?v=20260507a">
     <!-- LCP preload: about hero 背景 -->
     <link rel="preload" as="image" href="assets/images/about/about-gate-768.webp" type="image/webp" media="(max-width: 768px)" fetchpriority="high">
     <link rel="preload" as="image" href="assets/images/about/about-gate.webp" type="image/webp" media="(min-width: 769px)" fetchpriority="high">
@@ -105,31 +110,35 @@
                     <p data-en="The company integrates R&D, design, manufacturing, sales and after-sales into one full-chain service. Certified by ISO 9001 and CCC, our 'Xiangqi' and 'Chuyuan' brand vehicles are listed in the National Vehicle Product Catalog. We also undertake national-level key equipment projects, holding the relevant qualifications and quality system certifications.">公司集研发、设计、制造、销售、服务于一体,已通过国家 3C 认证与 ISO 9001 国际质量管理体系认证,"襄汽牌"与"楚源牌"汽车已录入国家汽车产品《公告》目录。<strong>承担国家级重点装备项目</strong>,具备相应承制资质与质量体系认证。</p>
                 </div>
 
-                <!-- 三件套:使命 / 愿景 / 价值观 -->
+                <!-- 三件套:使命 / 愿景 / 价值观(纯文字,无装饰卡) -->
                 <div class="mission-trinity">
-                    <div class="trinity-card">
+                    <div class="trinity-item">
                         <div class="trinity-label" data-en="MISSION">使命</div>
                         <p data-en="To deliver high-quality, trusted transport equipment to the global logistics industry.">为全球物流行业提供高品质、可信赖的运输装备。</p>
                     </div>
-                    <div class="trinity-card">
+                    <div class="trinity-item">
                         <div class="trinity-label" data-en="VISION">愿景</div>
                         <p data-en="To be a company customers trust and employees take pride in.">做客户值得信任、员工值得自豪的企业。</p>
                     </div>
-                    <div class="trinity-card">
+                    <div class="trinity-item">
                         <div class="trinity-label" data-en="VALUES">价值观</div>
                         <p data-en="Integrity · Responsibility · Innovation · Efficiency · Win-Win">诚信 · 责任 · 创新 · 高效 · 共赢</p>
                     </div>
                 </div>
 
                 <div class="mission-tags">
+                    <span data-en="Provincial 'Little Giant' SRDI">省专精特新"小巨人"</span>
+                    <span data-en="High-Tech Enterprise">高新技术企业</span>
+                    <span data-en="Gazelle Enterprise">瞪羚企业</span>
+                    <span data-en="Provincial Smart Mfg Pilot">省级智能制造试点</span>
+                    <span data-en="Provincial Green Factory">省级绿色工厂</span>
+                    <span data-en="National Catalog Listed">国家汽车产品目录</span>
+                    <span data-en="Shaanxi 1st-Tier Dealer">陕汽一级代理</span>
                     <span data-en="CCC Certified">CCC 认证</span>
                     <span data-en="ISO 9001">ISO 9001</span>
                     <span data-en="China 3A Credit">中国信用 3A</span>
                     <span data-en="Industry-Academia R&D">产学研合作</span>
                     <span data-en="T700C Steel">T700C 高强钢</span>
-                    <span data-en="Provincial Smart Mfg Pilot">省级智能制造试点</span>
-                    <span data-en="Shaanxi 1st-Tier Dealer">陕汽一级代理</span>
-                    <span data-en="National Catalog Listed">国家汽车产品目录</span>
                 </div>
             </div>
         </div>
@@ -143,38 +152,38 @@
                 <h2 class="section-title" data-en="Hard Numbers Behind Every Trailer">硬实力 · 数字说话</h2>
                 <p class="section-desc" data-en="Production capacity, R&D depth, and industry recognition — measured.">产能、研发与行业认可,可量化的实力</p>
             </div>
-            <div class="stats-figures">
-                <div class="figure-item">
-                    <div class="figure-num"><span data-num>120,000</span><span class="figure-unit" data-en=" m²">㎡</span></div>
-                    <div class="figure-label" data-en="Factory area">厂区占地</div>
+            <div class="stats-grid about-stats-grid">
+                <div class="stat-item">
+                    <div><span class="stat-number">120,000</span><span class="stat-unit">㎡</span></div>
+                    <div class="stat-label" data-en="Factory area">厂区占地</div>
                 </div>
-                <div class="figure-item">
-                    <div class="figure-num"><span data-num>200</span><span class="figure-unit">+</span></div>
-                    <div class="figure-label" data-en="Employees · 24% senior engineers">员工总数 · 高级工程技术人才占 24%</div>
+                <div class="stat-item">
+                    <div><span class="stat-number">200</span><span class="stat-unit">+</span></div>
+                    <div class="stat-label" data-en="Employees · 24% senior engineers">员工总数 · 高级工程技术人才占 24%</div>
                 </div>
-                <div class="figure-item">
-                    <div class="figure-num"><span data-num>8,000</span></div>
-                    <div class="figure-label" data-en="Annual capacity (units) · #1 in Hubei, Top 10 in China">年产能(台) · 省内第一 · 国内前十</div>
+                <div class="stat-item">
+                    <div><span class="stat-number">8,000</span></div>
+                    <div class="stat-label" data-en="Annual capacity (units) · #1 in Hubei, Top 10 in China">年产能(台) · 省内第一 · 国内前十</div>
                 </div>
-                <div class="figure-item">
-                    <div class="figure-num"><span data-num>15</span></div>
-                    <div class="figure-label" data-en="Max daily output (units)">最高日产能(台)</div>
+                <div class="stat-item">
+                    <div><span class="stat-number">15</span></div>
+                    <div class="stat-label" data-en="Max daily output (units)">最高日产能(台)</div>
                 </div>
-                <div class="figure-item">
-                    <div class="figure-num"><span data-num>26</span></div>
-                    <div class="figure-label" data-en="Patents granted">已授权专利</div>
+                <div class="stat-item">
+                    <div><span class="stat-number">26</span></div>
+                    <div class="stat-label" data-en="Patents granted">已授权专利</div>
                 </div>
-                <div class="figure-item">
-                    <div class="figure-num"><span data-num>32</span><span class="figure-unit"> / </span><span data-num>17</span></div>
-                    <div class="figure-label" data-en="Joint R&D projects / Tech-transfer projects">产学研合作研发 / 成果转化</div>
+                <div class="stat-item">
+                    <div><span class="stat-number">32</span><span class="stat-unit">/17</span></div>
+                    <div class="stat-label" data-en="Joint R&D projects / Tech-transfer projects">产学研研发 / 成果转化</div>
                 </div>
-                <div class="figure-item">
-                    <div class="figure-num"><span data-num>28</span></div>
-                    <div class="figure-label" data-en="Advanced equipment sets · +20% efficiency">先进技术设备(套) · 整体效能 +20%</div>
+                <div class="stat-item">
+                    <div><span class="stat-number">28</span></div>
+                    <div class="stat-label" data-en="Advanced equipment sets · +20% efficiency">先进设备 · 效能 +20%</div>
                 </div>
-                <div class="figure-item">
-                    <div class="figure-num"><span data-num>11</span></div>
-                    <div class="figure-label" data-en="Functional departments">分支部门</div>
+                <div class="stat-item">
+                    <div><span class="stat-number">11</span></div>
+                    <div class="stat-label" data-en="Functional departments">分支部门</div>
                 </div>
             </div>
         </div>
@@ -191,37 +200,58 @@
             <div class="timeline">
                 <div class="timeline-item">
                     <div class="timeline-year">2017</div>
-                    <div class="timeline-card timeline-highlight">
-                        <h3 data-en="Founded · Strategic Partnership with Shaanxi Heavy Duty">公司成立 · 与陕汽重卡建立战略合作</h3>
-                        <p data-en="Founded in Zaoyang, Hubei, with 66M RMB registered capital. Awarded 'Hubei Regional Market Breakthrough' by Shaanxi Heavy Duty Automobile in the same year, becoming the authorized first-tier dealer in Xiangyang region.">在湖北襄阳枣阳成立,主营半挂车研发制造与销售。同年获陕汽重卡颁发"2017 年度湖北区域市场突破奖",成为陕汽襄阳地区一级代理商。</p>
+                    <div class="timeline-card">
+                        <h3 data-en="Founded · Shaanxi Authorized Dealer">公司成立 · 陕汽重卡优秀经销商</h3>
+                        <p data-en="Founded in Zaoyang, Hubei, with 66M RMB registered capital. In the same year, recognized by Shaanxi Heavy Duty as an authorized dealer and 'Hubei Regional Market Breakthrough' awardee — becoming the first-tier dealer in Xiangyang region. Began continuous record as 'Honest-Contract Trustworthy Enterprise'.">在湖北襄阳枣阳成立,主营半挂车研发制造与销售。同年成为陕汽重卡优秀经销商、襄阳地区一级代理商,启动连续多年的"守合同重信用企业"纪录。</p>
                     </div>
                 </div>
                 <div class="timeline-item">
                     <div class="timeline-year">2018</div>
                     <div class="timeline-card">
-                        <h3 data-en="'Workpoint System' · 9-Star Incentive Launched">引进《工分制》九星激励管理体系</h3>
-                        <p data-en="From one-star to nine-star employee tiers, with transparent and scientific evaluation — letting strivers be the beneficiaries. The 'Jude Spirit' company culture took shape from this year.">评级从一星员工到九星员工,各级别有科学公正的评级机制,让奋斗者成为受益者。"聚德心"企业文化从这一年起逐步成形。</p>
+                        <h3 data-en="'Workpoint System' Launched · Shaanxi Market Breakthrough Award">工分制九星激励 · 陕汽市场突破奖</h3>
+                        <p data-en="Introduced the 'Workpoint System' — a 1-to-9-star employee tier with transparent evaluation, letting strivers be the beneficiaries. Awarded 'Hubei Regional Market Breakthrough' by Shaanxi Heavy Duty for outstanding 2017 performance. The 'Jude Spirit' company culture took shape from this year.">引进《工分制》九星激励管理体系,评级从一星到九星员工,让奋斗者成为受益者;同年获陕汽重卡颁发"湖北区域市场突破奖"。"聚德心"企业文化从这一年起逐步成形。</p>
+                    </div>
+                </div>
+                <div class="timeline-item">
+                    <div class="timeline-year">2019</div>
+                    <div class="timeline-card">
+                        <h3 data-en="Xiangyang Logistics Vice-Chair · Truck-Home Digital Marketing Award">襄阳市物流协会副会长 · 卡车之家年度数字营销创新奖</h3>
+                        <p data-en="Elected Vice-Chairman of Xiangyang Logistics Industry Association — recognition of industry standing. Won 'Annual Best Digital Marketing Innovation' from Truck-Home (China's largest commercial vehicle media platform), our first national-level brand recognition.">当选襄阳市物流协会副会长,行业话语权确立;荣获卡车之家"年度最佳数字营销创新奖"——首个全国性品牌认可。</p>
                     </div>
                 </div>
                 <div class="timeline-item">
                     <div class="timeline-year">2020</div>
                     <div class="timeline-card">
-                        <h3 data-en="National-Level Key Equipment Projects">承担国家级重点装备项目</h3>
-                        <p data-en="Established a dedicated R&D group, taking on national-level key equipment projects and obtaining the corresponding production qualifications and quality system certifications.">公司成立专项研发小组,承担国家级重点装备项目,取得相应承制资质与质量体系认证。同年与湖北工业大学等院校深化产学研合作,加快关键技术与新车型攻关。</p>
+                        <h3 data-en="National Key Equipment Projects · Production Breakthrough">国家级重点装备项目 · 产能突破</h3>
+                        <p data-en="Established the dedicated R&D group for national-level key equipment projects (corresponding production qualifications and quality system certifications acquired). Annual sales exceeded 1,996 units; annual production exceeded 1,919 units. Obtained the World Manufacturer Identifier (WMI) certificate.">成立专项研发小组,承担国家级重点装备项目,取得相应承制资质与质量体系认证。<strong>年销量突破 1,996 台,年产量突破 1,919 台</strong>;同年获世界制造厂识别代号(WMI)证书。</p>
                     </div>
                 </div>
                 <div class="timeline-item">
                     <div class="timeline-year">2021</div>
                     <div class="timeline-card">
-                        <h3 data-en="Industry-Academia R&D Base · Knuckle-Boom Crane First in China">湖北工业大学产学研基地 · 折臂式随车吊全国首创</h3>
-                        <p data-en="Officially established the joint R&D base with Hubei University of Technology, bringing academic R&D into trailer engineering. Independently developed the knuckle-boom truck-mounted crane semi-trailer — the first of its kind nationwide.">与湖北工业大学正式签署产学研合作基地协议,聚焦轻量化材料与焊接工艺。<strong>自主研发的折臂式随车吊半挂车为全国首创</strong>;自研等离子切割装置减少 37% 设备投入、提高 20% 工效。</p>
+                        <h3 data-en="High-Tech Enterprise · Gazelle · Hubei University R&D Base">高新技术企业 · 瞪羚企业 · 湖北工大产学研基地</h3>
+                        <p data-en="A breakthrough year of three national/provincial recognitions: Certified High-Tech Enterprise, named '2021 Gazelle Enterprise' (high-growth tech firm), and signed the joint R&D base with Hubei University of Technology. Also awarded 'Advanced Grass-roots Party Organization' and city-level logistics industry awards.">三连跳的一年:<strong>高新技术企业证书</strong>取得、<strong>2021 年瞪羚企业</strong>(高成长性科技企业)入选、<strong>湖北工业大学产学研合作基地</strong>正式签约。同年获评"先进基层党组织"+ 全市物流行业星级诚信企业 + 物流产业链先进单位。</p>
+                    </div>
+                </div>
+                <div class="timeline-item">
+                    <div class="timeline-year">2022</div>
+                    <div class="timeline-card">
+                        <h3 data-en="Provincial 'Little Giant' SRDI Enterprise">湖北省专精特新"小巨人"企业</h3>
+                        <p data-en="Recognized by Hubei Province as a 'Specialized, Refined, Differentiated, Innovative (SRDI) Little Giant' enterprise — the highest provincial designation for industry depth. Selected into the Hubei IT-Industrialization Integration Pilot. Established the Xiangyang IP Protection Workstation with the Zaoyang school-enterprise R&D promotion association.">荣获<strong>湖北省专精特新"小巨人"企业</strong>——行业深度的省级最高认定;入选 2021 年湖北省信息化和工业化融合试点示范企业;襄阳市知识产权保护(校企产研合作促进会)工作站设立。</p>
                     </div>
                 </div>
                 <div class="timeline-item">
                     <div class="timeline-year">2024</div>
-                    <div class="timeline-card timeline-highlight">
-                        <h3 data-en="Provincial Smart Manufacturing Pilot">湖北省级智能制造试点示范企业</h3>
-                        <p data-en="Awarded by Hubei Department of Economy and Information Technology — recognition of our intelligent production line and digital transformation efforts.">由湖北省经济和信息化厅授予"省级智能制造试点示范企业"称号,认可我们在智能化生产线和数字化转型上的投入。同年累计获得国家专利 26 项。</p>
+                    <div class="timeline-card">
+                        <h3 data-en="Provincial Smart Manufacturing Pilot Enterprise">湖北省级智能制造试点示范企业</h3>
+                        <p data-en="Awarded by Hubei Department of Economy and Information Technology — recognition of our intelligent production line and digital transformation efforts. Joined the Zaoyang Automotive & Parts Industry IP Alliance.">由湖北省经济和信息化厅授予"省级智能制造试点示范企业"称号,认可我们在智能化生产线和数字化转型上的投入;加入枣阳市汽车及零配件产业知识产权联盟。</p>
+                    </div>
+                </div>
+                <div class="timeline-item">
+                    <div class="timeline-year">2025</div>
+                    <div class="timeline-card">
+                        <h3 data-en="Provincial Green Factory · Specialty Logistics Smart Factory">省级绿色工厂 · 特型物流车智能工厂</h3>
+                        <p data-en="Awarded '2025 Provincial Green Factory' designation, recognizing our energy-efficiency and clean-production investment. Recognized as 'Xiangyang Logistics Equipment Service Advanced Unit'. Specialty logistics vehicle smart factory line came online.">荣获<strong>2025 年省级绿色工厂</strong>认定,认可我们在能效与清洁生产上的投入;荣获襄阳市物流装备服务先进单位;<strong>特型物流车制造智能工厂</strong>产线落地。</p>
                     </div>
                 </div>
                 <div class="timeline-item">
@@ -259,17 +289,21 @@
                     <div class="tech-card-eyebrow" data-en="IN-HOUSE R&D">自主研发</div>
                     <h3 data-en="Two R&D Departments · 22 Engineers">两个研发部门 · 22 名工程师</h3>
                     <ul class="tech-list">
-                        <li data-en="Senior engineer in Mechanical Design">机械设计 高级工程师</li>
-                        <li data-en="Engineer in Mechanical Manufacturing & Automation">机械制造及自动化 工程师</li>
-                        <li data-en="Engineer in Materials Processing">材料加工工程 工程师</li>
-                        <li data-en="Associate professor in Metallurgy & Materials">机械冶金及材料 副教授</li>
+                        <li data-en="1 Senior Engineer in Mechanical Design">机械设计 高级工程师 1 人</li>
+                        <li data-en="1 Engineer in Mechanical Manufacturing & Automation">机械制造及自动化 工程师 1 人</li>
+                        <li data-en="1 Engineer in Materials Processing">材料加工工程 工程师 1 人</li>
+                        <li data-en="1 Associate Professor in Metallurgy & Materials">机械冶金及材料 副教授 1 人</li>
+                        <li data-en="1 Engineer in Mechanical Design & Manufacturing">机械设计与制造 工程师 1 人</li>
                         <li data-en="18 specialized technical staff">特种作业技术人员 18 人</li>
                     </ul>
                     <p class="tech-stat" data-en="Vehicle Tech R&D Center + Master Welder Studio">"车辆技术研发中心" + "焊工技能大师"工作室</p>
                 </div>
 
-                <div class="tech-card tech-highlight">
+                <div class="tech-card">
                     <div class="tech-card-eyebrow" data-en="FIRST IN CHINA">行业首创</div>
+                    <figure class="tech-card-img">
+                        <picture><source type="image/webp" srcset="assets/images/about/product-shaanxi-crane.webp"><img src="assets/images/about/product-shaanxi-crane.jpg" alt="折臂式随车吊半挂车" loading="lazy"></picture>
+                    </figure>
                     <h3 data-en="Knuckle-Boom Crane Semi-Trailer">折臂式随车吊半挂车</h3>
                     <p data-en="The first knuckle-boom truck-mounted crane semi-trailer of its kind nationwide — designed and manufactured entirely in-house. Combined with our self-developed plasma cutting equipment, we cut 37% of equipment investment and lifted 20% of production efficiency.">自主研发,<strong>全国首创</strong>。配合自研等离子切割装置,减少 37% 设备投入、提升 20% 整体工效。</p>
                 </div>
@@ -286,14 +320,71 @@
                 </div>
             </div>
 
-            <!-- 创始人 -->
-            <div class="founder-card">
-                <div class="founder-info">
-                    <div class="founder-eyebrow" data-en="FOUNDER · CHAIRMAN">创始人 · 董事长</div>
-                    <h3 class="founder-name">欧德发</h3>
-                    <p class="founder-bio" data-en="Founded Ouyang Jude in 2017. Insists on three doctrines: 'real materials, real technology, real after-sales.' Personally chairs the national-level key equipment R&D group, making sure every trailer that leaves the factory carries the same quality our customers expect.">2017 年创立欧阳聚德,坚持"用真材实料、真技术、真服务"做企业。亲自任国家级重点装备研发小组组长,把每一台出厂的挂车都当成自家的车去造。</p>
+            <!-- 核心成员 -->
+            <div class="core-members">
+                <div class="member-block">
+                    <figure class="member-portrait">
+                        <picture><source type="image/webp" srcset="assets/images/about/founder-oudefa.webp"><img src="assets/images/about/founder-oudefa.jpg" alt="欧德发 创始人 董事长" loading="lazy"></picture>
+                    </figure>
+                    <div class="member-eyebrow" data-en="FOUNDER · CHAIRMAN">创始人 · 董事长</div>
+                    <h3 class="member-name">欧德发</h3>
+                    <p class="member-bio" data-en="Founded Ouyang Jude in 2017. Insists on three doctrines: 'real materials, real technology, real after-sales.' Personally chairs the national-level key equipment R&D group, making sure every trailer that leaves the factory carries the same quality our customers expect.">2017 年创立欧阳聚德,坚持"用真材实料、真技术、真服务"做企业。亲自任国家级重点装备研发小组组长,把每一台出厂的挂车都当成自家的车去造。</p>
                 </div>
             </div>
+        </div>
+    </section>
+
+    <!-- 竞争优势 -->
+    <section class="advantages-section">
+        <div class="container">
+            <div class="section-header">
+                <span class="section-tag">WHY CHOOSE US</span>
+                <h2 class="section-title" data-en="Why Customers Stay">客户为什么选择我们</h2>
+                <p class="section-desc" data-en="Repeat orders, referrals, and the speed at which a custom trailer becomes yours">回购、转介、提车速度——客户用脚投票的三件事</p>
+            </div>
+            <div class="advantage-grid">
+                <div class="advantage-block">
+                    <div class="advantage-eyebrow" data-en="REPEAT BUSINESS">客户回购 · 口碑转介</div>
+                    <h3 data-en="Customers Come Back, and Bring Friends">回购率高,转介频次高</h3>
+                    <p data-en="In a market where switching cost is low, our customers come back to us, and bring others. That's the cleanest signal that what we sell holds up after delivery.">在切换成本极低的挂车市场,我们的客户会回来,还会带朋友来。这是产品交付之后是否经得起跑的最干净的信号。</p>
+                </div>
+                <div class="advantage-block">
+                    <div class="advantage-eyebrow" data-en="DELIVERY SPEED">交付节奏 · 提车速度</div>
+                    <h3 data-en="From Spec Sheet to Driving Off">从规格表到上路</h3>
+                    <p data-en="Daily peak output of 15 units, 8,000-unit annual capacity — production scheduling is built around customer pickup, not the other way around. When you need it on the road, we know how to make that happen.">最高日产能 15 台、年产能 8,000 台——生产周期围着客户提车节奏排,不是反过来。需要尽快上路时,我们知道怎么帮你做到。</p>
+                </div>
+                <div class="advantage-block">
+                    <div class="advantage-eyebrow" data-en="ONE-TO-ONE CUSTOM">一对一定制</div>
+                    <h3 data-en="Built for Your Cargo, Your Route">为你的货、你的路而造</h3>
+                    <p data-en="Different cargo, different roads, different drivers — every trailer we build starts with what you actually carry. Six product lines, deep customization within each, no off-shelf compromise.">不同的货、不同的路、不同的司机——每一台车都从"你实际拉什么"开始。6 大产品系列,每一系列内部深度可定制,不让你将就标准件。</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- 专利墙 -->
+    <section class="patents-wall">
+        <div class="container">
+            <div class="section-header">
+                <span class="section-tag">PATENTS</span>
+                <h2 class="section-title" data-en="26 Patents · Practical Innovations on the Production Line">已授权专利 · 26 项实用新型</h2>
+                <p class="section-desc" data-en="Real engineering improvements, granted by the China National Intellectual Property Administration — quietly cumulative since founding">来自产线的真改进,国家知识产权局逐项授权——成立至今静水流深累计 26 项</p>
+            </div>
+            <div class="patents-grid">
+                <figure class="patent-cert"><picture><source type="image/webp" srcset="assets/images/about/patent-cert-01.webp"><img src="assets/images/about/patent-cert-01.jpg" alt="实用新型专利证书 01" loading="lazy"></picture></figure>
+                <figure class="patent-cert"><picture><source type="image/webp" srcset="assets/images/about/patent-cert-02.webp"><img src="assets/images/about/patent-cert-02.jpg" alt="实用新型专利证书 02" loading="lazy"></picture></figure>
+                <figure class="patent-cert"><picture><source type="image/webp" srcset="assets/images/about/patent-cert-03.webp"><img src="assets/images/about/patent-cert-03.jpg" alt="实用新型专利证书 03" loading="lazy"></picture></figure>
+                <figure class="patent-cert"><picture><source type="image/webp" srcset="assets/images/about/patent-cert-04.webp"><img src="assets/images/about/patent-cert-04.jpg" alt="实用新型专利证书 04" loading="lazy"></picture></figure>
+                <figure class="patent-cert"><picture><source type="image/webp" srcset="assets/images/about/patent-cert-05.webp"><img src="assets/images/about/patent-cert-05.jpg" alt="实用新型专利证书 05" loading="lazy"></picture></figure>
+                <figure class="patent-cert"><picture><source type="image/webp" srcset="assets/images/about/patent-cert-06.webp"><img src="assets/images/about/patent-cert-06.jpg" alt="实用新型专利证书 06" loading="lazy"></picture></figure>
+                <figure class="patent-cert"><picture><source type="image/webp" srcset="assets/images/about/patent-cert-07.webp"><img src="assets/images/about/patent-cert-07.jpg" alt="实用新型专利证书 07" loading="lazy"></picture></figure>
+                <figure class="patent-cert"><picture><source type="image/webp" srcset="assets/images/about/patent-cert-08.webp"><img src="assets/images/about/patent-cert-08.jpg" alt="实用新型专利证书 08" loading="lazy"></picture></figure>
+                <figure class="patent-cert"><picture><source type="image/webp" srcset="assets/images/about/patent-cert-09.webp"><img src="assets/images/about/patent-cert-09.jpg" alt="实用新型专利证书 09" loading="lazy"></picture></figure>
+                <figure class="patent-cert"><picture><source type="image/webp" srcset="assets/images/about/patent-cert-10.webp"><img src="assets/images/about/patent-cert-10.jpg" alt="实用新型专利证书 10" loading="lazy"></picture></figure>
+                <figure class="patent-cert"><picture><source type="image/webp" srcset="assets/images/about/patent-cert-11.webp"><img src="assets/images/about/patent-cert-11.jpg" alt="实用新型专利证书 11" loading="lazy"></picture></figure>
+                <figure class="patent-cert"><picture><source type="image/webp" srcset="assets/images/about/patent-cert-12.webp"><img src="assets/images/about/patent-cert-12.jpg" alt="实用新型专利证书 12" loading="lazy"></picture></figure>
+            </div>
+            <p class="patents-note" data-en="12 of 26 displayed · The complete list is available on request">展示 26 项中的 12 张 · 完整专利列表询销售索取</p>
         </div>
     </section>
 
@@ -306,25 +397,102 @@
                 <p class="section-desc" data-en="Quality builds honor, strength earns recognition">品质铸就荣誉,实力赢得认可</p>
             </div>
             <div class="honors-wall-grid">
-                <figure class="honor-figure honor-feature">
-                    <picture><source type="image/webp" srcset="assets/images/about/award-smart-mfg-2024.webp"><img src="assets/images/about/award-smart-mfg-2024.jpg" alt="湖北省级智能制造试点示范企业 2024" loading="lazy"></picture>
+                <figure class="honor-figure">
+                    <picture><source type="image/webp" srcset="assets/images/about/honor-srdi-little-giant-2022.webp"><img src="assets/images/about/honor-srdi-little-giant-2022.jpg" alt="湖北省专精特新小巨人企业 2022" loading="lazy"></picture>
                     <figcaption>
-                        <strong data-en="Provincial Smart Manufacturing Pilot Enterprise">省级智能制造试点示范企业</strong>
-                        <span data-en="Hubei Department of Economy & IT · Feb 2024">湖北省经济和信息化厅 · 2024 年 2 月</span>
+                        <strong data-en="Provincial 'Little Giant' SRDI Enterprise">湖北省专精特新"小巨人"企业</strong>
+                        <span data-en="Hubei Province · 2022">湖北省 · 2022 年</span>
                     </figcaption>
                 </figure>
                 <figure class="honor-figure">
-                    <picture><source type="image/webp" srcset="assets/images/about/award-research-2021.webp"><img src="assets/images/about/award-research-2021.jpg" alt="湖北工业大学产学研合作基地" loading="lazy"></picture>
+                    <picture><source type="image/webp" srcset="assets/images/about/honor-smart-mfg-2024.webp"><img src="assets/images/about/honor-smart-mfg-2024.jpg" alt="湖北省级智能制造试点示范企业 2024" loading="lazy"></picture>
                     <figcaption>
-                        <strong data-en="Industry-Academia R&D Partnership">产学研合作基地</strong>
+                        <strong data-en="Provincial Smart Manufacturing Pilot Enterprise">省级智能制造试点示范企业</strong>
+                        <span data-en="Hubei Dept. of Economy & IT · Feb 2024">湖北省经济和信息化厅 · 2024 年 2 月</span>
+                    </figcaption>
+                </figure>
+                <figure class="honor-figure">
+                    <picture><source type="image/webp" srcset="assets/images/about/honor-hubut-research-2021.webp"><img src="assets/images/about/honor-hubut-research-2021.jpg" alt="湖北工业大学产学研合作基地" loading="lazy"></picture>
+                    <figcaption>
+                        <strong data-en="Industry-Academia R&D Base">湖北工业大学产学研合作基地</strong>
                         <span data-en="Hubei University of Technology · Sep 2021">湖北工业大学 · 2021 年 9 月</span>
                     </figcaption>
                 </figure>
                 <figure class="honor-figure">
-                    <picture><source type="image/webp" srcset="assets/images/about/award-shaanxi-2017.webp"><img src="assets/images/about/award-shaanxi-2017.jpg" alt="陕汽重卡 2017 年度湖北区域市场突破奖" loading="lazy"></picture>
+                    <picture><source type="image/webp" srcset="assets/images/about/honor-party-org-2021.webp"><img src="assets/images/about/honor-party-org-2021.jpg" alt="先进基层党组织 2021" loading="lazy"></picture>
                     <figcaption>
-                        <strong data-en="Shaanxi Heavy Duty 2017 Hubei Market Breakthrough Award">陕汽重卡市场突破奖</strong>
+                        <strong data-en="Advanced Grass-roots Party Organization">先进基层党组织</strong>
+                        <span data-en="CPC Zaoyang Municipal Committee · Jun 2021">中共枣阳市委 · 2021 年 6 月</span>
+                    </figcaption>
+                </figure>
+                <figure class="honor-figure">
+                    <picture><source type="image/webp" srcset="assets/images/about/honor-startup-star-2021.webp"><img src="assets/images/about/honor-startup-star-2021.jpg" alt="第二届创在帝乡创新创业大赛企业之星 2021" loading="lazy"></picture>
+                    <figcaption>
+                        <strong data-en="2nd 'Startup in the Imperial Hometown' Enterprise Star">创在帝乡 · 企业之星</strong>
+                        <span data-en="2nd Innovation & Entrepreneurship Competition · 2021">第二届创新创业大赛 · 2021 年</span>
+                    </figcaption>
+                </figure>
+                <figure class="honor-figure">
+                    <picture><source type="image/webp" srcset="assets/images/about/honor-truckhome-2019.webp"><img src="assets/images/about/honor-truckhome-2019.jpg" alt="卡车之家 2019 年度最佳数字营销创新奖" loading="lazy"></picture>
+                    <figcaption>
+                        <strong data-en="Truck-Home Best Digital Marketing Innovation">卡车之家 · 年度最佳数字营销创新奖</strong>
+                        <span data-en="360che.com · 2019">360che.com · 2019 年</span>
+                    </figcaption>
+                </figure>
+                <figure class="honor-figure">
+                    <picture><source type="image/webp" srcset="assets/images/about/honor-logistics-vp-2019.webp"><img src="assets/images/about/honor-logistics-vp-2019.jpg" alt="襄阳市物流协会副会长单位" loading="lazy"></picture>
+                    <figcaption>
+                        <strong data-en="Xiangyang Logistics Association · Vice-Chair">襄阳市物流协会副会长单位</strong>
+                        <span data-en="Xiangyang Logistics Association · 2019">襄阳市物流协会 · 2019 年</span>
+                    </figcaption>
+                </figure>
+                <figure class="honor-figure">
+                    <picture><source type="image/webp" srcset="assets/images/about/honor-shaanxi-breakthrough-2018.webp"><img src="assets/images/about/honor-shaanxi-breakthrough-2018.jpg" alt="陕汽重卡 2017 年度湖北区域市场突破奖" loading="lazy"></picture>
+                    <figcaption>
+                        <strong data-en="Shaanxi Heavy Duty · Hubei Market Breakthrough">陕汽重卡 · 湖北区域市场突破奖</strong>
                         <span data-en="Shaanxi Heavy Duty Automobile · 2018">陕西重型汽车有限公司 · 2018 年</span>
+                    </figcaption>
+                </figure>
+                <figure class="honor-figure">
+                    <picture><source type="image/webp" srcset="assets/images/about/honor-shaanxi-dealer.webp"><img src="assets/images/about/honor-shaanxi-dealer.jpg" alt="陕汽重卡优秀经销商" loading="lazy"></picture>
+                    <figcaption>
+                        <strong data-en="Shaanxi Heavy Duty · Authorized Dealer of Excellence">陕汽重卡 · 优秀经销商</strong>
+                        <span data-en="Shaanxi Heavy Duty Automobile · 2017">陕西重型汽车有限公司 · 2017 年</span>
+                    </figcaption>
+                </figure>
+                <figure class="honor-figure">
+                    <picture><source type="image/webp" srcset="assets/images/about/honor-tax-2022.webp"><img src="assets/images/about/honor-tax-2022.jpg" alt="纳税突出贡献企业 2022" loading="lazy"></picture>
+                    <figcaption>
+                        <strong data-en="Outstanding Tax Contribution Enterprise">纳税突出贡献企业</strong>
+                        <span data-en="Zaoyang Municipal · 2022 Forging Ahead">枣阳市 · 2022 年度"奋进年"</span>
+                    </figcaption>
+                </figure>
+                <figure class="honor-figure">
+                    <picture><source type="image/webp" srcset="assets/images/about/honor-logistics-star-2021.webp"><img src="assets/images/about/honor-logistics-star-2021.jpg" alt="全市物流行业星级诚信企业 2021" loading="lazy"></picture>
+                    <figcaption>
+                        <strong data-en="City-wide Logistics Star Credit Enterprise">全市物流行业星级诚信企业</strong>
+                        <span data-en="Xiangyang · 2021">襄阳市 · 2021 年</span>
+                    </figcaption>
+                </figure>
+                <figure class="honor-figure">
+                    <picture><source type="image/webp" srcset="assets/images/about/honor-logistics-chain-2019.webp"><img src="assets/images/about/honor-logistics-chain-2019.jpg" alt="全市物流产业链先进单位 2019" loading="lazy"></picture>
+                    <figcaption>
+                        <strong data-en="City-wide Logistics Industry Chain Advanced Unit">全市物流产业链先进单位</strong>
+                        <span data-en="Xiangyang · 2019">襄阳市 · 2019 年</span>
+                    </figcaption>
+                </figure>
+                <figure class="honor-figure">
+                    <picture><source type="image/webp" srcset="assets/images/about/honor-truckhome-2021.webp"><img src="assets/images/about/honor-truckhome-2021.jpg" alt="卡车之家 2021 第四届商用车数字营销最佳创新奖" loading="lazy"></picture>
+                    <figcaption>
+                        <strong data-en="Truck-Home 4th Digital Marketing Innovation">卡车之家 · 第四届数字营销最佳创新奖</strong>
+                        <span data-en="360che.com · 2021">360che.com · 2021 年</span>
+                    </figcaption>
+                </figure>
+                <figure class="honor-figure">
+                    <picture><source type="image/webp" srcset="assets/images/about/honor-58-employer.webp"><img src="assets/images/about/honor-58-employer.jpg" alt="58 同城金牌雇主" loading="lazy"></picture>
+                    <figcaption>
+                        <strong data-en="58.com Gold Employer">58 同城 · 金牌雇主</strong>
+                        <span data-en="58.com">58 同城</span>
                     </figcaption>
                 </figure>
             </div>
@@ -346,6 +514,36 @@
                 <figure class="ft-tile"><picture><source type="image/webp" srcset="assets/images/about/team-trip-2020-768.webp 768w, assets/images/about/team-trip-2020.webp 1600w" sizes="(max-width: 768px) 100vw, 1200px"><source type="image/jpeg" srcset="assets/images/about/team-trip-2020-768.jpg 768w, assets/images/about/team-trip-2020.jpg 1600w" sizes="(max-width: 768px) 100vw, 1200px"><img src="assets/images/about/team-trip-2020.jpg" alt="2020 三峡员工旅行" loading="lazy"></picture><figcaption data-en="2020 Yangtze Three Gorges trip">2020 三峡员工旅行</figcaption></figure>
                 <figure class="ft-tile"><picture><source type="image/webp" srcset="assets/images/about/team-training-768.webp 768w, assets/images/about/team-training.webp 1600w" sizes="(max-width: 768px) 100vw, 1200px"><source type="image/jpeg" srcset="assets/images/about/team-training-768.jpg 768w, assets/images/about/team-training.jpg 1600w" sizes="(max-width: 768px) 100vw, 1200px"><img src="assets/images/about/team-training.jpg" alt="管理培训凝聚聚德心" loading="lazy"></picture><figcaption data-en="Management training: 'Unite the Jude Heart'">管理培训 · 凝聚聚德心</figcaption></figure>
                 <figure class="ft-tile"><picture><source type="image/webp" srcset="assets/images/about/party-volunteer.webp"><img src="assets/images/about/party-volunteer.jpg" alt="党员志愿者" loading="lazy"></picture><figcaption data-en="Party member volunteers serving the community">党员志愿者 · 服务社区</figcaption></figure>
+                <figure class="ft-tile"><picture><source type="image/webp" srcset="assets/images/about/team-01.webp"><img src="assets/images/about/team-01.jpg" alt="团队风采" loading="lazy"></picture><figcaption data-en="Team moments">团队风采</figcaption></figure>
+                <figure class="ft-tile"><picture><source type="image/webp" srcset="assets/images/about/team-03.webp"><img src="assets/images/about/team-03.jpg" alt="团队风采" loading="lazy"></picture><figcaption data-en="Team moments">团队风采</figcaption></figure>
+                <figure class="ft-tile"><picture><source type="image/webp" srcset="assets/images/about/team-05.webp"><img src="assets/images/about/team-05.jpg" alt="团队风采" loading="lazy"></picture><figcaption data-en="Team moments">团队风采</figcaption></figure>
+                <figure class="ft-tile"><picture><source type="image/webp" srcset="assets/images/about/team-07.webp"><img src="assets/images/about/team-07.jpg" alt="团队风采" loading="lazy"></picture><figcaption data-en="Team moments">团队风采</figcaption></figure>
+                <figure class="ft-tile"><picture><source type="image/webp" srcset="assets/images/about/team-09.webp"><img src="assets/images/about/team-09.jpg" alt="团队风采" loading="lazy"></picture><figcaption data-en="Team moments">团队风采</figcaption></figure>
+            </div>
+        </div>
+    </section>
+
+    <!-- 市场版图 -->
+    <section class="market-reach">
+        <div class="container">
+            <div class="section-header">
+                <span class="section-tag">MARKET REACH</span>
+                <h2 class="section-title" data-en="Where Our Trailers Run">我们的车跑在哪里</h2>
+                <p class="section-desc" data-en="Domestic strength compounding · overseas markets opening up">国内基本盘稳步上升 · 海外市场渐入佳境</p>
+            </div>
+            <div class="market-grid">
+                <div class="market-block market-domestic">
+                    <div class="market-eyebrow" data-en="DOMESTIC">国内市场</div>
+                    <div class="market-headline"><span class="market-num">30</span><span class="market-unit">+</span></div>
+                    <p class="market-label" data-en="Provinces and regions covered">省 / 自治区 / 直辖市覆盖</p>
+                    <p class="market-detail" data-en="Anchored in Hubei (#1 in province, top 10 nationally), expanding into surrounding provinces and key logistics corridors. Customers across general freight, dump-haul, agriculture, and specialty transport.">立足湖北(省内第一、国内前十),覆盖周边省份与重点物流通道。普货、自卸、农用、特种运输客户都在跑我们的车。</p>
+                </div>
+                <div class="market-block market-overseas">
+                    <div class="market-eyebrow" data-en="OVERSEAS">海外市场</div>
+                    <div class="market-headline"><span class="market-num">渐入佳境</span></div>
+                    <p class="market-label" data-en="Export-spec trailers, growing year over year">出口型车厢 · 逐年成长</p>
+                    <p class="market-detail" data-en="Special-purpose export vehicles are now part of our standard product mix. Markets being developed across Southeast Asia, Central Asia, and Africa — with English spec sheets, FOB/CIF support, and overseas WhatsApp inquiry line.">特种出口车已纳入主营产品。正在拓展东南亚、中亚与非洲市场——配套英文规格表、FOB/CIF 支持、海外 WhatsApp 询价直通。</p>
+                </div>
             </div>
         </div>
     </section>
@@ -387,16 +585,53 @@
         </div>
     </section>
 
+    <!-- 社会贡献 -->
+    <section class="social-contribution">
+        <div class="container">
+            <div class="section-header">
+                <span class="section-tag">SOCIAL CONTRIBUTION</span>
+                <h2 class="section-title" data-en="What We Give Back">回馈与责任</h2>
+                <p class="section-desc" data-en="A company that makes trailers also belongs to the community where its trailers are made">造车的企业,也属于造车的这片土地</p>
+            </div>
+            <div class="contribution-grid">
+                <div class="contribution-block">
+                    <div class="contribution-eyebrow" data-en="CHARITY">爱心捐赠</div>
+                    <p data-en="Sustained donations to local education, disaster relief, and elderly care programs in Zaoyang and surrounding counties — quietly recurring, not one-off campaigns.">持续向枣阳本地及周边县乡的助学、救灾与敬老项目捐赠——做的是常态投入,不是一次性运动。</p>
+                </div>
+                <div class="contribution-block">
+                    <div class="contribution-eyebrow" data-en="PARTY BUILDING">党建工作</div>
+                    <p data-en="Active Party-building organization within the company. Party-member volunteer team participates in community service throughout the year — from blood drives to flood emergency response.">公司设有活跃的党建组织,党员志愿者队伍常年参与社区服务——从义务献血到防汛救灾应急响应。</p>
+                </div>
+                <div class="contribution-block">
+                    <div class="contribution-eyebrow" data-en="LOCAL ECONOMY">本地经济</div>
+                    <p data-en="200+ local jobs in Zaoyang. Working with regional steel, parts, and logistics suppliers — every trailer that rolls out the gate carries dozens of upstream livelihoods with it.">为枣阳本地提供 200+ 工作岗位,长期采购周边钢材、配件、物流——每一台车出厂,都拉动一条上游生计。</p>
+                </div>
+            </div>
+
+            <!-- 实拍图集:6 张回馈社会现场 -->
+            <div class="contribution-gallery">
+                <figure><picture><source type="image/webp" srcset="assets/images/about/social-05.webp"><img src="assets/images/about/social-05.jpg" alt="回馈社会现场" loading="lazy"></picture></figure>
+                <figure><picture><source type="image/webp" srcset="assets/images/about/social-09.webp"><img src="assets/images/about/social-09.jpg" alt="回馈社会现场" loading="lazy"></picture></figure>
+                <figure><picture><source type="image/webp" srcset="assets/images/about/social-10.webp"><img src="assets/images/about/social-10.jpg" alt="回馈社会现场" loading="lazy"></picture></figure>
+                <figure><picture><source type="image/webp" srcset="assets/images/about/social-11.webp"><img src="assets/images/about/social-11.jpg" alt="回馈社会现场" loading="lazy"></picture></figure>
+                <figure><picture><source type="image/webp" srcset="assets/images/about/social-12.webp"><img src="assets/images/about/social-12.jpg" alt="回馈社会现场" loading="lazy"></picture></figure>
+                <figure><picture><source type="image/webp" srcset="assets/images/about/social-13.webp"><img src="assets/images/about/social-13.jpg" alt="回馈社会现场" loading="lazy"></picture></figure>
+            </div>
+        </div>
+    </section>
+
     <!-- CTA -->
     <section class="cta-section">
         <div class="container">
             <div class="cta-content">
+                <p class="cta-slogan" data-en="Jude Walk · Dream Forward">聚德同行 · 逐梦前行</p>
                 <h2 data-en="Tell Us What You Need">把您的需求告诉我们</h2>
                 <p data-en="From spec sheet to delivery — every step you'll have a real person to talk to">从规格表到交付,每一步都有真人对接</p>
                 <div class="cta-actions" style="display:flex; gap:16px; justify-content:center; flex-wrap:wrap; margin-top:36px;">
                     <a href="configurator.html" class="btn btn-primary" data-en="Configure Your Trailer">在线选配</a>
                     <a href="/#contact" class="btn btn-outline" data-en="Contact Sales">联系销售</a>
                 </div>
+                <p class="cta-tagline" data-en="Jude World — Bringing Together People of Virtue">聚天下有德之人</p>
             </div>
         </div>
     </section>
@@ -457,7 +692,7 @@
         </div>
     </footer>
 
-    <script src="main.js?v=20260428f" defer></script>
+    <script src="main.js?v=20260507b" defer></script>
     <script>
     // about-hero 视频延迟加载(同首页 hero)
     window.addEventListener('load', () => {

@@ -20,10 +20,25 @@
     --gray-500: #64748b;
     --gray-700: #334155;
     --gray-900: #0f172a;
-    --font: -apple-system, BlinkMacSystemFont, "PingFang SC", "HarmonyOS Sans SC", "Microsoft YaHei UI", "Microsoft YaHei", "Hiragino Sans GB", "Segoe UI", Helvetica, Arial, "Noto Sans SC", sans-serif;
+    --font: "OPPO Sans", "OPPOSans", -apple-system, BlinkMacSystemFont, "PingFang SC", "HarmonyOS Sans SC", "Microsoft YaHei UI", "Microsoft YaHei", "Hiragino Sans GB", "Segoe UI", Helvetica, Arial, "Noto Sans SC", sans-serif;
     --radius: 12px;
     --shadow: 0 4px 24px rgba(0,0,0,0.08);
     --shadow-lg: 0 12px 48px rgba(0,0,0,0.12);
+}
+
+/* ====== 滚动渐显(IntersectionObserver) ====== */
+.reveal {
+    opacity: 0;
+    transform: translateY(32px);
+    transition: opacity 0.7s cubic-bezier(0.22, 1, 0.36, 1), transform 0.7s cubic-bezier(0.22, 1, 0.36, 1);
+    will-change: opacity, transform;
+}
+.reveal.is-visible {
+    opacity: 1;
+    transform: translateY(0);
+}
+@media (prefers-reduced-motion: reduce) {
+    .reveal { opacity: 1 !important; transform: none !important; transition: none !important; }
 }
 
 * { margin: 0; padding: 0; box-sizing: border-box; }
@@ -1278,4 +1293,100 @@ img, video, iframe, table, pre, code {
 @media (max-width: 768px) {
     .promo-video { padding: 60px 0; }
     .promo-video-wrap { margin-top: 24px; border-radius: 12px; }
+}
+
+/* ====== 新闻 Lightbox(点新闻 → 弹卡 → 留官网内 → 用户决定要不要跳公众号) ====== */
+.news-lightbox {
+    position: fixed;
+    inset: 0;
+    z-index: 9999;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 24px;
+    opacity: 0;
+    transition: opacity 0.24s ease;
+}
+.news-lightbox.is-open { opacity: 1; }
+.news-lb-backdrop {
+    position: absolute;
+    inset: 0;
+    background: rgba(8, 14, 28, 0.78);
+    backdrop-filter: blur(6px);
+    -webkit-backdrop-filter: blur(6px);
+}
+.news-lb-card {
+    position: relative;
+    background: white;
+    border-radius: 16px;
+    max-width: 580px;
+    width: 100%;
+    max-height: 90vh;
+    overflow: auto;
+    box-shadow: 0 24px 80px rgba(0, 0, 0, 0.4);
+    transform: translateY(16px) scale(0.98);
+    transition: transform 0.32s cubic-bezier(0.22, 1, 0.36, 1);
+}
+.news-lightbox.is-open .news-lb-card { transform: translateY(0) scale(1); }
+.news-lb-close {
+    position: absolute;
+    top: 12px;
+    right: 12px;
+    width: 36px;
+    height: 36px;
+    border-radius: 50%;
+    border: none;
+    background: rgba(255, 255, 255, 0.95);
+    color: var(--gray-700);
+    font-size: 22px;
+    line-height: 1;
+    cursor: pointer;
+    z-index: 2;
+    transition: background 0.2s;
+}
+.news-lb-close:hover { background: white; color: var(--navy-900); }
+.news-lb-cover {
+    width: 100%;
+    aspect-ratio: 16 / 9;
+    background: var(--gray-100) center/cover no-repeat;
+}
+.news-lb-body { padding: 28px 32px 32px; }
+.news-lb-meta {
+    display: flex;
+    gap: 12px;
+    align-items: center;
+    margin-bottom: 14px;
+    font-size: 12px;
+    letter-spacing: 1px;
+}
+.news-lb-cat {
+    color: var(--blue-500);
+    font-weight: 700;
+    text-transform: uppercase;
+}
+.news-lb-date { color: var(--gray-500); }
+.news-lb-title {
+    font-size: 22px;
+    font-weight: 800;
+    line-height: 1.4;
+    color: var(--navy-900);
+    margin: 0 0 16px;
+    letter-spacing: 0.3px;
+}
+.news-lb-summary {
+    font-size: 15px;
+    line-height: 1.75;
+    color: var(--gray-700);
+    margin: 0 0 24px;
+}
+.news-lb-actions {
+    display: flex;
+    gap: 12px;
+    flex-wrap: wrap;
+}
+.news-lb-actions .btn { flex: 1; justify-content: center; min-width: 140px; }
+@media (max-width: 480px) {
+    .news-lb-card { border-radius: 12px; }
+    .news-lb-body { padding: 22px 20px 24px; }
+    .news-lb-title { font-size: 18px; }
 }
