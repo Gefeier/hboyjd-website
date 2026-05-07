@@ -1,0 +1,13 @@
+{
+  "hero": {
+    "subtitle": "DREAM ON THE ROAD · 为梦出发",
+    "subtitle_en": "DREAM ON THE ROAD",
+    "title": "半挂车研发制造专家",
+    "title_en": "Semi-Trailer R&D & Manufacturing Expert",
+    "description": "T700C高强度钢材 · 全系定制化生产 · 品质铸就未来",
+    "description_en": "T700C High-Strength Steel · Fully Customized Production · Quality Builds the Future",
+    "image": "assets/images/factory-gate.webp",
+    "poster": "assets/videos/hero-factory-poster.jpg",
+    "video": "assets/videos/hero-factory.mp4"
+  }
+}

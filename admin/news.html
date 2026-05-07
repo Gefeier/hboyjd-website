@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>新闻管理 · 欧阳聚德管理后台</title>
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+<div class="admin-shell">
+    <aside class="sidebar">
+        <div class="sidebar-logo">欧阳聚德 · 后台</div>
+        <nav class="sidebar-nav">
+            <a href="dashboard.html">工作台</a>
+            <a href="news.html" class="active">新闻管理</a>
+            <a href="editor.html">页面内容</a>
+            <a href="images.html">图片库</a>
+            <a href="logs.html">操作日志</a>
+        </nav>
+    </aside>
+    <main class="admin-main" id="news-page">
+        <h1 class="page-title">新闻管理</h1>
+        <p class="page-subtitle">粘贴公众号文章链接,自动抓取标题/封面/摘要</p>
+
+        <div class="card">
+            <h2>从公众号链接添加</h2>
+            <label>公众号文章 URL</label>
+            <input type="url" placeholder="https://mp.weixin.qq.com/s/..." id="wechat-url-input">
+            <button class="btn btn-primary" id="fetch-wechat-btn">抓取并添加</button>
+            <p class="muted">抓到后先进入新闻列表，可继续改标题、摘要、分类和封面。</p>
+        </div>
+
+        <div class="card">
+            <div class="card-head">
+                <h2>新闻列表</h2>
+                <div style="display:flex;gap:10px;">
+                    <button class="btn btn-primary" id="save-news-btn" type="button">保存新闻列表</button>
+                    <button class="btn btn-outline" type="button" data-publish>发布预演</button>
+                </div>
+            </div>
+            <div id="news-list" class="news-list"></div>
+        </div>
+    </main>
+</div>
+<script src="app.js"></script>
+</body>
+</html>

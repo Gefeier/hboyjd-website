@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>图片库 · 欧阳聚德管理后台</title>
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+<div class="admin-shell">
+    <aside class="sidebar">
+        <div class="sidebar-logo">欧阳聚德 · 后台</div>
+        <nav class="sidebar-nav">
+            <a href="dashboard.html">工作台</a>
+            <a href="news.html">新闻管理</a>
+            <a href="editor.html">页面内容</a>
+            <a href="images.html" class="active">图片库</a>
+            <a href="logs.html">操作日志</a>
+        </nav>
+    </aside>
+    <main class="admin-main" id="images-page">
+        <h1 class="page-title">图片库</h1>
+        <p class="page-subtitle">点击替换 · 拖拽上传 · 自动转 webp</p>
+
+        <div class="card">
+            <h2>上传新图</h2>
+            <input type="file" accept="image/*" multiple id="upload-input">
+            <p class="muted" id="upload-status">后端会自动 resize 长边 ≤1600，并生成 jpg + webp。</p>
+        </div>
+
+        <div class="card">
+            <div class="card-head">
+                <h2>当前图片库</h2>
+                <button class="btn btn-outline" type="button" id="refresh-images-btn">刷新清单</button>
+            </div>
+            <div class="image-grid" id="images-grid"></div>
+        </div>
+    </main>
+</div>
+<script src="app.js"></script>
+</body>
+</html>

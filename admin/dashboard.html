@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>工作台 · 欧阳聚德管理后台</title>
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+<div class="admin-shell">
+    <aside class="sidebar">
+        <div class="sidebar-logo">欧阳聚德 · 后台</div>
+        <nav class="sidebar-nav">
+            <a href="dashboard.html" class="active">工作台</a>
+            <a href="news.html">新闻管理</a>
+            <a href="editor.html">页面内容</a>
+            <a href="images.html">图片库</a>
+            <a href="logs.html">操作日志</a>
+        </nav>
+    </aside>
+    <main class="admin-main" id="dashboard-page">
+        <h1 class="page-title">早，<span class="js-user-name">市场部同事</span></h1>
+        <p class="page-subtitle">欧阳聚德官网管理后台 · 新闻、图片和首页 banner 的发布入口</p>
+
+        <div class="status-grid">
+            <div class="metric"><span id="metric-news">-</span><p>新闻条目</p></div>
+            <div class="metric"><span id="metric-images">-</span><p>图片素材</p></div>
+            <div class="metric"><span id="metric-user">-</span><p>当前用户</p></div>
+        </div>
+
+        <div class="card">
+            <h2>快捷操作</h2>
+            <div style="display:flex; gap:12px; flex-wrap:wrap;">
+                <a href="news.html" class="btn btn-primary">添加新闻</a>
+                <a href="images.html" class="btn btn-outline">图片库</a>
+                <a href="editor.html" class="btn btn-outline">改首页 banner</a>
+                <button class="btn btn-outline" type="button" data-publish>发布预演</button>
+            </div>
+        </div>
+
+        <div class="card">
+            <h2>最近动作</h2>
+            <p class="muted">最后动作：<span id="last-action">读取中...</span></p>
+            <div id="recent-logs" class="log-list compact"></div>
+        </div>
+    </main>
+</div>
+<script src="app.js"></script>
+</body>
+</html>

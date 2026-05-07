@@ -1,0 +1,19 @@
+[Unit]
+Description=HBOYJD admin backend
+After=network.target
+
+[Service]
+Type=simple
+WorkingDirectory=/opt/admin-backend
+Environment=ADMIN_PORT=9005
+Environment=ADMIN_AUTH_MODE=dingtalk
+Environment=HBOYJD_REPO_ROOT=/opt/hboyjd-website
+Environment=WECHAT_SYNC_SCRIPT=/opt/wechat-sync/sync.py
+Environment=ADMIN_ACTION_LOG=/var/log/admin-actions.jsonl
+Environment=ADMIN_PUBLISH_PUSH=1
+ExecStart=/opt/admin-backend/.venv/bin/python /opt/admin-backend/app.py
+Restart=always
+RestartSec=3
+
+[Install]
+WantedBy=multi-user.target

@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>页面内容 · 欧阳聚德管理后台</title>
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+<div class="admin-shell">
+    <aside class="sidebar">
+        <div class="sidebar-logo">欧阳聚德 · 后台</div>
+        <nav class="sidebar-nav">
+            <a href="dashboard.html">工作台</a>
+            <a href="news.html">新闻管理</a>
+            <a href="editor.html" class="active">页面内容</a>
+            <a href="images.html">图片库</a>
+            <a href="logs.html">操作日志</a>
+        </nav>
+    </aside>
+    <main class="admin-main" id="editor-page">
+        <h1 class="page-title">页面内容</h1>
+        <p class="page-subtitle">v1 先开放首页 banner；about 全量内容等模板化后再放开</p>
+
+        <div class="card">
+            <h2>首页 Hero</h2>
+            <label>主标语</label>
+            <input type="text" id="hero-title">
+            <label>主标语英文</label>
+            <input type="text" id="hero-title-en">
+            <label>副标语(英文)</label>
+            <input type="text" id="hero-subtitle">
+            <label>副标语英文 data-en</label>
+            <input type="text" id="hero-subtitle-en">
+            <label>描述</label>
+            <textarea id="hero-desc"></textarea>
+            <label>描述英文 data-en</label>
+            <textarea id="hero-desc-en"></textarea>
+            <div class="form-row two">
+                <label>Hero 视频路径<input type="text" id="hero-video"></label>
+                <label>视频 poster 路径<input type="text" id="hero-poster"></label>
+            </div>
+            <label>Banner 缩略图(点击从图片库替换)</label>
+            <div class="image-thumb" id="hero-image-thumb"></div>
+            <div style="margin-top:24px;">
+                <button class="btn btn-primary" id="save-index-btn" type="button">保存暂存</button>
+                <button class="btn btn-outline" type="button" data-publish>发布预演</button>
+            </div>
+        </div>
+
+        <div class="card">
+            <h2>About 页面</h2>
+            <p class="muted">已预留 content/about.json。v1 不开放全量编辑，避免破坏主站 about.html 当前调性。</p>
+        </div>
+    </main>
+</div>
+<script src="app.js"></script>
+</body>
+</html>
