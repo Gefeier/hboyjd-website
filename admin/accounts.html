@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>账号管理 · 欧阳聚德管理后台</title>
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+<div class="admin-shell">
+    <aside class="sidebar">
+        <div class="sidebar-logo">欧阳聚德 · 后台</div>
+        <nav class="sidebar-nav">
+            <a href="dashboard.html">工作台</a>
+            <a href="news.html">新闻管理</a>
+            <a href="editor.html">页面内容</a>
+            <a href="images.html">图片库</a>
+            <a href="logs.html">操作日志</a>
+        </nav>
+    </aside>
+    <main class="admin-main" id="accounts-page">
+        <h1 class="page-title">账号管理</h1>
+        <p class="page-subtitle">仅 admin 可见 · 新增 / 改密 / 改角色 / 停用</p>
+
+        <div class="card">
+            <div style="display:flex; align-items:center; justify-content:space-between; margin-bottom:18px;">
+                <h2 style="margin:0;">所有账号</h2>
+                <button class="btn btn-primary" type="button" id="btn-new-user">+ 新增账号</button>
+            </div>
+            <div id="users-table-wrap"></div>
+        </div>
+    </main>
+</div>
+
+<!-- 新增账号 modal -->
+<div class="modal-mask" id="modal-new" hidden>
+    <div class="modal-card">
+        <h3>新增账号</h3>
+        <form id="form-new-user" class="modal-form">
+            <label>账号(英数字_-)</label>
+            <input type="text" name="userid" required pattern="[A-Za-z0-9_-]+" maxlength="32" autocomplete="off">
+            <label>姓名</label>
+            <input type="text" name="name" required maxlength="32">
+            <label>角色</label>
+            <select name="role" required>
+                <option value="editor">editor (改内容,不能改账号)</option>
+                <option value="admin">admin (全权)</option>
+            </select>
+            <label>初始密码(至少 6 位)</label>
+            <input type="text" name="password" required minlength="6" autocomplete="new-password">
+            <p class="modal-error" id="new-error"></p>
+            <div class="modal-actions">
+                <button type="button" class="btn btn-outline" data-close>取消</button>
+                <button type="submit" class="btn btn-primary">创建</button>
+            </div>
+        </form>
+    </div>
+</div>
+
+<!-- 改密码 modal -->
+<div class="modal-mask" id="modal-change-pw" hidden>
+    <div class="modal-card">
+        <h3 id="change-pw-title">改密码</h3>
+        <form id="form-change-pw" class="modal-form">
+            <label id="old-pw-label">旧密码</label>
+            <input type="password" name="old_password" id="old-pw-input" autocomplete="current-password">
+            <label>新密码(至少 6 位)</label>
+            <input type="password" name="new_password" required minlength="6" autocomplete="new-password">
+            <p class="modal-error" id="change-pw-error"></p>
+            <div class="modal-actions">
+                <button type="button" class="btn btn-outline" data-close>取消</button>
+                <button type="submit" class="btn btn-primary">保存</button>
+            </div>
+        </form>
+    </div>
+</div>
+
+<script src="app.js"></script>
+</body>
+</html>

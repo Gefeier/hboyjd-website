@@ -75,6 +75,7 @@ document.addEventListener('DOMContentLoaded', async () => {
         if ($('#images-page')) await initImagesPage();
         if ($('#news-page')) await initNewsPage();
         if ($('#logs-page')) await initLogsPage();
+        if ($('#accounts-page')) await initAccountsPage();
     } catch (err) {
         if (err.message.includes('unauthorized')) {
             window.location.href = 'login.html';
@@ -432,20 +433,79 @@ function renderUser() {
 }
 
 function injectSidebarFooter() {
+    // 给 admin 注入「账号管理」入口(在 nav 末尾)
+    if (currentUser?.role === 'admin') {
+        $$('.sidebar-nav').forEach((nav) => {
+            if (nav.querySelector('a[href="accounts.html"]')) return;
+            const link = document.createElement('a');
+            link.href = 'accounts.html';
+            link.textContent = '账号管理';
+            if (location.pathname.endsWith('accounts.html')) link.classList.add('active');
+            nav.appendChild(link);
+        });
+    }
+    // 注入底部「当前账号 + 改密码 + 退出」
     $$('.sidebar').forEach((sidebar) => {
         if (sidebar.querySelector('.sidebar-footer')) return;
         const name = currentUser?.name || '';
         const userid = currentUser?.userid || '';
+        const role = currentUser?.role || '';
         const footer = document.createElement('div');
         footer.className = 'sidebar-footer';
         footer.innerHTML = `
-            <div class="sidebar-user">当前账号</div>
+            <div class="sidebar-user">当前账号 · ${escapeAttr(role)}</div>
             <div class="sidebar-user-name" title="${escapeAttr(userid)}">${escapeAttr(name)}</div>
+            <button type="button" class="sidebar-changepw-btn js-changepw">修改密码</button>
             <button type="button" class="sidebar-logout-btn js-logout">退出登录</button>
         `;
         sidebar.appendChild(footer);
     });
     $$('.js-logout').forEach((btn) => btn.addEventListener('click', logout));
+    $$('.js-changepw').forEach((btn) => btn.addEventListener('click', openSelfChangePw));
+}
+
+function openSelfChangePw() {
+    // 给所有页面注入(若不存在)一个改自己密码的简易 modal
+    if (!$('#self-changepw-modal')) {
+        const div = document.createElement('div');
+        div.id = 'self-changepw-modal';
+        div.className = 'modal-mask';
+        div.innerHTML = `
+            <div class="modal-card">
+                <h3>修改我的密码</h3>
+                <form class="modal-form" id="self-changepw-form">
+                    <label>旧密码</label>
+                    <input type="password" name="old_password" required autocomplete="current-password">
+                    <label>新密码(至少 6 位)</label>
+                    <input type="password" name="new_password" required minlength="6" autocomplete="new-password">
+                    <p class="modal-error" id="self-changepw-error"></p>
+                    <div class="modal-actions">
+                        <button type="button" class="btn btn-outline" data-close>取消</button>
+                        <button type="submit" class="btn btn-primary">保存</button>
+                    </div>
+                </form>
+            </div>`;
+        document.body.appendChild(div);
+        div.querySelector('[data-close]').addEventListener('click', () => div.hidden = true);
+        div.addEventListener('click', (e) => { if (e.target === div) div.hidden = true; });
+        $('#self-changepw-form').addEventListener('submit', async (ev) => {
+            ev.preventDefault();
+            const fd = new FormData(ev.target);
+            try {
+                await api('/auth/change-password', {
+                    method: 'POST',
+                    body: JSON.stringify({old_password: fd.get('old_password'), new_password: fd.get('new_password')})
+                });
+                $('#self-changepw-error').textContent = '';
+                showToast('密码已更新', 'ok');
+                div.hidden = true;
+                ev.target.reset();
+            } catch (err) {
+                $('#self-changepw-error').textContent = err.message || '改密失败';
+            }
+        });
+    }
+    $('#self-changepw-modal').hidden = false;
 }
 
 async function logout() {
@@ -518,4 +578,162 @@ function escapeHtml(value) {
 
 function escapeAttr(value) {
     return escapeHtml(value).replaceAll('\n', ' ');
+}
+
+// ===== 账号管理 =====
+async function initAccountsPage() {
+    if (currentUser?.role !== 'admin') {
+        $('#accounts-page').innerHTML = '<div class="card"><h2>无权访问</h2><p class="muted">账号管理仅 admin 可用。</p></div>';
+        return;
+    }
+    await refreshUsersTable();
+    bindAccountsModals();
+}
+
+async function refreshUsersTable() {
+    const wrap = $('#users-table-wrap');
+    wrap.innerHTML = '<p class="muted">加载中...</p>';
+    try {
+        const users = await api('/users');
+        if (!users.length) { wrap.innerHTML = '<p class="muted">无账号(异常,至少应有 admin)</p>'; return; }
+        const rows = users.map((u) => {
+            const isSelf = u.userid === currentUser.userid;
+            const roleBadge = u.role === 'admin'
+                ? '<span class="role-badge role-admin">admin</span>'
+                : '<span class="role-badge role-editor">editor</span>';
+            const status = u.disabled
+                ? '<span class="muted">已停用</span>'
+                : '<span style="color:#1a8a3a;">启用中</span>';
+            const lastLogin = u.last_login ? formatTime(u.last_login) : '从未登录';
+            const created = u.created_at ? formatTime(u.created_at) : '-';
+            const actions = [];
+            actions.push(`<button class="btn btn-mini btn-outline" data-act="changepw" data-uid="${escapeAttr(u.userid)}">改密码</button>`);
+            if (!isSelf) {
+                if (u.role === 'editor') {
+                    actions.push(`<button class="btn btn-mini btn-outline" data-act="role" data-uid="${escapeAttr(u.userid)}" data-role="admin">→admin</button>`);
+                } else {
+                    actions.push(`<button class="btn btn-mini btn-outline" data-act="role" data-uid="${escapeAttr(u.userid)}" data-role="editor">→editor</button>`);
+                }
+                if (u.disabled) {
+                    actions.push(`<button class="btn btn-mini btn-outline" data-act="enable" data-uid="${escapeAttr(u.userid)}">启用</button>`);
+                } else {
+                    actions.push(`<button class="btn btn-mini btn-danger" data-act="disable" data-uid="${escapeAttr(u.userid)}">停用</button>`);
+                }
+            } else {
+                actions.push('<span class="muted" style="font-size:12px;">(本人)</span>');
+            }
+            return `<tr>
+                <td><code>${escapeAttr(u.userid)}</code></td>
+                <td>${escapeAttr(u.name)}</td>
+                <td>${roleBadge}</td>
+                <td>${status}</td>
+                <td><small>${escapeAttr(lastLogin)}</small></td>
+                <td><small class="muted">${escapeAttr(created)}</small></td>
+                <td class="row-actions">${actions.join(' ')}</td>
+            </tr>`;
+        }).join('');
+        wrap.innerHTML = `<table class="users-table">
+            <thead><tr><th>账号</th><th>姓名</th><th>角色</th><th>状态</th><th>最后登录</th><th>创建于</th><th>操作</th></tr></thead>
+            <tbody>${rows}</tbody>
+        </table>`;
+        wrap.querySelectorAll('button[data-act]').forEach((btn) => {
+            btn.addEventListener('click', () => handleUserAction(btn.dataset.act, btn.dataset.uid, btn.dataset));
+        });
+    } catch (err) {
+        wrap.innerHTML = `<p class="login-error">${escapeHtml(err.message)}</p>`;
+    }
+}
+
+async function handleUserAction(act, uid, ds) {
+    try {
+        if (act === 'changepw') {
+            return openAdminChangePw(uid);
+        }
+        if (act === 'role') {
+            if (!confirm(`确认把 ${uid} 改成 ${ds.role}?`)) return;
+            await api(`/users/${encodeURIComponent(uid)}`, {method: 'PATCH', body: JSON.stringify({role: ds.role})});
+            showToast(`${uid} 角色已改 → ${ds.role}`, 'ok');
+        } else if (act === 'disable') {
+            if (!confirm(`确认停用 ${uid}? 停用后无法登录,但记录保留。`)) return;
+            await api(`/users/${encodeURIComponent(uid)}`, {method: 'PATCH', body: JSON.stringify({disabled: true})});
+            showToast(`${uid} 已停用`, 'ok');
+        } else if (act === 'enable') {
+            await api(`/users/${encodeURIComponent(uid)}`, {method: 'PATCH', body: JSON.stringify({disabled: false})});
+            showToast(`${uid} 已启用`, 'ok');
+        }
+        await refreshUsersTable();
+    } catch (err) {
+        showToast(err.message, 'error');
+    }
+}
+
+function openAdminChangePw(uid) {
+    const modal = $('#modal-change-pw');
+    $('#change-pw-title').textContent = `给 ${uid} 重置密码`;
+    $('#old-pw-label').hidden = true;
+    $('#old-pw-input').hidden = true;
+    $('#old-pw-input').required = false;
+    modal.dataset.uid = uid;
+    modal.dataset.mode = 'admin';
+    modal.hidden = false;
+    $('#change-pw-error').textContent = '';
+    modal.querySelector('input[name="new_password"]').value = '';
+    modal.querySelector('input[name="new_password"]').focus();
+}
+
+function bindAccountsModals() {
+    const newModal = $('#modal-new');
+    $('#btn-new-user').addEventListener('click', () => {
+        newModal.querySelector('form').reset();
+        $('#new-error').textContent = '';
+        newModal.hidden = false;
+        newModal.querySelector('input[name="userid"]').focus();
+    });
+    newModal.querySelectorAll('[data-close]').forEach((b) => b.addEventListener('click', () => newModal.hidden = true));
+    newModal.addEventListener('click', (e) => { if (e.target === newModal) newModal.hidden = true; });
+    $('#form-new-user').addEventListener('submit', async (ev) => {
+        ev.preventDefault();
+        const fd = new FormData(ev.target);
+        try {
+            await api('/users', {method: 'POST', body: JSON.stringify(Object.fromEntries(fd))});
+            $('#new-error').textContent = '';
+            newModal.hidden = true;
+            showToast('账号已创建', 'ok');
+            await refreshUsersTable();
+        } catch (err) {
+            $('#new-error').textContent = err.message;
+        }
+    });
+
+    const pwModal = $('#modal-change-pw');
+    pwModal.querySelectorAll('[data-close]').forEach((b) => b.addEventListener('click', () => pwModal.hidden = true));
+    pwModal.addEventListener('click', (e) => { if (e.target === pwModal) pwModal.hidden = true; });
+    $('#form-change-pw').addEventListener('submit', async (ev) => {
+        ev.preventDefault();
+        const fd = new FormData(ev.target);
+        const uid = pwModal.dataset.uid;
+        try {
+            await api(`/users/${encodeURIComponent(uid)}`, {
+                method: 'PATCH',
+                body: JSON.stringify({password: fd.get('new_password')})
+            });
+            $('#change-pw-error').textContent = '';
+            pwModal.hidden = true;
+            ev.target.reset();
+            showToast(`${uid} 密码已重置`, 'ok');
+        } catch (err) {
+            $('#change-pw-error').textContent = err.message;
+        }
+    });
+}
+
+function formatTime(iso) {
+    if (!iso) return '';
+    try {
+        const d = new Date(iso);
+        const pad = (n) => String(n).padStart(2, '0');
+        return `${d.getFullYear()}-${pad(d.getMonth()+1)}-${pad(d.getDate())} ${pad(d.getHours())}:${pad(d.getMinutes())}`;
+    } catch (e) {
+        return iso;
+    }
 }

@@ -1,6 +1,5 @@
 from __future__ import annotations
 
-import json
 import os
 from typing import Any
 from urllib.parse import urlencode
@@ -9,43 +8,49 @@ import requests
 from flask import session
 from werkzeug.security import check_password_hash
 
+import users_io
+
 
 AUTH_MODE = os.getenv("ADMIN_AUTH_MODE", "mock").lower()
 DINGTALK_API_BASE = "https://api.dingtalk.com"
-USERS_FILE = os.getenv("ADMIN_USERS_FILE", "")
-
-
-def _load_users() -> dict[str, dict[str, Any]]:
-    if not USERS_FILE or not os.path.exists(USERS_FILE):
-        return {}
-    try:
-        with open(USERS_FILE, encoding="utf-8") as fh:
-            data = json.load(fh)
-        if isinstance(data, dict):
-            return data
-    except (OSError, ValueError):
-        pass
-    return {}
 
 
 def login_with_password(username: str, password: str) -> dict[str, Any]:
     username = (username or "").strip()
     if not username or not password:
         raise PermissionError("账号或密码不能为空")
-    users = _load_users()
-    record = users.get(username)
-    if not record or not isinstance(record, dict):
+    record = users_io.get(username)
+    if not record:
         raise PermissionError("账号或密码错误")
+    if record.get("disabled"):
+        raise PermissionError("账号已停用,联系管理员")
     pw_hash = record.get("password_hash") or ""
     if not pw_hash or not check_password_hash(pw_hash, password):
         raise PermissionError("账号或密码错误")
     user = {
         "userid": username,
         "name": record.get("name", username),
-        "role": record.get("role", "admin"),
+        "role": record.get("role", "editor"),
         "auth_mode": "password",
     }
     session["user"] = user
+    users_io.touch_login(username)
+    return user
+
+
+def change_password(userid: str, old_password: str, new_password: str) -> None:
+    record = users_io.get(userid)
+    if not record:
+        raise PermissionError("账号不存在")
+    if not check_password_hash(record.get("password_hash") or "", old_password):
+        raise PermissionError("旧密码不正确")
+    users_io.update(userid, password=new_password)
+
+
+def require_admin() -> dict[str, Any]:
+    user = require_user()
+    if user.get("role") != "admin":
+        raise PermissionError("仅 admin 可操作")
     return user
 
 

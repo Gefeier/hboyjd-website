@@ -6,6 +6,7 @@ from pathlib import Path
 from flask import Flask, jsonify, redirect, request, send_from_directory
 
 import auth
+import users_io
 from audit_log import append_log, read_logs
 from content_io import REPO_ROOT, append_news, ensure_content_files, publish_site, read_images_manifest, read_section, write_section
 from image_processor import process_upload
@@ -72,6 +73,71 @@ def auth_logout():
     if user:
         append_log(user, "logout", "auth", "登出")
     return jsonify({"ok": True})
+
+
+@app.route("/api/auth/change-password", methods=["POST"])
+def auth_change_password():
+    user = auth.require_user()
+    payload = request.get_json(silent=True) or {}
+    old_password = payload.get("old_password") or ""
+    new_password = payload.get("new_password") or ""
+    auth.change_password(user["userid"], old_password, new_password)
+    append_log(user, "change-password", "auth", "改自己密码")
+    return jsonify({"ok": True})
+
+
+@app.route("/api/users", methods=["GET"])
+def users_list():
+    auth.require_admin()
+    return jsonify(users_io.list_users())
+
+
+@app.route("/api/users", methods=["POST"])
+def users_create():
+    admin = auth.require_admin()
+    payload = request.get_json(force=True) or {}
+    new_user = users_io.create(
+        userid=payload.get("userid", ""),
+        name=payload.get("name", ""),
+        role=payload.get("role", "editor"),
+        password=payload.get("password", ""),
+    )
+    append_log(admin, "create-user", new_user["userid"], f"新建账号({new_user['role']}) {new_user['name']}")
+    return jsonify(new_user), 201
+
+
+@app.route("/api/users/<userid>", methods=["PATCH"])
+def users_update(userid: str):
+    actor = auth.require_user()
+    payload = request.get_json(force=True) or {}
+    is_admin = actor.get("role") == "admin"
+    is_self = actor.get("userid") == userid
+
+    # admin 可以改任何人的任何字段(除了把自己 disabled 或 demote 自己 admin)
+    # 非 admin 只能改自己的密码
+    if not is_admin:
+        if not is_self:
+            raise PermissionError("仅 admin 可改其他账号")
+        if any(k in payload for k in ("role", "disabled", "name")):
+            raise PermissionError("非 admin 只能改自己密码")
+
+    if is_admin and is_self:
+        if payload.get("disabled") is True:
+            raise ValueError("不能停用自己")
+        if "role" in payload and payload["role"] != "admin":
+            raise ValueError("不能把自己降级")
+
+    updated = users_io.update(
+        userid,
+        **{k: v for k, v in payload.items() if k in ("name", "role", "password", "disabled")},
+    )
+    summary_parts = []
+    if "password" in payload: summary_parts.append("改密码")
+    if "role" in payload: summary_parts.append(f"角色→{payload['role']}")
+    if "disabled" in payload: summary_parts.append("停用" if payload["disabled"] else "启用")
+    if "name" in payload: summary_parts.append(f"姓名→{payload['name']}")
+    append_log(actor, "update-user", userid, ", ".join(summary_parts) or "更新")
+    return jsonify(updated)
 
 
 @app.route("/api/auth/dingtalk-qrcode")
