@@ -1,15 +1,5 @@
 [
   {
-    "id": "cms-test-20260508",
-    "title": "【CMS 端到端测试 5/8】墨在测能否真发到官网",
-    "summary": "这条是 chat 墨用 admin API 加的测试新闻,验证 publish 链路。验证完会被自动删除。",
-    "date": "2026-05-08",
-    "category": "company",
-    "category_label": "公司动态",
-    "category_label_en": "Company News",
-    "url": "https://hboyjd.com/#cms-test"
-  },
-  {
     "category": "company",
     "category_label": "公司动态",
     "category_label_en": "Company News",
