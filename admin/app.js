@@ -428,6 +428,33 @@ function renderUser() {
     $$('.js-user-name').forEach((node) => {
         node.textContent = currentUser?.name || '市场部同事';
     });
+    injectSidebarFooter();
+}
+
+function injectSidebarFooter() {
+    $$('.sidebar').forEach((sidebar) => {
+        if (sidebar.querySelector('.sidebar-footer')) return;
+        const name = currentUser?.name || '';
+        const userid = currentUser?.userid || '';
+        const footer = document.createElement('div');
+        footer.className = 'sidebar-footer';
+        footer.innerHTML = `
+            <div class="sidebar-user">当前账号</div>
+            <div class="sidebar-user-name" title="${escapeAttr(userid)}">${escapeAttr(name)}</div>
+            <button type="button" class="sidebar-logout-btn js-logout">退出登录</button>
+        `;
+        sidebar.appendChild(footer);
+    });
+    $$('.js-logout').forEach((btn) => btn.addEventListener('click', logout));
+}
+
+async function logout() {
+    try {
+        await api('/auth/logout', {method: 'POST'});
+    } catch (err) {
+        // 即使后端清不掉也跳登录页
+    }
+    window.location.href = 'login.html';
 }
 
 function setHeroThumb(url) {
