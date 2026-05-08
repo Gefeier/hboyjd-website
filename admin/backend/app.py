@@ -55,6 +55,25 @@ def auth_me():
     return jsonify(user)
 
 
+@app.route("/api/auth/login", methods=["POST"])
+def auth_login():
+    payload = request.get_json(silent=True) or {}
+    username = (payload.get("username") or "").strip()
+    password = payload.get("password") or ""
+    user = auth.login_with_password(username, password)
+    append_log(user, "login", "auth", "登录后台(密码)")
+    return jsonify(user)
+
+
+@app.route("/api/auth/logout", methods=["POST"])
+def auth_logout():
+    user = auth.current_user()
+    auth.logout()
+    if user:
+        append_log(user, "logout", "auth", "登出")
+    return jsonify({"ok": True})
+
+
 @app.route("/api/auth/dingtalk-qrcode")
 def auth_qrcode():
     return jsonify(auth.qrcode_payload())

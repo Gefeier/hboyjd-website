@@ -1,15 +1,56 @@
 from __future__ import annotations
 
+import json
 import os
 from typing import Any
 from urllib.parse import urlencode
 
 import requests
 from flask import session
+from werkzeug.security import check_password_hash
 
 
 AUTH_MODE = os.getenv("ADMIN_AUTH_MODE", "mock").lower()
 DINGTALK_API_BASE = "https://api.dingtalk.com"
+USERS_FILE = os.getenv("ADMIN_USERS_FILE", "")
+
+
+def _load_users() -> dict[str, dict[str, Any]]:
+    if not USERS_FILE or not os.path.exists(USERS_FILE):
+        return {}
+    try:
+        with open(USERS_FILE, encoding="utf-8") as fh:
+            data = json.load(fh)
+        if isinstance(data, dict):
+            return data
+    except (OSError, ValueError):
+        pass
+    return {}
+
+
+def login_with_password(username: str, password: str) -> dict[str, Any]:
+    username = (username or "").strip()
+    if not username or not password:
+        raise PermissionError("账号或密码不能为空")
+    users = _load_users()
+    record = users.get(username)
+    if not record or not isinstance(record, dict):
+        raise PermissionError("账号或密码错误")
+    pw_hash = record.get("password_hash") or ""
+    if not pw_hash or not check_password_hash(pw_hash, password):
+        raise PermissionError("账号或密码错误")
+    user = {
+        "userid": username,
+        "name": record.get("name", username),
+        "role": record.get("role", "admin"),
+        "auth_mode": "password",
+    }
+    session["user"] = user
+    return user
+
+
+def logout() -> None:
+    session.pop("user", None)
 
 
 def current_user() -> dict[str, Any] | None:
@@ -39,6 +80,12 @@ def qrcode_payload() -> dict[str, Any]:
             "mode": "mock",
             "url": "",
             "message": "本地演示模式：点击进入工作台即可。",
+        }
+    if AUTH_MODE == "password":
+        return {
+            "mode": "password",
+            "url": "",
+            "message": "请输入账号密码登录。",
         }
     if not app_key or not redirect_uri:
         return {

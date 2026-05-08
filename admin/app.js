@@ -85,30 +85,64 @@ document.addEventListener('DOMContentLoaded', async () => {
 });
 
 async function initLogin() {
-    const qr = $('#qr-placeholder');
-    const msg = $('#login-message');
-    const enter = $('#login-enter-btn');
+    const dingBlock = $('#login-dingtalk');
+    const passwordForm = $('#login-password-form');
+    const mockBlock = $('#login-mock');
+    const errBox = $('#login-error');
+
+    let payload = {mode: 'password'};
     try {
-        const payload = await api('/auth/dingtalk-qrcode');
+        payload = await api('/auth/dingtalk-qrcode');
+    } catch (err) {
+        // 接不到也走默认密码模式
+    }
+
+    if (payload.mode === 'dingtalk') {
+        dingBlock.hidden = false;
+        const qr = $('#qr-placeholder');
+        const msg = $('#login-message');
         if (payload.url) {
             qr.innerHTML = `<iframe title="钉钉扫码登录" src="${escapeAttr(payload.url)}"></iframe>`;
         } else {
-            qr.innerHTML = '<span>钉钉扫码<br><small>本地演示模式</small></span>';
+            qr.innerHTML = '<span>钉钉扫码<br><small>未配置</small></span>';
         }
         msg.textContent = payload.message || '请使用钉钉扫码登录。';
-        if (payload.mode !== 'mock' && enter) {
-            enter.hidden = true;
-        }
-    } catch (err) {
-        msg.textContent = err.message;
+        return;
     }
-    enter?.addEventListener('click', async () => {
-        enter.disabled = true;
-        await api('/auth/dingtalk-callback', {
-            method: 'POST',
-            body: JSON.stringify({name: '市场部演示账号'})
+
+    if (payload.mode === 'mock') {
+        mockBlock.hidden = false;
+        $('#login-enter-btn')?.addEventListener('click', async () => {
+            await api('/auth/dingtalk-callback', {
+                method: 'POST',
+                body: JSON.stringify({name: '市场部演示账号'})
+            });
+            window.location.href = 'dashboard.html';
         });
-        window.location.href = 'dashboard.html';
+        return;
+    }
+
+    // 默认: password 模式
+    passwordForm.hidden = false;
+    passwordForm.addEventListener('submit', async (ev) => {
+        ev.preventDefault();
+        errBox.textContent = '';
+        const username = $('#login-username').value.trim();
+        const password = $('#login-password').value;
+        const submit = $('#login-submit');
+        submit.disabled = true;
+        submit.textContent = '登录中...';
+        try {
+            await api('/auth/login', {
+                method: 'POST',
+                body: JSON.stringify({username, password})
+            });
+            window.location.href = 'dashboard.html';
+        } catch (err) {
+            errBox.textContent = err.message || '登录失败';
+            submit.disabled = false;
+            submit.textContent = '登 录';
+        }
     });
 }
 
