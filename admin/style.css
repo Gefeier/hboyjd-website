@@ -487,3 +487,91 @@ select {
     letter-spacing: 1px;
 }
 .sidebar-changepw-btn:hover { color: white; border-color: rgba(255,255,255,0.3); }
+
+/* ===== 批量导入结果 ===== */
+.batch-result {
+    margin-top: 16px;
+    max-height: 360px;
+    overflow-y: auto;
+    border: 1px solid var(--gray-200);
+    border-radius: 8px;
+    padding: 12px;
+    background: var(--gray-50);
+}
+.batch-summary {
+    padding: 10px 12px;
+    background: var(--navy-900);
+    color: white;
+    border-radius: 6px;
+    margin-bottom: 12px;
+    font-size: 13px;
+    letter-spacing: 0.5px;
+}
+.batch-summary strong { color: var(--gold); margin-right: 6px; }
+.batch-row {
+    display: flex; gap: 12px; align-items: flex-start;
+    padding: 10px 12px;
+    border-bottom: 1px solid var(--gray-100);
+    font-size: 13px;
+    line-height: 1.5;
+}
+.batch-row:last-child { border-bottom: none; }
+.batch-row.ok { background: rgba(26,138,58,0.04); }
+.batch-row.err { background: rgba(192,57,43,0.04); }
+.batch-icon {
+    flex-shrink: 0;
+    width: 22px; height: 22px;
+    border-radius: 50%;
+    display: inline-flex; align-items: center; justify-content: center;
+    font-weight: 700;
+    color: white;
+}
+.batch-row.ok .batch-icon { background: #1a8a3a; }
+.batch-row.err .batch-icon { background: #c0392b; }
+.batch-row strong { color: var(--navy-900); }
+
+/* ===== L1 视觉对齐官网 ===== */
+.btn-primary {
+    background: var(--navy-900) !important;
+    color: white !important;
+    letter-spacing: 2px;
+    padding: 11px 26px;
+    border-radius: 8px;
+    box-shadow: 0 4px 14px rgba(7,12,40,0.15);
+    transition: background 0.2s, box-shadow 0.2s, transform 0.06s;
+}
+.btn-primary:hover { background: var(--navy-800) !important; box-shadow: 0 6px 18px rgba(7,12,40,0.25); }
+.btn-primary:active { transform: translateY(1px); }
+.btn-primary:disabled { background: var(--gray-500) !important; box-shadow: none; }
+
+.card {
+    border-left: 3px solid var(--navy-900);
+}
+
+.page-title {
+    position: relative;
+    padding-bottom: 16px;
+    border-bottom: 1px solid var(--gray-200);
+    margin-bottom: 8px;
+    letter-spacing: 2px;
+}
+.page-title::after {
+    content: '';
+    position: absolute;
+    bottom: -1px; left: 0;
+    width: 56px;
+    height: 3px;
+    background: var(--gold);
+}
+.page-subtitle {
+    margin-top: 14px;
+    margin-bottom: 32px;
+    letter-spacing: 0.5px;
+}
+
+.sidebar-logo {
+    letter-spacing: 3px;
+    font-weight: 900;
+    padding-bottom: 18px;
+    border-bottom: 1px solid rgba(255,255,255,0.12);
+}

@@ -23,11 +23,33 @@
         <p class="page-subtitle">粘贴公众号文章链接,自动抓取标题/封面/摘要</p>
 
         <div class="card">
-            <h2>从公众号链接添加</h2>
+            <h2>单条添加(粘 1 个公众号链接)</h2>
             <label>公众号文章 URL</label>
             <input type="url" placeholder="https://mp.weixin.qq.com/s/..." id="wechat-url-input">
             <button class="btn btn-primary" id="fetch-wechat-btn">抓取并添加</button>
-            <p class="muted">抓到后先进入新闻列表，可继续改标题、摘要、分类和封面。</p>
+            <p class="muted">抓到后先进入下方新闻列表,可继续改标题、摘要、分类和封面。已存在的同 URL 会更新不重复。</p>
+        </div>
+
+        <div class="card">
+            <h2>批量导入(粘多个 URL,每行一个)</h2>
+            <label>公众号文章 URL 列表</label>
+            <textarea id="batch-urls" rows="6" placeholder="https://mp.weixin.qq.com/s/aaa
+https://mp.weixin.qq.com/s/bbb
+https://mp.weixin.qq.com/s/ccc"></textarea>
+            <div class="form-row two">
+                <label>默认分类(标题/摘要识别不到时用这个)
+                    <select id="batch-category">
+                        <option value="company">公司动态</option>
+                        <option value="gov">党政动态</option>
+                        <option value="case">客户案例</option>
+                    </select>
+                </label>
+                <label>&nbsp;
+                    <button class="btn btn-primary" id="batch-import-btn" type="button" style="width:100%;">开始批量导入</button>
+                </label>
+            </div>
+            <p class="muted">每条会调一次微信 og:tag 抓取(标题 / 封面 / 摘要 / 日期),约 1-2 秒一条。批量 50 条预计 1-2 分钟。已存在的同 URL 会自动跳过。</p>
+            <div id="batch-result" class="batch-result" hidden></div>
         </div>
 
         <div class="card">

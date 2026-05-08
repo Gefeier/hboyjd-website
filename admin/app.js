@@ -237,6 +237,42 @@ async function initNewsPage() {
         renderNewsList(news);
         showToast('新闻列表已暂存。');
     });
+
+    $('#batch-import-btn')?.addEventListener('click', async () => {
+        const text = $('#batch-urls').value.trim();
+        const urls = text.split(/\s+/).map((u) => u.trim()).filter((u) => /^https?:\/\//.test(u));
+        if (!urls.length) return showToast('没识别到任何 http(s) URL', 'error');
+        if (!confirm(`确认批量导入 ${urls.length} 个公众号文章?约需 ${Math.ceil(urls.length * 1.5)} 秒,请勿关闭页面。`)) return;
+        const btn = $('#batch-import-btn');
+        const resultBox = $('#batch-result');
+        btn.disabled = true;
+        btn.textContent = `导入中(0/${urls.length})...`;
+        resultBox.hidden = false;
+        resultBox.innerHTML = `<p class="muted">提交了 ${urls.length} 条,后端开始抓取... 大约 ${Math.ceil(urls.length * 1.5)} 秒后完成,请耐心等。</p>`;
+        try {
+            const res = await api('/news/batch-import', {
+                method: 'POST',
+                body: JSON.stringify({urls, default_category: $('#batch-category').value})
+            });
+            resultBox.innerHTML = `
+                <div class="batch-summary">
+                    <strong>完成:</strong> 共 ${res.total} 条,成功 ${res.success},新增 ${res.inserted},失败 ${res.total - res.success}
+                </div>
+                ${res.results.map((r) => r.ok
+                    ? `<div class="batch-row ok"><span class="batch-icon">✓</span><div><strong>${escapeHtml(r.title || '(无标题)')}</strong> <small class="muted">${escapeHtml(r.date || '')} ${r.inserted ? '· 新增' : '· 已存在,已更新'}</small><br><small class="muted">${escapeHtml(r.url)}</small></div></div>`
+                    : `<div class="batch-row err"><span class="batch-icon">✗</span><div><strong>抓取失败</strong> <small>${escapeHtml(r.error)}</small><br><small class="muted">${escapeHtml(r.url)}</small></div></div>`
+                ).join('')}`;
+            showToast(`完成: 成功 ${res.success}/${res.total}`, res.success === res.total ? 'ok' : 'error');
+            $('#batch-urls').value = '';
+            news = await loadSection('news');
+            renderNewsList(news);
+        } catch (err) {
+            resultBox.innerHTML = `<div class="batch-row err">批量导入失败: ${escapeHtml(err.message)}</div>`;
+        } finally {
+            btn.disabled = false;
+            btn.textContent = '开始批量导入';
+        }
+    });
 }
 
 async function initLogsPage() {

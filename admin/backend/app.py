@@ -203,6 +203,54 @@ def news_from_wechat_url():
     return jsonify(saved)
 
 
+@app.route("/api/news/batch-import", methods=["POST"])
+def news_batch_import():
+    user = auth.require_user()
+    payload = request.get_json(force=True) or {}
+    urls_raw = payload.get("urls") or []
+    default_category = (payload.get("default_category") or "company").strip()
+    default_label_map = {
+        "company": ("公司动态", "Company News"),
+        "gov": ("党政动态", "Government & Party"),
+        "case": ("客户案例", "Customer Stories"),
+    }
+    if isinstance(urls_raw, str):
+        urls_raw = [u for u in urls_raw.replace("\r", "\n").split("\n") if u.strip()]
+    if not isinstance(urls_raw, list):
+        raise ValueError("urls 必须是数组或换行字符串")
+
+    results = []
+    seen = set()
+    for url in urls_raw:
+        url = (url or "").strip()
+        if not url or url in seen:
+            continue
+        seen.add(url)
+        try:
+            article = fetch_wechat_article(url)
+            if default_category and not article.get("category"):
+                article["category"] = default_category
+                label, label_en = default_label_map.get(default_category, default_label_map["company"])
+                article["category_label"] = article.get("category_label") or label
+                article["category_label_en"] = article.get("category_label_en") or label_en
+            saved, inserted = append_news(article)
+            results.append({
+                "url": url,
+                "ok": True,
+                "title": saved.get("title"),
+                "date": saved.get("date"),
+                "inserted": inserted,
+            })
+        except Exception as exc:
+            results.append({"url": url, "ok": False, "error": str(exc)})
+
+    success = sum(1 for r in results if r["ok"])
+    inserted_count = sum(1 for r in results if r.get("ok") and r.get("inserted"))
+    append_log(user, "batch-import-news", "news",
+               f"批量导入 {len(results)} 条,成功 {success},新增 {inserted_count}")
+    return jsonify({"total": len(results), "success": success, "inserted": inserted_count, "results": results})
+
+
 @app.route("/api/publish", methods=["POST"])
 def publish():
     user = auth.require_user()
