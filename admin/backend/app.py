@@ -60,10 +60,17 @@ def auth_qrcode():
     return jsonify(auth.qrcode_payload())
 
 
-@app.route("/api/auth/dingtalk-callback", methods=["POST"])
+@app.route("/api/auth/dingtalk-callback", methods=["GET", "POST"])
 def auth_callback():
-    user = auth.login_from_callback(request.get_json(silent=True) or {})
+    payload = {}
+    if request.is_json:
+        payload.update(request.get_json(silent=True) or {})
+    payload.update(request.form.to_dict())
+    payload.update(request.args.to_dict())
+    user = auth.login_from_callback(payload)
     append_log(user, "login", "auth", "登录后台")
+    if request.method == "GET":
+        return redirect("/admin/dashboard.html")
     return jsonify(user)
 
 
@@ -132,4 +139,4 @@ def logs():
 
 if __name__ == "__main__":
     port = int(os.getenv("ADMIN_PORT", "9005"))
-    app.run(host="127.0.0.1", port=port, debug=os.getenv("ADMIN_DEBUG", "1") == "1")
+    app.run(host="127.0.0.1", port=port, debug=os.getenv("ADMIN_DEBUG", "0") == "1")
