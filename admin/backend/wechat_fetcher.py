@@ -40,6 +40,10 @@ def fetch_wechat_article(url: str) -> dict[str, Any]:
     title = _clean(title).replace(" - 微信公众平台", "").strip()
     summary = _first_meta(text, ["description", "og:description"]) or ""
     cover = _first_meta(text, ["og:image", "twitter:image"]) or _first_match(text, r'var\s+msg_cdn_url\s*=\s*"([^"]+)"')
+
+    # 严格校验:抓不到 og:title 多半是假 URL 或文章删除/未公开,拒绝 silently 兜底
+    if not title or title in {"微信公众平台", "微信公众号文章", "Error"}:
+        raise ValueError(f"未抓到文章标题,可能是无效 URL / 文章已删除 / 未公开: {url}")
     publish_date = (
         _first_match(text, r'var\s+publish_time\s*=\s*"([^"]+)"')
         or _first_match(text, r'"publish_time"\s*:\s*"([^"]+)"')
