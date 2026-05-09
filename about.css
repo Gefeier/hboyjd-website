@@ -1046,3 +1046,92 @@
     margin: 36px 0 0;
     font-style: italic;
 }
+
+/* ====== 资质证书 + 近五年获奖文字表 ====== */
+.certifications {
+    padding: 100px 0;
+    background: var(--white);
+}
+.cert-block {
+    max-width: 1100px;
+    margin: 0 auto 48px;
+}
+.cert-block:last-child { margin-bottom: 0; }
+.cert-block-title {
+    font-size: 18px;
+    font-weight: 700;
+    color: var(--navy-900);
+    letter-spacing: 2px;
+    margin-bottom: 20px;
+    padding-left: 14px;
+    border-left: 3px solid var(--gold);
+}
+.cert-table-wrap {
+    overflow-x: auto;
+    border-radius: 10px;
+    border: 1px solid var(--gray-200);
+    background: var(--white);
+    box-shadow: 0 2px 12px rgba(7,12,40,0.04);
+}
+.cert-table {
+    width: 100%;
+    border-collapse: collapse;
+    font-size: 14px;
+}
+.cert-table thead {
+    background: var(--navy-900);
+    color: white;
+}
+.cert-table thead th {
+    padding: 14px 16px;
+    text-align: left;
+    font-weight: 600;
+    letter-spacing: 1px;
+    font-size: 13px;
+    border-right: 1px solid rgba(255,255,255,0.08);
+}
+.cert-table thead th:last-child { border-right: none; }
+.cert-table tbody td {
+    padding: 13px 16px;
+    border-bottom: 1px solid var(--gray-100);
+    color: var(--gray-700);
+    line-height: 1.5;
+}
+.cert-table tbody tr:nth-child(even) {
+    background: var(--gray-50);
+}
+.cert-table tbody tr:hover {
+    background: rgba(212, 168, 83, 0.06);
+}
+.cert-table tbody tr:last-child td { border-bottom: none; }
+.cert-table tbody td code {
+    font-family: ui-monospace, "SF Mono", Menlo, Consolas, monospace;
+    font-size: 12px;
+    color: var(--navy-700);
+    background: var(--gray-100);
+    padding: 2px 8px;
+    border-radius: 4px;
+}
+.cert-table tbody td strong {
+    color: var(--gold);
+    font-weight: 700;
+    letter-spacing: 1px;
+}
+.cert-note {
+    margin-top: 18px;
+    font-size: 13px;
+    color: var(--gray-700);
+    line-height: 1.7;
+    text-align: center;
+}
+@media (max-width: 768px) {
+    .cert-table thead th,
+    .cert-table tbody td {
+        padding: 10px 10px;
+        font-size: 12px;
+    }
+    .cert-table tbody td code {
+        font-size: 11px;
+        word-break: break-all;
+    }
+}
