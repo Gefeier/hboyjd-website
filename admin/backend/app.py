@@ -49,6 +49,22 @@ def assets_static(filename: str):
     return send_from_directory(REPO_ROOT / "assets", filename)
 
 
+# 服 REPO_ROOT 根目录静态资源(style.css / main.js / news.json / about.css 等)
+# admin preview iframe 加载真实 about.html 时浏览器会去 /style.css 拿,这条 catch-all 兜底
+# 注意:Flask 路由 specificity 让 /admin/* /api/* /assets/* 等先匹,这里只兜根目录文件
+_REPO_ROOT_FILES = {"style.css", "about.css", "main.js", "news.json", "sitemap.xml", "robots.txt", "favicon.ico", "favicon-512x512.png", "index.html", "about.html", "configurator.html", "parts.html", "parts-data.json"}
+
+@app.route("/<filename>")
+def serve_repo_root_file(filename: str):
+    # 白名单:防泄露 .git / SPRINT.md / requirements.txt 等内部文件
+    if filename not in _REPO_ROOT_FILES:
+        return f"未授权: {filename}", 404
+    target = REPO_ROOT / filename
+    if not target.exists() or not target.is_file():
+        return f"not found: {filename}", 404
+    return send_from_directory(str(REPO_ROOT), filename)
+
+
 @app.route("/api/auth/me")
 def auth_me():
     user = auth.current_user()
@@ -202,6 +218,91 @@ def news_from_wechat_url():
     saved, inserted = append_news(article)
     append_log(user, "wechat-news", saved["url"], "新增公众号新闻" if inserted else "更新已有公众号新闻")
     return jsonify(saved)
+
+
+@app.route("/admin/preview/<path:page>")
+def admin_preview(page):
+    """加载 /opt/hboyjd-website/<page> 真实 HTML,注入桥接 JS 让父页 admin 能 postMessage 推改动"""
+    auth.require_user()
+    WHITELIST = {"index.html", "about.html"}
+    if page not in WHITELIST:
+        return f"页面 {page} 不在预览白名单", 404
+    html_path = REPO_ROOT / page
+    if not html_path.exists():
+        return f"页面文件不存在: {page}", 404
+    html = html_path.read_text(encoding="utf-8")
+
+    # 注入预览桥接(放 </body> 前)
+    bridge = """
+<script>
+(function(){
+  // 顶部加预览模式 banner
+  const banner = document.createElement('div');
+  banner.style.cssText = 'position:fixed;top:0;left:0;right:0;z-index:999999;background:linear-gradient(90deg,#0a1628,#1a3a5c);color:#d4a853;padding:7px 14px;font-size:12px;font-family:system-ui,-apple-system,sans-serif;letter-spacing:2px;text-align:center;border-bottom:1px solid rgba(212,168,83,0.3);';
+  banner.textContent = '🔧 admin 预览模式 · 左侧改字段右边实时反映 · 改完点「保存暂存」+「发布预演」才上线';
+  document.body.insertBefore(banner, document.body.firstChild);
+  document.body.style.paddingTop = '34px';
+
+  // 字段 → 选择器映射(可扩展)
+  const MAP = {
+    'hero-title': '.hero-title',
+    'hero-title-en': null,  // data-en attr
+    'hero-subtitle': '.hero-subtitle',
+    'hero-subtitle-en': null,
+    'hero-desc': '.hero-desc',
+    'hero-desc-en': null,
+  };
+  const EN_MAP = {
+    'hero-title-en': '.hero-title',
+    'hero-subtitle-en': '.hero-subtitle',
+    'hero-desc-en': '.hero-desc',
+  };
+
+  window.addEventListener('message', function(ev){
+    if (!ev.data || ev.data.type !== 'cms-update') return;
+    const k = ev.data.key, v = ev.data.value;
+    // 中文字段直接改 textContent
+    if (MAP[k]) {
+      document.querySelectorAll(MAP[k]).forEach(function(el){ el.textContent = v; });
+      return;
+    }
+    // _en 后缀的改 data-en 属性(主站有切换中英按钮会读这个)
+    if (EN_MAP[k]) {
+      document.querySelectorAll(EN_MAP[k]).forEach(function(el){ el.setAttribute('data-en', v); });
+      return;
+    }
+  });
+
+  // 点击区块通知 parent 跳到对应字段(可选,v2 完善)
+  document.addEventListener('click', function(ev){
+    let el = ev.target;
+    while (el && el !== document.body) {
+      if (el.classList && (el.classList.contains('hero-title') || el.classList.contains('hero-subtitle') || el.classList.contains('hero-desc'))) {
+        const key = el.classList.contains('hero-title') ? 'hero-title'
+                   : el.classList.contains('hero-subtitle') ? 'hero-subtitle' : 'hero-desc';
+        if (window.parent !== window) {
+          window.parent.postMessage({type: 'cms-focus', key: key}, '*');
+        }
+        ev.preventDefault();
+        return;
+      }
+      el = el.parentElement;
+    }
+  }, true);
+
+  // 通知 parent: preview 已就绪可推初始值
+  if (window.parent !== window) {
+    window.parent.postMessage({type: 'cms-preview-ready'}, '*');
+  }
+})();
+</script>
+"""
+    if "</body>" in html:
+        html = html.replace("</body>", bridge + "</body>")
+    else:
+        html += bridge
+    from flask import Response
+    return Response(html, mimetype="text/html; charset=utf-8")
 
 
 @app.route("/api/replace-about-image", methods=["POST"])

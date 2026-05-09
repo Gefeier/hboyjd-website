@@ -18,117 +18,113 @@
             <a href="logs.html">操作日志</a>
         </nav>
     </aside>
-    <main class="admin-main" id="editor-page">
-        <h1 class="page-title">页面内容</h1>
-        <p class="page-subtitle">改首页 Hero 横幅 · 右侧实时预览,左侧改完点保存+发布</p>
-
-        <div class="editor-split">
-            <!-- 左:表单 -->
-            <div class="card editor-form">
-                <h2>首页 Hero</h2>
-
-                <div class="translate-bar">
-                    <button type="button" class="btn btn-outline" id="translate-en-btn">⇄ 中文已填好,自动翻译英文字段</button>
-                    <p class="muted" style="font-size:12px; margin-top:8px;">翻译后请人工校对一遍 · 由 AI 翻译,品牌词 / 行业术语会自动保留</p>
-                </div>
-
-                <label>主标语 (中文)</label>
-                <input type="text" id="hero-title" placeholder="例:半挂车研发制造专家">
-
-                <label>主标语 (英文)</label>
-                <input type="text" id="hero-title-en" placeholder="例:Semi-Trailer R&amp;D Manufacturing Expert">
-
-                <label>副标语 (中文 · 标题上方一行小字)</label>
-                <input type="text" id="hero-subtitle" placeholder="例:DREAM ON THE ROAD · 为梦出发">
-
-                <label>副标语 (英文)</label>
-                <input type="text" id="hero-subtitle-en" placeholder="例:DREAM ON THE ROAD">
-
-                <label>描述 (中文 · 标题下方一段)</label>
-                <textarea id="hero-desc" rows="2" placeholder="例:T700C高强度钢材 · 全系定制化生产 · 品质铸就未来"></textarea>
-
-                <label>描述 (英文)</label>
-                <textarea id="hero-desc-en" rows="2" placeholder="例:T700C High-Strength Steel · Fully Customized Production"></textarea>
-
-                <label>Banner 缩略图(点击从图片库替换)</label>
-                <div class="image-thumb" id="hero-image-thumb"></div>
-
-                <details class="advanced-toggle" style="margin-top:24px;">
-                    <summary>⚙️ 高级设置(墨用,市场部不要碰) </summary>
-                    <p class="muted" style="font-size:12px; margin:12px 0;">视频文件几十 MB,普通图片库装不下。要换 Hero 视频请联系墨手动上传 mp4。下面这两个路径填错会让首页背景空白,**改完没把握就别保存**。</p>
-                    <div class="form-row two">
-                        <label>Hero 视频路径(.mp4)<input type="text" id="hero-video" placeholder="assets/videos/hero-factory.mp4"></label>
-                        <label>视频封面图(.jpg)<input type="text" id="hero-poster" placeholder="assets/videos/hero-factory-poster.jpg"></label>
-                    </div>
-                </details>
-
-                <div style="margin-top:24px; display:flex; gap:12px;">
-                    <button class="btn btn-primary" id="save-index-btn" type="button">保存暂存</button>
-                    <button class="btn btn-outline" type="button" data-publish>发布预演</button>
-                </div>
-                <p class="muted" style="margin-top:14px; font-size:12px;">"保存暂存"只写到服务器 content/index.json;"发布预演"才会 build 后 git push 到生产官网。</p>
-            </div>
-
-            <!-- 右:预览(navy 仿真首页 hero) -->
-            <div class="editor-preview-wrap">
-                <div class="preview-label">
-                    <span class="preview-eyebrow">实时预览</span>
-                    <span class="preview-note">右边卡片是首页 Hero 区简化版,改完字段立刻反映 · 不是 100% 像素级仿真但版面和字号一致</span>
-                </div>
-                <div class="hero-preview" id="hero-preview">
-                    <div class="hero-preview-bg" id="hero-preview-bg"></div>
-                    <div class="hero-preview-overlay"></div>
-                    <div class="hero-preview-content">
-                        <p class="hero-preview-subtitle" id="hero-preview-subtitle">DREAM ON THE ROAD · 为梦出发</p>
-                        <h1 class="hero-preview-title" id="hero-preview-title">半挂车研发制造专家</h1>
-                        <p class="hero-preview-desc" id="hero-preview-desc">T700C高强度钢材 · 全系定制化生产 · 品质铸就未来</p>
-                        <div class="hero-preview-actions">
-                            <span class="hero-preview-btn primary">在线选配车辆</span>
-                            <span class="hero-preview-btn ghost">查看产品</span>
-                        </div>
-                    </div>
-                </div>
-                <p class="preview-helper">📐 桌面端实际显示尺寸 16:9 全屏,这里是缩略卡 · 想看真效果点「发布预演」后访问 hboyjd.com</p>
+    <main class="admin-main editor-fullwidth" id="editor-page">
+        <div class="editor-header">
+            <h1 class="page-title">页面内容</h1>
+            <div class="page-tabs" id="page-tabs">
+                <button type="button" class="page-tab active" data-page="index">首页</button>
+                <button type="button" class="page-tab" data-page="about">关于我们</button>
+                <span class="page-tab-note">(更多页面 v2 开放)</span>
             </div>
         </div>
+        <p class="page-subtitle">左侧改字段右侧实时预览,改完点页面右上「保存暂存」+「发布预演」推到 hboyjd.com</p>
 
-        <div class="card" style="margin-top:32px;">
-            <h2>About 关键图替换</h2>
-            <p class="muted">点击下面任一缩略 → 选本地新图上传(自动 resize 长边 1600+ 转 webp,覆写同名文件)。改完点页面右上角「发布预演」推到 hboyjd.com/about.html。</p>
-            <div class="about-images-grid">
-                <button type="button" class="about-img-slot" data-key="about-gate">
-                    <div class="about-img-thumb" data-img="/assets/images/about/about-gate.jpg"></div>
-                    <span class="about-img-label">厂区大门</span>
-                    <span class="about-img-pos">顶部 hero 大图</span>
-                </button>
-                <button type="button" class="about-img-slot" data-key="staff-rally">
-                    <div class="about-img-thumb" data-img="/assets/images/about/staff-rally.jpg"></div>
-                    <span class="about-img-label">员工晨会</span>
-                    <span class="about-img-pos">工厂&团队照片墙</span>
-                </button>
-                <button type="button" class="about-img-slot" data-key="team-rally">
-                    <div class="about-img-thumb" data-img="/assets/images/about/team-rally.jpg"></div>
-                    <span class="about-img-label">年终团队合影</span>
-                    <span class="about-img-pos">陕汽车头前合影</span>
-                </button>
-                <button type="button" class="about-img-slot" data-key="factory-cutting-line">
-                    <div class="about-img-thumb" data-img="/assets/images/about/factory-cutting-line.jpg"></div>
-                    <span class="about-img-label">工厂车间</span>
-                    <span class="about-img-pos">数控等离子切割</span>
-                </button>
-                <button type="button" class="about-img-slot" data-key="party-volunteer">
-                    <div class="about-img-thumb" data-img="/assets/images/about/party-volunteer.jpg"></div>
-                    <span class="about-img-label">党员志愿者</span>
-                    <span class="about-img-pos">服务社区</span>
-                </button>
-                <button type="button" class="about-img-slot" data-key="team-trip-2020">
-                    <div class="about-img-thumb" data-img="/assets/images/about/team-trip-2020.jpg"></div>
-                    <span class="about-img-label">员工旅行</span>
-                    <span class="about-img-pos">2020 三峡</span>
-                </button>
+        <div class="editor-fullsplit">
+            <!-- 左:表单区(可滚动) -->
+            <div class="editor-form-pane">
+                <!-- 首页 Hero -->
+                <div class="editor-section" data-section="hero" data-page="index">
+                    <h3 class="editor-section-title">▼ Hero 横幅</h3>
+
+                    <div class="translate-bar">
+                        <button type="button" class="btn btn-outline" id="translate-en-btn">⇄ 中文已填好,自动翻译英文</button>
+                        <p class="muted" style="font-size:12px; margin-top:8px;">翻译后请人工校对一遍 · AI 自动保留品牌词 / 行业术语</p>
+                    </div>
+
+                    <label>主标语 (中文)</label>
+                    <input type="text" id="hero-title" placeholder="例:半挂车研发制造专家">
+                    <label>主标语 (英文)</label>
+                    <input type="text" id="hero-title-en" placeholder="例:Semi-Trailer R&amp;D Manufacturing Expert">
+
+                    <label>副标语 (中文)</label>
+                    <input type="text" id="hero-subtitle" placeholder="例:DREAM ON THE ROAD · 为梦出发">
+                    <label>副标语 (英文)</label>
+                    <input type="text" id="hero-subtitle-en" placeholder="例:DREAM ON THE ROAD">
+
+                    <label>描述 (中文)</label>
+                    <textarea id="hero-desc" rows="2" placeholder="例:T700C高强度钢材 · 全系定制化生产 · 品质铸就未来"></textarea>
+                    <label>描述 (英文)</label>
+                    <textarea id="hero-desc-en" rows="2" placeholder="例:T700C High-Strength Steel · Fully Customized Production"></textarea>
+
+                    <label>Banner 缩略图(点击从图片库替换)</label>
+                    <div class="image-thumb" id="hero-image-thumb"></div>
+
+                    <details class="advanced-toggle" style="margin-top:24px;">
+                        <summary>⚙️ 高级设置(墨用,市场部不要碰)</summary>
+                        <p class="muted" style="font-size:12px; margin:12px 0;">视频文件几十 MB,普通图片库装不下。要换 Hero 视频请联系墨手动上传 mp4。</p>
+                        <div class="form-row two">
+                            <label>Hero 视频路径(.mp4)<input type="text" id="hero-video" placeholder="assets/videos/hero-factory.mp4"></label>
+                            <label>视频封面图(.jpg)<input type="text" id="hero-poster" placeholder="assets/videos/hero-factory-poster.jpg"></label>
+                        </div>
+                    </details>
+
+                    <div style="margin-top:24px; display:flex; gap:12px;">
+                        <button class="btn btn-primary" id="save-index-btn" type="button">保存暂存</button>
+                        <button class="btn btn-outline" type="button" data-publish>发布预演</button>
+                    </div>
+                </div>
+
+                <!-- About 关键图替换(两个页面都能看) -->
+                <div class="editor-section" data-section="about-images">
+                    <h3 class="editor-section-title">▼ About 关键图替换</h3>
+                    <p class="muted" style="font-size:13px;">点缩略上传新图(自动 resize+webp+覆写同名)。改完一并点「发布预演」。</p>
+                    <div class="about-images-grid">
+                        <button type="button" class="about-img-slot" data-key="about-gate">
+                            <div class="about-img-thumb" data-img="/assets/images/about/about-gate.jpg"></div>
+                            <span class="about-img-label">厂区大门</span>
+                            <span class="about-img-pos">about 顶部 hero</span>
+                        </button>
+                        <button type="button" class="about-img-slot" data-key="staff-rally">
+                            <div class="about-img-thumb" data-img="/assets/images/about/staff-rally.jpg"></div>
+                            <span class="about-img-label">员工晨会</span>
+                            <span class="about-img-pos">工厂&团队墙</span>
+                        </button>
+                        <button type="button" class="about-img-slot" data-key="team-rally">
+                            <div class="about-img-thumb" data-img="/assets/images/about/team-rally.jpg"></div>
+                            <span class="about-img-label">年终团队合影</span>
+                            <span class="about-img-pos">陕汽车头前</span>
+                        </button>
+                        <button type="button" class="about-img-slot" data-key="factory-cutting-line">
+                            <div class="about-img-thumb" data-img="/assets/images/about/factory-cutting-line.jpg"></div>
+                            <span class="about-img-label">工厂车间</span>
+                            <span class="about-img-pos">数控等离子切割</span>
+                        </button>
+                        <button type="button" class="about-img-slot" data-key="party-volunteer">
+                            <div class="about-img-thumb" data-img="/assets/images/about/party-volunteer.jpg"></div>
+                            <span class="about-img-label">党员志愿者</span>
+                            <span class="about-img-pos">服务社区</span>
+                        </button>
+                        <button type="button" class="about-img-slot" data-key="team-trip-2020">
+                            <div class="about-img-thumb" data-img="/assets/images/about/team-trip-2020.jpg"></div>
+                            <span class="about-img-label">员工旅行</span>
+                            <span class="about-img-pos">2020 三峡</span>
+                        </button>
+                    </div>
+                    <input type="file" id="about-image-uploader" accept="image/*" hidden>
+                    <p class="muted" style="font-size:12px; margin-top:14px;">⚠️ 其他 about 图(14 荣誉/12 专利/11 团队墙)v2 模板化才开放。</p>
+                </div>
             </div>
-            <input type="file" id="about-image-uploader" accept="image/*" hidden>
-            <p class="muted" style="font-size:12px; margin-top:14px;">⚠️ 替换后跟主页 banner 一起,**点页面右上角「发布预演」**才真上线。其他 about 图(荣誉证书 / 专利 / 团队 11 张)v1 暂不开放,等模板化。</p>
+
+            <!-- 右:iframe 实时预览 -->
+            <div class="editor-preview-pane">
+                <div class="preview-toolbar">
+                    <span class="preview-eyebrow">实时预览</span>
+                    <span class="preview-current" id="preview-current">首页 · index.html</span>
+                    <button type="button" class="preview-refresh-btn" id="preview-refresh" title="刷新预览">↻</button>
+                </div>
+                <iframe id="editor-preview-iframe" src="/admin/preview/index.html" title="实时预览"></iframe>
+                <p class="preview-helper">改字段右边 0.5 秒内反映 · 点右边某区块左边自动跳到对应字段(部分支持)· 真效果以「发布预演」后访问 hboyjd.com 为准</p>
+            </div>
         </div>
     </main>
 </div>

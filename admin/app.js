@@ -176,10 +176,10 @@ async function initEditor() {
     setValue('#hero-poster', hero.poster);
     const initialBg = hero.image || hero.poster || 'assets/images/factory-gate.webp';
     setHeroThumb(initialBg);
-    setHeroPreviewBg(initialBg);
-    syncHeroPreview(); // 把当前字段值刷到 preview
 
-    bindHeroPreview();
+    // iframe 桥接 + page tab 切换(替代原 hero 缩略卡)
+    bindIframePreview();
+    bindPageTabs();
 
     $('#hero-image-thumb')?.addEventListener('click', () => {
         openImagePicker((image) => {
@@ -236,45 +236,77 @@ async function initEditor() {
     });
 }
 
-function bindHeroPreview() {
-    // 字段→preview 元素的实时映射
-    const map = [
-        ['#hero-title', '#hero-preview-title', '半挂车研发制造专家'],
-        ['#hero-subtitle', '#hero-preview-subtitle', 'DREAM ON THE ROAD · 为梦出发'],
-        ['#hero-desc', '#hero-preview-desc', 'T700C高强度钢材 · 全系定制化生产 · 品质铸就未来'],
-        ['#hero-poster', null, null],  // poster 改时同步 bg
-        ['#hero-video', null, null],   // 不影响 preview
-    ];
-    map.forEach(([from, to, fallback]) => {
-        const inp = $(from);
+// === iframe 实时预览桥接(L3 替代原 hero 缩略卡) ===
+const PREVIEW_FIELD_KEYS = [
+    'hero-title', 'hero-title-en',
+    'hero-subtitle', 'hero-subtitle-en',
+    'hero-desc', 'hero-desc-en',
+];
+
+function bindIframePreview() {
+    const iframe = $('#editor-preview-iframe');
+    if (!iframe) return;
+
+    // 工具:推改动到 iframe
+    function pushUpdate(key, value) {
+        if (iframe.contentWindow) {
+            iframe.contentWindow.postMessage({type: 'cms-update', key, value}, '*');
+        }
+    }
+
+    // 监听字段 input 事件
+    PREVIEW_FIELD_KEYS.forEach((k) => {
+        const inp = document.getElementById(k);
         if (!inp) return;
-        if (to) {
-            inp.addEventListener('input', () => {
-                const target = $(to);
-                if (target) target.textContent = inp.value || fallback;
+        inp.addEventListener('input', () => pushUpdate(k, inp.value));
+    });
+
+    // 收 iframe 信号:ready / focus 跳字段
+    window.addEventListener('message', (ev) => {
+        const data = ev.data || {};
+        if (data.type === 'cms-preview-ready') {
+            // 推一遍当前所有字段值,iframe 立刻反映
+            PREVIEW_FIELD_KEYS.forEach((k) => {
+                const inp = document.getElementById(k);
+                if (inp && inp.value) pushUpdate(k, inp.value);
             });
+        } else if (data.type === 'cms-focus' && data.key) {
+            const inp = document.getElementById(data.key);
+            if (inp) {
+                inp.focus();
+                inp.scrollIntoView({behavior: 'smooth', block: 'center'});
+                // 闪一下高亮
+                inp.classList.add('field-flash');
+                setTimeout(() => inp.classList.remove('field-flash'), 1200);
+            }
         }
     });
-    // poster 变了 → preview 背景跟着变(用户输 url 路径时即时反映)
-    $('#hero-poster')?.addEventListener('input', () => {
-        const v = $('#hero-poster').value.trim();
-        if (v) setHeroPreviewBg(v);
+
+    // 刷新按钮
+    $('#preview-refresh')?.addEventListener('click', () => {
+        const cur = $('#editor-preview-iframe');
+        if (cur) cur.src = cur.src;
     });
 }
 
-function syncHeroPreview() {
-    const t = $('#hero-title')?.value;
-    const s = $('#hero-subtitle')?.value;
-    const d = $('#hero-desc')?.value;
-    if ($('#hero-preview-title') && t) $('#hero-preview-title').textContent = t;
-    if ($('#hero-preview-subtitle') && s) $('#hero-preview-subtitle').textContent = s;
-    if ($('#hero-preview-desc') && d) $('#hero-preview-desc').textContent = d;
-}
-
-function setHeroPreviewBg(url) {
-    const el = $('#hero-preview-bg');
-    if (!el) return;
-    el.style.backgroundImage = `url('${escapeAttr(toPublicUrl(url))}')`;
+function bindPageTabs() {
+    const tabs = $$('.page-tab');
+    if (!tabs.length) return;
+    tabs.forEach((btn) => {
+        btn.addEventListener('click', () => {
+            const page = btn.dataset.page;
+            tabs.forEach((b) => b.classList.toggle('active', b === btn));
+            const iframe = $('#editor-preview-iframe');
+            if (iframe) iframe.src = `/admin/preview/${page}.html`;
+            const cur = $('#preview-current');
+            if (cur) cur.textContent = page === 'about' ? '关于我们 · about.html' : '首页 · index.html';
+            // 切左侧 section 显隐:section.data-page=index 只在首页 tab 显;无 data-page 属性的 section 永远显(比如 about-images)
+            $$('.editor-section').forEach((sec) => {
+                const belongs = sec.dataset.page;
+                sec.style.display = !belongs || belongs === page ? '' : 'none';
+            });
+        });
+    });
 }
 
 function initAboutImageReplace() {
