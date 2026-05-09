@@ -388,7 +388,7 @@ def admin_preview(page):
 
   // 图槽位 src 匹配(双向跟踪:点图跳左 form 槽)
   const ABOUT_IMG_SLOTS = {
-    // about.html 关于页 6 张
+    // about.html 关键代表图 6 张
     'about-gate': 'about-gate.',
     'staff-rally': 'staff-rally.',
     'team-rally': 'team-rally.',
@@ -408,6 +408,29 @@ def admin_preview(page):
     'honor-logistics-chain-2019': 'honor-logistics-chain-2019.',
     'honor-truckhome-2021': 'honor-truckhome-2021.',
     'honor-shaanxi-breakthrough-2018': 'honor-shaanxi-breakthrough-2018.',
+    // about 团队墙 6 张
+    'team-01': 'team-01.', 'team-03': 'team-03.', 'team-05': 'team-05.',
+    'team-07': 'team-07.', 'team-09': 'team-09.', 'team-training': 'team-training.',
+    // about 回馈社会 6 张
+    'social-05': 'social-05.', 'social-09': 'social-09.', 'social-10': 'social-10.',
+    'social-11': 'social-11.', 'social-12': 'social-12.', 'social-13': 'social-13.',
+    // about 产品预览 4 张(含行业首创)
+    'product-shaanxi-crane': 'product-shaanxi-crane.',
+    'product-fence': 'product-fence.', 'product-dump-fleet': 'product-dump-fleet.', 'product-crane': 'product-crane.',
+    // about 独有荣誉 6 张(首页 8 张外的)
+    'honor-party-org-2021': 'honor-party-org-2021.',
+    'honor-startup-star-2021': 'honor-startup-star-2021.',
+    'honor-truckhome-2019': 'honor-truckhome-2019.',
+    'honor-logistics-vp-2019': 'honor-logistics-vp-2019.',
+    'honor-shaanxi-dealer': 'honor-shaanxi-dealer.',
+    'honor-58-employer': 'honor-58-employer.',
+    // about 专利证书 12 张
+    'patent-cert-01': 'patent-cert-01.', 'patent-cert-02': 'patent-cert-02.',
+    'patent-cert-03': 'patent-cert-03.', 'patent-cert-04': 'patent-cert-04.',
+    'patent-cert-05': 'patent-cert-05.', 'patent-cert-06': 'patent-cert-06.',
+    'patent-cert-07': 'patent-cert-07.', 'patent-cert-08': 'patent-cert-08.',
+    'patent-cert-09': 'patent-cert-09.', 'patent-cert-10': 'patent-cert-10.',
+    'patent-cert-11': 'patent-cert-11.', 'patent-cert-12': 'patent-cert-12.',
   };
 
   // 点击区块通知 parent 跳到对应字段
@@ -506,6 +529,45 @@ def replace_about_image():
         "honor-logistics-chain-2019": ("about", "honor-logistics-chain-2019", "物流产业链先进 2019"),
         "honor-truckhome-2021": ("about", "honor-truckhome-2021", "卡车之家数字营销 2021"),
         "honor-shaanxi-breakthrough-2018": ("about", "honor-shaanxi-breakthrough-2018", "陕汽湖北区域突破 2018"),
+        # about 团队墙 6 张
+        "team-01": ("about", "team-01", "团队风采 01"),
+        "team-03": ("about", "team-03", "团队风采 03"),
+        "team-05": ("about", "team-05", "团队风采 05"),
+        "team-07": ("about", "team-07", "团队风采 07"),
+        "team-09": ("about", "team-09", "团队风采 09"),
+        "team-training": ("about", "team-training", "管理培训凝聚聚德心"),
+        # about 回馈社会 6 张
+        "social-05": ("about", "social-05", "回馈社会 05"),
+        "social-09": ("about", "social-09", "回馈社会 09"),
+        "social-10": ("about", "social-10", "回馈社会 10"),
+        "social-11": ("about", "social-11", "回馈社会 11"),
+        "social-12": ("about", "social-12", "回馈社会 12"),
+        "social-13": ("about", "social-13", "回馈社会 13"),
+        # about 产品预览 4 张(含行业首创)
+        "product-shaanxi-crane": ("about", "product-shaanxi-crane", "行业首创·折臂式随车吊"),
+        "product-fence": ("about", "product-fence", "仓栅半挂车"),
+        "product-dump-fleet": ("about", "product-dump-fleet", "自卸半挂车"),
+        "product-crane": ("about", "product-crane", "随车起重运输车"),
+        # about 独有荣誉 6 张(首页 8 张外的)
+        "honor-party-org-2021": ("about", "honor-party-org-2021", "先进基层党组织 2021"),
+        "honor-startup-star-2021": ("about", "honor-startup-star-2021", "创业之星 2021"),
+        "honor-truckhome-2019": ("about", "honor-truckhome-2019", "卡车之家数字营销 2019"),
+        "honor-logistics-vp-2019": ("about", "honor-logistics-vp-2019", "物流协会副会长"),
+        "honor-shaanxi-dealer": ("about", "honor-shaanxi-dealer", "陕汽优秀经销商"),
+        "honor-58-employer": ("about", "honor-58-employer", "58 同城金牌雇主"),
+        # about 专利证书 12 张
+        "patent-cert-01": ("about", "patent-cert-01", "实用新型专利 01"),
+        "patent-cert-02": ("about", "patent-cert-02", "实用新型专利 02"),
+        "patent-cert-03": ("about", "patent-cert-03", "实用新型专利 03"),
+        "patent-cert-04": ("about", "patent-cert-04", "实用新型专利 04"),
+        "patent-cert-05": ("about", "patent-cert-05", "实用新型专利 05"),
+        "patent-cert-06": ("about", "patent-cert-06", "实用新型专利 06"),
+        "patent-cert-07": ("about", "patent-cert-07", "实用新型专利 07"),
+        "patent-cert-08": ("about", "patent-cert-08", "实用新型专利 08"),
+        "patent-cert-09": ("about", "patent-cert-09", "实用新型专利 09"),
+        "patent-cert-10": ("about", "patent-cert-10", "实用新型专利 10"),
+        "patent-cert-11": ("about", "patent-cert-11", "实用新型专利 11"),
+        "patent-cert-12": ("about", "patent-cert-12", "实用新型专利 12"),
     }
     if key not in SLOTS:
         raise ValueError(f"无效 key: {key}(可选: {','.join(SLOTS.keys())})")
