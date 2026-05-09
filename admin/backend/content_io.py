@@ -197,9 +197,35 @@ def publish_site(commit_message: str | None = None, push: bool = False) -> dict[
     commit = subprocess.run(["git", "commit", "-m", message], cwd=REPO_ROOT, text=True, capture_output=True, check=False)
     if commit.returncode != 0 and "nothing to commit" not in (commit.stdout + commit.stderr).lower():
         return {**result, "ok": False, "stage": "commit", "stdout": commit.stdout, "stderr": commit.stderr}
+
+    # push 前先 pull --rebase 同步,防 G:/ 那边推得多导致 reject(踩坑日 5/9)
+    pull_result = subprocess.run(
+        ["git", "pull", "--rebase", "origin", "master"],
+        cwd=REPO_ROOT, text=True, capture_output=True, check=False,
+    )
+    if pull_result.returncode != 0:
+        return {
+            **result, "ok": False, "stage": "git-pull-rebase",
+            "pull_stdout": pull_result.stdout,
+            "pull_stderr": pull_result.stderr,
+            "hint": "服务器仓库 rebase 失败,可能有 conflict。墨需要 ssh 手动解决:cd /opt/hboyjd-website && git rebase --abort 然后重试",
+        }
+
     push_result = subprocess.run(["git", "push", "origin", "master"], cwd=REPO_ROOT, text=True, capture_output=True, check=False)
+    # 如果 push 还失败(比如刚 rebase 完又被别人推了),做一次重试
+    if push_result.returncode != 0 and "rejected" in (push_result.stderr or "").lower():
+        retry_pull = subprocess.run(
+            ["git", "pull", "--rebase", "origin", "master"],
+            cwd=REPO_ROOT, text=True, capture_output=True, check=False,
+        )
+        if retry_pull.returncode == 0:
+            push_result = subprocess.run(["git", "push", "origin", "master"], cwd=REPO_ROOT, text=True, capture_output=True, check=False)
+
     result.update({
         "stage": "git-push",
+        "pulled": pull_result.returncode == 0,
+        "pull_stdout": pull_result.stdout,
+        "pull_stderr": pull_result.stderr,
         "pushed": push_result.returncode == 0,
         "push_stdout": push_result.stdout,
         "push_stderr": push_result.stderr,
