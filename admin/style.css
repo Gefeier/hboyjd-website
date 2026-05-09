@@ -748,6 +748,67 @@ select {
     margin-right: 2px;
     opacity: 0.7;
 }
+
+/* ===== Timeline list editor ===== */
+.timeline-edit-list {
+    display: flex;
+    flex-direction: column;
+    gap: 14px;
+}
+.timeline-edit-row {
+    border: 1px solid var(--gray-200, #e2e8f0);
+    border-left: 3px solid var(--gold, #d4a853);
+    border-radius: 6px;
+    padding: 14px 16px;
+    background: var(--white, #fff);
+}
+.timeline-edit-head {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 10px;
+    gap: 10px;
+}
+.timeline-edit-year {
+    font-size: 22px !important;
+    font-weight: 800 !important;
+    color: var(--navy-900, #0a1628) !important;
+    width: 80px !important;
+    border: none !important;
+    border-bottom: 2px solid var(--gray-200) !important;
+    border-radius: 0 !important;
+    padding: 4px 0 !important;
+    letter-spacing: 1px !important;
+    background: transparent !important;
+    font-variant-numeric: tabular-nums;
+}
+.timeline-edit-year:focus {
+    border-bottom-color: var(--gold) !important;
+    outline: none !important;
+}
+.timeline-edit-tools {
+    display: flex;
+    gap: 4px;
+}
+.timeline-edit-tools .icon-btn {
+    width: 28px;
+    height: 28px;
+    font-size: 14px;
+    padding: 0;
+}
+.timeline-edit-tools .icon-btn.danger {
+    color: #b91c1c;
+    border-color: #fecaca;
+}
+.timeline-edit-tools .icon-btn.danger:hover {
+    background: #fee2e2;
+    color: #991b1b;
+}
+.timeline-edit-row label {
+    font-size: 12px !important;
+    color: var(--gray-500, #64748b) !important;
+    margin-top: 8px !important;
+}
 /* 重要消息 ★ 一闪一闪(admin/news 卡片标题里) */
 .news-imp-mark {
     color: #d4a853;

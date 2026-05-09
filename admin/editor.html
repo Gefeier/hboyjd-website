@@ -348,6 +348,124 @@
                     <input type="text" id="ab-adv-desc-en">
                 </div>
 
+                <!-- 关于页 大事记 timeline 列表(可增删) -->
+                <div class="editor-section" data-section="about-timeline" data-page="about">
+                    <h3 class="editor-section-title">▼ 关于页 大事记 timeline 列表(每年一张卡,可增删)</h3>
+                    <p class="muted" style="font-size:13px;">每条卡片 = 一年。可上下移、删除、新增。明年加新里程碑就在这里加。</p>
+                    <div id="timeline-list" class="timeline-edit-list"></div>
+                    <button type="button" class="btn btn-outline" id="timeline-add-btn" style="margin-top:14px;">+ 新增一年</button>
+                </div>
+
+                <!-- 关于页 技术与产学研 4 张卡 -->
+                <div class="editor-section" data-section="about-tech-cards" data-page="about">
+                    <h3 class="editor-section-title">▼ 关于页 技术与产学研 4 张卡</h3>
+                    <p class="muted" style="font-size:13px;">4 张固定卡(合作院校 / 自主研发 / 行业首创 / 实验设备),每张 3 字段(小标 / 标题 / 一句关键描述)。卡内 list 列表(3 院校列表 / 6 工程师列表)墨手改,这里只改文案。</p>
+
+                    <h4 style="font-size:13px; color:#64748b; margin:14px 0 8px;">▸ 卡 1:合作院校</h4>
+                    <div class="form-row two">
+                        <label>小标 (中)<input type="text" id="ab-tech-card-1-eyebrow" placeholder="例:合作院校"></label>
+                        <label>小标 (英)<input type="text" id="ab-tech-card-1-eyebrow-en"></label>
+                    </div>
+                    <label>标题 (中)</label>
+                    <input type="text" id="ab-tech-card-1-title">
+                    <label>标题 (英)</label>
+                    <input type="text" id="ab-tech-card-1-title-en">
+                    <label>一句关键描述 (中)</label>
+                    <input type="text" id="ab-tech-card-1-body" placeholder="例:累计开展合作研发 32 项 · 科技成果转化 17 项">
+                    <label>一句关键描述 (英)</label>
+                    <input type="text" id="ab-tech-card-1-body-en">
+
+                    <h4 style="font-size:13px; color:#64748b; margin:18px 0 8px;">▸ 卡 2:自主研发</h4>
+                    <div class="form-row two">
+                        <label>小标 (中)<input type="text" id="ab-tech-card-2-eyebrow"></label>
+                        <label>小标 (英)<input type="text" id="ab-tech-card-2-eyebrow-en"></label>
+                    </div>
+                    <label>标题 (中)</label>
+                    <input type="text" id="ab-tech-card-2-title">
+                    <label>标题 (英)</label>
+                    <input type="text" id="ab-tech-card-2-title-en">
+                    <label>一句关键描述 (中)</label>
+                    <input type="text" id="ab-tech-card-2-body">
+                    <label>一句关键描述 (英)</label>
+                    <input type="text" id="ab-tech-card-2-body-en">
+
+                    <h4 style="font-size:13px; color:#64748b; margin:18px 0 8px;">▸ 卡 3:行业首创</h4>
+                    <div class="form-row two">
+                        <label>小标 (中)<input type="text" id="ab-tech-card-3-eyebrow"></label>
+                        <label>小标 (英)<input type="text" id="ab-tech-card-3-eyebrow-en"></label>
+                    </div>
+                    <label>标题 (中)</label>
+                    <input type="text" id="ab-tech-card-3-title">
+                    <label>标题 (英)</label>
+                    <input type="text" id="ab-tech-card-3-title-en">
+                    <label>一段描述 (中)</label>
+                    <textarea id="ab-tech-card-3-body" rows="3"></textarea>
+                    <label>一段描述 (英)</label>
+                    <textarea id="ab-tech-card-3-body-en" rows="3"></textarea>
+
+                    <h4 style="font-size:13px; color:#64748b; margin:18px 0 8px;">▸ 卡 4:实验与设备</h4>
+                    <div class="form-row two">
+                        <label>小标 (中)<input type="text" id="ab-tech-card-4-eyebrow"></label>
+                        <label>小标 (英)<input type="text" id="ab-tech-card-4-eyebrow-en"></label>
+                    </div>
+                    <label>标题 (中)</label>
+                    <input type="text" id="ab-tech-card-4-title">
+                    <label>标题 (英)</label>
+                    <input type="text" id="ab-tech-card-4-title-en">
+                    <label>一句关键描述 (中)</label>
+                    <input type="text" id="ab-tech-card-4-body">
+                    <label>一句关键描述 (英)</label>
+                    <input type="text" id="ab-tech-card-4-body-en">
+                </div>
+
+                <!-- 关于页 客户为什么选择我们 3 张卡 -->
+                <div class="editor-section" data-section="about-adv-cards" data-page="about">
+                    <h3 class="editor-section-title">▼ 关于页 客户为什么选择我们 3 张卡</h3>
+                    <p class="muted" style="font-size:13px;">3 张固定卡(客户回购 / 交付节奏 / 一对一定制),每张 3 字段(小标 / 标题 / 段落描述)。</p>
+
+                    <h4 style="font-size:13px; color:#64748b; margin:14px 0 8px;">▸ 卡 1:客户回购 · 口碑转介</h4>
+                    <div class="form-row two">
+                        <label>小标 (中)<input type="text" id="ab-adv-card-1-eyebrow"></label>
+                        <label>小标 (英)<input type="text" id="ab-adv-card-1-eyebrow-en"></label>
+                    </div>
+                    <label>标题 (中)</label>
+                    <input type="text" id="ab-adv-card-1-title">
+                    <label>标题 (英)</label>
+                    <input type="text" id="ab-adv-card-1-title-en">
+                    <label>段落 (中)</label>
+                    <textarea id="ab-adv-card-1-body" rows="3"></textarea>
+                    <label>段落 (英)</label>
+                    <textarea id="ab-adv-card-1-body-en" rows="3"></textarea>
+
+                    <h4 style="font-size:13px; color:#64748b; margin:18px 0 8px;">▸ 卡 2:交付节奏 · 提车速度</h4>
+                    <div class="form-row two">
+                        <label>小标 (中)<input type="text" id="ab-adv-card-2-eyebrow"></label>
+                        <label>小标 (英)<input type="text" id="ab-adv-card-2-eyebrow-en"></label>
+                    </div>
+                    <label>标题 (中)</label>
+                    <input type="text" id="ab-adv-card-2-title">
+                    <label>标题 (英)</label>
+                    <input type="text" id="ab-adv-card-2-title-en">
+                    <label>段落 (中)</label>
+                    <textarea id="ab-adv-card-2-body" rows="3"></textarea>
+                    <label>段落 (英)</label>
+                    <textarea id="ab-adv-card-2-body-en" rows="3"></textarea>
+
+                    <h4 style="font-size:13px; color:#64748b; margin:18px 0 8px;">▸ 卡 3:一对一定制</h4>
+                    <div class="form-row two">
+                        <label>小标 (中)<input type="text" id="ab-adv-card-3-eyebrow"></label>
+                        <label>小标 (英)<input type="text" id="ab-adv-card-3-eyebrow-en"></label>
+                    </div>
+                    <label>标题 (中)</label>
+                    <input type="text" id="ab-adv-card-3-title">
+                    <label>标题 (英)</label>
+                    <input type="text" id="ab-adv-card-3-title-en">
+                    <label>段落 (中)</label>
+                    <textarea id="ab-adv-card-3-body" rows="3"></textarea>
+                    <label>段落 (英)</label>
+                    <textarea id="ab-adv-card-3-body-en" rows="3"></textarea>
+                </div>
+
                 <!-- 关于页 底部 CTA -->
                 <div class="editor-section" data-section="about-cta" data-page="about">
                     <h3 class="editor-section-title">▼ 关于页 底部 CTA</h3>

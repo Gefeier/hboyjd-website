@@ -163,7 +163,7 @@ async function initDashboard() {
     }
 }
 
-// 关于我们页 28 字段(中文 key,英文是 _en/-en 后缀)
+// 关于我们页 49 字段(中文 key,英文是 _en/-en 后缀)
 const ABOUT_PAGE_KEYS = [
     'ab-hero-eyebrow', 'ab-hero-title', 'ab-hero-tagline',
     'ab-mission-eyebrow', 'ab-mission-headline',
@@ -175,6 +175,14 @@ const ABOUT_PAGE_KEYS = [
     'ab-timeline-tag', 'ab-timeline-title', 'ab-timeline-desc',
     'ab-tech-tag', 'ab-tech-title', 'ab-tech-desc',
     'ab-adv-tag', 'ab-adv-title', 'ab-adv-desc',
+    // Tier 2: tech 4 cards (12 fields) + adv 3 cards (9 fields)
+    'ab-tech-card-1-eyebrow', 'ab-tech-card-1-title', 'ab-tech-card-1-body',
+    'ab-tech-card-2-eyebrow', 'ab-tech-card-2-title', 'ab-tech-card-2-body',
+    'ab-tech-card-3-eyebrow', 'ab-tech-card-3-title', 'ab-tech-card-3-body',
+    'ab-tech-card-4-eyebrow', 'ab-tech-card-4-title', 'ab-tech-card-4-body',
+    'ab-adv-card-1-eyebrow', 'ab-adv-card-1-title', 'ab-adv-card-1-body',
+    'ab-adv-card-2-eyebrow', 'ab-adv-card-2-title', 'ab-adv-card-2-body',
+    'ab-adv-card-3-eyebrow', 'ab-adv-card-3-title', 'ab-adv-card-3-body',
 ];
 // 新闻动态子页 2 字段
 const NEWS_PAGE_KEYS = ['news-hero-title', 'news-hero-tagline'];
@@ -196,6 +204,70 @@ function collectKvFields(obj, keys) {
         out[`${k}_en`] = en;
     });
     return out;
+}
+
+// === Timeline 列表编辑器(可增删) ===
+function renderTimelineList(items) {
+    const host = $('#timeline-list');
+    if (!host) return;
+    if (!items || !items.length) {
+        host.innerHTML = '<p class="muted">暂无年份卡,点下面「+ 新增一年」加。</p>';
+        return;
+    }
+    host.innerHTML = items.map((it, idx) => `
+        <article class="timeline-edit-row" data-idx="${idx}">
+            <div class="timeline-edit-head">
+                <input type="text" class="timeline-edit-year" data-field="year" value="${escapeAttr(it.year || '')}" placeholder="2027" maxlength="4">
+                <div class="timeline-edit-tools">
+                    <button type="button" class="icon-btn" data-act="up" title="上移">↑</button>
+                    <button type="button" class="icon-btn" data-act="down" title="下移">↓</button>
+                    <button type="button" class="icon-btn danger" data-act="del" title="删除">×</button>
+                </div>
+            </div>
+            <label>标题 (中)</label>
+            <input type="text" data-field="title" value="${escapeAttr(it.title || '')}" placeholder="例:省级专精特新小巨人...">
+            <label>标题 (英)</label>
+            <input type="text" data-field="title_en" value="${escapeAttr(it.title_en || '')}">
+            <label>段落 (中)</label>
+            <textarea data-field="body" rows="3">${escapeHtml(it.body || '')}</textarea>
+            <label>段落 (英)</label>
+            <textarea data-field="body_en" rows="3">${escapeHtml(it.body_en || '')}</textarea>
+        </article>
+    `).join('');
+    bindTimelineRowActions();
+}
+
+function bindTimelineRowActions() {
+    $$('#timeline-list [data-act]').forEach((btn) => {
+        btn.addEventListener('click', () => {
+            const row = btn.closest('.timeline-edit-row');
+            if (!row) return;
+            if (btn.dataset.act === 'del') {
+                if (!confirm('确认删除这一年?')) return;
+                row.remove();
+            } else if (btn.dataset.act === 'up') {
+                const prev = row.previousElementSibling;
+                if (prev && prev.classList.contains('timeline-edit-row')) {
+                    row.parentNode.insertBefore(row, prev);
+                }
+            } else if (btn.dataset.act === 'down') {
+                const next = row.nextElementSibling;
+                if (next && next.classList.contains('timeline-edit-row')) {
+                    row.parentNode.insertBefore(next, row);
+                }
+            }
+        });
+    });
+}
+
+function collectTimelineList() {
+    return $$('#timeline-list .timeline-edit-row').map((row) => {
+        const item = {};
+        $$('[data-field]', row).forEach((inp) => {
+            item[inp.dataset.field] = (inp.value || '').trim();
+        });
+        return item;
+    });
 }
 
 async function initEditor() {
@@ -223,9 +295,20 @@ async function initEditor() {
     setValue('#about-para2', aboutD.para2);
     setValue('#about-para2-en', aboutD.para2_en);
 
-    // 加载 about_page 19 字段 + news_page 2 字段
+    // 加载 about_page 49 字段 + news_page 2 字段 + timeline 数组
     loadKvFields('#', data.about_page || {}, ABOUT_PAGE_KEYS);
     loadKvFields('#', data.news_page || {}, NEWS_PAGE_KEYS);
+    renderTimelineList(data.timeline_items || []);
+
+    $('#timeline-add-btn')?.addEventListener('click', () => {
+        const cur = collectTimelineList();
+        cur.push({year: '', title: '', title_en: '', body: '', body_en: ''});
+        renderTimelineList(cur);
+        // 滚到新加的
+        const rows = $$('#timeline-list .timeline-edit-row');
+        const last = rows[rows.length - 1];
+        if (last) { last.scrollIntoView({behavior: 'smooth', block: 'center'}); last.querySelector('.timeline-edit-year')?.focus(); }
+    });
 
     // iframe 桥接 + page tab 切换(替代原 hero 缩略卡)
     bindIframePreview();
@@ -286,14 +369,15 @@ async function initEditor() {
         }
     });
 
-    // 保存「关于我们」页(19 字段)
+    // 保存「关于我们」页(49 字段 + timeline 列表)
     $('#save-about-btn')?.addEventListener('click', async () => {
         const btn = $('#save-about-btn');
         btn.disabled = true;
         data.about_page = collectKvFields(data.about_page || {}, ABOUT_PAGE_KEYS);
+        data.timeline_items = collectTimelineList();
         await saveSection('index', data);
         btn.disabled = false;
-        showToast('关于我们页已暂存,发布后写入 about.html。');
+        showToast(`关于我们页已暂存(${ABOUT_PAGE_KEYS.length} 字段 + ${data.timeline_items.length} 年 timeline),发布后写入 about.html。`);
     });
 
     // 保存「新闻动态」子页(2 字段 hero 文案)
@@ -374,6 +458,13 @@ const PREVIEW_FIELD_KEYS = (() => {
         'ab-timeline-tag', 'ab-timeline-title', 'ab-timeline-desc',
         'ab-tech-tag', 'ab-tech-title', 'ab-tech-desc',
         'ab-adv-tag', 'ab-adv-title', 'ab-adv-desc',
+        'ab-tech-card-1-eyebrow', 'ab-tech-card-1-title', 'ab-tech-card-1-body',
+        'ab-tech-card-2-eyebrow', 'ab-tech-card-2-title', 'ab-tech-card-2-body',
+        'ab-tech-card-3-eyebrow', 'ab-tech-card-3-title', 'ab-tech-card-3-body',
+        'ab-tech-card-4-eyebrow', 'ab-tech-card-4-title', 'ab-tech-card-4-body',
+        'ab-adv-card-1-eyebrow', 'ab-adv-card-1-title', 'ab-adv-card-1-body',
+        'ab-adv-card-2-eyebrow', 'ab-adv-card-2-title', 'ab-adv-card-2-body',
+        'ab-adv-card-3-eyebrow', 'ab-adv-card-3-title', 'ab-adv-card-3-body',
     ];
     const NEWS_KEYS = ['news-hero-title', 'news-hero-tagline'];
     [...ABOUT_KEYS, ...NEWS_KEYS].forEach((k) => {

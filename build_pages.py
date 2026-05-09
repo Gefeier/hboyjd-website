@@ -67,6 +67,14 @@ def _build_about(data: dict) -> None:
         "ab-timeline-tag", "ab-timeline-title", "ab-timeline-desc",
         "ab-tech-tag", "ab-tech-title", "ab-tech-desc",
         "ab-adv-tag", "ab-adv-title", "ab-adv-desc",
+        # Tier 2: tech 4 cards (12 fields) + adv 3 cards (9 fields)
+        "ab-tech-card-1-eyebrow", "ab-tech-card-1-title", "ab-tech-card-1-body",
+        "ab-tech-card-2-eyebrow", "ab-tech-card-2-title", "ab-tech-card-2-body",
+        "ab-tech-card-3-eyebrow", "ab-tech-card-3-title", "ab-tech-card-3-body",
+        "ab-tech-card-4-eyebrow", "ab-tech-card-4-title", "ab-tech-card-4-body",
+        "ab-adv-card-1-eyebrow", "ab-adv-card-1-title", "ab-adv-card-1-body",
+        "ab-adv-card-2-eyebrow", "ab-adv-card-2-title", "ab-adv-card-2-body",
+        "ab-adv-card-3-eyebrow", "ab-adv-card-3-title", "ab-adv-card-3-body",
     ]
     applied = 0
     for key in keys:
@@ -76,8 +84,45 @@ def _build_about(data: dict) -> None:
         html = _replace_by_cms_key(html, key, zh, en)
         if html != before:
             applied += 1
+
+    # Tier 2: timeline items 列表(数组)— 在 marker 之间整段重写
+    timeline_items = data.get("timeline_items") or []
+    if timeline_items:
+        rendered = _render_timeline_items(timeline_items)
+        pattern = re.compile(
+            r'(<!-- TIMELINE_ITEMS_START -->)(.*?)(<!-- TIMELINE_ITEMS_END -->)',
+            re.S,
+        )
+        new_html, n = pattern.subn(lambda m: f"{m.group(1)}\n{rendered}                {m.group(3)}", html)
+        if n:
+            html = new_html
+            print(f"  + timeline_items rerendered ({len(timeline_items)} items)")
+        else:
+            print("  ! TIMELINE_ITEMS marker not found, skipped")
+
     ABOUT_PATH.write_text(html, encoding="utf-8")
     print(f"built about.html from content/index.json about_page ({applied}/{len(keys)} fields)")
+
+
+def _render_timeline_items(items: list) -> str:
+    """从 timeline_items 数组重新渲染 .timeline-item HTML(替 about.html 默认 fallback 内容)"""
+    out = []
+    for it in items:
+        year = _html_escape(it.get("year", ""))
+        title_zh = _html_escape(it.get("title", ""))
+        title_en = _html_escape(it.get("title_en", ""))
+        body_zh = _html_escape(it.get("body", ""))
+        body_en = _html_escape(it.get("body_en", ""))
+        out.append(
+            '                <div class="timeline-item">\n'
+            f'                    <div class="timeline-year">{year}</div>\n'
+            '                    <div class="timeline-card">\n'
+            f'                        <h3 data-en="{title_en}">{title_zh}</h3>\n'
+            f'                        <p data-en="{body_en}">{body_zh}</p>\n'
+            '                    </div>\n'
+            '                </div>'
+        )
+    return "\n".join(out) + "\n"
 
 
 def _build_news(data: dict) -> None:
