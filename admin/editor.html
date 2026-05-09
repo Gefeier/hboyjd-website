@@ -93,8 +93,42 @@
         </div>
 
         <div class="card" style="margin-top:32px;">
-            <h2>About 关于我们页面</h2>
-            <p class="muted">已预留 content/about.json。v1 不开放全量编辑,避免破坏主站 about.html 当前调性。如需改 about,联系墨。</p>
+            <h2>About 关键图替换</h2>
+            <p class="muted">点击下面任一缩略 → 选本地新图上传(自动 resize 长边 1600+ 转 webp,覆写同名文件)。改完点页面右上角「发布预演」推到 hboyjd.com/about.html。</p>
+            <div class="about-images-grid">
+                <button type="button" class="about-img-slot" data-key="about-gate">
+                    <div class="about-img-thumb" data-img="/assets/images/about/about-gate.jpg"></div>
+                    <span class="about-img-label">厂区大门</span>
+                    <span class="about-img-pos">顶部 hero 大图</span>
+                </button>
+                <button type="button" class="about-img-slot" data-key="staff-rally">
+                    <div class="about-img-thumb" data-img="/assets/images/about/staff-rally.jpg"></div>
+                    <span class="about-img-label">员工晨会</span>
+                    <span class="about-img-pos">工厂&团队照片墙</span>
+                </button>
+                <button type="button" class="about-img-slot" data-key="team-rally">
+                    <div class="about-img-thumb" data-img="/assets/images/about/team-rally.jpg"></div>
+                    <span class="about-img-label">年终团队合影</span>
+                    <span class="about-img-pos">陕汽车头前合影</span>
+                </button>
+                <button type="button" class="about-img-slot" data-key="factory-cutting-line">
+                    <div class="about-img-thumb" data-img="/assets/images/about/factory-cutting-line.jpg"></div>
+                    <span class="about-img-label">工厂车间</span>
+                    <span class="about-img-pos">数控等离子切割</span>
+                </button>
+                <button type="button" class="about-img-slot" data-key="party-volunteer">
+                    <div class="about-img-thumb" data-img="/assets/images/about/party-volunteer.jpg"></div>
+                    <span class="about-img-label">党员志愿者</span>
+                    <span class="about-img-pos">服务社区</span>
+                </button>
+                <button type="button" class="about-img-slot" data-key="team-trip-2020">
+                    <div class="about-img-thumb" data-img="/assets/images/about/team-trip-2020.jpg"></div>
+                    <span class="about-img-label">员工旅行</span>
+                    <span class="about-img-pos">2020 三峡</span>
+                </button>
+            </div>
+            <input type="file" id="about-image-uploader" accept="image/*" hidden>
+            <p class="muted" style="font-size:12px; margin-top:14px;">⚠️ 替换后跟主页 banner 一起,**点页面右上角「发布预演」**才真上线。其他 about 图(荣誉证书 / 专利 / 团队 11 张)v1 暂不开放,等模板化。</p>
         </div>
     </main>
 </div>

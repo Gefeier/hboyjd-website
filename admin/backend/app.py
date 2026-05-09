@@ -204,6 +204,29 @@ def news_from_wechat_url():
     return jsonify(saved)
 
 
+@app.route("/api/replace-about-image", methods=["POST"])
+def replace_about_image():
+    user = auth.require_user()
+    key = (request.form.get("key") or "").strip()
+    file = request.files.get("file")
+    SLOTS = {
+        "about-gate": ("about", "about-gate", "厂区大门"),
+        "staff-rally": ("about", "staff-rally", "员工晨会"),
+        "team-rally": ("about", "team-rally", "年终团队合影"),
+        "factory-cutting-line": ("about", "factory-cutting-line", "工厂车间"),
+        "party-volunteer": ("about", "party-volunteer", "党员志愿者"),
+        "team-trip-2020": ("about", "team-trip-2020", "员工旅行"),
+    }
+    if key not in SLOTS:
+        raise ValueError(f"无效 key: {key}(可选: {','.join(SLOTS.keys())})")
+    if not file:
+        raise ValueError("缺少 file")
+    folder, basename, label = SLOTS[key]
+    entry = process_upload(file, folder=folder, basename=basename, label=label)
+    append_log(user, "replace-about-image", key, f"换 about/{basename}.jpg+webp")
+    return jsonify({"ok": True, "key": key, "label": label, "entry": entry})
+
+
 @app.route("/api/translate-batch", methods=["POST"])
 def translate_batch():
     user = auth.require_user()

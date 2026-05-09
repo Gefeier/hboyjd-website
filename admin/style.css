@@ -895,3 +895,68 @@ select {
     background: var(--gold);
     color: white;
 }
+
+/* ===== about 关键图替换 grid ===== */
+.about-images-grid {
+    display: grid;
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    gap: 14px;
+}
+.about-img-slot {
+    display: flex;
+    flex-direction: column;
+    align-items: stretch;
+    gap: 6px;
+    padding: 8px;
+    border: 1px solid var(--gray-200);
+    border-radius: 10px;
+    background: white;
+    cursor: pointer;
+    text-align: left;
+    font-family: inherit;
+    transition: border-color 0.18s, transform 0.06s;
+}
+.about-img-slot:hover {
+    border-color: var(--navy-700);
+}
+.about-img-slot:active { transform: translateY(1px); }
+.about-img-slot.uploading { opacity: 0.5; cursor: wait; }
+.about-img-thumb {
+    width: 100%;
+    aspect-ratio: 4 / 3;
+    background: var(--gray-100) center/cover no-repeat;
+    border-radius: 6px;
+    position: relative;
+}
+.about-img-thumb::after {
+    content: "点击替换";
+    position: absolute;
+    inset: 0;
+    background: rgba(7,12,40,0.55);
+    color: white;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 13px;
+    font-weight: 600;
+    border-radius: 6px;
+    opacity: 0;
+    transition: opacity 0.2s;
+    letter-spacing: 1px;
+}
+.about-img-slot:hover .about-img-thumb::after { opacity: 1; }
+.about-img-label {
+    font-size: 13px;
+    font-weight: 600;
+    color: var(--navy-900);
+    padding: 2px 4px;
+}
+.about-img-pos {
+    font-size: 11px;
+    color: var(--gray-500);
+    padding: 0 4px 4px;
+    letter-spacing: 0.5px;
+}
+@media (max-width: 768px) {
+    .about-images-grid { grid-template-columns: repeat(2, 1fr); }
+}

@@ -199,6 +199,8 @@ async function initEditor() {
         showToast('首页 banner 已暂存，发布后写入 index.html。');
     });
 
+    initAboutImageReplace();
+
     $('#translate-en-btn')?.addEventListener('click', async () => {
         const btn = $('#translate-en-btn');
         btn.disabled = true;
@@ -273,6 +275,62 @@ function setHeroPreviewBg(url) {
     const el = $('#hero-preview-bg');
     if (!el) return;
     el.style.backgroundImage = `url('${escapeAttr(toPublicUrl(url))}')`;
+}
+
+function initAboutImageReplace() {
+    const uploader = $('#about-image-uploader');
+    if (!uploader) return;
+
+    // 初始化每个 slot 的缩略图(从 data-img 读)
+    $$('.about-img-slot .about-img-thumb').forEach((el) => {
+        const url = el.dataset.img || '';
+        if (url) el.style.backgroundImage = `url('${escapeAttr(url)}?t=${Date.now()}')`;
+    });
+
+    let activeKey = null;
+    $$('.about-img-slot').forEach((btn) => {
+        btn.addEventListener('click', () => {
+            activeKey = btn.dataset.key;
+            uploader.click();
+        });
+    });
+
+    uploader.addEventListener('change', async (ev) => {
+        const file = ev.target.files && ev.target.files[0];
+        if (!file || !activeKey) {
+            uploader.value = '';
+            return;
+        }
+        const fd = new FormData();
+        fd.append('key', activeKey);
+        fd.append('file', file);
+        const slot = document.querySelector(`.about-img-slot[data-key="${activeKey}"]`);
+        if (slot) slot.classList.add('uploading');
+        try {
+            const res = await fetch(`${API_BASE}/replace-about-image`, {
+                method: 'POST',
+                credentials: 'include',
+                body: fd,
+            });
+            if (!res.ok) {
+                const j = await res.json().catch(() => ({}));
+                throw new Error(j.error || `HTTP ${res.status}`);
+            }
+            const data = await res.json();
+            // 立即刷新缩略图(加时间戳防 cache)
+            const thumb = slot?.querySelector('.about-img-thumb');
+            if (thumb && data.entry) {
+                thumb.style.backgroundImage = `url('${escapeAttr(data.entry.jpg_url)}?t=${Date.now()}')`;
+            }
+            showToast(`「${data.label || activeKey}」已换图,记得点发布预演`);
+        } catch (err) {
+            showToast(err.message || '上传失败', 'error');
+        } finally {
+            if (slot) slot.classList.remove('uploading');
+            uploader.value = '';
+            activeKey = null;
+        }
+    });
 }
 
 async function initImagesPage() {
