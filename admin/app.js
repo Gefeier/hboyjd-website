@@ -198,6 +198,40 @@ async function initEditor() {
         btn.disabled = false;
         showToast('首页 banner 已暂存，发布后写入 index.html。');
     });
+
+    $('#translate-en-btn')?.addEventListener('click', async () => {
+        const btn = $('#translate-en-btn');
+        btn.disabled = true;
+        const origText = btn.textContent;
+        btn.textContent = '⏳ AI 翻译中...';
+        try {
+            const items = [
+                {key: 'title', text: ($('#hero-title')?.value || '').trim()},
+                {key: 'subtitle', text: ($('#hero-subtitle')?.value || '').trim()},
+                {key: 'desc', text: ($('#hero-desc')?.value || '').trim()},
+            ].filter((x) => x.text);
+            if (!items.length) {
+                showToast('中文字段都是空的,先填中文再翻译', 'error');
+                return;
+            }
+            const res = await api('/translate-batch', {
+                method: 'POST',
+                body: JSON.stringify({items}),
+            });
+            const map = res.translations || {};
+            if (map.title && $('#hero-title-en')) $('#hero-title-en').value = map.title;
+            if (map.subtitle && $('#hero-subtitle-en')) $('#hero-subtitle-en').value = map.subtitle;
+            if (map.desc && $('#hero-desc-en')) $('#hero-desc-en').value = map.desc;
+            const filled = Object.keys(map).length;
+            showToast(`AI 翻译完成,填了 ${filled} 个英文字段,记得校对`);
+        } catch (err) {
+            const msg = err.message || '翻译失败';
+            showToast(msg.includes('未配置') ? 'AI 服务未配置 — 联系墨在服务器加 ANTHROPIC_API_KEY' : msg, 'error');
+        } finally {
+            btn.disabled = false;
+            btn.textContent = origText;
+        }
+    });
 }
 
 function bindHeroPreview() {

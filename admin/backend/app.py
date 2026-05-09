@@ -11,6 +11,7 @@ from audit_log import append_log, read_logs
 from content_io import REPO_ROOT, append_news, ensure_content_files, publish_site, read_images_manifest, read_section, write_section
 from image_processor import process_upload
 from wechat_fetcher import fetch_wechat_article
+from translate import translate_batch as do_translate_batch
 
 
 app = Flask(__name__, static_folder=None)
@@ -201,6 +202,21 @@ def news_from_wechat_url():
     saved, inserted = append_news(article)
     append_log(user, "wechat-news", saved["url"], "新增公众号新闻" if inserted else "更新已有公众号新闻")
     return jsonify(saved)
+
+
+@app.route("/api/translate-batch", methods=["POST"])
+def translate_batch():
+    user = auth.require_user()
+    payload = request.get_json(force=True) or {}
+    items = payload.get("items") or []
+    if not items:
+        return jsonify({"translations": {}})
+    try:
+        translations = do_translate_batch(items)
+        append_log(user, "translate-en", "hero", f"翻译 {len(items)} 条")
+        return jsonify({"translations": translations})
+    except RuntimeError as exc:
+        return jsonify({"error": str(exc)}), 503
 
 
 @app.route("/api/news/batch-import", methods=["POST"])

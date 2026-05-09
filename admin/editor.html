@@ -27,6 +27,11 @@
             <div class="card editor-form">
                 <h2>首页 Hero</h2>
 
+                <div class="translate-bar">
+                    <button type="button" class="btn btn-outline" id="translate-en-btn">⇄ 中文已填好,自动翻译英文字段</button>
+                    <p class="muted" style="font-size:12px; margin-top:8px;">翻译后请人工校对一遍 · 由 AI 翻译,品牌词 / 行业术语会自动保留</p>
+                </div>
+
                 <label>主标语 (中文)</label>
                 <input type="text" id="hero-title" placeholder="例:半挂车研发制造专家">
 
@@ -45,13 +50,17 @@
                 <label>描述 (英文)</label>
                 <textarea id="hero-desc-en" rows="2" placeholder="例:T700C High-Strength Steel · Fully Customized Production"></textarea>
 
-                <div class="form-row two">
-                    <label>Hero 视频路径(可选,留空只显示 poster)<input type="text" id="hero-video" placeholder="例:assets/videos/hero-factory.mp4"></label>
-                    <label>视频封面图路径(没视频时显示这张)<input type="text" id="hero-poster" placeholder="例:assets/videos/hero-factory-poster.jpg"></label>
-                </div>
-
                 <label>Banner 缩略图(点击从图片库替换)</label>
                 <div class="image-thumb" id="hero-image-thumb"></div>
+
+                <details class="advanced-toggle" style="margin-top:24px;">
+                    <summary>⚙️ 高级设置(墨用,市场部不要碰) </summary>
+                    <p class="muted" style="font-size:12px; margin:12px 0;">视频文件几十 MB,普通图片库装不下。要换 Hero 视频请联系墨手动上传 mp4。下面这两个路径填错会让首页背景空白,**改完没把握就别保存**。</p>
+                    <div class="form-row two">
+                        <label>Hero 视频路径(.mp4)<input type="text" id="hero-video" placeholder="assets/videos/hero-factory.mp4"></label>
+                        <label>视频封面图(.jpg)<input type="text" id="hero-poster" placeholder="assets/videos/hero-factory-poster.jpg"></label>
+                    </div>
+                </details>
 
                 <div style="margin-top:24px; display:flex; gap:12px;">
                     <button class="btn btn-primary" id="save-index-btn" type="button">保存暂存</button>

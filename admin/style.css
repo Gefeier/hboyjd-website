@@ -837,3 +837,61 @@ select {
     }
     .editor-preview-wrap { position: static; }
 }
+
+/* ===== 高级设置折叠区(藏视频路径等技术字段) ===== */
+.advanced-toggle {
+    border: 1px dashed var(--gray-300);
+    border-radius: 8px;
+    padding: 0;
+    background: var(--gray-50);
+    margin-top: 18px;
+}
+.advanced-toggle summary {
+    cursor: pointer;
+    color: var(--gray-700);
+    font-size: 13px;
+    font-weight: 600;
+    padding: 12px 16px;
+    user-select: none;
+    list-style: none;
+    transition: color 0.18s;
+    letter-spacing: 0.5px;
+}
+.advanced-toggle summary::-webkit-details-marker { display: none; }
+.advanced-toggle summary::before {
+    content: '▶';
+    margin-right: 8px;
+    font-size: 10px;
+    transition: transform 0.18s;
+    display: inline-block;
+    color: var(--gray-500);
+}
+.advanced-toggle[open] summary::before {
+    transform: rotate(90deg);
+}
+.advanced-toggle summary:hover {
+    color: var(--navy-900);
+}
+.advanced-toggle[open] {
+    background: white;
+}
+.advanced-toggle > *:not(summary) {
+    padding: 0 16px 16px;
+}
+
+.translate-bar {
+    background: linear-gradient(135deg, rgba(212,168,83,0.10), rgba(60,90,180,0.06));
+    border: 1px solid rgba(212,168,83,0.30);
+    border-radius: 8px;
+    padding: 14px 16px;
+    margin-bottom: 22px;
+}
+.translate-bar .btn {
+    background: white;
+    border: 1px solid var(--gold);
+    color: var(--navy-900);
+}
+.translate-bar .btn:hover {
+    background: var(--gold);
+    color: white;
+}
