@@ -301,6 +301,14 @@ def admin_preview(page):
         html = html.replace("</body>", bridge + "</body>")
     else:
         html += bridge
+
+    # 注入 <base href="/"> 到 <head> 顶部,让所有相对 URL(style.css/main.js/assets/...) 解析为根路径
+    # 不然 iframe 的 base URL 是 /admin/preview/,style.css 会被解成 /admin/preview/style.css 404
+    if "<head>" in html:
+        html = html.replace("<head>", '<head><base href="/">', 1)
+    elif "<HEAD>" in html:
+        html = html.replace("<HEAD>", '<HEAD><base href="/">', 1)
+
     from flask import Response
     return Response(html, mimetype="text/html; charset=utf-8")
 
