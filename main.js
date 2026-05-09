@@ -110,7 +110,10 @@ document.querySelectorAll('.stats, .about, .products, .advantages, .news, .cta-s
     fetch('news.json?t=' + Date.now())
         .then(r => r.json())
         .then(data => {
-            allNews = data.sort((a, b) => b.date.localeCompare(a.date));
+            // 过滤掉 site_visible:false(市场部标记不上官网的:价格喊话/内部梗/抽奖大促)
+            allNews = data
+                .filter(n => n.site_visible !== false)
+                .sort((a, b) => b.date.localeCompare(a.date));
             render();
         })
         .catch(() => {});

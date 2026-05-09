@@ -589,26 +589,31 @@ function renderNewsList(news) {
         list.innerHTML = '<p class="muted">暂无新闻，先粘贴公众号链接抓一条。</p>';
         return;
     }
-    list.innerHTML = news.map((item, index) => `
-        <article class="news-editor${item.important ? ' is-important' : ''}" data-index="${index}" data-id="${escapeAttr(item.id || '')}" data-source="${escapeAttr(item.source || 'manual')}" data-category="${escapeAttr(item.category || 'company')}">
+    list.innerHTML = news.map((item, index) => {
+        const isHidden = item.site_visible === false;
+        return `
+        <article class="news-editor${item.important ? ' is-important' : ''}${isHidden ? ' is-hidden-from-site' : ''}" data-index="${index}" data-id="${escapeAttr(item.id || '')}" data-source="${escapeAttr(item.source || 'manual')}" data-category="${escapeAttr(item.category || 'company')}">
             <div class="news-card-header">
                 <div class="news-cover" style="background-image:url('${escapeAttr(item.cover || '/assets/images/factory-gate.webp')}')"></div>
                 <div class="news-card-meta">
-                    <div class="news-card-title">${item.important ? '<span class="news-imp-mark news-imp-shimmer" title="重要消息">★</span> ' : ''}${escapeHtml(item.title || '(无标题)')}</div>
+                    <div class="news-card-title">${item.important ? '<span class="news-imp-mark news-imp-shimmer" title="重要消息">★</span> ' : ''}${isHidden ? '<span class="hide-mark" title="不上官网">🚫</span> ' : ''}${escapeHtml(item.title || '(无标题)')}</div>
                     <div class="news-card-sub">
                         <span class="cat-badge cat-${escapeAttr(item.category || 'company')}">${escapeHtml(item.category_label || categoryLabelZh(item.category))}</span>
                         <span class="news-card-date">${escapeHtml(item.date || '')}</span>
                         <span class="pill">${escapeHtml(item.source || 'manual')}</span>
+                        ${isHidden ? '<span class="pill pill-hidden">公众号自留 · 不上官网</span>' : ''}
                     </div>
                 </div>
                 <div class="news-card-tools">
                     <button type="button" class="icon-btn star-btn${item.important ? ' is-on' : ''}" data-act="toggle-important" title="标记重要消息(官网会金色一闪一闪)">★</button>
+                    <button type="button" class="icon-btn eye-btn${isHidden ? ' is-off' : ''}" data-act="toggle-site-visible" title="${isHidden ? '当前不上官网,点亮则恢复显示' : '当前上官网,点击切换为不上官网'}">${isHidden ? '🚫' : '👁'}</button>
                     <button type="button" class="icon-btn" data-act="up" title="上移">↑</button>
                     <button type="button" class="icon-btn" data-act="down" title="下移">↓</button>
                     <button type="button" class="icon-btn" data-act="copy-url" title="复制原文 URL">⧉</button>
                 </div>
             </div>
             <input type="hidden" data-field="important" value="${item.important ? '1' : ''}">
+            <input type="hidden" data-field="site_visible" value="${isHidden ? '0' : '1'}">
             <div class="news-fields">
                 <div class="form-row two">
                     <label>标题<input type="text" data-field="title" value="${escapeAttr(item.title || '')}"></label>
@@ -630,8 +635,8 @@ function renderNewsList(news) {
                     <button type="button" class="btn btn-outline danger" data-delete-news>删除</button>
                 </div>
             </div>
-        </article>
-    `).join('');
+        </article>`;
+    }).join('');
     bindNewsRowActions(list);
     applyNewsFilter();
 }
@@ -690,6 +695,18 @@ function handleNewsRowAction(act, article) {
             () => showToast('已复制原文 URL'),
             () => showToast('复制失败,手动复制吧', 'error')
         );
+    } else if (act === 'toggle-site-visible') {
+        const hidden = article.querySelector('input[data-field="site_visible"]');
+        const eye = article.querySelector('.eye-btn');
+        const isHidden = hidden && hidden.value === '0';  // 当前藏
+        if (hidden) hidden.value = isHidden ? '1' : '0';
+        article.classList.toggle('is-hidden-from-site', !isHidden);
+        if (eye) {
+            eye.classList.toggle('is-off', !isHidden);
+            eye.textContent = !isHidden ? '🚫' : '👁';
+            eye.title = !isHidden ? '当前不上官网,点亮则恢复显示' : '当前上官网,点击切换为不上官网';
+        }
+        showToast(!isHidden ? '已藏 — 保存+发布后官网新闻区不再显示这条' : '已恢复显示 — 保存+发布后官网新闻区会出现');
     } else if (act === 'toggle-important') {
         const hidden = article.querySelector('input[data-field="important"]');
         const star = article.querySelector('.star-btn');
@@ -773,6 +790,10 @@ function collectNewsList() {
         // important 转 bool(空字符串/'0'→false,'1'→true)
         item.important = item.important === '1' || item.important === 'true' || item.important === true;
         if (!item.important) delete item.important; // 不写 false 进 json,保持简洁
+        // site_visible:'0'→false 写 json;'1'→true 不写(默认上官网)
+        const sv = item.site_visible;
+        if (sv === '0' || sv === 0 || sv === false) item.site_visible = false;
+        else delete item.site_visible;
         return item;
     });
 }

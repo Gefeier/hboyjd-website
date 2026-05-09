@@ -211,7 +211,9 @@
         fetch('news.json?t=' + Date.now())
             .then(r => r.json())
             .then(data => {
+                // 过滤 site_visible:false(市场部标记不上官网)
                 allNews = (Array.isArray(data) ? data : [])
+                    .filter(n => n.site_visible !== false)
                     .sort((a, b) => (b.date || '').localeCompare(a.date || ''));
                 render();
             })
