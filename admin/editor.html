@@ -211,10 +211,136 @@
                     <p class="muted" style="font-size:12px; margin-top:14px;">⚠️ 其他 about 图(剩余 6 荣誉证书 / 12 专利 / 11 团队墙)v2 模板化才开放。</p>
                 </div>
 
+                <!-- ==================== 关于我们 tab ==================== -->
+
+                <!-- 关于页 Hero + 公司简介 -->
+                <div class="editor-section" data-section="about-hero-mission" data-page="about">
+                    <h3 class="editor-section-title">▼ 关于页 Hero + 公司简介</h3>
+                    <p class="muted" style="font-size:13px; margin-bottom:14px;">右边点对应区块,左边自动跳到字段。改完去最下面点「保存关于页」+「发布预演」。</p>
+
+                    <div class="translate-bar">
+                        <button type="button" class="btn btn-outline" id="translate-about-btn">⇄ 中文已填好,自动翻译英文</button>
+                    </div>
+
+                    <h4 style="font-size:13px; color:#64748b; margin:18px 0 8px; letter-spacing:1px;">▸ Hero 区</h4>
+                    <label>导览短句 (中文)</label>
+                    <input type="text" id="ab-hero-eyebrow" placeholder="例:关于我们 · 企业概况">
+                    <label>导览短句 (英文)</label>
+                    <input type="text" id="ab-hero-eyebrow-en" placeholder="例:ABOUT US · CORPORATE PROFILE">
+
+                    <label>大标题 (中文)</label>
+                    <input type="text" id="ab-hero-title" placeholder="例:关于欧阳聚德">
+                    <label>大标题 (英文)</label>
+                    <input type="text" id="ab-hero-title-en" placeholder="例:Built on Trust, Driven by Quality">
+
+                    <label>副标语 (中文)</label>
+                    <input type="text" id="ab-hero-tagline" placeholder="例:做客户值得信任、员工值得自豪的企业">
+                    <label>副标语 (英文)</label>
+                    <input type="text" id="ab-hero-tagline-en">
+
+                    <h4 style="font-size:13px; color:#64748b; margin:24px 0 8px; letter-spacing:1px;">▸ 公司简介小标题</h4>
+                    <label>导览短句 (中文)</label>
+                    <input type="text" id="ab-mission-eyebrow" placeholder="例:公司简介">
+                    <label>导览短句 (英文)</label>
+                    <input type="text" id="ab-mission-eyebrow-en" placeholder="例:OUR STORY">
+
+                    <label>headline 标语 (中文)</label>
+                    <textarea id="ab-mission-headline" rows="2" placeholder="例:扎根千古帝乡湖北枣阳 · 6 大系列覆盖主流车型..."></textarea>
+                    <label>headline 标语 (英文)</label>
+                    <textarea id="ab-mission-headline-en" rows="2"></textarea>
+                </div>
+
+                <!-- 关于页 关键数字 -->
+                <div class="editor-section" data-section="about-stats" data-page="about">
+                    <h3 class="editor-section-title">▼ 关于页 关键数字</h3>
+                    <p class="muted" style="font-size:13px;">每年增长就改这 4 个数字。其他非数字写死(15 日产 / 32+17 产学研 / 28 设备 / 11 部门)v2 再扩。</p>
+                    <div class="form-row two">
+                        <label>厂区占地(㎡)<input type="text" id="ab-stat-area" placeholder="120,000"></label>
+                        <label>员工总数<input type="text" id="ab-stat-employees" placeholder="200"></label>
+                    </div>
+                    <div class="form-row two">
+                        <label>年产能(台)<input type="text" id="ab-stat-capacity" placeholder="8,000"></label>
+                        <label>已授权专利<input type="text" id="ab-stat-patents" placeholder="44"></label>
+                    </div>
+                </div>
+
+                <!-- 关于页 回馈与责任 -->
+                <div class="editor-section" data-section="about-give-back" data-page="about">
+                    <h3 class="editor-section-title">▼ 关于页 回馈与责任 (3 板块)</h3>
+                    <p class="muted" style="font-size:13px;">爱心捐赠 / 党建工作 / 本地经济 三个板块的标题+文案。</p>
+
+                    <h4 style="font-size:13px; color:#64748b; margin:14px 0 8px;">▸ 板块 1</h4>
+                    <div class="form-row two">
+                        <label>标题 (中文)<input type="text" id="ab-give-back-1-title" placeholder="例:爱心捐赠"></label>
+                        <label>标题 (英文)<input type="text" id="ab-give-back-1-title-en" placeholder="例:CHARITY"></label>
+                    </div>
+                    <label>文案 (中文)</label>
+                    <textarea id="ab-give-back-1-body" rows="3"></textarea>
+                    <label>文案 (英文)</label>
+                    <textarea id="ab-give-back-1-body-en" rows="3"></textarea>
+
+                    <h4 style="font-size:13px; color:#64748b; margin:18px 0 8px;">▸ 板块 2</h4>
+                    <div class="form-row two">
+                        <label>标题 (中文)<input type="text" id="ab-give-back-2-title" placeholder="例:党建工作"></label>
+                        <label>标题 (英文)<input type="text" id="ab-give-back-2-title-en" placeholder="例:PARTY BUILDING"></label>
+                    </div>
+                    <label>文案 (中文)</label>
+                    <textarea id="ab-give-back-2-body" rows="3"></textarea>
+                    <label>文案 (英文)</label>
+                    <textarea id="ab-give-back-2-body-en" rows="3"></textarea>
+
+                    <h4 style="font-size:13px; color:#64748b; margin:18px 0 8px;">▸ 板块 3</h4>
+                    <div class="form-row two">
+                        <label>标题 (中文)<input type="text" id="ab-give-back-3-title" placeholder="例:本地经济"></label>
+                        <label>标题 (英文)<input type="text" id="ab-give-back-3-title-en" placeholder="例:LOCAL ECONOMY"></label>
+                    </div>
+                    <label>文案 (中文)</label>
+                    <textarea id="ab-give-back-3-body" rows="3"></textarea>
+                    <label>文案 (英文)</label>
+                    <textarea id="ab-give-back-3-body-en" rows="3"></textarea>
+                </div>
+
+                <!-- 关于页 底部 CTA -->
+                <div class="editor-section" data-section="about-cta" data-page="about">
+                    <h3 class="editor-section-title">▼ 关于页 底部 CTA</h3>
+                    <p class="muted" style="font-size:13px;">关于我们页最下面那块「把您的需求告诉我们」。</p>
+
+                    <div class="form-row two">
+                        <label>slogan (中文)<input type="text" id="ab-cta-slogan" placeholder="例:聚德同行 · 逐梦前行"></label>
+                        <label>slogan (英文)<input type="text" id="ab-cta-slogan-en" placeholder="例:Jude Walk · Dream Forward"></label>
+                    </div>
+
+                    <div class="form-row two">
+                        <label>主标题 (中文)<input type="text" id="ab-cta-title" placeholder="例:把您的需求告诉我们"></label>
+                        <label>主标题 (英文)<input type="text" id="ab-cta-title-en" placeholder="例:Tell Us What You Need"></label>
+                    </div>
+
+                    <label>描述 (中文)</label>
+                    <input type="text" id="ab-cta-desc" placeholder="例:从规格表到交付,每一步都有真人对接">
+                    <label>描述 (英文)</label>
+                    <input type="text" id="ab-cta-desc-en">
+
+                    <div class="form-row two">
+                        <label>底部 tagline (中文)<input type="text" id="ab-cta-tagline" placeholder="例:聚天下有德之人"></label>
+                        <label>底部 tagline (英文)<input type="text" id="ab-cta-tagline-en"></label>
+                    </div>
+
+                    <div style="margin-top:24px; display:flex; gap:12px;">
+                        <button class="btn btn-primary" id="save-about-btn" type="button">保存关于页</button>
+                        <button class="btn btn-outline" type="button" data-publish>发布预演</button>
+                    </div>
+                </div>
+
+                <!-- ==================== 新闻动态 tab ==================== -->
+
                 <!-- 新闻子页 hero 文案 -->
                 <div class="editor-section" data-section="news-text" data-page="news">
                     <h3 class="editor-section-title">▼ 新闻动态子页 Hero 文案</h3>
                     <p class="muted" style="font-size:13px; margin-bottom:14px;">右边新闻子页顶部的大标题和一句话副标。改完点保存→发布。新闻列表本身在「新闻管理」页(左侧导航)操作,不在这里。</p>
+
+                    <div class="translate-bar">
+                        <button type="button" class="btn btn-outline" id="translate-news-btn">⇄ 中文已填好,自动翻译英文</button>
+                    </div>
 
                     <label>大标题 (中文)</label>
                     <input type="text" id="news-hero-title" placeholder="例:新闻动态">
@@ -226,9 +352,11 @@
                     <label>副标语 (英文)</label>
                     <textarea id="news-hero-tagline-en" rows="2" placeholder="例:Company news, Party-building updates, and customer stories — synced from our WeChat Official Account."></textarea>
 
-                    <p class="muted" style="font-size:12px; margin-top:14px;">⚠️ 当前需墨手写文案到 news.html 后端,自动保存接口 v2 接入(占位,数据先存浏览器)。完整新闻条目请到「新闻管理」编辑。</p>
-
-                    <div style="margin-top:16px;">
+                    <div style="margin-top:24px; display:flex; gap:12px;">
+                        <button class="btn btn-primary" id="save-news-btn" type="button">保存新闻页</button>
+                        <button class="btn btn-outline" type="button" data-publish>发布预演</button>
+                    </div>
+                    <div style="margin-top:14px;">
                         <a href="news.html" target="_blank" rel="noopener" class="btn btn-outline" style="font-size:13px;">→ 跳「新闻管理」编辑文章列表</a>
                     </div>
                 </div>

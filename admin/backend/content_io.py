@@ -193,7 +193,7 @@ def publish_site(commit_message: str | None = None, push: bool = False) -> dict[
         return result
 
     message = commit_message or f"Update website content {datetime.now().strftime('%Y-%m-%d %H:%M')}"
-    subprocess.run(["git", "add", "index.html", "news.json", "content", "assets/images"], cwd=REPO_ROOT, check=True)
+    subprocess.run(["git", "add", "index.html", "about.html", "news.html", "news.json", "content", "assets/images"], cwd=REPO_ROOT, check=True)
     commit = subprocess.run(["git", "commit", "-m", message], cwd=REPO_ROOT, text=True, capture_output=True, check=False)
     if commit.returncode != 0 and "nothing to commit" not in (commit.stdout + commit.stderr).lower():
         return {**result, "ok": False, "stage": "commit", "stdout": commit.stdout, "stderr": commit.stderr}

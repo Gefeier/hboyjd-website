@@ -256,6 +256,26 @@ def admin_preview(page):
     // news.html 子页 hero
     'news-hero-title': '[data-cms-key="news-hero-title"]',
     'news-hero-tagline': '[data-cms-key="news-hero-tagline"]',
+    // about.html Tier 1 19 字段 (data-cms-key 全部以 ab- 前缀)
+    'ab-hero-eyebrow': '[data-cms-key="ab-hero-eyebrow"]',
+    'ab-hero-title': '[data-cms-key="ab-hero-title"]',
+    'ab-hero-tagline': '[data-cms-key="ab-hero-tagline"]',
+    'ab-mission-eyebrow': '[data-cms-key="ab-mission-eyebrow"]',
+    'ab-mission-headline': '[data-cms-key="ab-mission-headline"]',
+    'ab-stat-area': '[data-cms-key="ab-stat-area"]',
+    'ab-stat-employees': '[data-cms-key="ab-stat-employees"]',
+    'ab-stat-capacity': '[data-cms-key="ab-stat-capacity"]',
+    'ab-stat-patents': '[data-cms-key="ab-stat-patents"]',
+    'ab-give-back-1-title': '[data-cms-key="ab-give-back-1-title"]',
+    'ab-give-back-1-body': '[data-cms-key="ab-give-back-1-body"]',
+    'ab-give-back-2-title': '[data-cms-key="ab-give-back-2-title"]',
+    'ab-give-back-2-body': '[data-cms-key="ab-give-back-2-body"]',
+    'ab-give-back-3-title': '[data-cms-key="ab-give-back-3-title"]',
+    'ab-give-back-3-body': '[data-cms-key="ab-give-back-3-body"]',
+    'ab-cta-slogan': '[data-cms-key="ab-cta-slogan"]',
+    'ab-cta-title': '[data-cms-key="ab-cta-title"]',
+    'ab-cta-desc': '[data-cms-key="ab-cta-desc"]',
+    'ab-cta-tagline': '[data-cms-key="ab-cta-tagline"]',
   };
   // _en 后缀字段 → 改 data-en 属性(主站切英文 toggle 读这个)
   const EN_MAP = {
@@ -268,6 +288,26 @@ def admin_preview(page):
     'about-para2-en': '[data-cms-key="about-para2"]',
     'news-hero-title-en': '[data-cms-key="news-hero-title"]',
     'news-hero-tagline-en': '[data-cms-key="news-hero-tagline"]',
+    // about.html 19 字段 _en
+    'ab-hero-eyebrow-en': '[data-cms-key="ab-hero-eyebrow"]',
+    'ab-hero-title-en': '[data-cms-key="ab-hero-title"]',
+    'ab-hero-tagline-en': '[data-cms-key="ab-hero-tagline"]',
+    'ab-mission-eyebrow-en': '[data-cms-key="ab-mission-eyebrow"]',
+    'ab-mission-headline-en': '[data-cms-key="ab-mission-headline"]',
+    'ab-stat-area-en': '[data-cms-key="ab-stat-area"]',
+    'ab-stat-employees-en': '[data-cms-key="ab-stat-employees"]',
+    'ab-stat-capacity-en': '[data-cms-key="ab-stat-capacity"]',
+    'ab-stat-patents-en': '[data-cms-key="ab-stat-patents"]',
+    'ab-give-back-1-title-en': '[data-cms-key="ab-give-back-1-title"]',
+    'ab-give-back-1-body-en': '[data-cms-key="ab-give-back-1-body"]',
+    'ab-give-back-2-title-en': '[data-cms-key="ab-give-back-2-title"]',
+    'ab-give-back-2-body-en': '[data-cms-key="ab-give-back-2-body"]',
+    'ab-give-back-3-title-en': '[data-cms-key="ab-give-back-3-title"]',
+    'ab-give-back-3-body-en': '[data-cms-key="ab-give-back-3-body"]',
+    'ab-cta-slogan-en': '[data-cms-key="ab-cta-slogan"]',
+    'ab-cta-title-en': '[data-cms-key="ab-cta-title"]',
+    'ab-cta-desc-en': '[data-cms-key="ab-cta-desc"]',
+    'ab-cta-tagline-en': '[data-cms-key="ab-cta-tagline"]',
   };
 
   window.addEventListener('message', function(ev){

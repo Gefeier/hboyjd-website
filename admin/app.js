@@ -163,6 +163,38 @@ async function initDashboard() {
     }
 }
 
+// 关于我们页 19 字段(中文 key,英文是 _en/-en 后缀)
+const ABOUT_PAGE_KEYS = [
+    'ab-hero-eyebrow', 'ab-hero-title', 'ab-hero-tagline',
+    'ab-mission-eyebrow', 'ab-mission-headline',
+    'ab-stat-area', 'ab-stat-employees', 'ab-stat-capacity', 'ab-stat-patents',
+    'ab-give-back-1-title', 'ab-give-back-1-body',
+    'ab-give-back-2-title', 'ab-give-back-2-body',
+    'ab-give-back-3-title', 'ab-give-back-3-body',
+    'ab-cta-slogan', 'ab-cta-title', 'ab-cta-desc', 'ab-cta-tagline',
+];
+// 新闻动态子页 2 字段
+const NEWS_PAGE_KEYS = ['news-hero-title', 'news-hero-tagline'];
+
+// 工具:把 {key:zh, key_en:en} 写到 #key / #key-en input
+function loadKvFields(prefix, obj, keys) {
+    keys.forEach((k) => {
+        setValue(`${prefix}${k}`, obj[k]);
+        setValue(`${prefix}${k}-en`, obj[`${k}_en`]);
+    });
+}
+// 工具:从 #key / #key-en 读字段,合到一个 obj({key, key_en})
+function collectKvFields(obj, keys) {
+    const out = obj || {};
+    keys.forEach((k) => {
+        const zh = ($(`#${k}`)?.value || '').trim();
+        const en = ($(`#${k}-en`)?.value || '').trim();
+        out[k] = zh;
+        out[`${k}_en`] = en;
+    });
+    return out;
+}
+
 async function initEditor() {
     const data = await loadSection('index');
     const hero = data.hero || {};
@@ -187,6 +219,10 @@ async function initEditor() {
     setValue('#about-para1-en', aboutD.para1_en);
     setValue('#about-para2', aboutD.para2);
     setValue('#about-para2-en', aboutD.para2_en);
+
+    // 加载 about_page 19 字段 + news_page 2 字段
+    loadKvFields('#', data.about_page || {}, ABOUT_PAGE_KEYS);
+    loadKvFields('#', data.news_page || {}, NEWS_PAGE_KEYS);
 
     // iframe 桥接 + page tab 切换(替代原 hero 缩略卡)
     bindIframePreview();
@@ -246,20 +282,99 @@ async function initEditor() {
             btn.textContent = origText;
         }
     });
+
+    // 保存「关于我们」页(19 字段)
+    $('#save-about-btn')?.addEventListener('click', async () => {
+        const btn = $('#save-about-btn');
+        btn.disabled = true;
+        data.about_page = collectKvFields(data.about_page || {}, ABOUT_PAGE_KEYS);
+        await saveSection('index', data);
+        btn.disabled = false;
+        showToast('关于我们页已暂存,发布后写入 about.html。');
+    });
+
+    // 保存「新闻动态」子页(2 字段 hero 文案)
+    $('#save-news-btn')?.addEventListener('click', async () => {
+        const btn = $('#save-news-btn');
+        btn.disabled = true;
+        data.news_page = collectKvFields(data.news_page || {}, NEWS_PAGE_KEYS);
+        await saveSection('index', data);
+        btn.disabled = false;
+        showToast('新闻页文案已暂存,发布后写入 news.html。');
+    });
+
+    // 自动翻译 about 页全 19 字段中 → 英
+    $('#translate-about-btn')?.addEventListener('click', () => translateBatchByKeys('translate-about-btn', ABOUT_PAGE_KEYS));
+    // 自动翻译 news 页 hero 2 字段中 → 英
+    $('#translate-news-btn')?.addEventListener('click', () => translateBatchByKeys('translate-news-btn', NEWS_PAGE_KEYS));
+}
+
+// 通用批量翻译:按 keys 收集中文 → API → 填回 #key-en
+async function translateBatchByKeys(btnId, keys) {
+    const btn = document.getElementById(btnId);
+    if (!btn) return;
+    btn.disabled = true;
+    const origText = btn.textContent;
+    btn.textContent = '⏳ AI 翻译中...';
+    try {
+        const items = keys
+            .map((k) => ({key: k, text: ($(`#${k}`)?.value || '').trim()}))
+            .filter((x) => x.text);
+        if (!items.length) {
+            showToast('中文字段都是空的,先填中文再翻译', 'error');
+            return;
+        }
+        const res = await api('/translate-batch', {
+            method: 'POST',
+            body: JSON.stringify({items}),
+        });
+        const map = res.translations || {};
+        let filled = 0;
+        keys.forEach((k) => {
+            if (map[k] && $(`#${k}-en`)) {
+                $(`#${k}-en`).value = map[k];
+                filled += 1;
+                // 触发 input 事件,推到 iframe 实时反映
+                $(`#${k}-en`).dispatchEvent(new Event('input', {bubbles: true}));
+            }
+        });
+        showToast(`AI 翻译完成,填了 ${filled} 个英文字段,记得校对`);
+    } catch (err) {
+        const msg = err.message || '翻译失败';
+        showToast(msg.includes('未配置') ? 'AI 服务未配置 — 联系墨在服务器加 ANTHROPIC_API_KEY' : msg, 'error');
+    } finally {
+        btn.disabled = false;
+        btn.textContent = origText;
+    }
 }
 
 // === iframe 实时预览桥接(L3 替代原 hero 缩略卡) ===
-const PREVIEW_FIELD_KEYS = [
-    'hero-title', 'hero-title-en',
-    'hero-subtitle', 'hero-subtitle-en',
-    'hero-desc', 'hero-desc-en',
-    'about-title', 'about-title-en',
-    'about-subtitle', 'about-subtitle-en',
-    'about-para1', 'about-para1-en',
-    'about-para2', 'about-para2-en',
-    'news-hero-title', 'news-hero-title-en',
-    'news-hero-tagline', 'news-hero-tagline-en',
-];
+const PREVIEW_FIELD_KEYS = (() => {
+    const base = [
+        'hero-title', 'hero-title-en',
+        'hero-subtitle', 'hero-subtitle-en',
+        'hero-desc', 'hero-desc-en',
+        'about-title', 'about-title-en',
+        'about-subtitle', 'about-subtitle-en',
+        'about-para1', 'about-para1-en',
+        'about-para2', 'about-para2-en',
+    ];
+    // about_page 19 字段 + news_page 2 字段(中英)
+    const ABOUT_KEYS = [
+        'ab-hero-eyebrow', 'ab-hero-title', 'ab-hero-tagline',
+        'ab-mission-eyebrow', 'ab-mission-headline',
+        'ab-stat-area', 'ab-stat-employees', 'ab-stat-capacity', 'ab-stat-patents',
+        'ab-give-back-1-title', 'ab-give-back-1-body',
+        'ab-give-back-2-title', 'ab-give-back-2-body',
+        'ab-give-back-3-title', 'ab-give-back-3-body',
+        'ab-cta-slogan', 'ab-cta-title', 'ab-cta-desc', 'ab-cta-tagline',
+    ];
+    const NEWS_KEYS = ['news-hero-title', 'news-hero-tagline'];
+    [...ABOUT_KEYS, ...NEWS_KEYS].forEach((k) => {
+        base.push(k, `${k}-en`);
+    });
+    return base;
+})();
 
 function bindIframePreview() {
     const iframe = $('#editor-preview-iframe');

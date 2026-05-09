@@ -7,6 +7,8 @@ from pathlib import Path
 
 ROOT = Path(__file__).resolve().parent
 INDEX_PATH = ROOT / "index.html"
+ABOUT_PATH = ROOT / "about.html"
+NEWS_PATH = ROOT / "news.html"
 INDEX_JSON = ROOT / "content" / "index.json"
 
 
@@ -15,6 +17,13 @@ def main() -> None:
         print("content/index.json not found; skip index build")
         return
     data = json.loads(INDEX_JSON.read_text(encoding="utf-8-sig"))
+
+    _build_index(data)
+    _build_about(data)
+    _build_news(data)
+
+
+def _build_index(data: dict) -> None:
     hero = data.get("hero", {})
     about = data.get("about", {})
     html = INDEX_PATH.read_text(encoding="utf-8")
@@ -28,7 +37,7 @@ def main() -> None:
     if hero.get("video"):
         html = re.sub(r'(data-src=")[^"]*(")', rf'\g<1>{hero["video"]}\2', html, count=1)
 
-    # about 区(走 data-cms-key 通用机制,扩字段时不用改 build_pages,只 HTML 加 attribute + json 加 key)
+    # about 区(走 data-cms-key 通用机制)
     for key, text_key, en_key in [
         ("about-title", "title", "title_en"),
         ("about-subtitle", "subtitle", "subtitle_en"),
@@ -39,6 +48,52 @@ def main() -> None:
 
     INDEX_PATH.write_text(html, encoding="utf-8")
     print("built index.html from content/index.json (hero + about)")
+
+
+def _build_about(data: dict) -> None:
+    """构建 about.html — Tier 1 19 字段全部走 data-cms-key 通用机制。"""
+    about_page = data.get("about_page", {})
+    if not about_page or not ABOUT_PATH.exists():
+        return
+    html = ABOUT_PATH.read_text(encoding="utf-8")
+    keys = [
+        "ab-hero-eyebrow", "ab-hero-title", "ab-hero-tagline",
+        "ab-mission-eyebrow", "ab-mission-headline",
+        "ab-stat-area", "ab-stat-employees", "ab-stat-capacity", "ab-stat-patents",
+        "ab-give-back-1-title", "ab-give-back-1-body",
+        "ab-give-back-2-title", "ab-give-back-2-body",
+        "ab-give-back-3-title", "ab-give-back-3-body",
+        "ab-cta-slogan", "ab-cta-title", "ab-cta-desc", "ab-cta-tagline",
+    ]
+    applied = 0
+    for key in keys:
+        zh = about_page.get(key, "")
+        en = about_page.get(f"{key}_en", "")
+        before = html
+        html = _replace_by_cms_key(html, key, zh, en)
+        if html != before:
+            applied += 1
+    ABOUT_PATH.write_text(html, encoding="utf-8")
+    print(f"built about.html from content/index.json about_page ({applied}/{len(keys)} fields)")
+
+
+def _build_news(data: dict) -> None:
+    """构建 news.html — hero title + tagline 2 字段。"""
+    news_page = data.get("news_page", {})
+    if not news_page or not NEWS_PATH.exists():
+        return
+    html = NEWS_PATH.read_text(encoding="utf-8")
+    keys = ["news-hero-title", "news-hero-tagline"]
+    applied = 0
+    for key in keys:
+        zh = news_page.get(key, "")
+        en = news_page.get(f"{key}_en", "")
+        before = html
+        html = _replace_by_cms_key(html, key, zh, en)
+        if html != before:
+            applied += 1
+    NEWS_PATH.write_text(html, encoding="utf-8")
+    print(f"built news.html from content/index.json news_page ({applied}/{len(keys)} fields)")
 
 
 def _replace_tag(html: str, tag: str, class_name: str, text: str, text_en: str) -> str:
