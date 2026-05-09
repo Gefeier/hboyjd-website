@@ -20,37 +20,72 @@
     </aside>
     <main class="admin-main" id="editor-page">
         <h1 class="page-title">页面内容</h1>
-        <p class="page-subtitle">v1 先开放首页 banner；about 全量内容等模板化后再放开</p>
+        <p class="page-subtitle">改首页 Hero 横幅 · 右侧实时预览,左侧改完点保存+发布</p>
 
-        <div class="card">
-            <h2>首页 Hero</h2>
-            <label>主标语</label>
-            <input type="text" id="hero-title">
-            <label>主标语英文</label>
-            <input type="text" id="hero-title-en">
-            <label>副标语(英文)</label>
-            <input type="text" id="hero-subtitle">
-            <label>副标语英文 data-en</label>
-            <input type="text" id="hero-subtitle-en">
-            <label>描述</label>
-            <textarea id="hero-desc"></textarea>
-            <label>描述英文 data-en</label>
-            <textarea id="hero-desc-en"></textarea>
-            <div class="form-row two">
-                <label>Hero 视频路径<input type="text" id="hero-video"></label>
-                <label>视频 poster 路径<input type="text" id="hero-poster"></label>
+        <div class="editor-split">
+            <!-- 左:表单 -->
+            <div class="card editor-form">
+                <h2>首页 Hero</h2>
+
+                <label>主标语 (中文)</label>
+                <input type="text" id="hero-title" placeholder="例:半挂车研发制造专家">
+
+                <label>主标语 (英文)</label>
+                <input type="text" id="hero-title-en" placeholder="例:Semi-Trailer R&amp;D Manufacturing Expert">
+
+                <label>副标语 (中文 · 标题上方一行小字)</label>
+                <input type="text" id="hero-subtitle" placeholder="例:DREAM ON THE ROAD · 为梦出发">
+
+                <label>副标语 (英文)</label>
+                <input type="text" id="hero-subtitle-en" placeholder="例:DREAM ON THE ROAD">
+
+                <label>描述 (中文 · 标题下方一段)</label>
+                <textarea id="hero-desc" rows="2" placeholder="例:T700C高强度钢材 · 全系定制化生产 · 品质铸就未来"></textarea>
+
+                <label>描述 (英文)</label>
+                <textarea id="hero-desc-en" rows="2" placeholder="例:T700C High-Strength Steel · Fully Customized Production"></textarea>
+
+                <div class="form-row two">
+                    <label>Hero 视频路径(可选,留空只显示 poster)<input type="text" id="hero-video" placeholder="例:assets/videos/hero-factory.mp4"></label>
+                    <label>视频封面图路径(没视频时显示这张)<input type="text" id="hero-poster" placeholder="例:assets/videos/hero-factory-poster.jpg"></label>
+                </div>
+
+                <label>Banner 缩略图(点击从图片库替换)</label>
+                <div class="image-thumb" id="hero-image-thumb"></div>
+
+                <div style="margin-top:24px; display:flex; gap:12px;">
+                    <button class="btn btn-primary" id="save-index-btn" type="button">保存暂存</button>
+                    <button class="btn btn-outline" type="button" data-publish>发布预演</button>
+                </div>
+                <p class="muted" style="margin-top:14px; font-size:12px;">"保存暂存"只写到服务器 content/index.json;"发布预演"才会 build 后 git push 到生产官网。</p>
             </div>
-            <label>Banner 缩略图(点击从图片库替换)</label>
-            <div class="image-thumb" id="hero-image-thumb"></div>
-            <div style="margin-top:24px;">
-                <button class="btn btn-primary" id="save-index-btn" type="button">保存暂存</button>
-                <button class="btn btn-outline" type="button" data-publish>发布预演</button>
+
+            <!-- 右:预览(navy 仿真首页 hero) -->
+            <div class="editor-preview-wrap">
+                <div class="preview-label">
+                    <span class="preview-eyebrow">实时预览</span>
+                    <span class="preview-note">右边卡片是首页 Hero 区简化版,改完字段立刻反映 · 不是 100% 像素级仿真但版面和字号一致</span>
+                </div>
+                <div class="hero-preview" id="hero-preview">
+                    <div class="hero-preview-bg" id="hero-preview-bg"></div>
+                    <div class="hero-preview-overlay"></div>
+                    <div class="hero-preview-content">
+                        <p class="hero-preview-subtitle" id="hero-preview-subtitle">DREAM ON THE ROAD · 为梦出发</p>
+                        <h1 class="hero-preview-title" id="hero-preview-title">半挂车研发制造专家</h1>
+                        <p class="hero-preview-desc" id="hero-preview-desc">T700C高强度钢材 · 全系定制化生产 · 品质铸就未来</p>
+                        <div class="hero-preview-actions">
+                            <span class="hero-preview-btn primary">在线选配车辆</span>
+                            <span class="hero-preview-btn ghost">查看产品</span>
+                        </div>
+                    </div>
+                </div>
+                <p class="preview-helper">📐 桌面端实际显示尺寸 16:9 全屏,这里是缩略卡 · 想看真效果点「发布预演」后访问 hboyjd.com</p>
             </div>
         </div>
 
-        <div class="card">
-            <h2>About 页面</h2>
-            <p class="muted">已预留 content/about.json。v1 不开放全量编辑，避免破坏主站 about.html 当前调性。</p>
+        <div class="card" style="margin-top:32px;">
+            <h2>About 关于我们页面</h2>
+            <p class="muted">已预留 content/about.json。v1 不开放全量编辑,避免破坏主站 about.html 当前调性。如需改 about,联系墨。</p>
         </div>
     </main>
 </div>

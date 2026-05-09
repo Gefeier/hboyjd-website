@@ -174,13 +174,19 @@ async function initEditor() {
     setValue('#hero-desc-en', hero.description_en);
     setValue('#hero-video', hero.video);
     setValue('#hero-poster', hero.poster);
-    setHeroThumb(hero.image || hero.poster || 'assets/images/factory-gate.webp');
+    const initialBg = hero.image || hero.poster || 'assets/images/factory-gate.webp';
+    setHeroThumb(initialBg);
+    setHeroPreviewBg(initialBg);
+    syncHeroPreview(); // 把当前字段值刷到 preview
+
+    bindHeroPreview();
 
     $('#hero-image-thumb')?.addEventListener('click', () => {
         openImagePicker((image) => {
             data.hero = collectHero(data.hero || {});
             data.hero.image = stripLeadingSlash(image.webp_url || image.jpg_url || image.url);
             setHeroThumb(data.hero.image);
+            setHeroPreviewBg(data.hero.image);
         });
     });
 
@@ -192,6 +198,47 @@ async function initEditor() {
         btn.disabled = false;
         showToast('首页 banner 已暂存，发布后写入 index.html。');
     });
+}
+
+function bindHeroPreview() {
+    // 字段→preview 元素的实时映射
+    const map = [
+        ['#hero-title', '#hero-preview-title', '半挂车研发制造专家'],
+        ['#hero-subtitle', '#hero-preview-subtitle', 'DREAM ON THE ROAD · 为梦出发'],
+        ['#hero-desc', '#hero-preview-desc', 'T700C高强度钢材 · 全系定制化生产 · 品质铸就未来'],
+        ['#hero-poster', null, null],  // poster 改时同步 bg
+        ['#hero-video', null, null],   // 不影响 preview
+    ];
+    map.forEach(([from, to, fallback]) => {
+        const inp = $(from);
+        if (!inp) return;
+        if (to) {
+            inp.addEventListener('input', () => {
+                const target = $(to);
+                if (target) target.textContent = inp.value || fallback;
+            });
+        }
+    });
+    // poster 变了 → preview 背景跟着变(用户输 url 路径时即时反映)
+    $('#hero-poster')?.addEventListener('input', () => {
+        const v = $('#hero-poster').value.trim();
+        if (v) setHeroPreviewBg(v);
+    });
+}
+
+function syncHeroPreview() {
+    const t = $('#hero-title')?.value;
+    const s = $('#hero-subtitle')?.value;
+    const d = $('#hero-desc')?.value;
+    if ($('#hero-preview-title') && t) $('#hero-preview-title').textContent = t;
+    if ($('#hero-preview-subtitle') && s) $('#hero-preview-subtitle').textContent = s;
+    if ($('#hero-preview-desc') && d) $('#hero-preview-desc').textContent = d;
+}
+
+function setHeroPreviewBg(url) {
+    const el = $('#hero-preview-bg');
+    if (!el) return;
+    el.style.backgroundImage = `url('${escapeAttr(toPublicUrl(url))}')`;
 }
 
 async function initImagesPage() {
