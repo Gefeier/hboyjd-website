@@ -257,6 +257,8 @@ const PREVIEW_FIELD_KEYS = [
     'about-subtitle', 'about-subtitle-en',
     'about-para1', 'about-para1-en',
     'about-para2', 'about-para2-en',
+    'news-hero-title', 'news-hero-title-en',
+    'news-hero-tagline', 'news-hero-tagline-en',
 ];
 
 function bindIframePreview() {
@@ -319,6 +321,11 @@ function bindIframePreview() {
 function bindPageTabs() {
     const tabs = $$('.page-tab');
     if (!tabs.length) return;
+    const PAGE_LABEL = {
+        'index': '首页 · index.html',
+        'about': '关于我们 · about.html',
+        'news': '新闻动态 · news.html',
+    };
     tabs.forEach((btn) => {
         btn.addEventListener('click', () => {
             const page = btn.dataset.page;
@@ -326,8 +333,8 @@ function bindPageTabs() {
             const iframe = $('#editor-preview-iframe');
             if (iframe) iframe.src = `/admin/preview/${page}.html`;
             const cur = $('#preview-current');
-            if (cur) cur.textContent = page === 'about' ? '关于我们 · about.html' : '首页 · index.html';
-            // 切左侧 section 显隐:section.data-page=index 只在首页 tab 显;无 data-page 属性的 section 永远显(比如 about-images)
+            if (cur) cur.textContent = PAGE_LABEL[page] || `${page}.html`;
+            // 切左侧 section 显隐:section.data-page=xxx 只在对应 tab 显;无 data-page 属性的 section 永远显
             $$('.editor-section').forEach((sec) => {
                 const belongs = sec.dataset.page;
                 sec.style.display = !belongs || belongs === page ? '' : 'none';

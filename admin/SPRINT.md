@@ -165,20 +165,21 @@ ssh hboyjd 'cd /opt/hboyjd-website && git push --dry-run'
 
 ## 七、v1.5 待办(优先级排序)
 
-### 1. 首页荣誉/核心优势对齐 about.html
-**问题**:首页只 4 张荣誉卡 + 4 张优势卡(写死的),about.html 有完整 14 张荣誉 + 完整数据版优势区。**首页过时**。
-**做法**:把 index.html 荣誉/优势区抄 about.html 数据,或者把这俩区块改用 content/index.json + build_pages.py 生成。
-**文件**:`index.html` L287-346(advantages+honors 区块),`about.html` 已有完整版做参考。
+### 1. 首页荣誉/核心优势对齐 about.html ✓ (2026-05-09)
+~~首页 4→8 张荣誉,优势改客户视角(26→44 专利),已 commit 落地~~
 
-### 2. editor.html L2 区块仿真预览
-**问题**:editor 是裸 form,字段名「hero-title-en」对市场部不直观。
-**做法**:左边表单 + 右边「首页 Hero 真实模板缩略卡」(navy 大背景,改字段实时反映)。
-**预算**:60-90 分钟。
+### 2. editor.html L2 区块仿真预览 ✓ (2026-05-09)
+~~已升级为 L3 iframe 真实预览(`/admin/preview/<page>` Flask serve REPO_ROOT 真 HTML+ 注入桥接 JS),双向跟踪 cms-update + cms-focus,通用 data-cms-key 机制~~
 
-### 3. news.html 列表卡片化精雕
-**问题**:新闻列表是一栏堆叠,缺上下移、按分类过滤、按搜索。
-**做法**:列表加 toolbar(搜索+分类筛选)+每条卡片加"上移/下移/复制 URL"按钮。
-**预算**:30-40 分钟。
+### 3. admin 新闻列表卡片化精雕 ✓ (2026-05-09)
+~~admin/news.html 已加 toolbar(搜索+分类)+ 每条卡片加上下移/复制 URL,见 admin/app.js L577+~~
+
+### 3.5. 公众独立 news.html 子页 ✓ (2026-05-09)
+**新增**:`hboyjd.com/news.html` navy hero + pill 分类筛选 + 实时搜索 + lazy load(每次 12 条)+ 跳公众号原文。
+**首页 .news 区**改为 3 栏每列最近 5 条 + 「查看全部 N 条 →」+ 「查看完整新闻动态 →」 CTA。
+**admin editor**:加第三个 page-tab 「新闻动态」(预览-only,文案保存接口 v2 接入)。
+**文件**:`news.html`(新),`style.css`(news-page-* 样式),`main.js`(每列限 5 + 底 CTA),`index.html`(navbar+CTA),`about.html`(navbar),`admin/backend/app.py`(WHITELIST+MAP),`admin/editor.html`(news 段+第3 tab),`admin/app.js`(PAGE_LABEL+PREVIEW_FIELD_KEYS)。
+**待 v2**:news-hero-title/tagline 字段当前 live-preview-only,持久化需 build_pages.py 加 news.html 模板渲染 + content/index.json 加 news_page 子结构。
 
 ### 4. 历史 800+ 篇公众号文章选择性导入
 **前提**:material API 拉到 846 篇 2017-2021,但 url 浏览器活性未验证(curl 全部失败,微信反爬)。

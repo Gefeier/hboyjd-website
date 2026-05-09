@@ -24,7 +24,7 @@
             <div class="page-tabs" id="page-tabs">
                 <button type="button" class="page-tab active" data-page="index">首页</button>
                 <button type="button" class="page-tab" data-page="about">关于我们</button>
-                <span class="page-tab-note">(更多页面 v2 开放)</span>
+                <button type="button" class="page-tab" data-page="news">新闻动态</button>
             </div>
         </div>
         <p class="page-subtitle">左侧改字段右侧实时预览,改完点页面右上「保存暂存」+「发布预演」推到 hboyjd.com</p>
@@ -172,7 +172,7 @@
                 </div>
 
                 <!-- 关于我们页 6 张关键图 -->
-                <div class="editor-section" data-section="about-images">
+                <div class="editor-section" data-section="about-images" data-page="about">
                     <h3 class="editor-section-title">▼ 关于我们页 6 张关键图</h3>
                     <p class="muted" style="font-size:13px;">about.html 关于我们子页的 6 张图。</p>
                     <div class="about-images-grid">
@@ -209,6 +209,28 @@
                     </div>
                     <input type="file" id="about-image-uploader" accept="image/*" hidden>
                     <p class="muted" style="font-size:12px; margin-top:14px;">⚠️ 其他 about 图(剩余 6 荣誉证书 / 12 专利 / 11 团队墙)v2 模板化才开放。</p>
+                </div>
+
+                <!-- 新闻子页 hero 文案 -->
+                <div class="editor-section" data-section="news-text" data-page="news">
+                    <h3 class="editor-section-title">▼ 新闻动态子页 Hero 文案</h3>
+                    <p class="muted" style="font-size:13px; margin-bottom:14px;">右边新闻子页顶部的大标题和一句话副标。改完点保存→发布。新闻列表本身在「新闻管理」页(左侧导航)操作,不在这里。</p>
+
+                    <label>大标题 (中文)</label>
+                    <input type="text" id="news-hero-title" placeholder="例:新闻动态">
+                    <label>大标题 (英文)</label>
+                    <input type="text" id="news-hero-title-en" placeholder="例:News &amp; Updates">
+
+                    <label>副标语 (中文)</label>
+                    <textarea id="news-hero-tagline" rows="2" placeholder="例:公司动态 · 党政动态 · 客户案例 — 实时同步公众号最新资讯"></textarea>
+                    <label>副标语 (英文)</label>
+                    <textarea id="news-hero-tagline-en" rows="2" placeholder="例:Company news, Party-building updates, and customer stories — synced from our WeChat Official Account."></textarea>
+
+                    <p class="muted" style="font-size:12px; margin-top:14px;">⚠️ 当前需墨手写文案到 news.html 后端,自动保存接口 v2 接入(占位,数据先存浏览器)。完整新闻条目请到「新闻管理」编辑。</p>
+
+                    <div style="margin-top:16px;">
+                        <a href="news.html" target="_blank" rel="noopener" class="btn btn-outline" style="font-size:13px;">→ 跳「新闻管理」编辑文章列表</a>
+                    </div>
                 </div>
             </div>
 

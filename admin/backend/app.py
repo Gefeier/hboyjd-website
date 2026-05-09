@@ -224,7 +224,7 @@ def news_from_wechat_url():
 def admin_preview(page):
     """加载 /opt/hboyjd-website/<page> 真实 HTML,注入桥接 JS 让父页 admin 能 postMessage 推改动"""
     auth.require_user()
-    WHITELIST = {"index.html", "about.html"}
+    WHITELIST = {"index.html", "about.html", "news.html"}
     if page not in WHITELIST:
         return f"页面 {page} 不在预览白名单", 404
     html_path = REPO_ROOT / page
@@ -253,6 +253,9 @@ def admin_preview(page):
     'about-subtitle': '[data-cms-key="about-subtitle"]',
     'about-para1': '[data-cms-key="about-para1"]',
     'about-para2': '[data-cms-key="about-para2"]',
+    // news.html 子页 hero
+    'news-hero-title': '[data-cms-key="news-hero-title"]',
+    'news-hero-tagline': '[data-cms-key="news-hero-tagline"]',
   };
   // _en 后缀字段 → 改 data-en 属性(主站切英文 toggle 读这个)
   const EN_MAP = {
@@ -263,6 +266,8 @@ def admin_preview(page):
     'about-subtitle-en': '[data-cms-key="about-subtitle"]',
     'about-para1-en': '[data-cms-key="about-para1"]',
     'about-para2-en': '[data-cms-key="about-para2"]',
+    'news-hero-title-en': '[data-cms-key="news-hero-title"]',
+    'news-hero-tagline-en': '[data-cms-key="news-hero-tagline"]',
   };
 
   window.addEventListener('message', function(ev){

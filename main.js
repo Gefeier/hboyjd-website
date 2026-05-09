@@ -117,8 +117,10 @@ document.querySelectorAll('.stats, .about, .products, .advantages, .news, .cta-s
 
     function render() {
         const isEn = document.documentElement.lang === 'en';
+        const PER_COL = 5;  // 首页每列只展示最近 5 条;完整列表跳 news.html
         container.innerHTML = categories.map(cat => {
-            const items = allNews.filter(n => n.category === cat.key);
+            const items = allNews.filter(n => n.category === cat.key).slice(0, PER_COL);
+            const totalForCat = allNews.filter(n => n.category === cat.key).length;
             const listHTML = items.length > 0
                 ? `<ul class="news-list">${items.map(n => `
                     <li><a href="${n.url || '#'}" data-news-id="${n.id || ''}" class="news-link">
@@ -128,11 +130,16 @@ document.querySelectorAll('.stats, .about, .products, .advantages, .news, .cta-s
                     </a></li>`).join('')}</ul>`
                 : `<div class="news-column-empty">${isEn ? 'Coming soon' : '即将更新'}</div>`;
 
+            const moreHTML = totalForCat > PER_COL
+                ? `<div class="news-column-more"><a href="news.html?cat=${cat.key}">${isEn ? `View all ${totalForCat} →` : `查看全部 ${totalForCat} 条 →`}</a></div>`
+                : '';
+
             return `<div>
                 <div class="news-column-header">
                     <h3>${isEn ? cat.en : cat.zh}</h3>
                 </div>
                 ${listHTML}
+                ${moreHTML}
             </div>`;
         }).join('');
 

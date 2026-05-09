@@ -881,6 +881,261 @@ img, video, iframe, table, pre, code {
     .news-columns { grid-template-columns: minmax(0, 1fr); gap: 36px; }
 }
 
+/* ====== 首页 .news 区底部 CTA(精选 → 完整列表) ====== */
+.news-page-cta-row {
+    margin-top: 56px;
+    text-align: center;
+}
+.news-page-cta-row .btn {
+    min-width: 220px;
+}
+.news-column-more {
+    margin-top: 14px;
+    padding-top: 12px;
+    border-top: 1px solid var(--gray-200);
+    text-align: right;
+}
+.news-column-more a {
+    font-size: 12px;
+    color: var(--gray-500);
+    text-decoration: none;
+    letter-spacing: 0.5px;
+    transition: color 0.2s;
+}
+.news-column-more a:hover {
+    color: var(--blue-500);
+}
+
+/* ====== 新闻动态独立子页 (news.html) ====== */
+.news-page-hero {
+    position: relative;
+    height: 360px;
+    background: linear-gradient(135deg, var(--navy-900) 0%, var(--navy-700) 60%, var(--navy-600) 100%);
+    color: #fff;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    overflow: hidden;
+    margin-top: 70px; /* 让出导航栏 */
+}
+.news-page-hero-bg {
+    position: absolute; inset: 0;
+    background-image:
+        radial-gradient(circle at 20% 30%, rgba(212, 168, 83, 0.18) 0%, transparent 40%),
+        radial-gradient(circle at 80% 70%, rgba(37, 99, 235, 0.15) 0%, transparent 50%);
+    pointer-events: none;
+}
+.news-page-hero-content {
+    position: relative;
+    text-align: center;
+    padding: 0 24px;
+    max-width: 800px;
+}
+.news-page-hero-eyebrow {
+    font-size: 13px;
+    color: var(--gold);
+    letter-spacing: 4px;
+    margin-bottom: 18px;
+    font-weight: 600;
+}
+.news-page-hero-title {
+    font-size: 56px;
+    font-weight: 900;
+    margin-bottom: 14px;
+    letter-spacing: 4px;
+    line-height: 1.15;
+}
+.news-page-hero-tagline {
+    font-size: 16px;
+    color: rgba(255, 255, 255, 0.78);
+    line-height: 1.7;
+    max-width: 640px;
+    margin: 0 auto;
+}
+
+.news-page-list {
+    padding: 80px 0 100px;
+    background: var(--white);
+}
+
+.news-page-toolbar {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 24px;
+    flex-wrap: wrap;
+    margin-bottom: 24px;
+    padding-bottom: 24px;
+    border-bottom: 1px solid var(--gray-200);
+}
+.news-page-filters {
+    display: flex;
+    gap: 8px;
+    flex-wrap: wrap;
+}
+.news-filter-pill {
+    padding: 8px 18px;
+    border: 1px solid var(--gray-200);
+    background: var(--white);
+    color: var(--gray-700);
+    font-size: 13px;
+    font-weight: 500;
+    border-radius: 999px;
+    cursor: pointer;
+    transition: all 0.2s;
+}
+.news-filter-pill:hover {
+    border-color: var(--navy-700);
+    color: var(--navy-900);
+}
+.news-filter-pill.is-active {
+    background: var(--navy-900);
+    color: var(--white);
+    border-color: var(--navy-900);
+}
+.news-page-search {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    padding: 8px 14px;
+    border: 1px solid var(--gray-200);
+    border-radius: 999px;
+    background: var(--white);
+    min-width: 280px;
+    transition: border-color 0.2s;
+}
+.news-page-search:focus-within {
+    border-color: var(--navy-700);
+}
+.news-page-search svg {
+    color: var(--gray-500);
+    flex-shrink: 0;
+}
+.news-page-search input {
+    border: none;
+    outline: none;
+    background: transparent;
+    flex: 1;
+    font-size: 14px;
+    color: var(--gray-900);
+}
+.news-page-search input::placeholder {
+    color: var(--gray-500);
+}
+
+.news-page-count {
+    margin-bottom: 32px;
+    font-size: 13px;
+    color: var(--gray-500);
+}
+.news-page-count strong {
+    color: var(--navy-900);
+    font-weight: 700;
+    margin: 0 4px;
+}
+
+.news-page-grid {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 18px;
+}
+.news-page-card {
+    padding: 28px 32px;
+    background: var(--white);
+    border: 1px solid var(--gray-200);
+    border-radius: 8px;
+    cursor: pointer;
+    transition: all 0.25s;
+    position: relative;
+}
+.news-page-card:hover {
+    border-color: var(--navy-700);
+    box-shadow: 0 8px 24px rgba(10, 22, 40, 0.08);
+    transform: translateY(-1px);
+}
+.news-page-card-meta {
+    display: flex;
+    align-items: center;
+    gap: 14px;
+    margin-bottom: 12px;
+    font-size: 12px;
+}
+.news-page-cat {
+    display: inline-block;
+    padding: 3px 10px;
+    border-radius: 4px;
+    font-weight: 600;
+    letter-spacing: 0.5px;
+}
+.news-page-cat-company {
+    background: rgba(37, 99, 235, 0.1);
+    color: var(--blue-500);
+}
+.news-page-cat-gov {
+    background: rgba(220, 38, 38, 0.08);
+    color: #b91c1c;
+}
+.news-page-cat-case {
+    background: rgba(212, 168, 83, 0.15);
+    color: #92711f;
+}
+.news-page-date {
+    color: var(--gray-500);
+    font-variant-numeric: tabular-nums;
+}
+.news-page-title {
+    font-size: 18px;
+    font-weight: 700;
+    color: var(--navy-900);
+    line-height: 1.5;
+    margin-bottom: 10px;
+    transition: color 0.2s;
+}
+.news-page-card:hover .news-page-title {
+    color: var(--blue-500);
+}
+.news-page-summary {
+    font-size: 14px;
+    color: var(--gray-700);
+    line-height: 1.7;
+    margin-bottom: 14px;
+    display: -webkit-box;
+    -webkit-line-clamp: 2;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+}
+.news-page-card-footer {
+    font-size: 12px;
+    color: var(--gold);
+    letter-spacing: 1px;
+    font-weight: 600;
+}
+
+.news-page-empty {
+    padding: 80px 20px;
+    text-align: center;
+    color: var(--gray-500);
+    font-size: 14px;
+}
+.news-page-load-more {
+    margin-top: 40px;
+    text-align: center;
+}
+.news-page-load-more .btn {
+    min-width: 200px;
+}
+
+@media (max-width: 768px) {
+    .news-page-hero { height: 280px; }
+    .news-page-hero-title { font-size: 36px; letter-spacing: 2px; }
+    .news-page-hero-eyebrow { font-size: 11px; letter-spacing: 3px; }
+    .news-page-hero-tagline { font-size: 14px; }
+    .news-page-toolbar { flex-direction: column; align-items: stretch; }
+    .news-page-search { min-width: 0; width: 100%; }
+    .news-page-card { padding: 22px 20px; }
+    .news-page-title { font-size: 16px; }
+}
+
 /* ====== 联系方式增强 ====== */
 .social-links {
     display: flex;
