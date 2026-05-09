@@ -20,7 +20,11 @@ def process_upload(file_storage: Any, folder: str = "about", basename: str | Non
         raise ValueError("只支持 jpg/png/webp 图片")
 
     safe_base = _safe_basename(basename or Path(original_name).stem)
-    target_dir = REPO_ROOT / "assets" / "images" / folder
+    # folder="" 时直接放 assets/images/ 根目录(首页轮播 team-trucks/lab-testing 等)
+    if folder:
+        target_dir = REPO_ROOT / "assets" / "images" / folder
+    else:
+        target_dir = REPO_ROOT / "assets" / "images"
     target_dir.mkdir(parents=True, exist_ok=True)
     jpg_path = target_dir / f"{safe_base}.jpg"
     webp_path = target_dir / f"{safe_base}.webp"
@@ -36,13 +40,14 @@ def process_upload(file_storage: Any, folder: str = "about", basename: str | Non
     image.save(jpg_path, "JPEG", quality=85, optimize=True)
     image.save(webp_path, "WEBP", quality=80, method=6)
 
+    folder_segment = f"{folder}/" if folder else ""
     entry = {
         "basename": safe_base,
-        "folder": f"assets/images/{folder}",
+        "folder": f"assets/images/{folder}".rstrip("/"),
         "label": label or safe_base,
-        "jpg_url": f"/assets/images/{folder}/{safe_base}.jpg",
-        "webp_url": f"/assets/images/{folder}/{safe_base}.webp",
-        "url": f"/assets/images/{folder}/{safe_base}.webp",
+        "jpg_url": f"/assets/images/{folder_segment}{safe_base}.jpg",
+        "webp_url": f"/assets/images/{folder_segment}{safe_base}.webp",
+        "url": f"/assets/images/{folder_segment}{safe_base}.webp",
         "updated_at": datetime.now().isoformat(timespec="seconds"),
         "max_side": max(image.size),
         "width": image.size[0],

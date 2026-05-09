@@ -280,14 +280,28 @@ def admin_preview(page):
     }
   });
 
-  // about 关键图槽位 src 匹配(双向跟踪:点图跳左 form 槽)
+  // 图槽位 src 匹配(双向跟踪:点图跳左 form 槽)
   const ABOUT_IMG_SLOTS = {
+    // about.html 关于页 6 张
     'about-gate': 'about-gate.',
     'staff-rally': 'staff-rally.',
     'team-rally': 'team-rally.',
     'factory-cutting-line': 'factory-cutting-line.',
     'party-volunteer': 'party-volunteer.',
     'team-trip-2020': 'team-trip-2020.',
+    // 首页 about-carousel 3 张轮播
+    'team-trucks': 'team-trucks.',
+    'lab-testing': 'lab-testing.',
+    'team-assembly': 'team-assembly.',
+    // 首页 honors 8 张资质
+    'honor-srdi-little-giant-2022': 'honor-srdi-little-giant-2022.',
+    'honor-smart-mfg-2024': 'honor-smart-mfg-2024.',
+    'honor-hubut-research-2021': 'honor-hubut-research-2021.',
+    'honor-tax-2022': 'honor-tax-2022.',
+    'honor-logistics-star-2021': 'honor-logistics-star-2021.',
+    'honor-logistics-chain-2019': 'honor-logistics-chain-2019.',
+    'honor-truckhome-2021': 'honor-truckhome-2021.',
+    'honor-shaanxi-breakthrough-2018': 'honor-shaanxi-breakthrough-2018.',
   };
 
   // 点击区块通知 parent 跳到对应字段
@@ -366,12 +380,26 @@ def replace_about_image():
     key = (request.form.get("key") or "").strip()
     file = request.files.get("file")
     SLOTS = {
+        # about.html 关于我们页(folder=about)
         "about-gate": ("about", "about-gate", "厂区大门"),
         "staff-rally": ("about", "staff-rally", "员工晨会"),
         "team-rally": ("about", "team-rally", "年终团队合影"),
         "factory-cutting-line": ("about", "factory-cutting-line", "工厂车间"),
         "party-volunteer": ("about", "party-volunteer", "党员志愿者"),
         "team-trip-2020": ("about", "team-trip-2020", "员工旅行"),
+        # 首页 about-carousel 3 张轮播(folder=images)
+        "team-trucks": ("", "team-trucks", "首页轮播·团队卡车"),
+        "lab-testing": ("", "lab-testing", "首页轮播·品质检测实验室"),
+        "team-assembly": ("", "team-assembly", "首页轮播·团队集合"),
+        # 首页 honors-grid 8 张资质(folder=about,沿用 honor-* 命名)
+        "honor-srdi-little-giant-2022": ("about", "honor-srdi-little-giant-2022", "湖北省专精特新小巨人 2022"),
+        "honor-smart-mfg-2024": ("about", "honor-smart-mfg-2024", "省级智能制造试点 2024"),
+        "honor-hubut-research-2021": ("about", "honor-hubut-research-2021", "湖北工大产学研基地"),
+        "honor-tax-2022": ("about", "honor-tax-2022", "纳税突出贡献 2023"),
+        "honor-logistics-star-2021": ("about", "honor-logistics-star-2021", "物流星级诚信 2021"),
+        "honor-logistics-chain-2019": ("about", "honor-logistics-chain-2019", "物流产业链先进 2019"),
+        "honor-truckhome-2021": ("about", "honor-truckhome-2021", "卡车之家数字营销 2021"),
+        "honor-shaanxi-breakthrough-2018": ("about", "honor-shaanxi-breakthrough-2018", "陕汽湖北区域突破 2018"),
     }
     if key not in SLOTS:
         raise ValueError(f"无效 key: {key}(可选: {','.join(SLOTS.keys())})")
