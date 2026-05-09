@@ -211,6 +211,7 @@ async function initImagesPage() {
 async function initNewsPage() {
     let news = await loadSection('news');
     renderNewsList(news);
+    bindNewsToolbar();
 
     $('#fetch-wechat-btn')?.addEventListener('click', async () => {
         const input = $('#wechat-url-input');
@@ -378,13 +379,29 @@ async function openImagePicker(onPick) {
 function renderNewsList(news) {
     const list = $('#news-list');
     if (!list) return;
+    updateNewsCount(news.length);
     if (!news.length) {
         list.innerHTML = '<p class="muted">暂无新闻，先粘贴公众号链接抓一条。</p>';
         return;
     }
     list.innerHTML = news.map((item, index) => `
-        <article class="news-editor" data-index="${index}" data-id="${escapeAttr(item.id || '')}" data-source="${escapeAttr(item.source || 'manual')}">
-            <div class="news-cover" style="background-image:url('${escapeAttr(item.cover || '/assets/images/factory-gate.webp')}')"></div>
+        <article class="news-editor" data-index="${index}" data-id="${escapeAttr(item.id || '')}" data-source="${escapeAttr(item.source || 'manual')}" data-category="${escapeAttr(item.category || 'company')}">
+            <div class="news-card-header">
+                <div class="news-cover" style="background-image:url('${escapeAttr(item.cover || '/assets/images/factory-gate.webp')}')"></div>
+                <div class="news-card-meta">
+                    <div class="news-card-title">${escapeHtml(item.title || '(无标题)')}</div>
+                    <div class="news-card-sub">
+                        <span class="cat-badge cat-${escapeAttr(item.category || 'company')}">${escapeHtml(item.category_label || categoryLabelZh(item.category))}</span>
+                        <span class="news-card-date">${escapeHtml(item.date || '')}</span>
+                        <span class="pill">${escapeHtml(item.source || 'manual')}</span>
+                    </div>
+                </div>
+                <div class="news-card-tools">
+                    <button type="button" class="icon-btn" data-act="up" title="上移">↑</button>
+                    <button type="button" class="icon-btn" data-act="down" title="下移">↓</button>
+                    <button type="button" class="icon-btn" data-act="copy-url" title="复制原文 URL">⧉</button>
+                </div>
+            </div>
             <div class="news-fields">
                 <div class="form-row two">
                     <label>标题<input type="text" data-field="title" value="${escapeAttr(item.title || '')}"></label>
@@ -403,18 +420,119 @@ function renderNewsList(news) {
                 </div>
                 <label>原文 URL<input type="url" data-field="url" value="${escapeAttr(item.url || '')}"></label>
                 <div class="row-actions">
-                    <span class="pill">${escapeHtml(item.source || 'manual')}</span>
                     <button type="button" class="btn btn-outline danger" data-delete-news>删除</button>
                 </div>
             </div>
         </article>
     `).join('');
+    bindNewsRowActions(list);
+    applyNewsFilter();
+}
+
+function bindNewsRowActions(list) {
     $$('[data-delete-news]', list).forEach((btn) => {
         btn.addEventListener('click', () => {
+            if (!confirm('确认从列表移除? 点「保存」+「发布预演」后才真生效。')) return;
             btn.closest('.news-editor').remove();
-            showToast('已从当前列表移除，点“保存新闻列表”后生效。');
+            updateNewsCount($$('.news-editor', list).length);
+            showToast('已从当前列表移除,记得保存+发布。');
         });
     });
+    $$('[data-act]', list).forEach((btn) => {
+        btn.addEventListener('click', () => handleNewsRowAction(btn.dataset.act, btn.closest('.news-editor')));
+    });
+    // category 变更立即更新卡片徽章
+    $$('select[data-field="category"]', list).forEach((sel) => {
+        sel.addEventListener('change', () => {
+            const article = sel.closest('.news-editor');
+            article.dataset.category = sel.value;
+            const badge = article.querySelector('.cat-badge');
+            if (badge) {
+                badge.className = 'cat-badge cat-' + sel.value;
+                badge.textContent = categoryLabelZh(sel.value);
+            }
+            applyNewsFilter();
+        });
+    });
+    // title 变更立即更新卡片标题
+    $$('input[data-field="title"]', list).forEach((inp) => {
+        inp.addEventListener('input', () => {
+            const article = inp.closest('.news-editor');
+            const t = article.querySelector('.news-card-title');
+            if (t) t.textContent = inp.value || '(无标题)';
+        });
+    });
+}
+
+function handleNewsRowAction(act, article) {
+    if (!article) return;
+    if (act === 'up') {
+        const prev = article.previousElementSibling;
+        if (prev && prev.classList.contains('news-editor')) {
+            article.parentNode.insertBefore(article, prev);
+        }
+    } else if (act === 'down') {
+        const next = article.nextElementSibling;
+        if (next && next.classList.contains('news-editor')) {
+            article.parentNode.insertBefore(next, article);
+        }
+    } else if (act === 'copy-url') {
+        const url = article.querySelector('input[data-field="url"]')?.value || '';
+        if (!url) return showToast('原文 URL 为空', 'error');
+        navigator.clipboard.writeText(url).then(
+            () => showToast('已复制原文 URL'),
+            () => showToast('复制失败,手动复制吧', 'error')
+        );
+    }
+}
+
+function bindNewsToolbar() {
+    const search = $('#news-search');
+    const filter = $('#news-filter');
+    if (search) search.addEventListener('input', applyNewsFilter);
+    if (filter) {
+        filter.addEventListener('click', (ev) => {
+            const btn = ev.target.closest('.filter-pill');
+            if (!btn) return;
+            $$('.filter-pill', filter).forEach((b) => b.classList.toggle('active', b === btn));
+            applyNewsFilter();
+        });
+    }
+}
+
+function applyNewsFilter() {
+    const list = $('#news-list');
+    if (!list) return;
+    const q = ($('#news-search')?.value || '').trim().toLowerCase();
+    const activeFilter = $('#news-filter .filter-pill.active');
+    const cat = activeFilter ? activeFilter.dataset.filter : 'all';
+    let visible = 0, total = 0;
+    $$('.news-editor', list).forEach((article) => {
+        total += 1;
+        const title = (article.querySelector('input[data-field="title"]')?.value || '').toLowerCase();
+        const summary = (article.querySelector('textarea[data-field="summary"]')?.value || '').toLowerCase();
+        const itemCat = article.dataset.category || 'company';
+        const matchQ = !q || title.includes(q) || summary.includes(q);
+        const matchC = cat === 'all' || itemCat === cat;
+        const show = matchQ && matchC;
+        article.classList.toggle('news-hidden', !show);
+        if (show) visible += 1;
+    });
+    updateNewsCount(visible, total);
+}
+
+function updateNewsCount(visible, total) {
+    const el = $('#news-count');
+    if (!el) return;
+    if (total === undefined || visible === total) {
+        el.textContent = visible ? `(共 ${visible} 条)` : '';
+    } else {
+        el.textContent = `(显示 ${visible} / 共 ${total} 条)`;
+    }
+}
+
+function categoryLabelZh(cat) {
+    return cat === 'gov' ? '党政动态' : cat === 'case' ? '客户案例' : '公司动态';
 }
 
 function collectNewsList() {

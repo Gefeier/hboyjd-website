@@ -54,11 +54,21 @@ https://mp.weixin.qq.com/s/ccc"></textarea>
 
         <div class="card">
             <div class="card-head">
-                <h2>新闻列表</h2>
+                <h2>新闻列表 <span class="news-count muted" id="news-count"></span></h2>
                 <div style="display:flex;gap:10px;">
                     <button class="btn btn-primary" id="save-news-btn" type="button">保存新闻列表</button>
                     <button class="btn btn-outline" type="button" data-publish>发布预演</button>
                 </div>
+            </div>
+            <div class="news-toolbar">
+                <input type="search" id="news-search" placeholder="搜标题或摘要..." class="news-search">
+                <div class="news-filter-group" id="news-filter">
+                    <button type="button" class="filter-pill active" data-filter="all">全部</button>
+                    <button type="button" class="filter-pill" data-filter="company">公司动态</button>
+                    <button type="button" class="filter-pill" data-filter="gov">党政动态</button>
+                    <button type="button" class="filter-pill" data-filter="case">客户案例</button>
+                </div>
+                <p class="muted" style="font-size:12px; margin:4px 0 0;">↑/↓ 调顺序(顶上的显示在首页前面),改完点「保存新闻列表」+「发布预演」推上线。</p>
             </div>
             <div id="news-list" class="news-list"></div>
         </div>
