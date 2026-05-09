@@ -271,11 +271,22 @@ function bindIframePreview() {
                 if (inp && inp.value) pushUpdate(k, inp.value);
             });
         } else if (data.type === 'cms-focus' && data.key) {
+            // slot: 前缀 → 跳 about 关键图槽位
+            if (data.key.startsWith('slot:')) {
+                const slotKey = data.key.slice(5);
+                const slot = document.querySelector(`.about-img-slot[data-key="${slotKey}"]`);
+                if (slot) {
+                    slot.scrollIntoView({behavior: 'smooth', block: 'center'});
+                    slot.classList.add('field-flash');
+                    setTimeout(() => slot.classList.remove('field-flash'), 1200);
+                }
+                return;
+            }
+            // 普通 form 字段 → focus + 滚动 + 闪烁
             const inp = document.getElementById(data.key);
             if (inp) {
                 inp.focus();
                 inp.scrollIntoView({behavior: 'smooth', block: 'center'});
-                // 闪一下高亮
                 inp.classList.add('field-flash');
                 setTimeout(() => inp.classList.remove('field-flash'), 1200);
             }

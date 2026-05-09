@@ -273,10 +273,21 @@ def admin_preview(page):
     }
   });
 
-  // 点击区块通知 parent 跳到对应字段(可选,v2 完善)
+  // about 关键图槽位 src 匹配(双向跟踪:点图跳左 form 槽)
+  const ABOUT_IMG_SLOTS = {
+    'about-gate': 'about-gate.',
+    'staff-rally': 'staff-rally.',
+    'team-rally': 'team-rally.',
+    'factory-cutting-line': 'factory-cutting-line.',
+    'party-volunteer': 'party-volunteer.',
+    'team-trip-2020': 'team-trip-2020.',
+  };
+
+  // 点击区块通知 parent 跳到对应字段
   document.addEventListener('click', function(ev){
     let el = ev.target;
     while (el && el !== document.body) {
+      // 1) hero 三字段 → 跳 form input
       if (el.classList && (el.classList.contains('hero-title') || el.classList.contains('hero-subtitle') || el.classList.contains('hero-desc'))) {
         const key = el.classList.contains('hero-title') ? 'hero-title'
                    : el.classList.contains('hero-subtitle') ? 'hero-subtitle' : 'hero-desc';
@@ -284,6 +295,27 @@ def admin_preview(page):
           window.parent.postMessage({type: 'cms-focus', key: key}, '*');
         }
         ev.preventDefault();
+        return;
+      }
+      // 2) 图片(<img> 或 <picture>)→ 按 src 路径推断 about 关键图 slot,跳左 form 槽
+      if (el.tagName === 'IMG' || el.tagName === 'PICTURE') {
+        const img = el.tagName === 'IMG' ? el : el.querySelector('img');
+        const src = (img && img.src) || (img && img.getAttribute('data-src')) || '';
+        for (const slotKey in ABOUT_IMG_SLOTS) {
+          if (src.indexOf(ABOUT_IMG_SLOTS[slotKey]) !== -1) {
+            if (window.parent !== window) {
+              window.parent.postMessage({type: 'cms-focus', key: 'slot:' + slotKey}, '*');
+            }
+            ev.preventDefault();
+            return;
+          }
+        }
+        // 其他图也别跳走(预览模式所有 a 链接 / lightbox 都吞)
+      }
+      // 3) <a> 链接吞掉(预览模式不跳走)
+      if (el.tagName === 'A' && el.href && el.href.indexOf('#') === -1) {
+        ev.preventDefault();
+        ev.stopPropagation();
         return;
       }
       el = el.parentElement;
