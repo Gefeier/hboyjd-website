@@ -276,6 +276,15 @@ def admin_preview(page):
     'ab-cta-title': '[data-cms-key="ab-cta-title"]',
     'ab-cta-desc': '[data-cms-key="ab-cta-desc"]',
     'ab-cta-tagline': '[data-cms-key="ab-cta-tagline"]',
+    'ab-timeline-tag': '[data-cms-key="ab-timeline-tag"]',
+    'ab-timeline-title': '[data-cms-key="ab-timeline-title"]',
+    'ab-timeline-desc': '[data-cms-key="ab-timeline-desc"]',
+    'ab-tech-tag': '[data-cms-key="ab-tech-tag"]',
+    'ab-tech-title': '[data-cms-key="ab-tech-title"]',
+    'ab-tech-desc': '[data-cms-key="ab-tech-desc"]',
+    'ab-adv-tag': '[data-cms-key="ab-adv-tag"]',
+    'ab-adv-title': '[data-cms-key="ab-adv-title"]',
+    'ab-adv-desc': '[data-cms-key="ab-adv-desc"]',
   };
   // _en 后缀字段 → 改 data-en 属性(主站切英文 toggle 读这个)
   const EN_MAP = {
@@ -308,6 +317,15 @@ def admin_preview(page):
     'ab-cta-title-en': '[data-cms-key="ab-cta-title"]',
     'ab-cta-desc-en': '[data-cms-key="ab-cta-desc"]',
     'ab-cta-tagline-en': '[data-cms-key="ab-cta-tagline"]',
+    'ab-timeline-tag-en': '[data-cms-key="ab-timeline-tag"]',
+    'ab-timeline-title-en': '[data-cms-key="ab-timeline-title"]',
+    'ab-timeline-desc-en': '[data-cms-key="ab-timeline-desc"]',
+    'ab-tech-tag-en': '[data-cms-key="ab-tech-tag"]',
+    'ab-tech-title-en': '[data-cms-key="ab-tech-title"]',
+    'ab-tech-desc-en': '[data-cms-key="ab-tech-desc"]',
+    'ab-adv-tag-en': '[data-cms-key="ab-adv-tag"]',
+    'ab-adv-title-en': '[data-cms-key="ab-adv-title"]',
+    'ab-adv-desc-en': '[data-cms-key="ab-adv-desc"]',
   };
 
   window.addEventListener('message', function(ev){
@@ -331,7 +349,7 @@ def admin_preview(page):
     'about-gate': 'about-gate.',
     'staff-rally': 'staff-rally.',
     'team-rally': 'team-rally.',
-    'factory-cutting-line': 'factory-cutting-line.',
+    'founder-oudefa': 'founder-oudefa.',
     'party-volunteer': 'party-volunteer.',
     'team-trip-2020': 'team-trip-2020.',
     // 首页 about-carousel 3 张轮播
@@ -429,7 +447,7 @@ def replace_about_image():
         "about-gate": ("about", "about-gate", "厂区大门"),
         "staff-rally": ("about", "staff-rally", "员工晨会"),
         "team-rally": ("about", "team-rally", "年终团队合影"),
-        "factory-cutting-line": ("about", "factory-cutting-line", "工厂车间"),
+        "founder-oudefa": ("about", "founder-oudefa", "创始人欧德发"),
         "party-volunteer": ("about", "party-volunteer", "党员志愿者"),
         "team-trip-2020": ("about", "team-trip-2020", "员工旅行"),
         # 首页 about-carousel 3 张轮播(folder=images)

@@ -163,7 +163,7 @@ async function initDashboard() {
     }
 }
 
-// 关于我们页 19 字段(中文 key,英文是 _en/-en 后缀)
+// 关于我们页 28 字段(中文 key,英文是 _en/-en 后缀)
 const ABOUT_PAGE_KEYS = [
     'ab-hero-eyebrow', 'ab-hero-title', 'ab-hero-tagline',
     'ab-mission-eyebrow', 'ab-mission-headline',
@@ -172,6 +172,9 @@ const ABOUT_PAGE_KEYS = [
     'ab-give-back-2-title', 'ab-give-back-2-body',
     'ab-give-back-3-title', 'ab-give-back-3-body',
     'ab-cta-slogan', 'ab-cta-title', 'ab-cta-desc', 'ab-cta-tagline',
+    'ab-timeline-tag', 'ab-timeline-title', 'ab-timeline-desc',
+    'ab-tech-tag', 'ab-tech-title', 'ab-tech-desc',
+    'ab-adv-tag', 'ab-adv-title', 'ab-adv-desc',
 ];
 // 新闻动态子页 2 字段
 const NEWS_PAGE_KEYS = ['news-hero-title', 'news-hero-tagline'];
@@ -368,6 +371,9 @@ const PREVIEW_FIELD_KEYS = (() => {
         'ab-give-back-2-title', 'ab-give-back-2-body',
         'ab-give-back-3-title', 'ab-give-back-3-body',
         'ab-cta-slogan', 'ab-cta-title', 'ab-cta-desc', 'ab-cta-tagline',
+        'ab-timeline-tag', 'ab-timeline-title', 'ab-timeline-desc',
+        'ab-tech-tag', 'ab-tech-title', 'ab-tech-desc',
+        'ab-adv-tag', 'ab-adv-title', 'ab-adv-desc',
     ];
     const NEWS_KEYS = ['news-hero-title', 'news-hero-tagline'];
     [...ABOUT_KEYS, ...NEWS_KEYS].forEach((k) => {

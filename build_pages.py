@@ -64,6 +64,9 @@ def _build_about(data: dict) -> None:
         "ab-give-back-2-title", "ab-give-back-2-body",
         "ab-give-back-3-title", "ab-give-back-3-body",
         "ab-cta-slogan", "ab-cta-title", "ab-cta-desc", "ab-cta-tagline",
+        "ab-timeline-tag", "ab-timeline-title", "ab-timeline-desc",
+        "ab-tech-tag", "ab-tech-title", "ab-tech-desc",
+        "ab-adv-tag", "ab-adv-title", "ab-adv-desc",
     ]
     applied = 0
     for key in keys:
