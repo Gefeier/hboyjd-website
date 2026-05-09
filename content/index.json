@@ -9,5 +9,15 @@
     "image": "assets/images/factory-gate.webp",
     "poster": "assets/videos/hero-factory-poster.jpg",
     "video": "assets/videos/hero-factory.mp4"
+  },
+  "about": {
+    "title": "关于欧阳聚德",
+    "title_en": "About Ouyang Jude",
+    "subtitle": "做客户值得信任、员工值得自豪的企业",
+    "subtitle_en": "A Company Trusted by Customers, Proud for Employees",
+    "para1": "湖北欧阳聚德汽车有限公司位于湖北省枣阳市，专业从事半挂车的研发、生产与销售。公司拥有现代化生产车间，配备完整的专业化生产流水线，产品服务全国各地货运物流、工程建设等行业客户。",
+    "para1_en": "Hubei Ouyang Jude Automobile Co., Ltd., located in Zaoyang, Hubei Province, specializes in the R&D, manufacturing and sales of semi-trailers. Equipped with modern workshops and professional production lines, our products serve freight logistics and construction industries nationwide.",
+    "para2": "公司采用T700C超高强度钢材，配合先进焊接工艺，实现整车轻量化与高强度的完美结合。坚持品质铸就未来的发展理念，以技术创新为驱动，持续提升产品质量和服务水平。",
+    "para2_en": "Using T700C ultra-high-strength steel with advanced welding technology, we achieve the perfect balance of lightweight design and high strength. Committed to quality-driven development, we continuously improve product quality and service through technological innovation."
   }
 }

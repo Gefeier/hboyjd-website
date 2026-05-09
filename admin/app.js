@@ -177,6 +177,17 @@ async function initEditor() {
     const initialBg = hero.image || hero.poster || 'assets/images/factory-gate.webp';
     setHeroThumb(initialBg);
 
+    // 加载 about 区字段
+    const aboutD = data.about || {};
+    setValue('#about-title', aboutD.title);
+    setValue('#about-title-en', aboutD.title_en);
+    setValue('#about-subtitle', aboutD.subtitle);
+    setValue('#about-subtitle-en', aboutD.subtitle_en);
+    setValue('#about-para1', aboutD.para1);
+    setValue('#about-para1-en', aboutD.para1_en);
+    setValue('#about-para2', aboutD.para2);
+    setValue('#about-para2-en', aboutD.para2_en);
+
     // iframe 桥接 + page tab 切换(替代原 hero 缩略卡)
     bindIframePreview();
     bindPageTabs();
@@ -194,9 +205,10 @@ async function initEditor() {
         const btn = $('#save-index-btn');
         btn.disabled = true;
         data.hero = collectHero(data.hero || {});
+        data.about = collectAbout(data.about || {});
         await saveSection('index', data);
         btn.disabled = false;
-        showToast('首页 banner 已暂存，发布后写入 index.html。');
+        showToast('首页内容(Hero+About)已暂存，发布后写入 index.html。');
     });
 
     initAboutImageReplace();
@@ -241,6 +253,10 @@ const PREVIEW_FIELD_KEYS = [
     'hero-title', 'hero-title-en',
     'hero-subtitle', 'hero-subtitle-en',
     'hero-desc', 'hero-desc-en',
+    'about-title', 'about-title-en',
+    'about-subtitle', 'about-subtitle-en',
+    'about-para1', 'about-para1-en',
+    'about-para2', 'about-para2-en',
 ];
 
 function bindIframePreview() {
@@ -745,6 +761,20 @@ function collectHero(previous) {
         description_en: value('#hero-desc-en'),
         video: value('#hero-video'),
         poster: value('#hero-poster')
+    };
+}
+
+function collectAbout(previous) {
+    return {
+        ...previous,
+        title: value('#about-title') || (previous && previous.title) || '',
+        title_en: value('#about-title-en') || (previous && previous.title_en) || '',
+        subtitle: value('#about-subtitle') || (previous && previous.subtitle) || '',
+        subtitle_en: value('#about-subtitle-en') || (previous && previous.subtitle_en) || '',
+        para1: value('#about-para1') || (previous && previous.para1) || '',
+        para1_en: value('#about-para1-en') || (previous && previous.para1_en) || '',
+        para2: value('#about-para2') || (previous && previous.para2) || '',
+        para2_en: value('#about-para2-en') || (previous && previous.para2_en) || '',
     };
 }
 

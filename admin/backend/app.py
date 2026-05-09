@@ -243,19 +243,26 @@ def admin_preview(page):
   document.body.insertBefore(banner, document.body.firstChild);
   document.body.style.paddingTop = '34px';
 
-  // 字段 → 选择器映射(可扩展)
+  // 字段 → 选择器映射(扩字段在这里加)
   const MAP = {
     'hero-title': '.hero-title',
-    'hero-title-en': null,  // data-en attr
     'hero-subtitle': '.hero-subtitle',
-    'hero-subtitle-en': null,
     'hero-desc': '.hero-desc',
-    'hero-desc-en': null,
+    // about 区(走 data-cms-key 通用机制)
+    'about-title': '[data-cms-key="about-title"]',
+    'about-subtitle': '[data-cms-key="about-subtitle"]',
+    'about-para1': '[data-cms-key="about-para1"]',
+    'about-para2': '[data-cms-key="about-para2"]',
   };
+  // _en 后缀字段 → 改 data-en 属性(主站切英文 toggle 读这个)
   const EN_MAP = {
     'hero-title-en': '.hero-title',
     'hero-subtitle-en': '.hero-subtitle',
     'hero-desc-en': '.hero-desc',
+    'about-title-en': '[data-cms-key="about-title"]',
+    'about-subtitle-en': '[data-cms-key="about-subtitle"]',
+    'about-para1-en': '[data-cms-key="about-para1"]',
+    'about-para2-en': '[data-cms-key="about-para2"]',
   };
 
   window.addEventListener('message', function(ev){
@@ -287,7 +294,15 @@ def admin_preview(page):
   document.addEventListener('click', function(ev){
     let el = ev.target;
     while (el && el !== document.body) {
-      // 1) hero 三字段 → 跳 form input
+      // 0) 通用 data-cms-key 元素(about-title/about-subtitle/about-para1/2 等)
+      if (el.dataset && el.dataset.cmsKey) {
+        if (window.parent !== window) {
+          window.parent.postMessage({type: 'cms-focus', key: el.dataset.cmsKey}, '*');
+        }
+        ev.preventDefault();
+        return;
+      }
+      // 1) hero 三字段(走 class) → 跳 form input
       if (el.classList && (el.classList.contains('hero-title') || el.classList.contains('hero-subtitle') || el.classList.contains('hero-desc'))) {
         const key = el.classList.contains('hero-title') ? 'hero-title'
                    : el.classList.contains('hero-subtitle') ? 'hero-subtitle' : 'hero-desc';
