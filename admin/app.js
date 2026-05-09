@@ -326,21 +326,24 @@ function bindPageTabs() {
         'about': '关于我们 · about.html',
         'news': '新闻动态 · news.html',
     };
-    tabs.forEach((btn) => {
-        btn.addEventListener('click', () => {
-            const page = btn.dataset.page;
-            tabs.forEach((b) => b.classList.toggle('active', b === btn));
-            const iframe = $('#editor-preview-iframe');
-            if (iframe) iframe.src = `/admin/preview/${page}.html`;
-            const cur = $('#preview-current');
-            if (cur) cur.textContent = PAGE_LABEL[page] || `${page}.html`;
-            // 切左侧 section 显隐:section.data-page=xxx 只在对应 tab 显;无 data-page 属性的 section 永远显
-            $$('.editor-section').forEach((sec) => {
-                const belongs = sec.dataset.page;
-                sec.style.display = !belongs || belongs === page ? '' : 'none';
-            });
+    function applyPage(page) {
+        tabs.forEach((b) => b.classList.toggle('active', b.dataset.page === page));
+        const iframe = $('#editor-preview-iframe');
+        if (iframe) iframe.src = `/admin/preview/${page}.html`;
+        const cur = $('#preview-current');
+        if (cur) cur.textContent = PAGE_LABEL[page] || `${page}.html`;
+        // 切左侧 section 显隐:section.data-page=xxx 只在对应 tab 显;无 data-page 属性的 section 永远显
+        $$('.editor-section').forEach((sec) => {
+            const belongs = sec.dataset.page;
+            sec.style.display = !belongs || belongs === page ? '' : 'none';
         });
+    }
+    tabs.forEach((btn) => {
+        btn.addEventListener('click', () => applyPage(btn.dataset.page));
     });
+    // 初次加载主动跑一遍当前 active tab,防 about/news 的 section 在 index tab 时露出
+    const activeBtn = tabs.find((b) => b.classList.contains('active')) || tabs[0];
+    applyPage(activeBtn.dataset.page);
 }
 
 function initAboutImageReplace() {
