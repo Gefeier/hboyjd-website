@@ -974,11 +974,14 @@
   {
     "basename": "staff-rally",
     "folder": "assets/images/about",
-    "label": "Staff rally",
+    "label": "员工晨会",
     "jpg_url": "/assets/images/about/staff-rally.jpg",
     "webp_url": "/assets/images/about/staff-rally.webp",
     "url": "/assets/images/about/staff-rally.webp",
-    "updated_at": "2026-04-26T00:29:05"
+    "updated_at": "2026-05-09T14:45:17",
+    "max_side": 1600,
+    "width": 1600,
+    "height": 1067
   },
   {
     "basename": "staff-rally-768",
