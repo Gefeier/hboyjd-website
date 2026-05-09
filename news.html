@@ -16,7 +16,9 @@
     <link rel="stylesheet" href="https://chinese-fonts-cdn.deno.dev/packages/opposans/dist/OPPOSans-Heavy/result.css" media="print" onload="this.media='all'">
     <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Noto+Sans+SC:wght@300;400;500;700;900&display=swap" media="print" onload="this.media='all'">
     <noscript><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Noto+Sans+SC:wght@300;400;500;700;900&display=swap"></noscript>
-    <link rel="stylesheet" href="style.css?v=20260509a">
+    <link rel="stylesheet" href="style.css?v=20260509b">
+    <link rel="preload" as="image" href="assets/images/factory-gate.webp" type="image/webp" media="(min-width: 769px)" fetchpriority="high">
+    <link rel="preload" as="image" href="assets/images/factory-gate-768.webp" type="image/webp" media="(max-width: 768px)" fetchpriority="high">
     <link rel="icon" href="/favicon.ico" sizes="any">
     <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png">
     <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
@@ -48,7 +50,7 @@
         gtag('config', 'G-7XYYMJZCMZ');
     </script>
 </head>
-<body>
+<body class="news-page-body">
     <!-- 导航栏 -->
     <nav class="navbar" id="navbar">
         <div class="nav-container">
@@ -75,45 +77,36 @@
         </div>
     </nav>
 
-    <!-- Hero -->
-    <section class="news-page-hero">
-        <div class="news-page-hero-bg"></div>
-        <div class="news-page-hero-content">
-            <p class="news-page-hero-eyebrow" data-en="NEWS · COMPANY UPDATES">NEWS · 公司资讯</p>
-            <h1 class="news-page-hero-title" data-cms-key="news-hero-title" data-en="News &amp; Updates">新闻动态</h1>
-            <p class="news-page-hero-tagline" data-cms-key="news-hero-tagline" data-en="Company news, Party-building updates, and customer stories — synced from our WeChat Official Account.">公司动态 · 党政动态 · 客户案例 — 实时同步公众号最新资讯</p>
+    <!-- 厂区背景固定层(走 CSS body bg 实现) -->
+
+    <!-- 头部小条:页面标题 + 简介 -->
+    <section class="news-strip-hero">
+        <div class="container">
+            <p class="news-strip-eyebrow" data-en="NEWS · COMPANY UPDATES">NEWS · 公司资讯</p>
+            <h1 class="news-strip-title" data-cms-key="news-hero-title" data-en="News &amp; Updates">新闻动态</h1>
+            <p class="news-strip-tagline" data-cms-key="news-hero-tagline" data-en="Company news, Party-building updates, and customer stories — synced from our WeChat Official Account.">公司动态 · 党政动态 · 客户案例 — 实时同步公众号最新资讯</p>
         </div>
     </section>
 
-    <!-- 新闻列表区 -->
-    <section class="news-page-list">
+    <!-- 玻璃面板:三版块文字列表 -->
+    <section class="news-glass-wrap">
         <div class="container">
-            <!-- 筛选栏 -->
-            <div class="news-page-toolbar">
-                <div class="news-page-filters" id="newsFilters">
-                    <button type="button" class="news-filter-pill is-active" data-cat="all" data-en="All">全部</button>
-                    <button type="button" class="news-filter-pill" data-cat="company" data-en="Company">公司动态</button>
-                    <button type="button" class="news-filter-pill" data-cat="gov" data-en="Government &amp; Party">党政动态</button>
-                    <button type="button" class="news-filter-pill" data-cat="case" data-en="Customer Stories">客户案例</button>
+            <div class="news-glass">
+                <div class="news-glass-toolbar">
+                    <div class="news-glass-tabs" id="newsTabs">
+                        <button type="button" class="news-glass-tab is-active" data-cat="all" data-en="All">全部</button>
+                        <button type="button" class="news-glass-tab" data-cat="company" data-en="Company">公司动态</button>
+                        <button type="button" class="news-glass-tab" data-cat="gov" data-en="Government &amp; Party">党政动态</button>
+                        <button type="button" class="news-glass-tab" data-cat="case" data-en="Customer Stories">客户案例</button>
+                    </div>
+                    <p class="news-glass-hint">
+                        <span class="news-imp-mark">★</span>
+                        <span data-en="= Important update">= 重要消息</span>
+                    </p>
                 </div>
-                <div class="news-page-search">
-                    <svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2"><circle cx="11" cy="11" r="8"/><path d="m21 21-4.3-4.3"/></svg>
-                    <input type="search" id="newsSearch" placeholder="搜索新闻标题或摘要…" data-en-placeholder="Search news title or summary…">
-                </div>
-            </div>
 
-            <p class="news-page-count" id="newsCountLine">
-                <span data-en="Showing">共</span>
-                <strong id="newsCount">—</strong>
-                <span data-en="articles">条</span>
-            </p>
-
-            <!-- 列表 -->
-            <div class="news-page-grid" id="newsGrid"></div>
-            <div class="news-page-empty" id="newsEmpty" hidden data-en="No news matching the filter.">没有匹配的新闻</div>
-
-            <div class="news-page-load-more">
-                <button type="button" class="btn btn-outline" id="loadMoreBtn" hidden data-en="Load More">加载更多 ↓</button>
+                <div class="news-glass-body" id="newsSections"></div>
+                <div class="news-glass-empty" id="newsEmpty" hidden data-en="No news yet.">暂无消息</div>
             </div>
         </div>
     </section>
@@ -190,26 +183,27 @@
         </div>
     </footer>
 
-    <script src="main.js?v=20260509a" defer></script>
+    <script src="main.js?v=20260509b" defer></script>
     <script>
-    // 新闻列表页:筛选 + 搜索 + 懒加载
+    // 新闻列表页 v2:版块化文字行 + 重要消息金色闪烁
     (function() {
-        const PAGE_SIZE = 12;
-        const grid = document.getElementById('newsGrid');
-        const empty = document.getElementById('newsEmpty');
-        const moreBtn = document.getElementById('loadMoreBtn');
-        const countEl = document.getElementById('newsCount');
-        let allNews = [];
-        let filtered = [];
-        let visible = 0;
-        let activeCategory = 'all';
-        let searchQ = '';
+        const SECTION_DEFS = [
+            { key: 'company', zh: '公司动态', en: 'Company News' },
+            { key: 'gov',     zh: '党政动态', en: 'Government & Party' },
+            { key: 'case',    zh: '客户案例', en: 'Customer Stories' },
+        ];
 
-        // URL 参数支持:?cat=company / ?cat=gov / ?cat=case
+        const PER_SECTION_DEFAULT = 8;  // 每版块默认显示 8 条;点版块标题切到该版块全显
+        const sectionsHost = document.getElementById('newsSections');
+        const empty = document.getElementById('newsEmpty');
+        let allNews = [];
+        let activeCategory = 'all';
+
+        // URL 参数支持
         const urlCat = new URLSearchParams(location.search).get('cat');
         if (urlCat && ['all', 'company', 'gov', 'case'].includes(urlCat)) {
             activeCategory = urlCat;
-            document.querySelectorAll('.news-filter-pill').forEach(b => {
+            document.querySelectorAll('.news-glass-tab').forEach(b => {
                 b.classList.toggle('is-active', b.dataset.cat === urlCat);
             });
         }
@@ -219,112 +213,111 @@
             .then(data => {
                 allNews = (Array.isArray(data) ? data : [])
                     .sort((a, b) => (b.date || '').localeCompare(a.date || ''));
-                applyFilter();
+                render();
             })
             .catch(() => {
                 empty.hidden = false;
                 empty.textContent = '加载失败,请稍后重试';
             });
 
-        function applyFilter() {
-            const q = searchQ.toLowerCase();
-            filtered = allNews.filter(n => {
-                if (activeCategory !== 'all' && n.category !== activeCategory) return false;
-                if (q) {
-                    const blob = ((n.title || '') + ' ' + (n.summary || '') + ' ' + (n.title_en || '') + ' ' + (n.summary_en || '')).toLowerCase();
-                    if (!blob.includes(q)) return false;
-                }
-                return true;
-            });
-            visible = 0;
-            grid.innerHTML = '';
-            countEl.textContent = filtered.length;
-            if (filtered.length === 0) {
+        function render() {
+            const isEn = document.documentElement.lang === 'en';
+            const sections = activeCategory === 'all'
+                ? SECTION_DEFS
+                : SECTION_DEFS.filter(s => s.key === activeCategory);
+
+            const totalForActive = sections.reduce((sum, s) =>
+                sum + allNews.filter(n => n.category === s.key).length, 0);
+
+            if (totalForActive === 0) {
+                sectionsHost.innerHTML = '';
                 empty.hidden = false;
-                empty.textContent = searchQ ? '没有匹配「' + searchQ + '」的新闻' : '没有匹配的新闻';
-                moreBtn.hidden = true;
                 return;
             }
             empty.hidden = true;
-            appendNext();
+
+            sectionsHost.innerHTML = sections.map(sec => {
+                const items = allNews.filter(n => n.category === sec.key);
+                if (items.length === 0) return '';
+                const limit = activeCategory === 'all' ? PER_SECTION_DEFAULT : items.length;
+                const displayed = items.slice(0, limit);
+                const hasMore = items.length > limit;
+
+                const rows = displayed.map(n => rowHTML(n, isEn)).join('');
+                const moreHTML = hasMore
+                    ? `<a href="?cat=${sec.key}" class="news-section-more" data-go-cat="${sec.key}">${isEn ? `more (${items.length - limit}+) →` : `更多 (${items.length - limit}+)→`}</a>`
+                    : '';
+
+                return `<div class="news-section">
+                    <div class="news-section-head">
+                        <h2 class="news-section-title">${isEn ? sec.en : sec.zh}<span class="news-section-count">${items.length}</span></h2>
+                        ${moreHTML}
+                    </div>
+                    <ul class="news-section-list">${rows}</ul>
+                </div>`;
+            }).join('');
+
+            bindRowClicks();
+            bindMoreClicks();
         }
 
-        function appendNext() {
-            const slice = filtered.slice(visible, visible + PAGE_SIZE);
-            visible += slice.length;
-            const isEn = document.documentElement.lang === 'en';
-            grid.insertAdjacentHTML('beforeend', slice.map(n => cardHTML(n, isEn)).join(''));
-            bindCardClicks(grid.querySelectorAll('.news-page-card:not([data-bound])'));
-            moreBtn.hidden = visible >= filtered.length;
-        }
-
-        function cardHTML(n, isEn) {
+        function rowHTML(n, isEn) {
             const title = isEn ? (n.title_en || n.title || '') : (n.title || '');
-            const summary = isEn ? (n.summary_en || n.summary || '') : (n.summary || '');
-            const cat = isEn ? (n.category_label_en || n.category_label || '') : (n.category_label || '');
-            const catKey = n.category || 'company';
-            return '<article class="news-page-card" data-id="' + escapeAttr(n.id || '') + '">'
-                + '<div class="news-page-card-meta">'
-                + '<span class="news-page-cat news-page-cat-' + escapeAttr(catKey) + '">' + esc(cat) + '</span>'
-                + '<time class="news-page-date">' + esc(n.date || '') + '</time>'
-                + '</div>'
-                + '<h3 class="news-page-title">' + esc(title) + '</h3>'
-                + (summary ? '<p class="news-page-summary">' + esc(summary) + '</p>' : '')
-                + '<div class="news-page-card-footer">'
-                + '<span class="news-page-readmore" data-en="Read full article →">阅读全文(公众号) →</span>'
-                + '</div>'
-                + '</article>';
+            const isImp = n.important === true;
+            const star = isImp ? '<span class="news-imp-mark news-imp-shimmer">★</span>' : '<span class="news-row-bullet"></span>';
+            const cls = isImp ? 'news-row is-important' : 'news-row';
+            return `<li class="${cls}" data-id="${esc(n.id || '')}">
+                ${star}
+                <span class="news-row-title">${esc(title)}</span>
+                <time class="news-row-date">${esc(n.date || '')}</time>
+            </li>`;
         }
 
-        function bindCardClicks(cards) {
-            cards.forEach(c => {
-                c.dataset.bound = '1';
-                c.addEventListener('click', () => {
-                    const id = c.dataset.id;
+        function bindRowClicks() {
+            sectionsHost.querySelectorAll('.news-row').forEach(li => {
+                li.addEventListener('click', () => {
+                    const id = li.dataset.id;
                     const n = allNews.find(x => x.id === id);
                     if (n && n.url) window.open(n.url, '_blank', 'noopener,noreferrer');
                 });
             });
         }
+        function bindMoreClicks() {
+            sectionsHost.querySelectorAll('.news-section-more').forEach(a => {
+                a.addEventListener('click', (e) => {
+                    e.preventDefault();
+                    const cat = a.dataset.goCat;
+                    activeCategory = cat;
+                    document.querySelectorAll('.news-glass-tab').forEach(b => {
+                        b.classList.toggle('is-active', b.dataset.cat === cat);
+                    });
+                    const url = new URL(location.href);
+                    url.searchParams.set('cat', cat);
+                    history.replaceState(null, '', url.toString());
+                    render();
+                    window.scrollTo({top: document.querySelector('.news-glass-wrap').offsetTop - 80, behavior: 'smooth'});
+                });
+            });
+        }
 
-        // 分类 pill
-        document.querySelectorAll('.news-filter-pill').forEach(b => {
+        // 顶部 tabs 切换
+        document.querySelectorAll('.news-glass-tab').forEach(b => {
             b.addEventListener('click', () => {
-                document.querySelectorAll('.news-filter-pill').forEach(x => x.classList.remove('is-active'));
+                document.querySelectorAll('.news-glass-tab').forEach(x => x.classList.remove('is-active'));
                 b.classList.add('is-active');
                 activeCategory = b.dataset.cat;
-                applyFilter();
-                // 同步 URL(不刷新)
                 const url = new URL(location.href);
                 if (activeCategory === 'all') url.searchParams.delete('cat');
                 else url.searchParams.set('cat', activeCategory);
                 history.replaceState(null, '', url.toString());
+                render();
             });
         });
 
-        // 搜索(防抖)
-        let st;
-        document.getElementById('newsSearch').addEventListener('input', (e) => {
-            clearTimeout(st);
-            st = setTimeout(() => { searchQ = e.target.value.trim(); applyFilter(); }, 200);
-        });
-
-        moreBtn.addEventListener('click', appendNext);
-
-        // 语言切换 → 重渲染当前可见
-        document.getElementById('langToggle')?.addEventListener('click', () => {
-            setTimeout(() => {
-                if (filtered.length) {
-                    const v = visible;
-                    visible = 0;
-                    grid.innerHTML = '';
-                    while (visible < v && visible < filtered.length) appendNext();
-                }
-            }, 60);
-        });
+        // 语言切换
+        document.getElementById('langToggle')?.addEventListener('click', () => setTimeout(render, 60));
 
         function esc(s) { return String(s == null ? '' : s).replace(/[&<>"']/g, m => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[m])); }
-        function escapeAttr(s) { return esc(s); }
     })();
     </script>
 </body>

@@ -590,11 +590,11 @@ function renderNewsList(news) {
         return;
     }
     list.innerHTML = news.map((item, index) => `
-        <article class="news-editor" data-index="${index}" data-id="${escapeAttr(item.id || '')}" data-source="${escapeAttr(item.source || 'manual')}" data-category="${escapeAttr(item.category || 'company')}">
+        <article class="news-editor${item.important ? ' is-important' : ''}" data-index="${index}" data-id="${escapeAttr(item.id || '')}" data-source="${escapeAttr(item.source || 'manual')}" data-category="${escapeAttr(item.category || 'company')}">
             <div class="news-card-header">
                 <div class="news-cover" style="background-image:url('${escapeAttr(item.cover || '/assets/images/factory-gate.webp')}')"></div>
                 <div class="news-card-meta">
-                    <div class="news-card-title">${escapeHtml(item.title || '(无标题)')}</div>
+                    <div class="news-card-title">${item.important ? '<span class="news-imp-mark news-imp-shimmer" title="重要消息">★</span> ' : ''}${escapeHtml(item.title || '(无标题)')}</div>
                     <div class="news-card-sub">
                         <span class="cat-badge cat-${escapeAttr(item.category || 'company')}">${escapeHtml(item.category_label || categoryLabelZh(item.category))}</span>
                         <span class="news-card-date">${escapeHtml(item.date || '')}</span>
@@ -602,11 +602,13 @@ function renderNewsList(news) {
                     </div>
                 </div>
                 <div class="news-card-tools">
+                    <button type="button" class="icon-btn star-btn${item.important ? ' is-on' : ''}" data-act="toggle-important" title="标记重要消息(官网会金色一闪一闪)">★</button>
                     <button type="button" class="icon-btn" data-act="up" title="上移">↑</button>
                     <button type="button" class="icon-btn" data-act="down" title="下移">↓</button>
                     <button type="button" class="icon-btn" data-act="copy-url" title="复制原文 URL">⧉</button>
                 </div>
             </div>
+            <input type="hidden" data-field="important" value="${item.important ? '1' : ''}">
             <div class="news-fields">
                 <div class="form-row two">
                     <label>标题<input type="text" data-field="title" value="${escapeAttr(item.title || '')}"></label>
@@ -688,6 +690,21 @@ function handleNewsRowAction(act, article) {
             () => showToast('已复制原文 URL'),
             () => showToast('复制失败,手动复制吧', 'error')
         );
+    } else if (act === 'toggle-important') {
+        const hidden = article.querySelector('input[data-field="important"]');
+        const star = article.querySelector('.star-btn');
+        const isOn = hidden && hidden.value === '1';
+        if (hidden) hidden.value = isOn ? '' : '1';
+        article.classList.toggle('is-important', !isOn);
+        if (star) star.classList.toggle('is-on', !isOn);
+        // 同步卡片标题前的 ★ 标记
+        const titleEl = article.querySelector('.news-card-title');
+        const titleInp = article.querySelector('input[data-field="title"]');
+        const t = titleInp ? titleInp.value : (titleEl ? titleEl.textContent.replace(/^★\s*/, '') : '');
+        if (titleEl) {
+            titleEl.innerHTML = (!isOn ? '<span class="news-imp-mark news-imp-shimmer" title="重要消息">★</span> ' : '') + (t || '(无标题)').replace(/[<>&"]/g, c => ({'<':'&lt;','>':'&gt;','&':'&amp;','"':'&quot;'}[c]));
+        }
+        showToast(!isOn ? '已标重要 — 保存+发布后官网金色闪烁' : '已取消重要标记');
     }
 }
 
@@ -753,6 +770,9 @@ function collectNewsList() {
         item.category_label = labelForCategory(item.category);
         item.category_label_en = item.category === 'gov' ? 'Government & Party' : item.category === 'case' ? 'Customer Stories' : 'Company News';
         item.source = row.dataset.source || 'manual';
+        // important 转 bool(空字符串/'0'→false,'1'→true)
+        item.important = item.important === '1' || item.important === 'true' || item.important === true;
+        if (!item.important) delete item.important; // 不写 false 进 json,保持简洁
         return item;
     });
 }
