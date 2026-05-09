@@ -763,6 +763,30 @@ img, video, iframe, table, pre, code {
     font-weight: 500;
     color: var(--gray-700);
     text-align: center;
+    line-height: 1.5;
+    min-height: 64px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.honors-more {
+    text-align: center;
+    margin-top: 32px;
+}
+.honors-more a {
+    color: var(--navy-900);
+    font-size: 14px;
+    font-weight: 600;
+    text-decoration: none;
+    letter-spacing: 1px;
+    border-bottom: 1px solid var(--gold);
+    padding-bottom: 4px;
+    transition: color 0.2s, border-color 0.2s;
+}
+.honors-more a:hover {
+    color: var(--blue-500);
+    border-bottom-color: var(--blue-500);
 }
 
 /* ====== 新闻动态 ====== */
