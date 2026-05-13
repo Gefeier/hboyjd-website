@@ -288,7 +288,17 @@ const typeImages = {
     '自卸':    'assets/images/config-base-dump.png',
     '骨架':    'assets/images/config-base-skeleton.png',
     '仓栅':    'assets/images/config-base-fence.png',
-    '特种':    'assets/images/product-special.jpg'  // 特种暂用卡片图
+    '特种':    'assets/images/product-special.jpg'
+};
+
+// webp 显示版本（浏览器展示用；Canvas 换色仍走 typeImages .png）
+const typeImagesDisplay = {
+    '直梁平板': 'assets/images/config-base.webp',
+    '高低平板': 'assets/images/config-base-lowbed.webp',
+    '自卸':    'assets/images/config-base-dump.webp',
+    '骨架':    'assets/images/config-base-skeleton.webp',
+    '仓栅':    'assets/images/config-base-fence.webp',
+    '特种':    'assets/images/product-special.jpg'
 };
 
 // ====== 每车型规格 Schema（按车型动态渲染 Step1 / Step2） ======
@@ -498,11 +508,12 @@ document.querySelectorAll('input[name="vehicleType"]').forEach(radio => {
         vehicleWrapper.style.animation = 'driveIn 1.2s cubic-bezier(0.16, 1, 0.3, 1) both';
 
         setTimeout(() => {
-            vehicleImg.src = src;
-            reflectionImg.src = src;
+            // 展示用 webp（快），Canvas 换色另读 png
+            var displaySrc = typeImagesDisplay[type] || src;
+            vehicleImg.src = displaySrc;
+            reflectionImg.src = displaySrc;
             vehicleLabel.querySelector('.label-en').textContent = label.en;
             vehicleLabel.querySelector('.label-zh').textContent = label.zh;
-            // 加载该车型的原始像素并应用当前颜色
             loadPixelsForType(type, function() { recolorVehicle(getCurrentColor()); });
         }, 150);
 
@@ -597,10 +608,11 @@ function recolorVehicle(colorVal) {
     var rImg = document.getElementById('reflectionImg');
     var baseSrc = typeImages[currentType];
 
-    // 原色或无像素缓存（如特种车用卡片图）→ 直接显示原图
+    // 原色或无像素缓存（如特种车）→ 直接显示 webp 原图
     if (!target || !pixelCache[currentType]) {
-        vImg.src = baseSrc;
-        rImg.src = baseSrc;
+        var fallback = typeImagesDisplay[currentType] || baseSrc;
+        vImg.src = fallback;
+        rImg.src = fallback;
         vImg.style.filter = 'drop-shadow(0 20px 60px rgba(37,99,235,0.15))';
         rImg.style.filter = 'blur(3px)';
         return;
