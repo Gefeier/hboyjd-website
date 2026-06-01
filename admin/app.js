@@ -829,6 +829,8 @@ function renderNewsList(news) {
             </div>
             <input type="hidden" data-field="important" value="${item.important ? '1' : ''}">
             <input type="hidden" data-field="site_visible" value="${isHidden ? '0' : '1'}">
+            <input type="hidden" data-field="title_en" value="${escapeAttr(item.title_en || '')}">
+            <input type="hidden" data-field="summary_en" value="${escapeAttr(item.summary_en || '')}">
             <div class="news-fields">
                 <div class="form-row two">
                     <label>标题<input type="text" data-field="title" value="${escapeAttr(item.title || '')}"></label>
@@ -997,8 +999,7 @@ function collectNewsList() {
             item[input.dataset.field] = input.value.trim();
         });
         item.id = row.dataset.id || `news-${Date.now()}-${oldIndex}`;
-        item.title_en = '';
-        item.summary_en = '';
+        // title_en/summary_en 从 hidden input 收集(renderNewsList 已渲染),不再写死空 — 防止保存时清掉人工翻译
         item.category_label = labelForCategory(item.category);
         item.category_label_en = item.category === 'gov' ? 'Government & Party' : item.category === 'case' ? 'Customer Stories' : 'Company News';
         item.source = row.dataset.source || 'manual';
