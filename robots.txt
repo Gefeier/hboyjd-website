@@ -2,6 +2,7 @@ User-agent: *
 Allow: /
 Disallow: /.well-known/
 Disallow: /.git/
+Disallow: /admin/
 
 User-agent: Baiduspider
 Allow: /
