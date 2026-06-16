@@ -284,6 +284,157 @@
         </div>
     </section>
 
+    <!-- 车型详情 carousel(2026-06-16)·横滚展示具体型号 vs #products 按大类展示 -->
+    <section class="models" id="models">
+        <div class="container">
+            <div class="section-header models-header">
+                <div>
+                    <span class="section-tag">FEATURED MODELS</span>
+                    <h2 class="section-title" data-en="Featured Models">车型详情</h2>
+                    <p class="section-desc" data-en="Specific in-production models with full specs, photos and use cases">已上市具体型号 · 完整参数 · 实景图 · 应用场景</p>
+                </div>
+                <div class="models-nav" aria-label="车型滚动控制">
+                    <button class="models-nav-btn" id="modelsPrev" aria-label="上一个" type="button">‹</button>
+                    <button class="models-nav-btn" id="modelsNext" aria-label="下一个" type="button">›</button>
+                </div>
+            </div>
+        </div>
+
+        <!-- carousel 容器突破 container 边距,让滚动到边缘视觉自然 -->
+        <div class="models-scroll-wrap">
+            <div class="models-scroll" id="modelsScroll">
+                <!-- 已上线详情页 · 真车型卡 -->
+                <a href="product-flatbed.html" class="model-mini model-mini-live" aria-label="13米直梁栏板半挂车 EHJ9400LB 详情">
+                    <div class="model-mini-img">
+                        <picture>
+                            <source type="image/webp" srcset="assets/images/product-flatbed-768.webp 768w, assets/images/product-flatbed.webp 1600w" sizes="360px">
+                            <img src="assets/images/product-flatbed.jpg" alt="13米直梁栏板半挂车" loading="lazy">
+                        </picture>
+                        <span class="model-mini-badge">EHJ9400LB</span>
+                    </div>
+                    <div class="model-mini-body">
+                        <p class="model-mini-eyebrow">STAKE BODY · 13M · 3 AXLES</p>
+                        <h3 class="model-mini-name">13米直梁栏板半挂车</h3>
+                        <ul class="model-mini-stats">
+                            <li><strong>34.3</strong>吨总质量</li>
+                            <li><strong>3</strong>桥承重</li>
+                            <li><strong>13</strong>米车长</li>
+                        </ul>
+                        <span class="model-mini-cta">查看详情 →</span>
+                    </div>
+                </a>
+
+                <!-- 占位车型 · 未上线时统一灰底 CTA="敬请期待" -->
+                <div class="model-mini model-mini-coming">
+                    <div class="model-mini-img">
+                        <picture>
+                            <source type="image/webp" srcset="assets/images/product-dump.webp">
+                            <img src="assets/images/product-dump.jpg" alt="自卸半挂车" loading="lazy">
+                        </picture>
+                        <span class="model-mini-badge coming">COMING</span>
+                    </div>
+                    <div class="model-mini-body">
+                        <p class="model-mini-eyebrow">DUMP SEMI-TRAILER</p>
+                        <h3 class="model-mini-name">后翻自卸半挂车</h3>
+                        <ul class="model-mini-stats">
+                            <li>9-13.6 米</li>
+                            <li>重型液压</li>
+                            <li>工程运输</li>
+                        </ul>
+                        <span class="model-mini-cta muted">详情陆续上线</span>
+                    </div>
+                </div>
+
+                <div class="model-mini model-mini-coming">
+                    <div class="model-mini-img">
+                        <picture>
+                            <source type="image/webp" srcset="assets/images/product-fence.webp">
+                            <img src="assets/images/product-fence.jpg" alt="仓栅半挂车" loading="lazy">
+                        </picture>
+                        <span class="model-mini-badge coming">COMING</span>
+                    </div>
+                    <div class="model-mini-body">
+                        <p class="model-mini-eyebrow">FENCE SEMI-TRAILER</p>
+                        <h3 class="model-mini-name">仓栅半挂车</h3>
+                        <ul class="model-mini-stats">
+                            <li>多种栏高</li>
+                            <li>带篷布架</li>
+                            <li>散货运输</li>
+                        </ul>
+                        <span class="model-mini-cta muted">详情陆续上线</span>
+                    </div>
+                </div>
+
+                <div class="model-mini model-mini-coming">
+                    <div class="model-mini-img">
+                        <picture>
+                            <source type="image/webp" srcset="assets/images/product-lowbed-768.webp 768w, assets/images/product-lowbed.webp 1600w" sizes="360px">
+                            <img src="assets/images/product-lowbed.jpg" alt="低平板半挂车" loading="lazy">
+                        </picture>
+                        <span class="model-mini-badge coming">COMING</span>
+                    </div>
+                    <div class="model-mini-body">
+                        <p class="model-mini-eyebrow">LOW-BED · GOOSENECK</p>
+                        <h3 class="model-mini-name">低平板半挂车</h3>
+                        <ul class="model-mini-stats">
+                            <li>12-17.9 米</li>
+                            <li>80 吨+</li>
+                            <li>大件运输</li>
+                        </ul>
+                        <span class="model-mini-cta muted">详情陆续上线</span>
+                    </div>
+                </div>
+
+                <div class="model-mini model-mini-coming">
+                    <div class="model-mini-img">
+                        <picture>
+                            <source type="image/webp" srcset="assets/images/product-crane.webp">
+                            <img src="assets/images/product-crane.jpg" alt="随车起重运输车" loading="lazy">
+                        </picture>
+                        <span class="model-mini-badge coming">COMING</span>
+                    </div>
+                    <div class="model-mini-body">
+                        <p class="model-mini-eyebrow">TRUCK-MOUNTED CRANE</p>
+                        <h3 class="model-mini-name">随车起重运输车</h3>
+                        <ul class="model-mini-stats">
+                            <li>折臂 / 直臂</li>
+                            <li>多吨位可选</li>
+                            <li>一车多用</li>
+                        </ul>
+                        <span class="model-mini-cta muted">详情陆续上线</span>
+                    </div>
+                </div>
+
+                <div class="model-mini model-mini-coming">
+                    <div class="model-mini-img">
+                        <picture>
+                            <source type="image/webp" srcset="assets/images/product-special.webp">
+                            <img src="assets/images/product-special.jpg" alt="特种专用车" loading="lazy">
+                        </picture>
+                        <span class="model-mini-badge coming">COMING</span>
+                    </div>
+                    <div class="model-mini-body">
+                        <p class="model-mini-eyebrow">SPECIAL-PURPOSE</p>
+                        <h3 class="model-mini-name">特种专用车</h3>
+                        <ul class="model-mini-stats">
+                            <li>高空作业</li>
+                            <li>全挂车</li>
+                            <li>非标定制</li>
+                        </ul>
+                        <span class="model-mini-cta muted">详情陆续上线</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- 滚动进度指示器 -->
+        <div class="container">
+            <div class="models-progress">
+                <div class="models-progress-bar" id="modelsProgressBar"></div>
+            </div>
+        </div>
+    </section>
+
     <!-- 核心优势 -->
     <section class="advantages" id="advantages">
         <div class="container">
