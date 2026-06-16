@@ -16,7 +16,7 @@
     <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Noto+Sans+SC:wght@300;400;500;700;900&display=swap" media="print" onload="this.media='all'">
     <link rel="stylesheet" href="style.css?v=20260615a">
     <link rel="stylesheet" href="about.css?v=20260615a">
-    <link rel="stylesheet" href="product-detail.css?v=20260615b">
+    <link rel="stylesheet" href="product-detail.css?v=20260616c">
 
     <link rel="preload" as="image" href="assets/images/product-flatbed.webp" type="image/webp" fetchpriority="high">
 
@@ -99,14 +99,21 @@
         </div>
     </section>
 
-    <!-- ============ 公司简介 + 三件套 (复用 about-mission 风格) ============ -->
-    <section class="about-mission">
+    <!-- ============ 公司简介 + 三件套 (左图右文 v2 · 6/16 改) ============ -->
+    <section class="about-mission pf-mission">
         <div class="container">
-            <p class="mission-eyebrow">PRODUCT OVERVIEW</p>
-            <h2 class="mission-headline">为长途重载而生 · 13米直梁车架 · T700C 高强钢 · 富华 13吨车桥</h2>
             <div class="mission-grid">
-                <div class="mission-text">
-                    <p>13米直梁栏板半挂车 EHJ9400LB 是湖北欧阳聚德汽车主销车型之一,采用倒梯形锥形主梁、加重前端纵向板焊接、配合斜撑固定加强车身性能,适配长途公路与省际干线的重载运输需求。</p>
+                <div class="pf-mission-image">
+                    <picture>
+                        <source type="image/webp" srcset="assets/images/products/flatbed/02-768.webp 768w, assets/images/products/flatbed/02.webp 1600w" sizes="(max-width: 900px) 100vw, 600px">
+                        <img src="assets/images/products/flatbed/02.jpg" alt="13米直梁栏板半挂车" loading="lazy">
+                    </picture>
+                </div>
+                <div class="pf-mission-content">
+                    <p class="mission-eyebrow">PRODUCT OVERVIEW</p>
+                    <h2 class="mission-headline">为长途重载而生 · 13米直梁车架 · T700C 高强钢 · 富华 13吨车桥</h2>
+                    <div class="mission-text">
+                        <p>13米直梁栏板半挂车 EHJ9400LB 是湖北欧阳聚德汽车主销车型之一,采用倒梯形锥形主梁、加重前端纵向板焊接、配合斜撑固定加强车身性能,适配长途公路与省际干线的重载运输需求。</p>
                     <p>整车搭载富华 13 吨车桥与子午 12R22.5 轮胎,配气式制动 4 双 2 单与 ABS 科密辅助,在<strong>过弯抗侧倾、抗悬挂磨损与长寿命</strong>方面经多年市场验证。"襄汽牌"已录入国家汽车产品《公告》目录,支持厂家直销与全国 30+ 省售后服务网络。</p>
                 </div>
 
@@ -137,6 +144,7 @@
                     <span>ISO 9001</span>
                     <span>CCC 认证</span>
                     <span>厂家直销</span>
+                </div>
                 </div>
             </div>
         </div>
