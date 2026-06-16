@@ -23,6 +23,87 @@
     font-weight: 600;
 }
 
+/* === 每个车型 Hero/Stats/Features 背景图独立覆盖 (2026-06-16) === */
+.pf-hero-dump {
+    background:
+        linear-gradient(180deg, rgba(8,14,28,0.55) 0%, rgba(8,14,28,0.35) 50%, rgba(8,14,28,0.7) 100%),
+        url('assets/images/products/dump/03.jpg') center/cover no-repeat;
+}
+.pf-stats-dump {
+    background:
+        linear-gradient(180deg, rgba(8,14,28,0.94) 0%, rgba(15,32,53,0.96) 100%),
+        url('assets/images/products/dump/03.jpg') center/cover no-repeat;
+}
+.pf-features-dump {
+    background:
+        linear-gradient(180deg, rgba(8,14,28,0.88) 0%, rgba(15,32,53,0.92) 100%),
+        url('assets/images/products/dump/03.jpg') center/cover no-repeat;
+}
+
+.pf-hero-lowbed {
+    background:
+        linear-gradient(180deg, rgba(8,14,28,0.55) 0%, rgba(8,14,28,0.35) 50%, rgba(8,14,28,0.7) 100%),
+        url('assets/images/products/lowbed/01.jpg') center/cover no-repeat;
+}
+.pf-stats-lowbed {
+    background:
+        linear-gradient(180deg, rgba(8,14,28,0.94) 0%, rgba(15,32,53,0.96) 100%),
+        url('assets/images/products/lowbed/01.jpg') center/cover no-repeat;
+}
+.pf-features-lowbed {
+    background:
+        linear-gradient(180deg, rgba(8,14,28,0.88) 0%, rgba(15,32,53,0.92) 100%),
+        url('assets/images/products/lowbed/01.jpg') center/cover no-repeat;
+}
+
+.pf-hero-crane {
+    background:
+        linear-gradient(180deg, rgba(8,14,28,0.55) 0%, rgba(8,14,28,0.35) 50%, rgba(8,14,28,0.7) 100%),
+        url('assets/images/products/crane/01.jpg') center/cover no-repeat;
+}
+.pf-stats-crane {
+    background:
+        linear-gradient(180deg, rgba(8,14,28,0.94) 0%, rgba(15,32,53,0.96) 100%),
+        url('assets/images/products/crane/01.jpg') center/cover no-repeat;
+}
+.pf-features-crane {
+    background:
+        linear-gradient(180deg, rgba(8,14,28,0.88) 0%, rgba(15,32,53,0.92) 100%),
+        url('assets/images/products/crane/01.jpg') center/cover no-repeat;
+}
+
+.pf-hero-fence {
+    background:
+        linear-gradient(180deg, rgba(8,14,28,0.55) 0%, rgba(8,14,28,0.35) 50%, rgba(8,14,28,0.7) 100%),
+        url('assets/images/products/fence/01.jpg') center/cover no-repeat;
+}
+.pf-stats-fence {
+    background:
+        linear-gradient(180deg, rgba(8,14,28,0.94) 0%, rgba(15,32,53,0.96) 100%),
+        url('assets/images/products/fence/01.jpg') center/cover no-repeat;
+}
+.pf-features-fence {
+    background:
+        linear-gradient(180deg, rgba(8,14,28,0.88) 0%, rgba(15,32,53,0.92) 100%),
+        url('assets/images/products/fence/01.jpg') center/cover no-repeat;
+}
+
+.pf-hero-aerial {
+    background:
+        linear-gradient(180deg, rgba(8,14,28,0.55) 0%, rgba(8,14,28,0.35) 50%, rgba(8,14,28,0.7) 100%),
+        url('assets/images/products/aerial/01.jpg') center/cover no-repeat;
+}
+.pf-stats-aerial {
+    background:
+        linear-gradient(180deg, rgba(8,14,28,0.94) 0%, rgba(15,32,53,0.96) 100%),
+        url('assets/images/products/aerial/01.jpg') center/cover no-repeat;
+}
+.pf-features-aerial {
+    background:
+        linear-gradient(180deg, rgba(8,14,28,0.88) 0%, rgba(15,32,53,0.92) 100%),
+        url('assets/images/products/aerial/01.jpg') center/cover no-repeat;
+}
+
 /* ====== 核心参数看板 · 让 8 个数字气质统一 ====== */
 .pf-stats {
     background:
