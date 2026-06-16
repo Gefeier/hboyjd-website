@@ -15,7 +15,7 @@
     <link rel="stylesheet" href="https://chinese-fonts-cdn.deno.dev/packages/opposans/dist/OPPOSans-Heavy/result.css" media="print" onload="this.media='all'">
     <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Noto+Sans+SC:wght@300;400;500;700;900&display=swap" media="print" onload="this.media='all'">
     <noscript><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Noto+Sans+SC:wght@300;400;500;700;900&display=swap"></noscript>
-    <link rel="stylesheet" href="style.css?v=20260507b">
+    <link rel="stylesheet" href="style.css?v=20260616h">
     <!-- LCP preload: 首屏背景按设备走对应格式/尺寸 -->
     <link rel="preload" as="image" href="assets/images/factory-gate-768.webp" type="image/webp" media="(max-width: 768px)" fetchpriority="high">
     <link rel="preload" as="image" href="assets/images/factory-gate.webp" type="image/webp" media="(min-width: 769px)" fetchpriority="high">
@@ -280,6 +280,95 @@
                         <a href="#contact" class="product-link" data-en="Inquire →">咨询定制 →</a>
                     </div>
                 </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- 车型详情 marquee (2026-06-16 v3 · 纯 CSS 静态复制无 JS) -->
+    <section class="models" id="models">
+        <div class="container">
+            <div class="section-header">
+                <span class="section-tag">FEATURED MODELS</span>
+                <h2 class="section-title" data-en="Featured Models">车型详情</h2>
+                <p class="section-desc" data-en="Specific in-production models · full specs · real photos">已上市具体型号 · 完整参数 · 实景图 · 应用场景</p>
+            </div>
+        </div>
+        <div class="models-marquee">
+            <div class="models-marquee-track">
+                <!-- 第一组(原始) -->
+                <a href="product-flatbed.html" class="m-card">
+                    <div class="m-card-img"><img src="assets/images/products/flatbed/mission.jpg" alt="13米直梁栏板半挂车" loading="lazy"><span class="m-card-badge">EHJ9400LB</span></div>
+                    <div class="m-card-body">
+                        <p class="m-card-eyebrow">STAKE BODY · 13M · 3 AXLES</p>
+                        <h3 class="m-card-name">13米直梁栏板半挂车</h3>
+                        <p class="m-card-stats"><strong>34.3</strong>吨 · <strong>3</strong>桥 · <strong>13</strong>米</p>
+                        <span class="m-card-cta">查看详情 →</span>
+                    </div>
+                </a>
+                <a href="product-dump.html" class="m-card">
+                    <div class="m-card-img"><img src="assets/images/products/dump/mission.jpg" alt="后翻自卸半挂车" loading="lazy"><span class="m-card-badge">EHJ9400ZH</span></div>
+                    <div class="m-card-body">
+                        <p class="m-card-eyebrow">REAR TIPPING DUMP</p>
+                        <h3 class="m-card-name">后翻自卸半挂车</h3>
+                        <p class="m-card-stats"><strong>40</strong>吨 · <strong>50</strong>°卸料 · 工程</p>
+                        <span class="m-card-cta">查看详情 →</span>
+                    </div>
+                </a>
+                <a href="product-lowbed.html" class="m-card">
+                    <div class="m-card-img"><img src="assets/images/products/lowbed/mission.jpg" alt="低平板半挂车" loading="lazy"><span class="m-card-badge">EHJ9400TDP</span></div>
+                    <div class="m-card-body">
+                        <p class="m-card-eyebrow">LOW FLATBED · GOOSENECK</p>
+                        <h3 class="m-card-name">低平板半挂车</h3>
+                        <p class="m-card-stats"><strong>80</strong>吨+ · <strong>3-6</strong>桥 · 大件</p>
+                        <span class="m-card-cta">查看详情 →</span>
+                    </div>
+                </a>
+                <a href="product-crane.html" class="m-card">
+                    <div class="m-card-img"><img src="assets/images/products/crane/mission.jpg" alt="随车起重运输货车" loading="lazy"><span class="m-card-badge">EHJ5310JSQ</span></div>
+                    <div class="m-card-body">
+                        <p class="m-card-eyebrow">TRUCK-MOUNTED CRANE</p>
+                        <h3 class="m-card-name">随车起重运输货车</h3>
+                        <p class="m-card-stats"><strong>3-16</strong>吨 · 折臂/直臂</p>
+                        <span class="m-card-cta">查看详情 →</span>
+                    </div>
+                </a>
+                <!-- 第二组(静态复制无 JS 实现 seamless loop) -->
+                <a href="product-flatbed.html" class="m-card" aria-hidden="true" tabindex="-1">
+                    <div class="m-card-img"><img src="assets/images/products/flatbed/mission.jpg" alt="" loading="lazy"><span class="m-card-badge">EHJ9400LB</span></div>
+                    <div class="m-card-body">
+                        <p class="m-card-eyebrow">STAKE BODY · 13M · 3 AXLES</p>
+                        <h3 class="m-card-name">13米直梁栏板半挂车</h3>
+                        <p class="m-card-stats"><strong>34.3</strong>吨 · <strong>3</strong>桥 · <strong>13</strong>米</p>
+                        <span class="m-card-cta">查看详情 →</span>
+                    </div>
+                </a>
+                <a href="product-dump.html" class="m-card" aria-hidden="true" tabindex="-1">
+                    <div class="m-card-img"><img src="assets/images/products/dump/mission.jpg" alt="" loading="lazy"><span class="m-card-badge">EHJ9400ZH</span></div>
+                    <div class="m-card-body">
+                        <p class="m-card-eyebrow">REAR TIPPING DUMP</p>
+                        <h3 class="m-card-name">后翻自卸半挂车</h3>
+                        <p class="m-card-stats"><strong>40</strong>吨 · <strong>50</strong>°卸料 · 工程</p>
+                        <span class="m-card-cta">查看详情 →</span>
+                    </div>
+                </a>
+                <a href="product-lowbed.html" class="m-card" aria-hidden="true" tabindex="-1">
+                    <div class="m-card-img"><img src="assets/images/products/lowbed/mission.jpg" alt="" loading="lazy"><span class="m-card-badge">EHJ9400TDP</span></div>
+                    <div class="m-card-body">
+                        <p class="m-card-eyebrow">LOW FLATBED · GOOSENECK</p>
+                        <h3 class="m-card-name">低平板半挂车</h3>
+                        <p class="m-card-stats"><strong>80</strong>吨+ · <strong>3-6</strong>桥 · 大件</p>
+                        <span class="m-card-cta">查看详情 →</span>
+                    </div>
+                </a>
+                <a href="product-crane.html" class="m-card" aria-hidden="true" tabindex="-1">
+                    <div class="m-card-img"><img src="assets/images/products/crane/mission.jpg" alt="" loading="lazy"><span class="m-card-badge">EHJ5310JSQ</span></div>
+                    <div class="m-card-body">
+                        <p class="m-card-eyebrow">TRUCK-MOUNTED CRANE</p>
+                        <h3 class="m-card-name">随车起重运输货车</h3>
+                        <p class="m-card-stats"><strong>3-16</strong>吨 · 折臂/直臂</p>
+                        <span class="m-card-cta">查看详情 →</span>
+                    </div>
+                </a>
             </div>
         </div>
     </section>
