@@ -5,17 +5,21 @@
    只新加: hero 背景图覆盖 / spec-grid 表 / CTA 块
    ============================================ */
 
-/* ====== Hero 背景换成栏板车实景图 ====== */
+/* ====== Hero 背景 · 栏板半挂车真图(从钉盘扒) ====== */
 .pf-hero {
     background:
         linear-gradient(180deg, rgba(8,14,28,0.55) 0%, rgba(8,14,28,0.35) 50%, rgba(8,14,28,0.7) 100%),
-        url('assets/images/product-flatbed.jpg') center/cover no-repeat;
-    background-image:
-        linear-gradient(180deg, rgba(8,14,28,0.55) 0%, rgba(8,14,28,0.35) 50%, rgba(8,14,28,0.7) 100%),
-        image-set(
-            url('assets/images/product-flatbed.webp') type('image/webp'),
-            url('assets/images/product-flatbed.jpg') type('image/jpeg')
-        );
+        url('assets/images/products/flatbed/mission.jpg') center/cover no-repeat;
+}
+.pf-stats {
+    background:
+        linear-gradient(180deg, rgba(8,14,28,0.94) 0%, rgba(15,32,53,0.96) 100%),
+        url('assets/images/products/flatbed/mission.jpg') center/cover no-repeat;
+}
+.pf-features {
+    background:
+        linear-gradient(180deg, rgba(8,14,28,0.88) 0%, rgba(15,32,53,0.92) 100%),
+        url('assets/images/products/flatbed/mission.jpg') center/cover no-repeat;
 }
 .pf-hero .about-hero-eyebrow {
     letter-spacing: 5px;
@@ -162,15 +166,9 @@
     .pf-mission .mission-headline { font-size: 24px; }
 }
 
-/* ====== 核心参数看板 · 让 8 个数字气质统一 ====== */
-.pf-stats {
-    background:
-        linear-gradient(180deg, rgba(8,14,28,0.94) 0%, rgba(15,32,53,0.96) 100%),
-        url('assets/images/product-flatbed.jpg') center/cover no-repeat;
-    background-attachment: scroll;
-}
+/* ====== 核心参数看板 / 产品特点 · 视差等效果 ====== */
 @media (min-width: 769px) {
-    .pf-stats { background-attachment: fixed; }
+    .pf-stats, .pf-features { background-attachment: fixed; }
 }
 .pf-stats .stat-number {
     font-size: 40px;
@@ -178,17 +176,6 @@
 }
 .pf-stats .stat-unit {
     font-size: 18px;
-}
-
-/* ====== 产品特点 · 用 product-flatbed 实景做毛玻璃卡背景 ====== */
-.pf-features {
-    background:
-        linear-gradient(180deg, rgba(8,14,28,0.88) 0%, rgba(15,32,53,0.92) 100%),
-        url('assets/images/product-flatbed.jpg') center/cover no-repeat;
-    background-attachment: scroll;
-}
-@media (min-width: 769px) {
-    .pf-features { background-attachment: fixed; }
 }
 
 /* ====== 技术规格全表 ====== */
