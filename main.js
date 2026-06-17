@@ -383,9 +383,13 @@ document.getElementById('inquiryForm')?.addEventListener('submit', function(e) {
         return card.offsetWidth + gap;
     }
 
-    // seamless loop: 滚到副本起点(原始一半宽度)时瞬间跳回原始起点
+    // seamless loop: 滚到副本起点(原始一半 cards 总宽)时瞬间跳回原始起点
+    // 用 cards-only 宽度而不是 track.scrollWidth(后者含两侧 padding,大视口下 max scrollLeft 到不了 halfWidth 会卡边界)
     function checkLoop() {
-        var halfWidth = track.scrollWidth / 2;
+        var cards = track.querySelectorAll('.m-card');
+        if (cards.length < 2) return;
+        var halfCount = cards.length / 2;
+        var halfWidth = cardStep() * halfCount;
         if (scroll.scrollLeft >= halfWidth) scroll.scrollLeft -= halfWidth;
         else if (scroll.scrollLeft < 0) scroll.scrollLeft += halfWidth;
     }
