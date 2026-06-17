@@ -639,15 +639,13 @@ img, video, iframe, table, pre, code {
     transform: scale(1.05);
 }
 
-/* AI 渲染图卡 (透明 PNG 用 contain + 浅灰底 + padding 让产品悬浮) */
+/* AI 渲染图卡 · 跟 configurator 选配器同款黑底 (radial #1a1a1a → #000) */
 .product-img-ai {
-    background:
-        radial-gradient(ellipse at center bottom, rgba(15, 32, 53, 0.06) 0%, transparent 65%),
-        linear-gradient(180deg, var(--white) 0%, var(--gray-100) 100%);
+    background: radial-gradient(ellipse at center, #1a1a1a 0%, #000 100%);
     display: flex;
     align-items: center;
     justify-content: center;
-    padding: 16px;
+    padding: 12px;
 }
 .product-img-ai img {
     object-fit: contain;
