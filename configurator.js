@@ -283,21 +283,21 @@ const vehicleLabel = document.getElementById('vehicleLabel');
 const vehicleWrapper = document.getElementById('vehicleWrapper');
 
 const typeImages = {
-    '直梁平板': 'assets/images/config-base.png',
-    '高低平板': 'assets/images/config-base-lowbed.png',
-    '自卸':    'assets/images/config-base-dump.png',
-    '骨架':    'assets/images/config-base-skeleton.png',
-    '仓栅':    'assets/images/config-base-fence.png',
+    '直梁平板': 'assets/images/config-base.png?v=20260617e',
+    '高低平板': 'assets/images/config-base-lowbed.png?v=20260617e',
+    '自卸':    'assets/images/config-base-dump.png?v=20260617e',
+    '骨架':    'assets/images/config-base-skeleton.png?v=20260617e',
+    '仓栅':    'assets/images/config-base-fence.png?v=20260617e',
     '特种':    'assets/images/product-special.jpg'
 };
 
 // webp 显示版本（浏览器展示用；Canvas 换色仍走 typeImages .png）
 const typeImagesDisplay = {
-    '直梁平板': 'assets/images/config-base.webp',
-    '高低平板': 'assets/images/config-base-lowbed.webp',
-    '自卸':    'assets/images/config-base-dump.webp',
-    '骨架':    'assets/images/config-base-skeleton.webp',
-    '仓栅':    'assets/images/config-base-fence.webp',
+    '直梁平板': 'assets/images/config-base.webp?v=20260617e',
+    '高低平板': 'assets/images/config-base-lowbed.webp?v=20260617e',
+    '自卸':    'assets/images/config-base-dump.webp?v=20260617e',
+    '骨架':    'assets/images/config-base-skeleton.webp?v=20260617e',
+    '仓栅':    'assets/images/config-base-fence.webp?v=20260617e',
     '特种':    'assets/images/product-special.jpg'
 };
 
