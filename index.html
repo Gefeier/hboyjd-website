@@ -15,7 +15,7 @@
     <link rel="stylesheet" href="https://chinese-fonts-cdn.deno.dev/packages/opposans/dist/OPPOSans-Heavy/result.css" media="print" onload="this.media='all'">
     <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Noto+Sans+SC:wght@300;400;500;700;900&display=swap" media="print" onload="this.media='all'">
     <noscript><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Noto+Sans+SC:wght@300;400;500;700;900&display=swap"></noscript>
-    <link rel="stylesheet" href="style.css?v=20260616h">
+    <link rel="stylesheet" href="style.css?v=20260617a">
     <!-- LCP preload: 首屏背景按设备走对应格式/尺寸 -->
     <link rel="preload" as="image" href="assets/images/factory-gate-768.webp" type="image/webp" media="(max-width: 768px)" fetchpriority="high">
     <link rel="preload" as="image" href="assets/images/factory-gate.webp" type="image/webp" media="(min-width: 769px)" fetchpriority="high">
@@ -284,17 +284,23 @@
         </div>
     </section>
 
-    <!-- 车型详情 marquee (2026-06-16 v3 · 纯 CSS 静态复制无 JS) -->
+    <!-- 车型详情 marquee (2026-06-17 v4 · 静态复制 + JS scrollBy 手动按钮) -->
     <section class="models" id="models">
         <div class="container">
-            <div class="section-header">
-                <span class="section-tag">FEATURED MODELS</span>
-                <h2 class="section-title" data-en="Featured Models">车型详情</h2>
-                <p class="section-desc" data-en="Specific in-production models · full specs · real photos">已上市具体型号 · 完整参数 · 实景图 · 应用场景</p>
+            <div class="section-header models-header-v4">
+                <div>
+                    <span class="section-tag">FEATURED MODELS</span>
+                    <h2 class="section-title" data-en="Featured Models">车型详情</h2>
+                    <p class="section-desc" data-en="Specific in-production models · full specs · real photos">已上市具体型号 · 完整参数 · 实景图 · 应用场景</p>
+                </div>
+                <div class="models-nav">
+                    <button class="models-nav-btn" id="modelsPrev" type="button" aria-label="上一个">‹</button>
+                    <button class="models-nav-btn" id="modelsNext" type="button" aria-label="下一个">›</button>
+                </div>
             </div>
         </div>
         <div class="models-marquee">
-            <div class="models-marquee-track">
+            <div class="models-marquee-track" id="modelsTrack">
                 <!-- 第一组(原始) -->
                 <a href="product-flatbed.html" class="m-card">
                     <div class="m-card-img"><img src="assets/images/products/flatbed/mission.jpg" alt="13米直梁栏板半挂车" loading="lazy"><span class="m-card-badge">EHJ9400LB</span></div>
@@ -650,6 +656,6 @@
         </div>
     </footer>
 
-    <script src="main.js?v=20260507b" defer></script>
+    <script src="main.js?v=20260617a" defer></script>
 </body>
 </html>

@@ -367,3 +367,84 @@ document.getElementById('inquiryForm')?.addEventListener('submit', function(e) {
 
     els.forEach((el) => observer.observe(el));
 })();
+
+// ====== 车型详情 marquee v4 (2026-06-17) · 静态复制不用 cloneNode + 整数累加自走 + prev/next ======
+(function initModelsMarqueeV4() {
+    var scroll = document.querySelector('.models-marquee');
+    var track = document.getElementById('modelsTrack');
+    if (!scroll || !track) return;
+    var prevBtn = document.getElementById('modelsPrev');
+    var nextBtn = document.getElementById('modelsNext');
+
+    function cardStep() {
+        var card = track.querySelector('.m-card');
+        if (!card) return 340;
+        var gap = parseInt(getComputedStyle(track).gap) || 20;
+        return card.offsetWidth + gap;
+    }
+
+    // seamless loop: 滚到副本起点(原始一半宽度)时瞬间跳回原始起点
+    function checkLoop() {
+        var halfWidth = track.scrollWidth / 2;
+        if (scroll.scrollLeft >= halfWidth) scroll.scrollLeft -= halfWidth;
+        else if (scroll.scrollLeft < 0) scroll.scrollLeft += halfWidth;
+    }
+
+    // 自走 · 每秒 30px 整数累加防浮点丢精度
+    var PX_PER_SEC = 30;
+    var paused = false;
+    var lastTs = 0;
+    var driftAccum = 0;
+    function tick(ts) {
+        if (!lastTs) { lastTs = ts; requestAnimationFrame(tick); return; }
+        var dt = ts - lastTs;
+        lastTs = ts;
+        if (!paused && dt > 0 && dt < 100) {
+            driftAccum += PX_PER_SEC * (dt / 1000);
+            var step = Math.floor(driftAccum);
+            if (step >= 1) {
+                scroll.scrollLeft += step;
+                driftAccum -= step;
+                checkLoop();
+            }
+        }
+        requestAnimationFrame(tick);
+    }
+    requestAnimationFrame(tick);
+
+    // 暂停触发
+    scroll.addEventListener('mouseenter', function () { paused = true; });
+    scroll.addEventListener('mouseleave', function () { paused = false; lastTs = 0; });
+    scroll.addEventListener('touchstart', function () { paused = true; }, { passive: true });
+    scroll.addEventListener('touchend', function () {
+        setTimeout(function () { paused = false; lastTs = 0; }, 2000);
+    });
+
+    // prev/next 按钮(暂停 3 秒后恢复自走)
+    function manualNudge(dir) {
+        paused = true;
+        scroll.scrollBy({ left: dir * cardStep(), behavior: 'smooth' });
+        setTimeout(function () { paused = false; lastTs = 0; }, 3000);
+    }
+    if (prevBtn) prevBtn.addEventListener('click', function () { manualNudge(-1); });
+    if (nextBtn) nextBtn.addEventListener('click', function () { manualNudge(1); });
+
+    // 鼠标拖拽
+    var isDown = false, startX = 0, startScroll = 0;
+    scroll.addEventListener('mousedown', function (e) {
+        isDown = true; paused = true;
+        startX = e.pageX; startScroll = scroll.scrollLeft;
+    });
+    window.addEventListener('mousemove', function (e) {
+        if (!isDown) return;
+        scroll.scrollLeft = startScroll - (e.pageX - startX);
+    });
+    window.addEventListener('mouseup', function () {
+        if (!isDown) return;
+        isDown = false;
+        setTimeout(function () { paused = false; lastTs = 0; }, 1500);
+    });
+
+    // scroll 监听 seamless loop(手动 scrollBy/拖拽触发后)
+    scroll.addEventListener('scroll', checkLoop, { passive: true });
+})();
