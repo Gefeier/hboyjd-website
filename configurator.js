@@ -549,7 +549,9 @@ function loadPixelsForType(type, cb) {
     if (pixelCache[type]) { if (cb) cb(pixelCache[type]); return; }
     var src = typeImages[type];
     // 特种或非 PNG 图不做像素缓存（不参与换色）
-    if (!src || !src.endsWith('.png')) { if (cb) cb(null); return; }
+    // 去掉 ?v=xxx cache buster 再判扩展名，否则 endsWith('.png') 永远 false → 像素缓存填不进去 → 换色全 fallback
+    var srcPath = src ? src.split('?')[0] : '';
+    if (!srcPath.endsWith('.png')) { if (cb) cb(null); return; }
     var img = new Image();
     img.crossOrigin = 'anonymous';
     img.onload = function() {
