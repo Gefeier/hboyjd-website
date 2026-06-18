@@ -283,21 +283,21 @@ const vehicleLabel = document.getElementById('vehicleLabel');
 const vehicleWrapper = document.getElementById('vehicleWrapper');
 
 const typeImages = {
-    '直梁平板': 'assets/images/config-base.png?v=20260618f',
-    '高低平板': 'assets/images/config-base-lowbed.png?v=20260618f',
-    '自卸':    'assets/images/config-base-dump.png?v=20260618f',
-    '骨架':    'assets/images/config-base-skeleton.png?v=20260618f',
-    '仓栅':    'assets/images/config-base-fence.png?v=20260618f',
+    '直梁平板': 'assets/images/config-base.png?v=20260618g',
+    '高低平板': 'assets/images/config-base-lowbed.png?v=20260618g',
+    '自卸':    'assets/images/config-base-dump.png?v=20260618g',
+    '骨架':    'assets/images/config-base-skeleton.png?v=20260618g',
+    '仓栅':    'assets/images/config-base-fence.png?v=20260618g',
     '特种':    'assets/images/product-special.jpg'
 };
 
 // webp 显示版本（浏览器展示用；Canvas 换色仍走 typeImages .png）
 const typeImagesDisplay = {
-    '直梁平板': 'assets/images/config-base.webp?v=20260618f',
-    '高低平板': 'assets/images/config-base-lowbed.webp?v=20260618f',
-    '自卸':    'assets/images/config-base-dump.webp?v=20260618f',
-    '骨架':    'assets/images/config-base-skeleton.webp?v=20260618f',
-    '仓栅':    'assets/images/config-base-fence.webp?v=20260618f',
+    '直梁平板': 'assets/images/config-base.webp?v=20260618g',
+    '高低平板': 'assets/images/config-base-lowbed.webp?v=20260618g',
+    '自卸':    'assets/images/config-base-dump.webp?v=20260618g',
+    '骨架':    'assets/images/config-base-skeleton.webp?v=20260618g',
+    '仓栅':    'assets/images/config-base-fence.webp?v=20260618g',
     '特种':    'assets/images/product-special.jpg'
 };
 
@@ -506,28 +506,33 @@ document.querySelectorAll('input[name="vehicleType"]').forEach(radio => {
         vehicleLabel.querySelector('.label-en').textContent = label.en;
         vehicleLabel.querySelector('.label-zh').textContent = label.zh;
 
-        // src 处理分两种情况:
-        // (1) 当前色是默认大红 → 同步换 webp,driveIn 直接跑新车型(无红色闪现因为本来就是红)
-        // (2) 当前色非默认 → 保持上一帧 data URL(旧车型旧颜色),等 recolor 出新车型新颜色再切
-        //     如果同步换 webp,前 150ms 会看到"红色 + 新车型"闪现(丽丽戳的 bug)
+        // src 处理 — 配合 init 时全车型预加载 pixelCache,实现切车型瞬间正确视觉:
+        // (1) 默认大红 → 同步换 webp,driveIn 跑新车型
+        // (2) 非默认色 + pixelCache 已有 → 同步 recolor 出新车型新颜色 data URL,driveIn 跑新车型新色
+        // (3) 非默认色 + pixelCache 未加载 → 保持上一帧 data URL,异步 recolor 接管(短暂回退)
         var currentColor = getCurrentColor();
         var isDefaultRed = !colorTargets[currentColor];
         var displaySrc = typeImagesDisplay[type] || src;
         if (isDefaultRed) {
             vehicleImg.src = displaySrc;
             reflectionImg.src = displaySrc;
+        } else if (pixelCache[type]) {
+            // 同步 recolor — 切换瞬间 src 就是新车型新颜色
+            recolorVehicle(currentColor);
+        } else {
+            // pixelCache 还没加载完(首次切到陌生车型),保持上一帧,异步加载完再 recolor
+            loadPixelsForType(type, function() { recolorVehicle(getCurrentColor()); });
         }
-        // 非默认色:不动 src,等 recolor 接管
 
         // 驶出 + 驶入动画(无论哪种情况都立即跑)
         vehicleWrapper.style.animation = 'none';
         vehicleWrapper.offsetHeight; // reflow
         vehicleWrapper.style.animation = 'driveIn 1.2s cubic-bezier(0.16, 1, 0.3, 1) both';
 
-        // recolor 依赖 pixelCache 异步加载,留在 setTimeout 里等动画跑一会儿
-        setTimeout(() => {
-            loadPixelsForType(type, function() { recolorVehicle(getCurrentColor()); });
-        }, 150);
+        // 默认红场景下后台启动 pixelCache 加载,为后续换色用
+        if (isDefaultRed && !pixelCache[type]) {
+            setTimeout(function() { loadPixelsForType(type); }, 0);
+        }
 
         // 重新渲染规格项
         renderSpecsForType(type);
@@ -813,7 +818,14 @@ btnSubmit.addEventListener('click', () => {
 });
 
 // ====== 初始化 ======
-// 默认渲染"直梁平板"的规格 + 预加载像素缓存
+// 默认渲染"直梁平板"的规格 + 后台预加载所有车型像素缓存
+// 预加载让用户切车型(非默认色场景)时同步 recolor,不再前 ~1s 显示旧车型
 renderSpecsForType('直梁平板');
 loadPixelsForType('直梁平板');
+// 其他车型异步后台加载(不阻塞首屏)
+setTimeout(function() {
+    Object.keys(typeImages).forEach(function(t) {
+        if (t !== '直梁平板') loadPixelsForType(t);
+    });
+}, 100);
 updateTags();
