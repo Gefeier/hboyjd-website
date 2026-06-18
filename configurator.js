@@ -283,21 +283,21 @@ const vehicleLabel = document.getElementById('vehicleLabel');
 const vehicleWrapper = document.getElementById('vehicleWrapper');
 
 const typeImages = {
-    '直梁平板': 'assets/images/config-base.png?v=20260618g',
-    '高低平板': 'assets/images/config-base-lowbed.png?v=20260618g',
-    '自卸':    'assets/images/config-base-dump.png?v=20260618g',
-    '骨架':    'assets/images/config-base-skeleton.png?v=20260618g',
-    '仓栅':    'assets/images/config-base-fence.png?v=20260618g',
+    '直梁平板': 'assets/images/config-base.png?v=20260618h',
+    '高低平板': 'assets/images/config-base-lowbed.png?v=20260618h',
+    '自卸':    'assets/images/config-base-dump.png?v=20260618h',
+    '骨架':    'assets/images/config-base-skeleton.png?v=20260618h',
+    '仓栅':    'assets/images/config-base-fence.png?v=20260618h',
     '特种':    'assets/images/product-special.jpg'
 };
 
 // webp 显示版本（浏览器展示用；Canvas 换色仍走 typeImages .png）
 const typeImagesDisplay = {
-    '直梁平板': 'assets/images/config-base.webp?v=20260618g',
-    '高低平板': 'assets/images/config-base-lowbed.webp?v=20260618g',
-    '自卸':    'assets/images/config-base-dump.webp?v=20260618g',
-    '骨架':    'assets/images/config-base-skeleton.webp?v=20260618g',
-    '仓栅':    'assets/images/config-base-fence.webp?v=20260618g',
+    '直梁平板': 'assets/images/config-base.webp?v=20260618h',
+    '高低平板': 'assets/images/config-base-lowbed.webp?v=20260618h',
+    '自卸':    'assets/images/config-base-dump.webp?v=20260618h',
+    '骨架':    'assets/images/config-base-skeleton.webp?v=20260618h',
+    '仓栅':    'assets/images/config-base-fence.webp?v=20260618h',
     '特种':    'assets/images/product-special.jpg'
 };
 
@@ -314,7 +314,10 @@ const COMMON = {
 const SPEC_SCHEMA = {
     '直梁平板': {
         step1: { title: '车辆规格', groups: [
-            { name: 'length',   label: '车身长度', options: ['13米', '13.75米', '14.6米', '16米', '其他'], custom: true },
+            // length 选项来源:工价 sqlite Top 35 真实在产
+            // 13米/13.75米/40英尺(12.19米) 都是实战长度,16米/14.6米保留通用项
+            { name: 'length',   label: '车身长度', options: ['13米', '13.75米', '14.6米', '16米', '40英尺(12.19米)', '其他'], custom: true },
+            { name: 'variant',  label: '车型变种', options: ['标准直梁平板', '直梁栏板', '40英尺集装箱平板', '其他'] },
             COMMON.axles, COMMON.leg,
             { name: 'webPlate', label: '腹板厚度', options: ['5mm', '6mm', '8mm', '10mm', '12mm'] },
         ]},
@@ -322,7 +325,9 @@ const SPEC_SCHEMA = {
     },
     '高低平板': {
         step1: { title: '车辆规格', groups: [
-            { name: 'length',     label: '车身长度', options: ['13米', '13.75米', '14.6米', '其他'], custom: true },
+            // 17.5米 425台/月最高频;13.75米 191台/月次高;12米钩机板 26台/月业内通称"挖机板"
+            { name: 'length',     label: '车身长度', options: ['12米', '13米', '13.75米', '14.6米', '17.5米', '其他'], custom: true },
+            { name: 'variant',    label: '车型变种', options: ['标准高低平板', '钩机板(挖机专用 12×3×3.3)', '高低栏板', '高低仓栏', '其他'] },
             { name: 'gooseneck',  label: '鹅颈高度', options: ['标准 380mm', '加高 420mm'] },
             { name: 'sinkDepth',  label: '下沉深度', options: ['0.8米', '1.0米', '1.2米'] },
             COMMON.axles, COMMON.leg,
@@ -332,7 +337,9 @@ const SPEC_SCHEMA = {
     },
     '自卸': {
         step1: { title: '厢体与液压', groups: [
-            { name: 'length',    label: '厢体长度', options: ['7.8米', '8.6米', '9.6米', '其他'], custom: true },
+            // 7.5米小蜜蜂 130台/月;8.5米三桥U型 27台/月;9.6米罐式 65台/月;13米小鹅颈侧翻 194台/月
+            { name: 'length',    label: '厢体长度', options: ['7.5米', '7.8米', '8米', '8.5米', '8.6米', '9.6米', '13米', '其他'], custom: true },
+            { name: 'variant',   label: '车型变种', options: ['标准后翻自卸', '小蜜蜂(7.5米轻型后翻)', '小鹅颈侧翻(13米)', 'U型后翻(8.5米三桥)', '罐式后翻(9.6米)', '直梁侧翻', '其他'] },
             { name: 'tipAngle',  label: '翻转角度', options: ['50°', '55°', '60°'] },
             { name: 'cylinder',  label: '油缸规格', options: ['前顶 16吨', '前顶 20吨', '中顶 16吨'] },
             { name: 'boardMat',  label: '厢板材质', options: ['普通钢板', '锰板', '高强度钢'] },
@@ -342,7 +349,9 @@ const SPEC_SCHEMA = {
     },
     '骨架': {
         step1: { title: '集装箱规格', groups: [
-            { name: 'length',        label: '车身长度', options: ['12.5米', '13米', '14.6米', '其他'], custom: true },
+            // 10.7米三桥 51台/月;13.95米三桥/两桥 各 44-45台/月;11.488米总成 46台/月;20英尺不封顶 60台/月
+            { name: 'length',        label: '车身长度', options: ['9米', '10.2米', '10.7米', '11.488米', '12.5米', '13米', '13.95米', '14.6米', '其他'], custom: true },
+            { name: 'variant',       label: '车型变种', options: ['标准骨架', '三桥骨架', '两桥骨架', '集装箱不封顶(20英尺)', '骨架仓栏上装', '骨架侧帘上装', '骨架箱式上装', '饲料车专用', '其他'] },
             { name: 'lockCount',     label: '箱锁数量', options: ['12把', '16把', '20把'] },
             { name: 'containerType', label: '兼容箱型', options: ['20尺×1', '40尺×1', '45尺×1', '双20尺'] },
             { name: 'frontLock',     label: '前移位锁', options: ['有', '无'] },
@@ -352,7 +361,9 @@ const SPEC_SCHEMA = {
     },
     '仓栅': {
         step1: { title: '栏板与车厢', groups: [
-            { name: 'length',        label: '车身长度', options: ['13米', '13.75米', '14.6米', '其他'], custom: true },
+            // 13米直梁仓栏/鹅颈仓栏 47-52台/月;9.6米载货车仓栏 22台/月
+            { name: 'length',        label: '车身长度', options: ['9.6米', '13米', '13.75米', '14.6米', '其他'], custom: true },
+            { name: 'variant',       label: '车型变种', options: ['直梁仓栏', '鹅颈仓栏(13米)', '高低仓栏', '载货车仓栏(9.6米)', '其他'] },
             { name: 'fenceHeight',   label: '栏板高度', options: ['0.6米', '0.8米', '1.2米', '1.5米'] },
             { name: 'fenceMat',      label: '栏板材质', options: ['花纹钢板', '镀锌板', '铝合金'] },
             { name: 'fenceSegments', label: '栏板段数', options: ['6段', '8段', '10段'] },
