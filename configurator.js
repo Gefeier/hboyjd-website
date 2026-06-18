@@ -283,21 +283,21 @@ const vehicleLabel = document.getElementById('vehicleLabel');
 const vehicleWrapper = document.getElementById('vehicleWrapper');
 
 const typeImages = {
-    '直梁平板': 'assets/images/config-base.png?v=20260618e',
-    '高低平板': 'assets/images/config-base-lowbed.png?v=20260618e',
-    '自卸':    'assets/images/config-base-dump.png?v=20260618e',
-    '骨架':    'assets/images/config-base-skeleton.png?v=20260618e',
-    '仓栅':    'assets/images/config-base-fence.png?v=20260618e',
+    '直梁平板': 'assets/images/config-base.png?v=20260618f',
+    '高低平板': 'assets/images/config-base-lowbed.png?v=20260618f',
+    '自卸':    'assets/images/config-base-dump.png?v=20260618f',
+    '骨架':    'assets/images/config-base-skeleton.png?v=20260618f',
+    '仓栅':    'assets/images/config-base-fence.png?v=20260618f',
     '特种':    'assets/images/product-special.jpg'
 };
 
 // webp 显示版本（浏览器展示用；Canvas 换色仍走 typeImages .png）
 const typeImagesDisplay = {
-    '直梁平板': 'assets/images/config-base.webp?v=20260618e',
-    '高低平板': 'assets/images/config-base-lowbed.webp?v=20260618e',
-    '自卸':    'assets/images/config-base-dump.webp?v=20260618e',
-    '骨架':    'assets/images/config-base-skeleton.webp?v=20260618e',
-    '仓栅':    'assets/images/config-base-fence.webp?v=20260618e',
+    '直梁平板': 'assets/images/config-base.webp?v=20260618f',
+    '高低平板': 'assets/images/config-base-lowbed.webp?v=20260618f',
+    '自卸':    'assets/images/config-base-dump.webp?v=20260618f',
+    '骨架':    'assets/images/config-base-skeleton.webp?v=20260618f',
+    '仓栅':    'assets/images/config-base-fence.webp?v=20260618f',
     '特种':    'assets/images/product-special.jpg'
 };
 
@@ -502,15 +502,24 @@ document.querySelectorAll('input[name="vehicleType"]').forEach(radio => {
         const label = typeLabels[type];
         currentType = type;
 
-        // 先同步换 img/label,再启动 driveIn 动画
-        // 否则前 150ms 用户看到旧车型从右驶入,中途 frame 切到新车
-        var displaySrc = typeImagesDisplay[type] || src;
-        vehicleImg.src = displaySrc;
-        reflectionImg.src = displaySrc;
+        // label 立即换(不影响视觉)
         vehicleLabel.querySelector('.label-en').textContent = label.en;
         vehicleLabel.querySelector('.label-zh').textContent = label.zh;
 
-        // 驶出 + 驶入动画
+        // src 处理分两种情况:
+        // (1) 当前色是默认大红 → 同步换 webp,driveIn 直接跑新车型(无红色闪现因为本来就是红)
+        // (2) 当前色非默认 → 保持上一帧 data URL(旧车型旧颜色),等 recolor 出新车型新颜色再切
+        //     如果同步换 webp,前 150ms 会看到"红色 + 新车型"闪现(丽丽戳的 bug)
+        var currentColor = getCurrentColor();
+        var isDefaultRed = !colorTargets[currentColor];
+        var displaySrc = typeImagesDisplay[type] || src;
+        if (isDefaultRed) {
+            vehicleImg.src = displaySrc;
+            reflectionImg.src = displaySrc;
+        }
+        // 非默认色:不动 src,等 recolor 接管
+
+        // 驶出 + 驶入动画(无论哪种情况都立即跑)
         vehicleWrapper.style.animation = 'none';
         vehicleWrapper.offsetHeight; // reflow
         vehicleWrapper.style.animation = 'driveIn 1.2s cubic-bezier(0.16, 1, 0.3, 1) both';
