@@ -1611,6 +1611,9 @@ body.news-page-body {
     padding: 100px 0;
     background: linear-gradient(180deg, #0a0a14 0%, #050508 100%);
 }
+.promo-video .section-tag { color: var(--gold); }
+.promo-video .section-title { color: var(--white); }
+.promo-video .section-desc { color: rgba(255, 255, 255, 0.7); }
 .promo-video-wrap {
     max-width: 960px;
     margin: 40px auto 0;
