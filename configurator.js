@@ -283,21 +283,21 @@ const vehicleLabel = document.getElementById('vehicleLabel');
 const vehicleWrapper = document.getElementById('vehicleWrapper');
 
 const typeImages = {
-    '直梁平板': 'assets/images/config-base.png?v=20260618d',
-    '高低平板': 'assets/images/config-base-lowbed.png?v=20260618d',
-    '自卸':    'assets/images/config-base-dump.png?v=20260618d',
-    '骨架':    'assets/images/config-base-skeleton.png?v=20260618d',
-    '仓栅':    'assets/images/config-base-fence.png?v=20260618d',
+    '直梁平板': 'assets/images/config-base.png?v=20260618e',
+    '高低平板': 'assets/images/config-base-lowbed.png?v=20260618e',
+    '自卸':    'assets/images/config-base-dump.png?v=20260618e',
+    '骨架':    'assets/images/config-base-skeleton.png?v=20260618e',
+    '仓栅':    'assets/images/config-base-fence.png?v=20260618e',
     '特种':    'assets/images/product-special.jpg'
 };
 
 // webp 显示版本（浏览器展示用；Canvas 换色仍走 typeImages .png）
 const typeImagesDisplay = {
-    '直梁平板': 'assets/images/config-base.webp?v=20260618d',
-    '高低平板': 'assets/images/config-base-lowbed.webp?v=20260618d',
-    '自卸':    'assets/images/config-base-dump.webp?v=20260618d',
-    '骨架':    'assets/images/config-base-skeleton.webp?v=20260618d',
-    '仓栅':    'assets/images/config-base-fence.webp?v=20260618d',
+    '直梁平板': 'assets/images/config-base.webp?v=20260618e',
+    '高低平板': 'assets/images/config-base-lowbed.webp?v=20260618e',
+    '自卸':    'assets/images/config-base-dump.webp?v=20260618e',
+    '骨架':    'assets/images/config-base-skeleton.webp?v=20260618e',
+    '仓栅':    'assets/images/config-base-fence.webp?v=20260618e',
     '特种':    'assets/images/product-special.jpg'
 };
 
@@ -502,18 +502,21 @@ document.querySelectorAll('input[name="vehicleType"]').forEach(radio => {
         const label = typeLabels[type];
         currentType = type;
 
+        // 先同步换 img/label,再启动 driveIn 动画
+        // 否则前 150ms 用户看到旧车型从右驶入,中途 frame 切到新车
+        var displaySrc = typeImagesDisplay[type] || src;
+        vehicleImg.src = displaySrc;
+        reflectionImg.src = displaySrc;
+        vehicleLabel.querySelector('.label-en').textContent = label.en;
+        vehicleLabel.querySelector('.label-zh').textContent = label.zh;
+
         // 驶出 + 驶入动画
         vehicleWrapper.style.animation = 'none';
         vehicleWrapper.offsetHeight; // reflow
         vehicleWrapper.style.animation = 'driveIn 1.2s cubic-bezier(0.16, 1, 0.3, 1) both';
 
+        // recolor 依赖 pixelCache 异步加载,留在 setTimeout 里等动画跑一会儿
         setTimeout(() => {
-            // 展示用 webp（快），Canvas 换色另读 png
-            var displaySrc = typeImagesDisplay[type] || src;
-            vehicleImg.src = displaySrc;
-            reflectionImg.src = displaySrc;
-            vehicleLabel.querySelector('.label-en').textContent = label.en;
-            vehicleLabel.querySelector('.label-zh').textContent = label.zh;
             loadPixelsForType(type, function() { recolorVehicle(getCurrentColor()); });
         }, 150);
 
