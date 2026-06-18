@@ -283,21 +283,31 @@ const vehicleLabel = document.getElementById('vehicleLabel');
 const vehicleWrapper = document.getElementById('vehicleWrapper');
 
 const typeImages = {
-    '直梁平板': 'assets/images/config-base.png?v=20260618h',
-    '高低平板': 'assets/images/config-base-lowbed.png?v=20260618h',
-    '自卸':    'assets/images/config-base-dump.png?v=20260618h',
-    '骨架':    'assets/images/config-base-skeleton.png?v=20260618h',
-    '仓栅':    'assets/images/config-base-fence.png?v=20260618h',
+    '直梁平板': 'assets/images/config-base.png?v=20260618k',
+    '高低平板': 'assets/images/config-base-lowbed.png?v=20260618k',
+    '自卸':    'assets/images/config-base-dump.png?v=20260618k',
+    '骨架':    'assets/images/config-base-skeleton.png?v=20260618k',
+    '仓栅':    'assets/images/config-base-fence.png?v=20260618k',
     '特种':    'assets/images/product-special.jpg'
+};
+
+// 车型变种图(#105 v3 增量,选 variant 时触发"变形态")
+// 标准变种(走 typeImages 大类图)不写在这里;只列"非标"变种独立图
+// 变种图走 webp 显示,Canvas 换色暂时不支持(后续可加 pixelCache)
+const typeVariantImages = {
+    '高低平板': {
+        '钩机板(挖机专用 12×3×3.3)': 'assets/images/product-variant-excavator-bed.webp?v=20260618k',
+    },
+    // 待补:小蜜蜂/罐式/U型/不封顶/饲料/小鹅颈侧翻 ...
 };
 
 // webp 显示版本（浏览器展示用；Canvas 换色仍走 typeImages .png）
 const typeImagesDisplay = {
-    '直梁平板': 'assets/images/config-base.webp?v=20260618h',
-    '高低平板': 'assets/images/config-base-lowbed.webp?v=20260618h',
-    '自卸':    'assets/images/config-base-dump.webp?v=20260618h',
-    '骨架':    'assets/images/config-base-skeleton.webp?v=20260618h',
-    '仓栅':    'assets/images/config-base-fence.webp?v=20260618h',
+    '直梁平板': 'assets/images/config-base.webp?v=20260618k',
+    '高低平板': 'assets/images/config-base-lowbed.webp?v=20260618k',
+    '自卸':    'assets/images/config-base-dump.webp?v=20260618k',
+    '骨架':    'assets/images/config-base-skeleton.webp?v=20260618k',
+    '仓栅':    'assets/images/config-base-fence.webp?v=20260618k',
     '特种':    'assets/images/product-special.jpg'
 };
 
@@ -549,6 +559,35 @@ document.querySelectorAll('input[name="vehicleType"]').forEach(radio => {
         renderSpecsForType(type);
         updateTags();
     });
+});
+
+// ====== 车型变种(variant) → "变形态"切图(#105 v3) ======
+// variant 选了某细分(钩机板/小蜜蜂等)→ vehicleImg 切到 product-variant-* webp
+// variant 选"标准xxx"或没图的变种 → 回到大类 config-base + 当前颜色
+// 注:变种图当前不进 pixelCache,选了变种后 Canvas 换色暂不工作
+document.addEventListener('change', function(e) {
+    if (!e.target || e.target.name !== 'variant') return;
+    var variant = e.target.value;
+    var typeMap = typeVariantImages[currentType] || {};
+    var variantSrc = typeMap[variant];
+    if (variantSrc) {
+        vehicleImg.src = variantSrc;
+        reflectionImg.src = variantSrc;
+    } else {
+        // 回到大类 + 颜色
+        var color = getCurrentColor();
+        var baseDisplay = typeImagesDisplay[currentType] || typeImages[currentType];
+        if (!colorTargets[color] || !pixelCache[currentType]) {
+            vehicleImg.src = baseDisplay;
+            reflectionImg.src = baseDisplay;
+        } else {
+            recolorVehicle(color);
+        }
+    }
+    // 重播 driveIn 动画
+    vehicleWrapper.style.animation = 'none';
+    vehicleWrapper.offsetHeight;
+    vehicleWrapper.style.animation = 'driveIn 1.2s cubic-bezier(0.16, 1, 0.3, 1) both';
 });
 
 // ====== 颜色切换 — Canvas像素级HSL换色 ======
