@@ -283,11 +283,11 @@ const vehicleLabel = document.getElementById('vehicleLabel');
 const vehicleWrapper = document.getElementById('vehicleWrapper');
 
 const typeImages = {
-    '直梁平板': 'assets/images/config-base.png?v=20260618k',
-    '高低平板': 'assets/images/config-base-lowbed.png?v=20260618k',
-    '自卸':    'assets/images/config-base-dump.png?v=20260618k',
-    '骨架':    'assets/images/config-base-skeleton.png?v=20260618k',
-    '仓栅':    'assets/images/config-base-fence.png?v=20260618k',
+    '直梁平板': 'assets/images/config-base.png?v=20260618m',
+    '高低平板': 'assets/images/config-base-lowbed.png?v=20260618m',
+    '自卸':    'assets/images/config-base-dump.png?v=20260618m',
+    '骨架':    'assets/images/config-base-skeleton.png?v=20260618m',
+    '仓栅':    'assets/images/config-base-fence.png?v=20260618m',
     '特种':    'assets/images/product-special.jpg'
 };
 
@@ -296,18 +296,21 @@ const typeImages = {
 // 变种图走 webp 显示,Canvas 换色暂时不支持(后续可加 pixelCache)
 const typeVariantImages = {
     '高低平板': {
-        '钩机板(挖机专用 12×3×3.3)': 'assets/images/product-variant-excavator-bed.webp?v=20260618k',
+        '钩机板(挖机专用 12×3×3.3)': 'assets/images/product-variant-excavator-bed.webp?v=20260618m',
     },
-    // 待补:小蜜蜂/罐式/U型/不封顶/饲料/小鹅颈侧翻 ...
+    '自卸': {
+        '小蜜蜂(7.5米轻型后翻)': 'assets/images/product-variant-small-bee.webp?v=20260618m',
+    },
+    // 待补:罐式/U型/不封顶/饲料/小鹅颈侧翻 ...
 };
 
 // webp 显示版本（浏览器展示用；Canvas 换色仍走 typeImages .png）
 const typeImagesDisplay = {
-    '直梁平板': 'assets/images/config-base.webp?v=20260618k',
-    '高低平板': 'assets/images/config-base-lowbed.webp?v=20260618k',
-    '自卸':    'assets/images/config-base-dump.webp?v=20260618k',
-    '骨架':    'assets/images/config-base-skeleton.webp?v=20260618k',
-    '仓栅':    'assets/images/config-base-fence.webp?v=20260618k',
+    '直梁平板': 'assets/images/config-base.webp?v=20260618m',
+    '高低平板': 'assets/images/config-base-lowbed.webp?v=20260618m',
+    '自卸':    'assets/images/config-base-dump.webp?v=20260618m',
+    '骨架':    'assets/images/config-base-skeleton.webp?v=20260618m',
+    '仓栅':    'assets/images/config-base-fence.webp?v=20260618m',
     '特种':    'assets/images/product-special.jpg'
 };
 
