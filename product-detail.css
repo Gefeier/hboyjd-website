@@ -96,17 +96,17 @@
 .pf-hero-skeleton {
     background:
         linear-gradient(180deg, rgba(8,14,28,0.65) 0%, rgba(8,14,28,0.45) 50%, rgba(8,14,28,0.75) 100%),
-        url('assets/images/config-base-skeleton.webp') center/cover no-repeat;
+        url('assets/images/products/skeleton/01.jpg') center/cover no-repeat;
 }
 .pf-stats-skeleton {
     background:
         linear-gradient(180deg, rgba(8,14,28,0.94) 0%, rgba(15,32,53,0.96) 100%),
-        url('assets/images/config-base-skeleton.webp') center/cover no-repeat;
+        url('assets/images/products/skeleton/01.jpg') center/cover no-repeat;
 }
 .pf-features-skeleton {
     background:
         linear-gradient(180deg, rgba(8,14,28,0.88) 0%, rgba(15,32,53,0.92) 100%),
-        url('assets/images/config-base-skeleton.webp') center/cover no-repeat;
+        url('assets/images/products/skeleton/01.jpg') center/cover no-repeat;
 }
 
 .pf-hero-aerial {
