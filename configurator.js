@@ -301,7 +301,13 @@ const typeVariantImages = {
     '自卸': {
         '小蜜蜂(7.5米轻型后翻)': 'assets/images/product-variant-small-bee.webp?v=20260618m',
     },
-    // 待补:罐式/U型/不封顶/饲料/小鹅颈侧翻 ...
+    '直梁平板': {
+        '40英尺集装箱平板': 'assets/images/product-variant-40ft-container-flatbed.webp?v=20260624a',
+    },
+    '骨架': {
+        '三桥骨架': 'assets/images/product-variant-tri-axle-skeleton.webp?v=20260624a',
+    },
+    // 待澜心 v2:罐式后翻/U型后翻/小鹅颈侧翻/集装箱不封顶(20英尺)
 };
 
 // webp 显示版本（浏览器展示用；Canvas 换色仍走 typeImages .png）
