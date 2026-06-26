@@ -1,0 +1,93 @@
+{
+  "template_id": "case-deep-v1",
+  "name": "客户案例 · 深度版",
+  "category": "case",
+  "category_label": "客户案例",
+  "summary": "适合做单笔成交/批量交付的深度叙事:开篇引言 → 客户来历 → 车型方案 → 交付过程 → 客户反馈 → 收尾 CTA。",
+  "fields": [
+    {
+      "key": "title",
+      "label": "推文标题",
+      "type": "text",
+      "required": true,
+      "ai_hint": "突出客户身份/数量/车型/价值观点,16-30字。例:中东批量订单36台挖机板,紧急加速生产进行时!",
+      "placeholder": "中东批量订单36台挖机板,紧急加速生产进行时!"
+    },
+    {
+      "key": "subtitle",
+      "label": "副标题/导语",
+      "type": "text",
+      "ai_hint": "一句话点明交付场景或情绪基调,30-50字。",
+      "placeholder": "外贸订单加急赶工:全员动员,全速前进。"
+    },
+    {
+      "key": "cover",
+      "label": "封面图",
+      "type": "image",
+      "required": true,
+      "hint": "建议 16:9 比例 1200x675 以上,jpg。"
+    },
+    {
+      "key": "intro",
+      "label": "开篇引言",
+      "type": "markdown",
+      "required": true,
+      "ai_hint": "用1-2段把读者拉入场景:时间/客户来历/订单规模/重要程度。100-150字。",
+      "placeholder": "近日,欧阳聚德迎来一批来自中东的重量级客户..."
+    },
+    {
+      "key": "client_intro",
+      "label": "客户介绍",
+      "type": "markdown",
+      "ai_hint": "1-2段,客户是谁/做什么的/为什么选我们。150-200字。可用 ## 副标题分块。",
+      "placeholder": "## 来自中东的批量需求\n\n本次合作的XX公司..."
+    },
+    {
+      "key": "vehicle_specs",
+      "label": "车型方案/参数",
+      "type": "markdown",
+      "ai_hint": "突出本次配置的关键参数与定制点,可用列表。120-180字。",
+      "placeholder": "## 36台挖机板·定制配置\n\n- 13.75米低平板\n- T700C高强度大梁\n- 出口专用..."
+    },
+    {
+      "key": "timeline",
+      "label": "交付过程/时间线",
+      "type": "markdown",
+      "ai_hint": "可用 - 列表罗列关键节点,或用2-3段叙述生产/交付/发车过程。100-200字。",
+      "placeholder": "## 加急赶工·三班轮班\n\n- 6月初:签约确认\n- 6月中:..."
+    },
+    {
+      "key": "gallery",
+      "label": "现场图集(可多张)",
+      "type": "image-array",
+      "hint": "建议 3-9 张,优先生产线/装车/客户现场图。"
+    },
+    {
+      "key": "testimonial",
+      "label": "客户反馈/合作展望(可空)",
+      "type": "markdown",
+      "ai_hint": "客户简短证言或合作展望,2-3句。可省略。",
+      "placeholder": "客户代表表示:..."
+    },
+    {
+      "key": "closing",
+      "label": "结语",
+      "type": "markdown",
+      "ai_hint": "1段,总结此次合作意义+对未来表达。80-120字。",
+      "placeholder": "## 靠谱国货 · 远销海外\n\n此次合作不仅是订单..."
+    },
+    {
+      "key": "cta_text",
+      "label": "CTA 文案",
+      "type": "text",
+      "default": "如您也有专用车需求,欢迎随时联系欧阳聚德,我们将为您定制最优方案。",
+      "placeholder": "如您也有专用车需求,欢迎随时联系欧阳聚德..."
+    }
+  ],
+  "render": "case-deep-v1.html",
+  "meta_defaults": {
+    "category": "case",
+    "category_label": "客户案例",
+    "category_label_en": "Customer Stories"
+  }
+}

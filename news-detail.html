@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title id="page-title">新闻详情 | 湖北欧阳聚德汽车</title>
+    <meta name="description" id="page-desc" content="湖北欧阳聚德汽车有限公司新闻详情。">
+    <meta name="author" content="湖北欧阳聚德汽车有限公司">
+    <link rel="preconnect" href="https://fonts.googleapis.com" crossorigin>
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link rel="preconnect" href="https://chinese-fonts-cdn.deno.dev" crossorigin>
+    <link rel="stylesheet" href="https://chinese-fonts-cdn.deno.dev/packages/opposans/dist/OPPOSans-Regular/result.css" media="print" onload="this.media='all'">
+    <link rel="stylesheet" href="https://chinese-fonts-cdn.deno.dev/packages/opposans/dist/OPPOSans-Bold/result.css" media="print" onload="this.media='all'">
+    <link rel="stylesheet" href="https://chinese-fonts-cdn.deno.dev/packages/opposans/dist/OPPOSans-Heavy/result.css" media="print" onload="this.media='all'">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Noto+Sans+SC:wght@300;400;500;700;900&display=swap" media="print" onload="this.media='all'">
+    <noscript><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Noto+Sans+SC:wght@300;400;500;700;900&display=swap"></noscript>
+    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="news-detail.css">
+    <link rel="icon" href="/favicon.ico" sizes="any">
+    <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png">
+    <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
+    <link rel="icon" type="image/png" sizes="192x192" href="/favicon-192x192.png">
+    <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
+    <link rel="canonical" id="page-canonical" href="https://hboyjd.com/news-detail.html">
+    <meta property="og:type" content="article">
+    <meta property="og:site_name" content="湖北欧阳聚德汽车有限公司">
+    <meta property="og:url" id="og-url" content="https://hboyjd.com/news-detail.html">
+    <meta property="og:title" id="og-title" content="新闻详情 | 湖北欧阳聚德汽车">
+    <meta property="og:description" id="og-desc" content="湖北欧阳聚德汽车有限公司新闻详情。">
+    <meta property="og:image" id="og-image" content="https://hboyjd.com/assets/images/about/about-gate.jpg">
+    <!-- 百度统计 -->
+    <script>
+    var _hmt = _hmt || [];
+    (function() {
+        var hm = document.createElement("script");
+        hm.src = "https://hm.baidu.com/hm.js?65c76ffcec5fffefc264800dccf23f1b";
+        var s = document.getElementsByTagName("script")[0];
+        s.parentNode.insertBefore(hm, s);
+    })();
+    </script>
+    <!-- Google Analytics 4 -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-7XYYMJZCMZ"></script>
+    <script>
+        window.dataLayer = window.dataLayer || [];
+        function gtag(){dataLayer.push(arguments);}
+        gtag('js', new Date());
+        gtag('config', 'G-7XYYMJZCMZ');
+    </script>
+</head>
+<body class="news-page-body">
+    <!-- 导航栏 -->
+    <nav class="navbar" id="navbar">
+        <div class="nav-container">
+            <a href="/" class="nav-logo">
+                <img src="assets/images/logo-white.png" alt="欧阳聚德" class="logo-img">
+            </a>
+            <ul class="nav-links">
+                <li><a href="/">首页</a></li>
+                <li><a href="/about.html">关于我们</a></li>
+                <li><a href="/parts.html">配件中心</a></li>
+                <li><a href="/configurator.html">在线选配</a></li>
+                <li><a href="/news.html" class="active">新闻动态</a></li>
+            </ul>
+            <button class="nav-toggle" id="navToggle" aria-label="菜单"><span></span><span></span><span></span></button>
+        </div>
+    </nav>
+
+    <main class="news-detail-shell">
+        <article class="news-detail" id="news-detail">
+            <div class="news-detail-loading" id="news-detail-loading">正在加载文章...</div>
+            <div class="news-detail-error" id="news-detail-error" hidden>
+                <h1>文章未找到</h1>
+                <p>这篇文章可能已被移除或链接错误。</p>
+                <p><a href="/news.html">← 返回新闻列表</a></p>
+            </div>
+            <div class="news-detail-content" id="news-detail-content" hidden>
+                <div class="news-detail-meta">
+                    <a href="/news.html" class="news-detail-back">← 返回新闻列表</a>
+                    <span class="news-detail-cat" id="news-detail-cat"></span>
+                    <span class="news-detail-date" id="news-detail-date"></span>
+                </div>
+                <h1 class="news-detail-title" id="news-detail-title"></h1>
+                <p class="news-detail-summary" id="news-detail-summary"></p>
+                <div class="news-detail-cover" id="news-detail-cover" hidden></div>
+                <div class="news-detail-body" id="news-detail-body"></div>
+                <div class="news-detail-footer">
+                    <p class="news-detail-publisher">湖北欧阳聚德汽车有限公司 · <a href="/">hboyjd.com</a></p>
+                </div>
+            </div>
+        </article>
+    </main>
+
+    <!-- 页脚 -->
+    <footer class="site-footer">
+        <div class="footer-container">
+            <p>© 2017-2026 湖北欧阳聚德汽车有限公司 · 鄂ICP备2024093488号</p>
+        </div>
+    </footer>
+
+    <script src="main.js"></script>
+    <script src="news-detail.js"></script>
+</body>
+</html>

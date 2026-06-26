@@ -19,6 +19,10 @@ __pycache__/
 admin/backend/__pycache__/
 admin/backend/logs/
 
+# 本地 dev 启动脚本 (含 API key, 不进 git)
+start-admin-dev.bat
+.env.local
+
 # 图片旋转/数据回滚备份(本地保留即可)
 *_BACKUP_orig.*
 *.bak.[0-9]*

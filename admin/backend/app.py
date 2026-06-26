@@ -12,6 +12,8 @@ from content_io import REPO_ROOT, append_news, ensure_content_files, publish_sit
 from image_processor import process_upload
 from wechat_fetcher import fetch_wechat_article
 from translate import translate_batch as do_translate_batch
+import workshop_io
+import ai_draft as ai_draft_module
 
 
 app = Flask(__name__, static_folder=None)
@@ -52,7 +54,7 @@ def assets_static(filename: str):
 # 服 REPO_ROOT 根目录静态资源(style.css / main.js / news.json / about.css 等)
 # admin preview iframe 加载真实 about.html 时浏览器会去 /style.css 拿,这条 catch-all 兜底
 # 注意:Flask 路由 specificity 让 /admin/* /api/* /assets/* 等先匹,这里只兜根目录文件
-_REPO_ROOT_FILES = {"style.css", "about.css", "main.js", "news.json", "sitemap.xml", "robots.txt", "favicon.ico", "favicon-512x512.png", "index.html", "about.html", "configurator.html", "parts.html", "parts-data.json"}
+_REPO_ROOT_FILES = {"style.css", "about.css", "main.js", "news.json", "sitemap.xml", "robots.txt", "favicon.ico", "favicon-512x512.png", "index.html", "about.html", "configurator.html", "parts.html", "parts-data.json", "news.html", "news-detail.html", "news-detail.css", "news-detail.js"}
 
 @app.route("/<filename>")
 def serve_repo_root_file(filename: str):
@@ -659,6 +661,100 @@ def logs():
     auth.require_user()
     limit = min(int(request.args.get("limit", "50")), 200)
     return jsonify(read_logs(limit))
+
+
+# ========== 创作工坊 ==========
+
+@app.route("/api/workshop/templates")
+def workshop_templates():
+    auth.require_user()
+    return jsonify(workshop_io.list_templates())
+
+
+@app.route("/api/workshop/template/<template_id>")
+def workshop_template(template_id: str):
+    auth.require_user()
+    return jsonify(workshop_io.get_template(template_id))
+
+
+@app.route("/api/workshop/render", methods=["POST"])
+def workshop_render():
+    auth.require_user()
+    payload = request.get_json(force=True) or {}
+    template_id = payload.get("template_id", "")
+    ctx = payload.get("fields") or {}
+    ctx["category"] = payload.get("category", "")
+    ctx["category_label"] = payload.get("category_label", "")
+    tpl = workshop_io.get_template(template_id)
+    body = workshop_io.render_body(tpl.get("render_template", ""), ctx)
+    return jsonify({"body": body})
+
+
+@app.route("/api/workshop/drafts")
+def workshop_drafts():
+    auth.require_user()
+    return jsonify(workshop_io.list_drafts())
+
+
+@app.route("/api/workshop/save", methods=["POST"])
+def workshop_save():
+    user = auth.require_user()
+    payload = request.get_json(force=True) or {}
+    if payload.get("draft"):
+        result = workshop_io.save_draft(payload)
+        append_log(user, "workshop-save-draft", result["id"], f"模板 {payload.get('template_id', '?')}")
+        return jsonify(result)
+    result = workshop_io.publish(payload)
+    append_log(user, "workshop-publish", result["id"],
+               f"原创推文 {payload.get('template_id', '?')} → {result['public_url']}")
+    return jsonify(result)
+
+
+@app.route("/api/ai/draft", methods=["POST"])
+def ai_draft_route():
+    user = auth.require_user()
+    p = request.get_json(force=True) or {}
+    text = ai_draft_module.draft_field(
+        template_id=p.get("template_id", ""),
+        field_key=p.get("field_key", ""),
+        field_label=p.get("field_label", ""),
+        field_hint=p.get("field_hint", ""),
+        user_input=p.get("user_input", ""),
+        category=p.get("category", ""),
+        context=p.get("context") or {},
+    )
+    append_log(user, "ai-draft", p.get("field_key", "?"),
+               f"模板 {p.get('template_id', '?')} 起稿 {len(text)} 字")
+    return jsonify({"text": text})
+
+
+@app.route("/api/ai/draft-full", methods=["POST"])
+def ai_draft_full_route():
+    user = auth.require_user()
+    p = request.get_json(force=True) or {}
+    result = ai_draft_module.draft_full(
+        source_text=p.get("source_text", ""),
+        images=p.get("images") or [],
+        intent=p.get("intent", ""),
+    )
+    append_log(user, "ai-draft-full", result.get("category", "?"),
+               f"AI 全文起稿 {len(result.get('html', ''))} 字 · {result.get('title', '')[:40]}")
+    return jsonify(result)
+
+
+@app.route("/api/ai/revise", methods=["POST"])
+def ai_revise_route():
+    user = auth.require_user()
+    p = request.get_json(force=True) or {}
+    result = ai_draft_module.revise(
+        current_html=p.get("current_html", ""),
+        instruction=p.get("instruction", ""),
+        title=p.get("title", ""),
+        category=p.get("category", ""),
+    )
+    append_log(user, "ai-revise", p.get("instruction", "?")[:40],
+               f"AI 修订 → {len(result.get('html', ''))} 字")
+    return jsonify(result)
 
 
 if __name__ == "__main__":

@@ -1,0 +1,47 @@
+<section class="wsx-article wsx-case-deep">
+  <section class="wsx-intro">
+    {{html:intro}}
+  </section>
+
+  <section class="wsx-block">
+    {{html:client_intro}}
+  </section>
+
+  <section class="wsx-block">
+    {{html:vehicle_specs}}
+  </section>
+
+  <section class="wsx-block">
+    {{html:timeline}}
+  </section>
+
+  {{#if gallery}}
+  <section class="wsx-gallery-wrap">
+    <h3>现场图集</h3>
+    <div class="gallery">
+      {{images:gallery}}
+    </div>
+  </section>
+  {{/if}}
+
+  {{#if testimonial}}
+  <section class="wsx-testimonial">
+    <blockquote>
+      {{html:testimonial}}
+    </blockquote>
+  </section>
+  {{/if}}
+
+  <section class="wsx-closing">
+    {{html:closing}}
+  </section>
+
+  <aside class="wsx-cta">
+    <p class="wsx-cta-text">{{cta_text}}</p>
+    <p class="wsx-cta-contact">
+      <strong>湖北欧阳聚德汽车有限公司</strong><br>
+      电话: 0710-6388888 · 13797671616<br>
+      官网: <a href="https://hboyjd.com">hboyjd.com</a>
+    </p>
+  </aside>
+</section>

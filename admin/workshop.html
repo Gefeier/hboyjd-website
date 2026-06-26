@@ -1,0 +1,164 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>创作工坊 · 欧阳聚德管理后台</title>
+<link rel="stylesheet" href="style.css">
+<link rel="stylesheet" href="workshop.css">
+<script src="https://cdn.jsdelivr.net/npm/marked/marked.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/dompurify@3/dist/purify.min.js"></script>
+</head>
+<body>
+<div class="admin-shell">
+    <aside class="sidebar">
+        <div class="sidebar-logo">欧阳聚德 · 后台</div>
+        <nav class="sidebar-nav">
+            <a href="dashboard.html">工作台</a>
+            <a href="news.html">新闻管理</a>
+            <a href="workshop.html" class="active">创作工坊</a>
+            <a href="editor.html">页面内容</a>
+            <a href="images.html">图片库</a>
+            <a href="logs.html">操作日志</a>
+        </nav>
+    </aside>
+
+    <main class="admin-main workshop-page" id="workshop-page">
+        <div class="workshop-header">
+            <h1 class="page-title">创作工坊 · AI 主笔模式</h1>
+            <p class="page-subtitle">丢素材(文字+图)→AI 自动起稿→你改→AI 再调→发布拿到采集 URL 进公众号。</p>
+        </div>
+
+        <div class="wsx-split">
+            <section class="wsx-form-pane">
+                <!-- 第 1 步: 丢素材 -->
+                <div class="card wsx-step" id="wsx-step-source">
+                    <div class="wsx-step-head">
+                        <h2 class="wsx-step-num">① 丢素材给 AI</h2>
+                        <button type="button" class="btn-text" id="wsx-load-draft-btn">📂 载入草稿</button>
+                    </div>
+
+                    <label class="wsx-field-label">文字 — 客户/订单/事件/口语化描述, 随便丢, AI 自己整</label>
+                    <textarea id="wsx-source-text" rows="9" placeholder="例:
+近期签了一批中东的客户,36 台挖机板半挂车,要 7 月初首批装船。客户是XX外贸公司,合作三年,这次主要看中我们 T700C 大梁和出口规格的电气接口。
+生产线已经进入三班轮班,大梁焊接进度过半,桥架到位..."></textarea>
+
+                    <label class="wsx-field-label">图片 — Ctrl+V 粘贴, 拖进来, 或点上传</label>
+                    <div class="wsx-image-dropzone" id="wsx-image-dropzone" tabindex="0">
+                        <div class="wsx-image-grid" id="wsx-image-grid"></div>
+                        <div class="wsx-image-dropzone-hint">
+                            <button type="button" class="btn btn-outline" id="wsx-image-upload-btn">+ 选图上传</button>
+                            <span>或在这里直接 Ctrl+V / 拖拽图进来</span>
+                        </div>
+                        <input type="file" id="wsx-image-file-input" accept="image/*" multiple hidden>
+                    </div>
+
+                    <label class="wsx-field-label">意图 (可选) — 一句话说调性, 留空 AI 自己拿捏</label>
+                    <input type="text" id="wsx-intent" placeholder="例:强调外贸批量 / 走党建调性 / 突出客户口碑 / 客户案例深度版">
+
+                    <div class="wsx-step-actions">
+                        <button type="button" class="btn btn-primary wsx-cta-button" id="wsx-draft-btn">✨ 让 AI 起稿</button>
+                        <span class="wsx-cta-hint muted">AI 自动判分类+选模板+出整篇 HTML, 几秒钟</span>
+                    </div>
+                </div>
+
+                <!-- 第 2 步: 改稿 -->
+                <div class="card wsx-step" id="wsx-step-editor" hidden>
+                    <div class="wsx-step-head">
+                        <h2 class="wsx-step-num">② 改稿</h2>
+                        <span class="wsx-editor-meta" id="wsx-editor-meta"></span>
+                    </div>
+
+                    <div class="wsx-editor-meta-row">
+                        <label>标题</label>
+                        <input type="text" id="wsx-title">
+                        <label>分类</label>
+                        <select id="wsx-category">
+                            <option value="case">客户案例</option>
+                            <option value="company">公司动态</option>
+                            <option value="gov">党政动态</option>
+                            <option value="product">产品介绍</option>
+                            <option value="tech">技术小知识</option>
+                            <option value="insight">老板视角</option>
+                        </select>
+                        <label>日期</label>
+                        <input type="date" id="wsx-date">
+                    </div>
+
+                    <div class="wsx-editor-toolbar">
+                        <button type="button" data-cmd="bold" title="加粗">B</button>
+                        <button type="button" data-cmd="italic" title="斜体"><em>I</em></button>
+                        <button type="button" data-cmd="h2" title="二级标题">H2</button>
+                        <button type="button" data-cmd="h3" title="三级标题">H3</button>
+                        <button type="button" data-cmd="p" title="段落">¶</button>
+                        <button type="button" data-cmd="ul" title="无序列表">• 列表</button>
+                        <button type="button" data-cmd="blockquote" title="引用">❝</button>
+                        <button type="button" data-cmd="undo" title="撤销">↶</button>
+                        <button type="button" data-cmd="redo" title="重做">↷</button>
+                    </div>
+
+                    <div class="wsx-editor" id="wsx-editor" contenteditable="true"></div>
+
+                    <div class="wsx-revise-row">
+                        <input type="text" id="wsx-revise-instruction" placeholder="想 AI 再调一轮?写一行: 标题再亮点 / 第二段再短一点 / 加客户口碑">
+                        <button type="button" class="btn btn-outline" id="wsx-revise-btn">✨ 让 AI 再调</button>
+                    </div>
+                </div>
+
+                <!-- 第 3 步: 发布 -->
+                <div class="card wsx-actions-card" id="wsx-step-publish" hidden>
+                    <button type="button" class="btn btn-outline" id="wsx-save-draft-btn">💾 保存草稿</button>
+                    <button type="button" class="btn btn-primary" id="wsx-publish-btn">🚀 发布并生成采集 URL</button>
+                </div>
+            </section>
+
+            <!-- 右栏: 实时预览 -->
+            <section class="wsx-preview-pane">
+                <div class="wsx-preview-toolbar">
+                    <span class="wsx-preview-label">实时预览(站内详情页样式)</span>
+                    <button class="btn-text" type="button" id="wsx-preview-refresh">↻ 刷新</button>
+                </div>
+                <div class="wsx-preview-frame" id="wsx-preview-frame">
+                    <div class="wsx-preview-empty">丢素材 → AI 起稿后, 渲染出现在这。</div>
+                </div>
+            </section>
+        </div>
+
+        <!-- AI 工作中遮罩 -->
+        <div class="wsx-busy" id="wsx-busy" hidden>
+            <div class="wsx-busy-card">
+                <div class="wsx-busy-spinner"></div>
+                <p class="wsx-busy-msg" id="wsx-busy-msg">AI 起稿中...</p>
+            </div>
+        </div>
+
+        <!-- 发布成功 modal -->
+        <div class="wsx-success-modal" id="wsx-success-modal" hidden>
+            <div class="wsx-modal-backdrop"></div>
+            <div class="wsx-modal-card">
+                <div class="wsx-modal-head">
+                    <h2>🎉 发布成功!</h2>
+                    <button class="wsx-modal-close" type="button" id="wsx-modal-close">×</button>
+                </div>
+                <div class="wsx-modal-body">
+                    <p class="wsx-modal-step">第 1 步 · 复制下面的官网采集 URL:</p>
+                    <div class="wsx-url-row">
+                        <input type="text" id="wsx-published-url" readonly>
+                        <button class="btn btn-primary" type="button" id="wsx-copy-url">📋 复制</button>
+                    </div>
+                    <p class="wsx-modal-step">第 2 步 · 打开公众号后台,在编辑器里点壹伴的「采集文章」,粘贴 URL,一键导入:</p>
+                    <div class="wsx-link-row">
+                        <a class="btn btn-outline" id="wsx-open-mp" href="https://mp.weixin.qq.com" target="_blank" rel="noopener">→ 打开公众号后台</a>
+                        <a class="btn btn-outline" id="wsx-open-public" href="#" target="_blank" rel="noopener">→ 看一眼公开页面</a>
+                    </div>
+                    <p class="wsx-modal-step">第 3 步 · 在公众号草稿里改图改格式,你审核无误,在公众号 App 亲自点发表。</p>
+                </div>
+            </div>
+        </div>
+    </main>
+</div>
+
+<script src="app.js"></script>
+<script src="workshop.js"></script>
+</body>
+</html>

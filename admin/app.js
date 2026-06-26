@@ -1063,6 +1063,20 @@ function renderUser() {
 }
 
 function injectSidebarFooter() {
+    // 给所有 sidebar 注入「创作工坊」入口(放在新闻管理后面)
+    $$('.sidebar-nav').forEach((nav) => {
+        if (nav.querySelector('a[href="workshop.html"]')) return;
+        const newsLink = nav.querySelector('a[href="news.html"]');
+        const link = document.createElement('a');
+        link.href = 'workshop.html';
+        link.textContent = '创作工坊';
+        if (location.pathname.endsWith('workshop.html')) link.classList.add('active');
+        if (newsLink && newsLink.nextSibling) {
+            nav.insertBefore(link, newsLink.nextSibling);
+        } else {
+            nav.appendChild(link);
+        }
+    });
     // 给 admin 注入「账号管理」入口(在 nav 末尾)
     if (currentUser?.role === 'admin') {
         $$('.sidebar-nav').forEach((nav) => {

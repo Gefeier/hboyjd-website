@@ -146,12 +146,14 @@ document.querySelectorAll('.stats, .about, .products, .advantages, .news, .cta-s
             </div>`;
         }).join('');
 
-        // 绑定 news-link → 拦截 → 打开 lightbox
+        // 绑定 news-link → 拦截 → 打开 lightbox(原创文章直接跳站内详情页,不弹 lightbox)
         container.querySelectorAll('.news-link').forEach(a => {
             a.addEventListener('click', (e) => {
                 const id = a.dataset.newsId;
                 const news = allNews.find(n => n.id === id);
                 if (!news || !news.url) return;  // 没 url 就让默认 # 跳
+                // 原创文章 url 已是 /news-detail.html?id=...,让默认 <a href> 跳走即可
+                if (news.source === 'original') return;
                 e.preventDefault();
                 openNewsLightbox(news, isEn);
             });
