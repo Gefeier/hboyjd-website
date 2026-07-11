@@ -135,9 +135,9 @@
     @media (max-width:1023px){
       .mdb-wrap{padding-top:110px; padding-left: 16px; padding-right: 16px;}
       .mdb-layout{display:block}
-      .mdb-side{position:sticky;top:60px;z-index:20;flex-direction:row;overflow-x:auto;overflow-y:hidden;gap:8px;margin-bottom:24px;padding:12px; background: rgba(10, 15, 26, 0.95); border: 1px solid rgba(255,255,255,0.1); scrollbar-width:none; box-shadow: 0 10px 30px rgba(0,0,0,0.5);}
+      .mdb-side{position:sticky;top:64px;z-index:90;flex-direction:row;overflow-x:auto;overflow-y:hidden;gap:8px;margin-bottom:24px;padding:12px; align-items: center; background: rgba(10, 15, 26, 0.95); border: 1px solid rgba(255,255,255,0.1); scrollbar-width:none; box-shadow: 0 10px 30px rgba(0,0,0,0.5);}
       .mdb-side::-webkit-scrollbar{display:none;}
-      .mdb-side-item > a, .mdb-side > a {flex-shrink:0;padding:8px 16px; background: rgba(255,255,255,0.05); border: 1px solid transparent; border-radius: 6px; font-size: 14px;}
+      .mdb-side-item > a, .mdb-side > a {flex-shrink:0;padding:8px 16px; background: rgba(255,255,255,0.05); border: 1px solid transparent; border-radius: 6px; font-size: 14px; white-space: nowrap; display: block;}
       .mdb-side-item > a.active, .mdb-side > a.active{background: rgba(37,99,235,0.2); border: 1px solid rgba(37,99,235,0.4); color: white;}
       .mdb-side-item > a::before, .mdb-side > a::before{content:none;}
       
@@ -191,8 +191,8 @@
     /* Mobile Accordion adjustments */
 
     @media (max-width:1023px) {
-        .mdb-sub-menu { display: none; } /* Hide sub-menu in horizontal mobile pill-nav */
-        .mdb-side-item { flex-shrink: 0; }
+        .mdb-sub-menu { display: none !important; } /* Hide sub-menu in horizontal mobile pill-nav */
+        .mdb-side-item { flex-shrink: 0; display: block; }
     }
 
 </style>
