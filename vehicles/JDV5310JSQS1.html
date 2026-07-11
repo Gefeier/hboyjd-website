@@ -10,48 +10,31 @@
     <link rel="stylesheet" href="/style.css?v=20260615a">
     <link rel="stylesheet" href="/about.css?v=20260615a">
     <link rel="stylesheet" href="/product-detail.css?v=20260616g">
+    <link rel="stylesheet" href="/product-detail-dark.css?v=20260711c">
     <style>
-    /* Automotive Cinematic Style — 与 product-detail-dark.css 同一套视觉语言 */
-    body{background:#050505;color:#e2e8f0}
-    .navbar{background:rgba(5,5,5,.85)!important;backdrop-filter:blur(20px);-webkit-backdrop-filter:blur(20px);border-bottom:1px solid rgba(255,255,255,.05)!important}
-    .nav-links a{color:rgba(255,255,255,.8)!important}
-    .nav-links a:hover,.nav-links a.active{color:#fff!important}
-    .vh-wrap{max-width:980px;margin:0 auto;padding:140px 24px 90px}
-    .vh-crumb{font-size:12px;color:#64748b;letter-spacing:2px;margin-bottom:28px}
-    .vh-crumb a{color:#64748b;text-decoration:none;transition:.2s} .vh-crumb a:hover{color:#fff}
-    .vh-head h1{font-size:34px;color:#fff;font-weight:700;letter-spacing:2px;margin:0 0 6px}
-    .vh-head .vh-sub{font-size:16px;color:#94a3b8;font-weight:300;letter-spacing:1px}
-    .vh-badge{display:inline-block;font-size:12px;color:#94a3b8;border:1px solid #334155;border-radius:20px;padding:2px 11px;margin-left:10px;vertical-align:4px;font-weight:400;letter-spacing:0}
-    .vh-tagline{font-size:15px;color:#94a3b8;font-weight:300;line-height:1.8;margin:14px 0 6px}
-    .vh-highlights{display:flex;flex-wrap:wrap;gap:8px;margin:12px 0}
-    .vh-pill{font-size:13px;color:#94a3b8;background:transparent;border:1px solid #334155;border-radius:6px;padding:5px 12px;font-weight:300}
-    .vh-scene{font-size:14px;color:#94a3b8;font-weight:300;line-height:1.9;background:rgba(255,255,255,.02);border:1px solid rgba(255,255,255,.05);border-left:2px solid #334155;padding:12px 16px;border-radius:0 8px 8px 0;margin:16px 0 0}
-    .vh-cta{display:flex;gap:12px;margin:28px 0 44px;flex-wrap:wrap}
-    .vh-btn{font-size:14.5px;text-decoration:none;padding:11px 26px;border-radius:8px;border:1px solid #334155;color:#fff;background:transparent;transition:.2s}
-    .vh-btn:hover{border-color:#fff;background:rgba(255,255,255,.05)}
-    .vh-btn-quote{background:#fff;color:#000;border-color:#fff;font-weight:600}
-    .vh-btn-quote:hover{background:#e2e8f0;color:#000;box-shadow:0 0 30px rgba(255,255,255,.15)}
-    .vh-sec-tag{display:block;font-size:12px;color:#64748b;letter-spacing:6px;font-weight:600;text-transform:uppercase;margin:44px 0 4px}
-    .vh-sec-title{font-size:22px;color:#fff;font-weight:600;letter-spacing:1px;margin:0 0 16px}
-    .vh-sib{margin-top:40px;font-size:13.5px;line-height:2.2;color:#94a3b8}
+    .vh-hero{height:64vh!important;min-height:440px;background:url('/assets/images/products/crane/01.jpg') center/cover no-repeat}
+    .vh-hero .about-hero-eyebrow{color:#94a3b8!important;letter-spacing:5px!important;font-weight:600!important}
+    .vh-hero .about-hero-title{color:#fff!important;font-weight:800!important;letter-spacing:3px}
+    .vh-hero .about-hero-tagline{color:#cbd5e1!important;letter-spacing:1px}
+    .vh-crumbbar{background:#050505;border-bottom:1px solid #111;padding:14px 0}
+    .vh-crumbbar .container{font-size:12.5px;color:#64748b;letter-spacing:1px}
+    .vh-crumbbar a{color:#64748b;text-decoration:none;transition:.2s} .vh-crumbbar a:hover{color:#fff}
+    .vh-photo{background:#050505;padding:56px 0 8px;text-align:center}
+    .vh-fig img{max-width:min(620px,92%);height:auto;filter:drop-shadow(0 18px 36px rgba(0,0,0,.7))}
+    .vh-fig-photo img{border-radius:10px;filter:none;box-shadow:0 20px 60px rgba(0,0,0,.9);border:1px solid rgba(255,255,255,.05)}
+    .vh-fig-note{display:block;font-size:11.5px;color:#64748b;letter-spacing:1px;margin-top:10px}
+    .pf-spec-section{padding:80px 0}
+    .pf-spec-grid{max-width:980px;margin:0 auto}
+    .pf-spec-note{max-width:980px;margin:16px auto 0;color:#64748b;font-weight:300;font-size:13px}
+    .pf-spec-note a{color:#94a3b8}
+    .vh-sib{background:#050505;padding:36px 0 64px}
+    .vh-sib .container{font-size:13.5px;line-height:2.2;color:#94a3b8}
     .vh-sib strong{color:#e2e8f0;font-weight:600}
     .vh-sib a{color:#64748b;text-decoration:none;margin-right:14px;border-bottom:1px dashed #334155;transition:.2s}
     .vh-sib a:hover{color:#fff;border-bottom-color:#fff}
     .vh-sib a.cur{color:#fff;font-weight:600;border-bottom:1px solid #fff}
-    .vh-cat{margin-top:12px;font-size:14px} .vh-cat a{color:#e2e8f0}
-    .vh-fig{text-align:center;margin:6px 0 20px}
-    .vh-fig img{max-width:min(560px,100%);height:auto;filter:drop-shadow(0 18px 36px rgba(0,0,0,.7))}
-    .vh-fig-photo img{border-radius:10px;filter:none;box-shadow:0 20px 60px rgba(0,0,0,.9);border:1px solid rgba(255,255,255,.05)}
-    .vh-fig-note{display:block;font-size:11.5px;color:#64748b;letter-spacing:1px;margin-top:8px}
-    .pf-spec-grid{background:transparent!important;border:none!important;box-shadow:none!important;border-top:1px solid #1e293b!important}
-    .pf-spec-row{background:transparent!important;border-bottom:1px solid #1e293b!important;border-left:none;border-right:none}
-    .pf-spec-row:nth-child(even){background:transparent!important}
-    .pf-spec-row:hover{background:rgba(255,255,255,.02)!important}
-    .pf-spec-key{color:#64748b}
-    .pf-spec-val{color:#e2e8f0;font-weight:300}
-    .pf-spec-note{margin-top:16px;color:#64748b;font-weight:300}
-    .pf-spec-note a{color:#94a3b8}
-    @media(max-width:768px){.vh-wrap{padding-top:100px}.vh-head h1{font-size:25px}}
+    .vh-cat{margin-top:12px;font-size:14px} .vh-cat a{color:#e2e8f0;border-bottom:none}
+    @media(max-width:768px){.vh-hero{height:52vh!important;min-height:360px}}
     </style>
 </head>
 <body>
@@ -71,24 +54,43 @@
             <button class="nav-toggle" id="navToggle"><span></span><span></span><span></span></button>
         </div>
     </nav>
-    <div class="vh-wrap">
-        <div class="vh-crumb"><a href="/models.html">产品中心</a> / <a href="/product-crane.html">随车起重</a> / JDV5310JSQS1</div>
-        <div class="vh-fig vh-fig-photo"><img src="/assets/images/models/grp-crane.webp" alt="随车吊系列实车(同系示意)" loading="eager"><span class="vh-fig-note">同系列实车照片(示意),以所选型号实车为准</span></div>
-        <div class="vh-head">
-            <h1>JDV5310JSQS1<span class="vh-badge">襄汽牌 · 第 385 批公告</span></h1>
-            <div class="vh-sub">随车起重运输车</div>
-            <p class="vh-tagline">襄汽牌随车起重运输车，厂家直销</p>
-            <div class="vh-highlights"><span class="vh-pill">整备质量 20000 kg 起</span><span class="vh-pill">额定载质量 10870 kg</span><span class="vh-pill">支持定制选装</span></div>
-            <p class="vh-scene">专为工程建设设计的随车起重运输车，实现货物自行装卸起重举升。适合从事重型设备运输的卡车司机和物流老板。操作平稳，让您轻松接大单，厂家直销支持定制选装。</p>
+    <section class="about-hero vh-hero">
+        <div class="about-hero-overlay"></div>
+        <div class="about-hero-content">
+            <p class="about-hero-eyebrow">JDV5310JSQS1 · 襄汽牌 · 第 385 批公告</p>
+            <h1 class="about-hero-title">随车起重运输车</h1>
+            <p class="about-hero-tagline">襄汽牌随车起重运输车，厂家直销</p>
         </div>
-        <div class="vh-cta">
-            <a class="vh-btn vh-btn-quote" href="/configurator.html?model=JDV5310JSQS1&vname=%E9%9A%8F%E8%BD%A6%E8%B5%B7%E9%87%8D%E8%BF%90%E8%BE%93%E8%BD%A6">在线询价 · 配置这台车</a>
-            <a class="vh-btn" href="/product-crane.html">看随车起重品类页</a>
-            <a class="vh-btn" href="/models.html">返回车型总库</a>
+    </section>
+    <div class="vh-crumbbar"><div class="container"><a href="/models.html">产品中心</a> / <a href="/product-crane.html">随车起重</a> / JDV5310JSQS1</div></div>
+    <section class="about-stats pf-stats">
+        <div class="container">
+            <div class="section-header">
+                <span class="section-tag">SPEC HIGHLIGHTS</span>
+                <h2 class="section-title">核心参数</h2>
+                <p class="section-desc">工信部公告口径 · 完整参数见下方公告表</p>
+            </div>
+            <div class="stats-grid about-stats-grid"><div class="stat-item"><div><span class="stat-number">31000</span><span class="stat-unit">kg</span></div><div class="stat-label">总质量(公告)</div></div><div class="stat-item"><div><span class="stat-number">20000</span><span class="stat-unit">kg</span></div><div class="stat-label">整备质量</div></div><div class="stat-item"><div><span class="stat-number">385</span><span class="stat-unit">批</span></div><div class="stat-label">工信部公告批次</div></div></div>
         </div>
-        <span class="vh-sec-tag">TYPE APPROVAL SPECIFICATIONS</span>
-        <h2 class="vh-sec-title">工信部公告参数</h2>
-        <div class="pf-spec-grid">
+    </section>
+    <section class="vh-photo"><div class="vh-fig vh-fig-photo"><img src="/assets/images/models/grp-crane.webp" alt="随车吊系列实车(同系示意)" loading="lazy"><span class="vh-fig-note">同系列实车照片(示意),以所选型号实车为准</span></div></section>
+    <section class="about-tech pf-features">
+        <div class="container">
+            <div class="section-header">
+                <span class="section-tag">FEATURES</span>
+                <h2 class="section-title">这台车的亮点</h2>
+                <p class="section-desc">专为工程建设设计的随车起重运输车，实现货物自行装卸起重举升。适合从事重型设备运输的卡车司机和物流老板。操作平稳，让您轻松接大单，厂家直销支持定制选装。</p>
+            </div>
+            <div class="tech-grid"><div class="tech-card"><div class="tech-card-eyebrow">01 HIGHLIGHT</div><h3>整备质量 20000 kg 起</h3></div><div class="tech-card"><div class="tech-card-eyebrow">02 HIGHLIGHT</div><h3>额定载质量 10870 kg</h3></div><div class="tech-card"><div class="tech-card-eyebrow">03 HIGHLIGHT</div><h3>支持定制选装</h3></div></div>
+        </div>
+    </section>
+    <section class="pf-spec-section">
+        <div class="container">
+            <div class="section-header">
+                <span class="section-tag">TYPE APPROVAL SPECIFICATIONS</span>
+                <h2 class="section-title">工信部公告参数</h2>
+            </div>
+            <div class="pf-spec-grid">
                 <div class="pf-spec-row"><span class="pf-spec-key">车辆类型</span><span class="pf-spec-val">随车起重运输车</span></div>
                 <div class="pf-spec-row"><span class="pf-spec-key">品牌</span><span class="pf-spec-val">襄汽牌</span></div>
                 <div class="pf-spec-row"><span class="pf-spec-key">公告批次</span><span class="pf-spec-val">385</span></div>
@@ -99,11 +101,31 @@
                 <div class="pf-spec-row"><span class="pf-spec-key">外形尺寸 (mm)</span><span class="pf-spec-val">12000×2550,2500×3980,3860,3750,3650,3930</span></div>
                 <div class="pf-spec-row"><span class="pf-spec-key">轮胎规格</span><span class="pf-spec-val">11.00R20 18PR,12.00R20 18PR</span></div>
                 <div class="pf-spec-row"><span class="pf-spec-key">其它(公告摘要)</span><span class="pf-spec-val">起重机型号,最大起升载荷及质量为(Kg): SQS350:14000,5500,侧后防护为金属护栏,材料Q235,侧防护连接方式为焊接,后防护连接方式焊接,后防护离地高度495mm,截面高度120mm,截面宽度60mm,已安装具有卫星定位功能的行驶记录仪,ABS系统生产厂家及型号为:西安正昌电子股份有限公司(型号:ZQFB-V),广州市科密汽车制动技术开发有限公司(型号:CM4XL-4S/4K(4S/4M)).随底盘选装限速装置,限速89km/h,随车起重机主要由水平支腿,垂直支腿,转向基座和起重吊臂组成,主要用于实现货物自行装卸的起重举升,选用发动机WP9H350E62,WP10H375E6</span></div>
+            </div>
+            <p class="pf-spec-note">以上为工信部《道路机动车辆生产企业及产品公告》口径;定制与选装项按订单约定,详询销售。</p>
         </div>
-        <p class="pf-spec-note">以上为工信部《道路机动车辆生产企业及产品公告》口径;定制与选装项按订单约定,详询销售。</p>
-        <div class="vh-sib"><strong>同系公告型号:</strong><br><a href="/vehicles/JDV5310JSQS1.html" class="cur">JDV5310JSQS1</a> <a href="/vehicles/JDV5250JSQS1.html">JDV5250JSQS1</a> <a href="/vehicles/JDV9400JSQ.html">JDV9400JSQ</a> <a href="/vehicles/JDV9401JSQ.html">JDV9401JSQ</a> <a href="/vehicles/JDV9402JSQ.html">JDV9402JSQ</a></div>
-        <div class="vh-cat"><a href="/product-crane.html">随车起重品类详情页 →</a></div>
-    </div>
+    </section>
+    <section class="pf-cta">
+        <div class="container">
+            <div class="section-header">
+                <span class="section-tag">GET A QUOTE</span>
+                <h2 class="section-title">想要这一台 · 告诉我们</h2>
+                <p class="section-desc">带型号直达在线询价,备注自动填好公告型号,销售直接对接</p>
+            </div>
+            <div class="pf-cta-actions">
+                <a href="/configurator.html?model=JDV5310JSQS1&vname=%E9%9A%8F%E8%BD%A6%E8%B5%B7%E9%87%8D%E8%BF%90%E8%BE%93%E8%BD%A6" class="pf-cta-btn pf-cta-btn-primary">在线询价 · 配置这台车 →</a>
+                <a href="/product-crane.html" class="pf-cta-btn pf-cta-btn-ghost">看随车起重品类页</a>
+                <a href="/models.html" class="pf-cta-btn pf-cta-btn-ghost">返回车型总库</a>
+            </div>
+            <div class="pf-cta-contact"><span>全国免费电话</span><a href="tel:400-1588-106" class="pf-cta-tel">400-1588-106</a></div>
+        </div>
+    </section>
+    <section class="vh-sib">
+        <div class="container">
+            <strong>同系公告型号:</strong><br><a href="/vehicles/JDV5310JSQS1.html" class="cur">JDV5310JSQS1</a> <a href="/vehicles/JDV5250JSQS1.html">JDV5250JSQS1</a> <a href="/vehicles/JDV9400JSQ.html">JDV9400JSQ</a> <a href="/vehicles/JDV9401JSQ.html">JDV9401JSQ</a> <a href="/vehicles/JDV9402JSQ.html">JDV9402JSQ</a>
+            <div class="vh-cat"><a href="/product-crane.html">随车起重品类详情页 →</a></div>
+        </div>
+    </section>
 <footer class="footer pf-footer">
         <div class="container">
             <div class="footer-bottom">
