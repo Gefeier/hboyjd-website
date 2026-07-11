@@ -1,0 +1,196 @@
+/* ============================================
+   OVERRIDE: Automotive Cinematic Style (暗黑汽车风)
+   ============================================ */
+
+/* ====== 全局覆盖为高级暗黑模式 ====== */
+body {
+    background-color: #050505 !important;
+    color: #e2e8f0;
+}
+
+/* 强制导航栏变暗 */
+.navbar {
+    background: rgba(5,5,5,0.85) !important;
+    backdrop-filter: blur(20px) !important;
+    -webkit-backdrop-filter: blur(20px) !important;
+    border-bottom: 1px solid rgba(255,255,255,0.05) !important;
+}
+.nav-links a { color: rgba(255,255,255,0.8) !important; }
+.nav-links a:hover, .nav-links a.active { color: #fff !important; }
+
+/* ====== Hero 电影级全屏 ====== */
+.pf-hero, .pf-hero-dump, .pf-hero-lowbed, .pf-hero-crane, .pf-hero-fence, .pf-hero-skeleton, .pf-hero-aerial {
+    height: 90vh !important;
+    border-bottom: 1px solid rgba(255,255,255,0.05);
+}
+
+/* 极暗的底部渐变 */
+.about-hero-overlay {
+    background: linear-gradient(180deg, rgba(5,5,5,0.2) 0%, rgba(5,5,5,0.4) 60%, #050505 100%) !important;
+}
+
+.pf-hero .about-hero-eyebrow {
+    color: #94a3b8 !important;
+    letter-spacing: 8px !important;
+    font-weight: 600 !important;
+}
+.pf-hero .about-hero-title {
+    font-size: 80px !important;
+    font-weight: 800 !important;
+    color: #ffffff !important;
+    letter-spacing: 4px !important;
+    text-shadow: 0 10px 40px rgba(0,0,0,0.8);
+}
+@media (max-width: 768px) {
+    .pf-hero .about-hero-title { font-size: 48px !important; }
+}
+.pf-hero .about-hero-tagline {
+    color: #cbd5e1 !important;
+    font-weight: 400 !important;
+    letter-spacing: 2px !important;
+}
+
+/* ====== OVERVIEW 使命区块 ====== */
+.pf-mission {
+    background: #050505 !important;
+    color: #f1f5f9;
+}
+.pf-mission .mission-eyebrow { color: #64748b !important; letter-spacing: 6px !important; }
+.pf-mission .mission-headline { color: #ffffff !important; font-weight: 700 !important; }
+.pf-mission .mission-text p { color: #94a3b8 !important; }
+.pf-mission .trinity-label { color: #64748b !important; }
+.pf-mission .trinity-item p { color: #e2e8f0 !important; }
+.pf-mission .mission-tags span { 
+    background: transparent !important; 
+    border: 1px solid #334155 !important; 
+    color: #94a3b8 !important; 
+}
+.pf-mission-image {
+    box-shadow: 0 20px 60px rgba(0,0,0,0.9) !important;
+    border: 1px solid rgba(255,255,255,0.05);
+}
+
+/* ====== 核心参数 (Stats) ====== */
+.pf-stats, .pf-stats-dump, .pf-stats-lowbed, .pf-stats-crane, .pf-stats-fence, .pf-stats-skeleton, .pf-stats-aerial {
+    background: #000000 !important;
+    border-top: 1px solid #111;
+    border-bottom: 1px solid #111;
+}
+.pf-stats .section-title { color: #ffffff !important; }
+.pf-stats .section-tag { color: #64748b !important; letter-spacing: 6px !important; }
+.pf-stats .stat-number {
+    font-weight: 200 !important;
+    color: #ffffff !important;
+    font-family: 'Inter', sans-serif !important;
+}
+.pf-stats .stat-unit { color: #94a3b8 !important; font-weight: 300 !important; }
+.pf-stats .stat-label { color: #64748b !important; text-transform: uppercase; }
+
+/* ====== 产品特点 (Features) ====== */
+.pf-features, .pf-features-dump, .pf-features-lowbed, .pf-features-crane, .pf-features-fence, .pf-features-skeleton, .pf-features-aerial {
+    background: #050505 !important;
+}
+.pf-features .section-title { color: #ffffff !important; }
+.pf-features .section-desc { color: #94a3b8 !important; }
+.pf-features .section-tag { color: #64748b !important; letter-spacing: 6px !important; }
+
+.pf-features .tech-card {
+    background: rgba(255,255,255,0.02) !important;
+    backdrop-filter: blur(20px) !important;
+    -webkit-backdrop-filter: blur(20px) !important;
+    border: 1px solid rgba(255,255,255,0.05) !important;
+    box-shadow: none !important;
+}
+.pf-features .tech-card-eyebrow { color: #64748b !important; font-weight: 600 !important;}
+.pf-features .tech-card h3 { color: #ffffff !important; font-weight: 600 !important;}
+.pf-features .tech-card p { color: #94a3b8 !important; font-weight: 300 !important;}
+.pf-features .tech-card:hover {
+    border-color: rgba(255,255,255,0.15) !important;
+    background: rgba(255,255,255,0.05) !important;
+    transform: translateY(-5px);
+}
+
+/* ====== 规格表 (Spec Section) ====== */
+.pf-spec-section {
+    background: #000000 !important;
+}
+.pf-spec-section .section-title { color: #ffffff !important; }
+.pf-spec-section .section-desc { color: #94a3b8 !important; }
+.pf-spec-section .section-tag { color: #64748b !important; letter-spacing: 6px !important;}
+.pf-spec-grid {
+    background: transparent !important;
+    border: none !important;
+    box-shadow: none !important;
+    border-top: 1px solid #1e293b !important;
+}
+.pf-spec-row {
+    background: transparent !important;
+    border-bottom: 1px solid #1e293b !important;
+}
+.pf-spec-row:hover {
+    background: rgba(255,255,255,0.02) !important;
+}
+.pf-spec-key { color: #64748b !important; }
+.pf-spec-val { color: #e2e8f0 !important; }
+
+/* ====== Variants (车型矩阵) ====== */
+.pf-variants {
+    background: #050505 !important;
+}
+.pf-variants .section-title { color: #ffffff !important; }
+.pf-variants .section-desc { color: #94a3b8 !important; }
+.pf-variants .section-tag { color: #64748b !important; letter-spacing: 6px !important;}
+.pf-variant-card {
+    background: rgba(255,255,255,0.02) !important;
+    border: 1px solid rgba(255,255,255,0.05) !important;
+}
+.pf-variant-card:hover {
+    border-color: rgba(255,255,255,0.2) !important;
+    background: rgba(255,255,255,0.04) !important;
+}
+.pf-variant-name { color: #ffffff !important; font-weight: 600 !important;}
+.pf-variant-tag { 
+    background: #1e293b !important; 
+    color: #e2e8f0 !important; 
+    border: 1px solid #334155 !important;
+}
+.pf-variant-note { color: #64748b !important; }
+.pf-variant-image {
+    background: #000 !important;
+    border-bottom: 1px solid rgba(255,255,255,0.05) !important;
+}
+
+/* ====== CTA ====== */
+.pf-cta {
+    background: #000000 !important;
+}
+.pf-cta .section-title { color: #ffffff !important; }
+.pf-cta .section-desc { color: #94a3b8 !important; }
+.pf-cta .section-tag { color: #64748b !important; letter-spacing: 6px !important;}
+.pf-cta-btn-primary {
+    background: #ffffff !important;
+    color: #000000 !important;
+    border: none !important;
+}
+.pf-cta-btn-primary:hover {
+    background: #e2e8f0 !important;
+    transform: scale(1.05) !important;
+    box-shadow: 0 0 30px rgba(255,255,255,0.15) !important;
+}
+.pf-cta-btn-ghost {
+    background: transparent !important;
+    color: #ffffff !important;
+    border: 1px solid #334155 !important;
+}
+.pf-cta-btn-ghost:hover {
+    border-color: #ffffff !important;
+    background: rgba(255,255,255,0.05) !important;
+}
+.pf-cta-contact { border-top-color: #1e293b !important; }
+.pf-cta-tel { color: #ffffff !important; }
+
+/* ====== Footer ====== */
+.pf-footer {
+    background: #000000 !important;
+    border-top: 1px solid #111 !important;
+}
