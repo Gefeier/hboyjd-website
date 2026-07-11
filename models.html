@@ -178,8 +178,10 @@
         font-size: 13px; color: rgba(255,255,255,0.4); text-decoration: none;
         padding: 8px 12px; transition: 0.3s;
         border-left: 1px solid rgba(255,255,255,0.1);
-        display: block; position: relative;
+        display: flex; justify-content: space-between; align-items: baseline; gap: 8px;
+        position: relative;
     }
+    .mdb-sub-code { font-size: 10px; color: rgba(255,255,255,0.28); font-family: Consolas, monospace; flex-shrink: 0; letter-spacing: .5px; }
     .mdb-sub-link:hover { color: #fff; border-left-color: var(--blue-500); background: rgba(255,255,255,0.03); }
     .mdb-sub-link::before {
         content: ''; position: absolute; left: -3px; top: 50%; transform: translateY(-50%);
@@ -1009,7 +1011,9 @@ document.addEventListener('DOMContentLoaded', function() {
         
         cards.forEach((card, index) => {
             // Give card an ID
-            const modelName = card.querySelector('h4').childNodes[0].textContent.trim();
+            const modelCode = card.querySelector('h4').childNodes[0].textContent.trim();
+            const nameSpan = card.querySelector('.mdb-name');
+            const modelName = nameSpan ? nameSpan.textContent.trim() : modelCode;
             const cardId = `card-${catId}-${index}`;
             card.id = cardId;
             card.style.scrollMarginTop = '100px';
@@ -1018,7 +1022,7 @@ document.addEventListener('DOMContentLoaded', function() {
             const subLink = document.createElement('a');
             subLink.className = 'mdb-sub-link';
             subLink.href = `#${cardId}`;
-            subLink.textContent = modelName;
+            subLink.innerHTML = '<span>' + modelName + '</span><span class="mdb-sub-code">' + modelCode + '</span>';
             
             // Click scroll smooth
             subLink.addEventListener('click', function(e) {
