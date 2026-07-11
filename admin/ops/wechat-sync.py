@@ -28,7 +28,7 @@ PROTECTED = {'site_visible', 'important', 'category', 'category_label',
              'category_label_en', 'title_en', 'summary_en'}
 
 CASE_KEYWORDS = ['商客', '客商', '订单', '采购', '签订', '签约', '直邀', '跨国', '批量', '现订', '交付', '中东', '非洲', '出口', '交车', '提车', '到货', '订车', '成交', '客户']
-GOV_KEYWORDS = ['书记', '领导', '党建', '党支部', '党组', '组织部', '社工部', '办事处', '调研', '指导', '党员', '红色领航', '党课', '党中央', '人大', '国家安全', '主题党']
+GOV_KEYWORDS = ['书记', '领导', '党建', '党支部', '党组', '组织部', '社工部', '办事处', '调研', '指导', '党员', '红色领航', '党课', '党中央', '人大', '国家安全', '主题党', '工会', '政协', '共青团', '妇联', '统战']
 
 CAT_ZH = {'case': '客户案例', 'gov': '党政动态', 'company': '公司动态'}
 CAT_EN = {'case': 'Customer Stories', 'gov': 'Government & Party', 'company': 'Company News'}
