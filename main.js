@@ -349,7 +349,10 @@ document.getElementById('inquiryForm')?.addEventListener('submit', function(e) {
         '.news-column',
         '.mission-text',
         '.mission-tags',
-        '.cta-content'
+        '.cta-content',
+        '.mdb-group-head',
+        '.mdb-banner',
+        '.mdb-card'
     ];
     const els = document.querySelectorAll(selectors.join(','));
     els.forEach((el) => el.classList.add('reveal'));
