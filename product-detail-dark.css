@@ -24,9 +24,9 @@ body {
     border-bottom: 1px solid rgba(255,255,255,0.05);
 }
 
-/* 极暗的底部渐变 */
+/* 极暗的底部渐变;顶部加重压住亮色厂房/天空,导航栏下不再透白条 */
 .about-hero-overlay {
-    background: linear-gradient(180deg, rgba(5,5,5,0.2) 0%, rgba(5,5,5,0.4) 60%, #050505 100%) !important;
+    background: linear-gradient(180deg, rgba(5,5,5,0.88) 0%, rgba(5,5,5,0.38) 22%, rgba(5,5,5,0.42) 60%, #050505 100%) !important;
 }
 
 .pf-hero .about-hero-eyebrow {
@@ -66,6 +66,7 @@ body {
     color: #94a3b8 !important; 
 }
 .pf-mission-image {
+    background: #0a0a0a !important;
     box-shadow: 0 20px 60px rgba(0,0,0,0.9) !important;
     border: 1px solid rgba(255,255,255,0.05);
 }

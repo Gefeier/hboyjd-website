@@ -10,44 +10,47 @@
     <link rel="stylesheet" href="about.css?v=20260615a">
     <link rel="stylesheet" href="product-detail.css?v=20260616g">
     <style>
-    .navbar{background:rgba(5,8,16,.94)!important;backdrop-filter:blur(12px)}
-    body{background:#07070b}
-    .mdb-wrap{max-width:1280px;margin:0 auto;padding:140px 24px 80px}
-    .mdb-head{text-align:center;margin-bottom:48px}
-    .mdb-head .section-tag{letter-spacing:4px;color:#94a3b8}
-    .mdb-head .section-title{color:#f8fafc!important}
-    .mdb-head .section-desc{color:#94a3b8}
+    /* Automotive Cinematic Style — 与 product-detail-dark.css 同一套视觉语言 */
+    body{background:#050505;color:#e2e8f0}
+    .navbar{background:rgba(5,5,5,.85)!important;backdrop-filter:blur(20px);-webkit-backdrop-filter:blur(20px);border-bottom:1px solid rgba(255,255,255,.05)!important}
+    .nav-links a{color:rgba(255,255,255,.8)!important}
+    .nav-links a:hover,.nav-links a.active{color:#fff!important}
+    .mdb-wrap{max-width:1280px;margin:0 auto;padding:150px 24px 90px}
+    .mdb-head{text-align:center;margin-bottom:60px}
+    .mdb-head .section-tag{letter-spacing:6px;color:#64748b;font-weight:600;text-transform:uppercase}
+    .mdb-head .section-title{color:#fff!important;font-weight:700;letter-spacing:2px}
+    .mdb-head .section-desc{color:#94a3b8;font-weight:300}
     .mdb-layout{display:grid;grid-template-columns:230px minmax(0,1fr);gap:40px;align-items:start}
-    .mdb-side{position:sticky;top:96px;display:flex;flex-direction:column;gap:4px;background:rgba(255,255,255,.035);border:1px solid rgba(255,255,255,.08);border-radius:14px;padding:10px}
-    .mdb-side a{display:flex;justify-content:space-between;align-items:center;padding:10px 14px;border-radius:9px;font-size:14.5px;color:#cbd5e1;text-decoration:none;transition:.15s}
-    .mdb-side a:hover{background:rgba(255,255,255,.07);color:#fff}
-    .mdb-side a.active{background:#c8102e;color:#fff}
-    .mdb-count{font-size:12px;opacity:.55}
-    .mdb-group{scroll-margin-top:96px;margin-bottom:44px}
-    .mdb-group-head{display:flex;justify-content:space-between;align-items:center;margin:48px 0 12px;flex-wrap:wrap;gap:10px}
-    .mdb-group-head h2{font-size:22px;color:#f1f5f9;margin:0}
-    .mdb-group-sub{font-size:13px;color:#94a3b8;font-weight:400;margin-left:12px}
-    .mdb-card{display:flex;justify-content:space-between;align-items:center;gap:18px;background:rgba(255,255,255,.035);border:1px solid rgba(255,255,255,.08);border-radius:12px;padding:16px 20px;margin-bottom:10px;transition:.15s}
-    .mdb-card:hover{border-color:rgba(255,255,255,.25);box-shadow:0 4px 22px rgba(0,0,0,.5)}
-    .mdb-card h4{margin:0 0 8px;font-size:16.5px;color:#f8fafc;display:flex;align-items:baseline;flex-wrap:wrap;gap:8px}
-    .mdb-name{font-size:14px;color:#cbd5e1;font-weight:500}
-    .mdb-brand{font-size:12px;color:#94a3b8;font-weight:400;border:1px solid rgba(255,255,255,.14);border-radius:20px;padding:1px 9px}
+    .mdb-side{position:sticky;top:96px;display:flex;flex-direction:column;gap:4px;background:rgba(255,255,255,.02);border:1px solid rgba(255,255,255,.05);border-radius:12px;padding:10px;backdrop-filter:blur(20px)}
+    .mdb-side a{display:flex;justify-content:space-between;align-items:center;padding:10px 14px;border-radius:8px;font-size:14.5px;color:#94a3b8;text-decoration:none;transition:.2s;font-weight:300}
+    .mdb-side a:hover{background:rgba(255,255,255,.05);color:#fff}
+    .mdb-side a.active{background:#fff;color:#000;font-weight:600}
+    .mdb-count{font-size:12px;opacity:.5}
+    .mdb-group{scroll-margin-top:96px;margin-bottom:52px}
+    .mdb-group-head{display:flex;justify-content:space-between;align-items:center;margin:56px 0 14px;flex-wrap:wrap;gap:10px;border-bottom:1px solid #1e293b;padding-bottom:12px}
+    .mdb-group-head h2{font-size:22px;color:#fff;font-weight:600;letter-spacing:1px;margin:0}
+    .mdb-group-sub{font-size:12px;color:#64748b;font-weight:400;letter-spacing:2px;margin-left:12px}
+    .mdb-card{display:flex;justify-content:space-between;align-items:center;gap:18px;background:rgba(255,255,255,.02);border:1px solid rgba(255,255,255,.05);border-radius:10px;padding:16px 20px;margin-bottom:10px;transition:.25s}
+    .mdb-card:hover{border-color:rgba(255,255,255,.15);background:rgba(255,255,255,.05);transform:translateY(-3px)}
+    .mdb-card h4{margin:0 0 8px;font-size:16.5px;color:#fff;font-weight:600;display:flex;align-items:baseline;flex-wrap:wrap;gap:8px}
+    .mdb-name{font-size:14px;color:#94a3b8;font-weight:300}
+    .mdb-brand{font-size:12px;color:#94a3b8;font-weight:400;border:1px solid #334155;border-radius:20px;padding:1px 9px}
     .mdb-chips{display:flex;flex-wrap:wrap;gap:6px}
-    .mdb-chip{font-size:12.5px;color:#cbd5e1;background:rgba(255,255,255,.05);border:1px solid rgba(255,255,255,.07);border-radius:7px;padding:3px 9px}
+    .mdb-chip{font-size:12.5px;color:#94a3b8;background:transparent;border:1px solid #1e293b;border-radius:6px;padding:3px 9px;font-weight:300}
     .mdb-chip i{font-style:normal;color:#64748b;margin-right:5px}
     .mdb-actions{display:flex;flex-direction:column;gap:8px;flex-shrink:0}
-    .mdb-btn{font-size:13px;text-decoration:none;text-align:center;padding:7px 16px;border-radius:8px;border:1px solid rgba(255,255,255,.25);color:#e2e8f0;white-space:nowrap;transition:.15s}
-    .mdb-btn:hover{border-color:#fff;color:#fff}
-    .mdb-btn-primary{background:#f8fafc;color:#0b0b10;border-color:#f8fafc}
-    .mdb-btn-primary:hover{opacity:.85}
-    .mdb-btn-quote{background:#c8102e;color:#fff;border-color:#c8102e}
-    .mdb-btn-quote:hover{opacity:.85}
-    .mdb-note{margin-top:30px;font-size:13px;color:#64748b;line-height:1.8}
+    .mdb-btn{font-size:13px;text-decoration:none;text-align:center;padding:7px 16px;border-radius:7px;border:1px solid #334155;color:#e2e8f0;white-space:nowrap;transition:.2s;background:transparent}
+    .mdb-btn:hover{border-color:#fff;background:rgba(255,255,255,.05);color:#fff}
+    .mdb-btn-primary{background:#fff;color:#000;border-color:#fff;font-weight:600}
+    .mdb-btn-primary:hover{background:#e2e8f0;color:#000;box-shadow:0 0 20px rgba(255,255,255,.12)}
+    .mdb-btn-quote{background:#fff;color:#000;border-color:#fff;font-weight:600}
+    .mdb-btn-quote:hover{background:#e2e8f0;color:#000;box-shadow:0 0 20px rgba(255,255,255,.12)}
+    .mdb-note{margin-top:34px;font-size:13px;color:#64748b;line-height:1.8;font-weight:300}
     .mdb-note a{color:#94a3b8}
     @media (max-width:1023px){
       .mdb-wrap{padding-top:110px}
       .mdb-layout{display:block}
-      .mdb-side{position:sticky;top:60px;z-index:20;flex-direction:row;overflow-x:auto;gap:6px;margin-bottom:20px;padding:8px;-webkit-overflow-scrolling:touch;background:#0b0b12}
+      .mdb-side{position:sticky;top:60px;z-index:20;flex-direction:row;overflow-x:auto;gap:6px;margin-bottom:20px;padding:8px;-webkit-overflow-scrolling:touch;background:#050505}
       .mdb-side a{flex-shrink:0;padding:8px 13px}
       .mdb-card{flex-direction:column;align-items:stretch}
       .mdb-actions{flex-direction:row}
