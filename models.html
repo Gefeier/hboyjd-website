@@ -10,48 +10,55 @@
     <link rel="stylesheet" href="about.css?v=20260615a">
     <link rel="stylesheet" href="product-detail.css?v=20260616g">
     <style>
-    /* Automotive Cinematic Style — 与 product-detail-dark.css 同一套视觉语言 */
-    body{background:#050505;color:#e2e8f0}
-    .navbar{background:rgba(5,5,5,.85)!important;backdrop-filter:blur(20px);-webkit-backdrop-filter:blur(20px);border-bottom:1px solid rgba(255,255,255,.05)!important}
-    .nav-links a{color:rgba(255,255,255,.8)!important}
-    .nav-links a:hover,.nav-links a.active{color:#fff!important}
-    .mdb-wrap{max-width:1280px;margin:0 auto;padding:150px 24px 90px}
-    .mdb-head{text-align:center;margin-bottom:60px}
-    .mdb-head .section-tag{letter-spacing:6px;color:#64748b;font-weight:600;text-transform:uppercase}
-    .mdb-head .section-title{color:#fff!important;font-weight:700;letter-spacing:2px}
-    .mdb-head .section-desc{color:#94a3b8;font-weight:300}
+    /* 浅色主基调(对齐首页 navy/blue 体系);产品详情页保持暗黑,总库承担导览职能 */
+    .navbar{background:rgba(10,22,40,.96)!important;backdrop-filter:blur(12px)}
+    body{background:#f7f9fc}
+    .mdb-wrap{max-width:1280px;margin:0 auto;padding:140px 24px 80px}
+    .mdb-head{text-align:center;margin-bottom:44px}
+    .mdb-head .section-tag{letter-spacing:4px;color:var(--blue-500);font-weight:600}
+    .mdb-head .section-title{color:var(--navy-900)!important}
+    .mdb-head .section-desc{color:var(--gray-500)}
     .mdb-layout{display:grid;grid-template-columns:230px minmax(0,1fr);gap:40px;align-items:start}
-    .mdb-side{position:sticky;top:96px;display:flex;flex-direction:column;gap:4px;background:rgba(255,255,255,.02);border:1px solid rgba(255,255,255,.05);border-radius:12px;padding:10px;backdrop-filter:blur(20px)}
-    .mdb-side a{display:flex;justify-content:space-between;align-items:center;padding:10px 14px;border-radius:8px;font-size:14.5px;color:#94a3b8;text-decoration:none;transition:.2s;font-weight:300}
-    .mdb-side a:hover{background:rgba(255,255,255,.05);color:#fff}
-    .mdb-side a.active{background:#fff;color:#000;font-weight:600}
-    .mdb-count{font-size:12px;opacity:.5}
+    .mdb-side{position:sticky;top:96px;display:flex;flex-direction:column;gap:4px;background:#fff;border:1px solid var(--gray-200);border-radius:14px;padding:10px;box-shadow:var(--shadow)}
+    .mdb-side a{display:flex;justify-content:space-between;align-items:center;padding:10px 14px;border-radius:9px;font-size:14.5px;color:var(--gray-700);text-decoration:none;transition:.15s}
+    .mdb-side a:hover{background:var(--gray-100);color:var(--navy-900)}
+    .mdb-side a.active{background:var(--blue-500);color:#fff}
+    .mdb-count{font-size:12px;opacity:.55}
     .mdb-group{scroll-margin-top:96px;margin-bottom:52px}
-    .mdb-group-head{display:flex;justify-content:space-between;align-items:center;margin:56px 0 14px;flex-wrap:wrap;gap:10px;border-bottom:1px solid #1e293b;padding-bottom:12px}
-    .mdb-group-head h2{font-size:22px;color:#fff;font-weight:600;letter-spacing:1px;margin:0}
-    .mdb-group-sub{font-size:12px;color:#64748b;font-weight:400;letter-spacing:2px;margin-left:12px}
-    .mdb-card{display:flex;justify-content:space-between;align-items:center;gap:18px;background:rgba(255,255,255,.02);border:1px solid rgba(255,255,255,.05);border-radius:10px;padding:16px 20px;margin-bottom:10px;transition:.25s}
-    .mdb-card:hover{border-color:rgba(255,255,255,.15);background:rgba(255,255,255,.05);transform:translateY(-3px)}
-    .mdb-card h4{margin:0 0 8px;font-size:16.5px;color:#fff;font-weight:600;display:flex;align-items:baseline;flex-wrap:wrap;gap:8px}
-    .mdb-name{font-size:14px;color:#94a3b8;font-weight:300}
-    .mdb-brand{font-size:12px;color:#94a3b8;font-weight:400;border:1px solid #334155;border-radius:20px;padding:1px 9px}
+    .mdb-group-head{display:flex;justify-content:space-between;align-items:center;margin:52px 0 14px;flex-wrap:wrap;gap:10px;border-bottom:2px solid var(--gray-200);padding-bottom:12px}
+    .mdb-group-head h2{font-size:23px;color:var(--navy-900);margin:0}
+    .mdb-group-sub{font-size:13px;color:var(--gray-500);font-weight:400;margin-left:12px}
+    .mdb-banner{display:grid;grid-template-columns:320px minmax(0,1fr);gap:22px;background:#fff;border:1px solid var(--gray-200);border-radius:14px;padding:16px;margin-bottom:14px;box-shadow:var(--shadow)}
+    .mdb-banner-img{border-radius:10px;overflow:hidden;background:var(--gray-100);align-self:center}
+    .mdb-banner-img img{width:100%;height:100%;max-height:210px;object-fit:cover;display:block}
+    .mdb-banner-txt{align-self:center}
+    .mdb-banner-txt p{font-size:13.5px;line-height:1.75;color:var(--gray-700);margin:0 0 8px}
+    .mdb-banner-txt p:last-child{margin-bottom:0}
+    .mdb-banner-txt i{font-style:normal;font-size:12px;font-weight:600;color:var(--blue-500);border:1px solid var(--blue-300);border-radius:5px;padding:1px 7px;margin-right:8px;white-space:nowrap}
+    .mdb-card{display:flex;justify-content:space-between;align-items:center;gap:18px;background:#fff;border:1px solid var(--gray-200);border-radius:12px;padding:16px 20px;margin-bottom:10px;transition:.15s}
+    .mdb-card:hover{border-color:var(--blue-300);box-shadow:var(--shadow-lg)}
+    .mdb-card h4{margin:0 0 8px;font-size:16.5px;color:var(--navy-900);display:flex;align-items:baseline;flex-wrap:wrap;gap:8px}
+    .mdb-name{font-size:14px;color:var(--gray-700);font-weight:500}
+    .mdb-brand{font-size:12px;color:var(--gray-500);font-weight:400;border:1px solid var(--gray-300);border-radius:20px;padding:1px 9px}
     .mdb-chips{display:flex;flex-wrap:wrap;gap:6px}
-    .mdb-chip{font-size:12.5px;color:#94a3b8;background:transparent;border:1px solid #1e293b;border-radius:6px;padding:3px 9px;font-weight:300}
-    .mdb-chip i{font-style:normal;color:#64748b;margin-right:5px}
+    .mdb-chip{font-size:12.5px;color:var(--gray-700);background:var(--gray-50);border:1px solid var(--gray-200);border-radius:7px;padding:3px 9px}
+    .mdb-chip i{font-style:normal;color:var(--gray-500);margin-right:5px}
     .mdb-actions{display:flex;flex-direction:column;gap:8px;flex-shrink:0}
-    .mdb-btn{font-size:13px;text-decoration:none;text-align:center;padding:7px 16px;border-radius:7px;border:1px solid #334155;color:#e2e8f0;white-space:nowrap;transition:.2s;background:transparent}
-    .mdb-btn:hover{border-color:#fff;background:rgba(255,255,255,.05);color:#fff}
-    .mdb-btn-primary{background:#fff;color:#000;border-color:#fff;font-weight:600}
-    .mdb-btn-primary:hover{background:#e2e8f0;color:#000;box-shadow:0 0 20px rgba(255,255,255,.12)}
-    .mdb-btn-quote{background:#fff;color:#000;border-color:#fff;font-weight:600}
-    .mdb-btn-quote:hover{background:#e2e8f0;color:#000;box-shadow:0 0 20px rgba(255,255,255,.12)}
-    .mdb-note{margin-top:34px;font-size:13px;color:#64748b;line-height:1.8;font-weight:300}
-    .mdb-note a{color:#94a3b8}
+    .mdb-btn{font-size:13px;text-decoration:none;text-align:center;padding:7px 16px;border-radius:8px;border:1px solid var(--gray-300);color:var(--gray-700);white-space:nowrap;transition:.15s;background:#fff}
+    .mdb-btn:hover{border-color:var(--blue-500);color:var(--blue-500)}
+    .mdb-btn-primary{background:var(--navy-900);color:#fff;border-color:var(--navy-900)}
+    .mdb-btn-primary:hover{opacity:.88;color:#fff;border-color:var(--navy-900)}
+    .mdb-btn-quote{background:var(--blue-500);color:#fff;border-color:var(--blue-500)}
+    .mdb-btn-quote:hover{opacity:.88;color:#fff;border-color:var(--blue-500)}
+    .mdb-note{margin-top:30px;font-size:13px;color:var(--gray-500);line-height:1.8}
+    .mdb-note a{color:var(--blue-500)}
     @media (max-width:1023px){
       .mdb-wrap{padding-top:110px}
       .mdb-layout{display:block}
-      .mdb-side{position:sticky;top:60px;z-index:20;flex-direction:row;overflow-x:auto;gap:6px;margin-bottom:20px;padding:8px;-webkit-overflow-scrolling:touch;background:#050505}
+      .mdb-side{position:sticky;top:60px;z-index:20;flex-direction:row;overflow-x:auto;gap:6px;margin-bottom:20px;padding:8px;-webkit-overflow-scrolling:touch}
       .mdb-side a{flex-shrink:0;padding:8px 13px}
+      .mdb-banner{grid-template-columns:1fr;padding:12px}
+      .mdb-banner-img img{max-height:180px}
       .mdb-card{flex-direction:column;align-items:stretch}
       .mdb-actions{flex-direction:row}
       .mdb-actions .mdb-btn{flex:1}
@@ -91,6 +98,14 @@
                 <div class="mdb-group-head">
                     <h2>平板 · 栏板<span class="mdb-group-sub">5 款公告车型</span></h2>
                     <a class="mdb-btn mdb-btn-primary" href="product-flatbed.html">品类详情页 →</a>
+                </div>
+                <div class="mdb-banner">
+                    <div class="mdb-banner-img"><img src="assets/images/models/grp-flatbed.webp" alt="平板式运输半挂车 厂区实拍" loading="lazy"></div>
+                    <div class="mdb-banner-txt">
+                        <p><i>车型介绍</i>工作平台承载面低,车体重心稳,利于机器上下;上部提供较大装货空间,装载后重心低,运行安全可靠,可按实际需求定制车架承载面。</p>
+                        <p><i>适用范围</i>多种机械设备、大型物件、公路建设设备、大件罐体、超高集装箱及各种钢材的运输,是国内大件运输客户的主选车型。栏板式为开放式低栏结构,钢材、建材、散货一车多用。</p>
+                        <p><i>车型优点</i>整车自重轻,抗扭曲、抗震、抗颠簸;开放式栏板无遮挡,吊车、叉车均可快速作业。</p>
+                    </div>
                 </div>
                 <div class="mdb-card">
                     <div class="mdb-card-main">
@@ -146,6 +161,14 @@
                 <div class="mdb-group-head">
                     <h2>自卸<span class="mdb-group-sub">9 款公告车型</span></h2>
                     <a class="mdb-btn mdb-btn-primary" href="product-dump.html">品类详情页 →</a>
+                </div>
+                <div class="mdb-banner">
+                    <div class="mdb-banner-img"><img src="assets/images/models/grp-dump.webp" alt="自卸半挂车 厂区实拍" loading="lazy"></div>
+                    <div class="mdb-banner-txt">
+                        <p><i>车型介绍</i>车厢采用侧翻或后翻自卸方式,多缸举升,另配自救缸;厢体采用高强度冷轧瓦楞钢板、无骨架结构,厢体高低多样可选,装货空间大。</p>
+                        <p><i>适用范围</i>矿石、砂石、泥土、煤炭、建筑物料等散装零散货物运输,与挖掘机、装载机配套作业。</p>
+                        <p><i>车型优点</i>强度高、举升力强、承载能力强不变形;举升高度高、卸货快,多拉重载。</p>
+                    </div>
                 </div>
                 <div class="mdb-card">
                     <div class="mdb-card-main">
@@ -242,6 +265,14 @@
                     <h2>仓栅<span class="mdb-group-sub">3 款公告车型</span></h2>
                     <a class="mdb-btn mdb-btn-primary" href="product-fence.html">品类详情页 →</a>
                 </div>
+                <div class="mdb-banner">
+                    <div class="mdb-banner-img"><img src="assets/images/models/grp-fence.webp" alt="仓栅式运输半挂车 厂区实拍" loading="lazy"></div>
+                    <div class="mdb-banner-txt">
+                        <p><i>车型介绍</i>分直梁式和鹅颈式两种类型;仓栏高度可按 1.6 米、1.8 米、2 米、2.2 米等规格定做,后开门样式有对开门、墙板加花栏、墙板加对开门等。</p>
+                        <p><i>适用范围</i>农副产品及其他轻泡货物的运输。</p>
+                        <p><i>车型优点</i>载重情况下充分减轻车厢自重,结构简单适用、拆卸方便,为用户降低投资成本。</p>
+                    </div>
+                </div>
                 <div class="mdb-card">
                     <div class="mdb-card-main">
                         <h4>EHJ9400CCY<span class="mdb-name">仓栅式运输半挂车</span><span class="mdb-brand">楚源牌</span></h4>
@@ -276,6 +307,14 @@
                 <div class="mdb-group-head">
                     <h2>低平板<span class="mdb-group-sub">4 款公告车型</span></h2>
                     <a class="mdb-btn mdb-btn-primary" href="product-lowbed.html">品类详情页 →</a>
+                </div>
+                <div class="mdb-banner">
+                    <div class="mdb-banner-img"><img src="assets/images/products/lowbed/mission.jpg" alt="低平板半挂车 实拍" loading="lazy"></div>
+                    <div class="mdb-banner-txt">
+                        <p><i>车型介绍</i>货台低、重心稳的低平板系列,可选凹梁与爬梯结构,装卸工程机械便捷安全。</p>
+                        <p><i>适用范围</i>挖掘机、装载机、压路机等工程机械和不可拆解大件设备的运输。</p>
+                        <p><i>车型优点</i>多轴距、多轴荷公告可选,按设备吨位与外形匹配车型。</p>
+                    </div>
                 </div>
                 <div class="mdb-card">
                     <div class="mdb-card-main">
@@ -321,6 +360,14 @@
                 <div class="mdb-group-head">
                     <h2>集装箱骨架<span class="mdb-group-sub">6 款公告车型</span></h2>
                     <a class="mdb-btn mdb-btn-primary" href="product-skeleton.html">品类详情页 →</a>
+                </div>
+                <div class="mdb-banner">
+                    <div class="mdb-banner-img"><img src="assets/images/models/grp-skeleton.webp" alt="集装箱骨架运输半挂车 厂区实拍" loading="lazy"></div>
+                    <div class="mdb-banner-txt">
+                        <p><i>车型介绍</i>集装箱直接装到底盘骨架上,由扭锁装置固定,成为半挂车的强度构件。</p>
+                        <p><i>适用范围</i>集装箱转运:发货人仓库装货直达收货人仓库,中途换车、换船无须开箱换装,港口与多式联运主力。</p>
+                        <p><i>车型优点</i>快速装卸,可从一种运输工具直接换装到另一种;按客户需要工装保证,质量稳定性能可靠。</p>
+                    </div>
                 </div>
                 <div class="mdb-card">
                     <div class="mdb-card-main">
@@ -387,6 +434,14 @@
                     <h2>随车起重<span class="mdb-group-sub">5 款公告车型</span></h2>
                     <a class="mdb-btn mdb-btn-primary" href="product-crane.html">品类详情页 →</a>
                 </div>
+                <div class="mdb-banner">
+                    <div class="mdb-banner-img"><img src="assets/images/models/grp-crane.webp" alt="随车吊式半挂车 厂区实拍" loading="lazy"></div>
+                    <div class="mdb-banner-txt">
+                        <p><i>车型介绍</i>随车起重运输一体,吊机分直臂式和折臂式两种,装卸吊装一车完成。</p>
+                        <p><i>适用范围</i>吊装、装卸货物和救援等领域,狭窄特殊工况优势明显。</p>
+                        <p><i>车型优点</i>装货灵活、装货量更大;作业半径大,必要时车头与货箱可分离作业。</p>
+                    </div>
+                </div>
                 <div class="mdb-card">
                     <div class="mdb-card-main">
                         <h4>JDV5310JSQS1<span class="mdb-name">随车起重运输车</span><span class="mdb-brand">襄汽牌</span></h4>
@@ -442,6 +497,14 @@
                     <h2>厢式 · 通信<span class="mdb-group-sub">3 款公告车型</span></h2>
                     
                 </div>
+                <div class="mdb-banner">
+                    <div class="mdb-banner-img"><img src="assets/images/models/grp-van.webp" alt="厢式运输半挂车 厂区实拍" loading="lazy"></div>
+                    <div class="mdb-banner-txt">
+                        <p><i>车型介绍</i>厢体采用高强度冷轧瓦楞钢板、无骨架结构,X 型拉撑;厢顶有封闭式、推拉开启式、敞开式等多种形式。本系列另含通信专用车公告。</p>
+                        <p><i>适用范围</i>家用电器、轻纺货物及建筑材料运输,兼适海洋、铁路、公路多式联运。</p>
+                        <p><i>车型优点</i>货物免受风吹日晒雨淋,快速装卸转运,降低货损与运输成本。</p>
+                    </div>
+                </div>
                 <div class="mdb-card">
                     <div class="mdb-card-main">
                         <h4>EHJ9400XXYE<span class="mdb-name">厢式运输半挂车</span><span class="mdb-brand">楚源牌</span></h4>
@@ -477,6 +540,14 @@
                     <h2>散装饲料<span class="mdb-group-sub">2 款公告车型</span></h2>
                     
                 </div>
+                <div class="mdb-banner">
+                    <div class="mdb-banner-img"><img src="assets/images/models/grp-feed.webp" alt="散装饲料运输车 实拍" loading="lazy"></div>
+                    <div class="mdb-banner-txt">
+                        <p><i>车型介绍</i>全封闭罐体,顶部进料口密封压紧,内部圆弧过渡无尖锐棱角,缓落分料仓减少颗粒破碎。</p>
+                        <p><i>适用范围</i>畜禽、水产颗粒饲料长途转运,可直接对接养殖场料塔自动化上料。</p>
+                        <p><i>车型优点</i>螺旋绞龙推送卸料,无残留卸料快;可做独立分仓,一次分运多种配方饲料。</p>
+                    </div>
+                </div>
                 <div class="mdb-card">
                     <div class="mdb-card-main">
                         <h4>EHJ9400ZSL<span class="mdb-name">散装饲料运输半挂车</span><span class="mdb-brand">楚源牌</span></h4>
@@ -502,6 +573,14 @@
                     <h2>运材 · 危险品罐箱<span class="mdb-group-sub">2 款公告车型</span></h2>
                     <a class="mdb-btn mdb-btn-primary" href="product-special.html">品类详情页 →</a>
                 </div>
+                <div class="mdb-banner">
+                    <div class="mdb-banner-img"><img src="assets/images/vehicles/photo-JDV9400TWY.webp" alt="危险品罐箱骨架运输半挂车 公告实拍" loading="lazy"></div>
+                    <div class="mdb-banner-txt">
+                        <p><i>车型介绍</i>运材半挂车与危险品罐箱骨架运输半挂车两个公告系列,结构按货种专项设计。</p>
+                        <p><i>适用范围</i>原木木材运输;罐式集装箱危化品运输,公告齐全合规上路。</p>
+                        <p><i>车型优点</i>专用绑扎与锁固结构,货种匹配度高,手续齐全省心。</p>
+                    </div>
+                </div>
                 <div class="mdb-card">
                     <div class="mdb-card-main">
                         <h4>EHJ9400TYC<span class="mdb-name">运材半挂车</span><span class="mdb-brand">楚源牌</span></h4>
@@ -526,6 +605,14 @@
                 <div class="mdb-group-head">
                     <h2>专用车系列<span class="mdb-group-sub">6 款公告车型</span></h2>
                     <a class="mdb-btn mdb-btn-primary" href="product-special.html">品类详情页 →</a>
+                </div>
+                <div class="mdb-banner">
+                    <div class="mdb-banner-img"><img src="assets/images/models/grp-special.webp" alt="应急救险车系列 厂区实拍" loading="lazy"></div>
+                    <div class="mdb-banner-txt">
+                        <p><i>车型介绍</i>应急救险、前突指挥、高空作业、垃圾转运等专项公告车系;其中蓝牌轻型车型 C1 驾照即可驾驶,城区不限行。</p>
+                        <p><i>适用范围</i>市政抢修、电力抢险、道路应急、防汛排涝、消防前置保障与突发事件现场指挥。</p>
+                        <p><i>车型优点</i>模块化密闭救援方舱分区收纳;整车预留标准化设备安装位,一车载全套抢险装备。</p>
+                    </div>
                 </div>
                 <div class="mdb-card">
                     <div class="mdb-card-main">
