@@ -56,29 +56,10 @@
     .mdb-side-item > a.active, .mdb-side > a.active .mdb-count { background: var(--blue-500); color: white; box-shadow: 0 0 8px rgba(37,99,235,0.5); }
     
     /* Full-Width Parallax Categories */
-    .mdb-group { position: relative; scroll-margin-top: 96px; margin-bottom: 0; padding: 80px 32px; border: none; border-radius: 0; z-index: 1; }
+    .mdb-group { position: relative; scroll-margin-top: 96px; margin-bottom: 0; padding: 52px 0; border: none; border-bottom: 1px solid rgba(255,255,255,0.06); border-radius: 0; z-index: 1; }
     
-    /* The Parallax Image */
-    .mdb-group::before { 
-        content: ''; 
-        position: absolute; 
-        top: 0; bottom: 0; left: -50vw; right: -50vw;
-        background-image: inherit; 
-        background-size: cover;
-        background-position: center;
-        background-attachment: fixed; 
-        z-index: -2; 
-    }
-    
-    /* The Dark Overlay (Deep Cinematic) */
-    .mdb-group::after { 
-        content: ''; 
-        position: absolute; 
-        top: 0; bottom: 0; left: -50vw; right: -50vw;
-        background: linear-gradient(180deg, rgba(4,7,14,0.75) 0%, rgba(8,12,22,0.9) 100%);
-        border-bottom: 1px solid rgba(255,255,255,0.05);
-        z-index: -1; 
-    }
+    /* 7/12 凌晨降噪:整宽视差背景退役(十张大图常驻=视觉噪音),照片收进摘要卡图框 */
+    .mdb-group::before, .mdb-group::after { content: none; }
     
     .mdb-group-head { display: flex; justify-content: space-between; align-items: center; margin: 0 0 32px; flex-wrap: wrap; gap: 10px; padding-bottom: 16px; border-bottom: 1px solid rgba(255,255,255,0.15); }
     .mdb-group-head h2 { font-size: 32px; color: #fff; margin: 0; font-weight: 700; letter-spacing: 1.5px; text-shadow: 0 4px 15px rgba(0,0,0,0.5); }
@@ -261,6 +242,17 @@
     .mdb-fold.open { grid-template-rows: 1fr; }
     .mdb-fold-in { overflow: hidden; min-height: 0; }
     .mdb-fold .mdb-card.reveal { opacity: 1 !important; transform: none !important; }
+    
+    /* ==== 摘要卡图文布局(照片从背景降级为元素) ==== */
+    .mdb-gsum { display: grid; grid-template-columns: 280px minmax(0,1fr); gap: 22px; align-items: center; }
+    .mdb-gsum-media { border-radius: 10px; overflow: hidden; border: 1px solid rgba(255,255,255,0.1); }
+    .mdb-gsum-media img { width: 100%; height: 185px; object-fit: cover; display: block; }
+    .mdb-gsum-body { min-width: 0; }
+    @media (max-width: 1023px) {
+      .mdb-gsum { grid-template-columns: 1fr; gap: 14px; }
+      .mdb-gsum-media img { height: 150px; }
+      .mdb-group { padding: 36px 0; }
+    }
     </style>
 
 </head>
@@ -293,12 +285,12 @@
             </aside>
             <main>
 
-            <div class="mdb-group" id="cat-flatbed" style="background-image: url('assets/images/models/grp-flatbed.webp')">
+            <div class="mdb-group" id="cat-flatbed">
                 <div class="mdb-group-head">
                     <h2>平板 · 栏板<span class="mdb-group-sub">5 款公告车型</span></h2>
                     <a class="mdb-btn mdb-btn-primary" href="product-flatbed.html">品类详情页 →</a>
                 </div>
-                <div class="mdb-banner mdb-gsum"><div class="mdb-banner-txt"><p><i>一句话</i>工作平台承载面低,车体重心稳,利于机器上下;上部提供较大装货空间,装载后重心低,运行安全可靠,可按实际需求定制车架承载面。</p></div><div class="mdb-gshared"><span class="mdb-gshared-lab">全系共有</span><span class="mdb-chip"><i>总质量</i>40000 kg</span><span class="mdb-chip"><i>轴数</i>3轴</span><span class="mdb-chip"><i>轮胎</i>11.00R20 12PR</span></div><button class="mdb-fold-btn" type="button" data-open-label="展开 5 款车型 ▾" data-close-label="收起车型 ▴">展开 5 款车型 ▾</button></div>
+                <div class="mdb-banner mdb-gsum"><div class="mdb-gsum-media"><img src="assets/images/models/grp-flatbed.webp" alt="" loading="lazy"></div><div class="mdb-gsum-body"><div class="mdb-banner-txt"><p><i>一句话</i>工作平台承载面低,车体重心稳,利于机器上下;上部提供较大装货空间,装载后重心低,运行安全可靠,可按实际需求定制车架承载面。</p></div><div class="mdb-gshared"><span class="mdb-gshared-lab">全系共有</span><span class="mdb-chip"><i>总质量</i>40000 kg</span><span class="mdb-chip"><i>轴数</i>3轴</span><span class="mdb-chip"><i>轮胎</i>11.00R20 12PR</span></div><button class="mdb-fold-btn" type="button" data-open-label="展开 5 款车型 ▾" data-close-label="收起车型 ▴">展开 5 款车型 ▾</button></div></div>
                 <div class="mdb-fold"><div class="mdb-fold-in"><div class="mdb-card">
                     <div class="mdb-card-main">
                         <h4>EHJ9400TPB<span class="mdb-name">平板运输半挂车</span><span class="mdb-brand">楚源牌</span></h4>
@@ -350,12 +342,12 @@
                     </div>
                 </div>            </div></div>
             </div>
-            <div class="mdb-group" id="cat-dump" style="background-image: url('assets/images/models/grp-dump.webp')">
+            <div class="mdb-group" id="cat-dump">
                 <div class="mdb-group-head">
                     <h2>自卸<span class="mdb-group-sub">9 款公告车型</span></h2>
                     <a class="mdb-btn mdb-btn-primary" href="product-dump.html">品类详情页 →</a>
                 </div>
-                <div class="mdb-banner mdb-gsum"><div class="mdb-banner-txt"><p><i>一句话</i>车厢采用侧翻或后翻自卸方式,多缸举升,另配自救缸;厢体采用高强度冷轧瓦楞钢板、无骨架结构,厢体高低多样可选,装货空间大。</p></div><div class="mdb-gshared"><span class="mdb-gshared-lab">全系共有</span><span class="mdb-chip"><i>总质量</i>40000 kg</span><span class="mdb-chip"><i>轴数</i>3轴</span><span class="mdb-chip"><i>轮胎</i>11.00R20 12PR</span></div><button class="mdb-fold-btn" type="button" data-open-label="展开 9 款车型 ▾" data-close-label="收起车型 ▴">展开 9 款车型 ▾</button></div>
+                <div class="mdb-banner mdb-gsum"><div class="mdb-gsum-media"><img src="assets/images/models/grp-dump.webp" alt="" loading="lazy"></div><div class="mdb-gsum-body"><div class="mdb-banner-txt"><p><i>一句话</i>车厢采用侧翻或后翻自卸方式,多缸举升,另配自救缸;厢体采用高强度冷轧瓦楞钢板、无骨架结构,厢体高低多样可选,装货空间大。</p></div><div class="mdb-gshared"><span class="mdb-gshared-lab">全系共有</span><span class="mdb-chip"><i>总质量</i>40000 kg</span><span class="mdb-chip"><i>轴数</i>3轴</span><span class="mdb-chip"><i>轮胎</i>11.00R20 12PR</span></div><button class="mdb-fold-btn" type="button" data-open-label="展开 9 款车型 ▾" data-close-label="收起车型 ▴">展开 9 款车型 ▾</button></div></div>
                 <div class="mdb-fold"><div class="mdb-fold-in"><div class="mdb-card">
                     <div class="mdb-card-main">
                         <h4>EHJ9400ZHX<span class="mdb-name">自卸半挂车</span><span class="mdb-brand">楚源牌</span></h4>
@@ -447,12 +439,12 @@
                     </div>
                 </div>            </div></div>
             </div>
-            <div class="mdb-group" id="cat-fence" style="background-image: url('assets/images/models/grp-fence.webp')">
+            <div class="mdb-group" id="cat-fence">
                 <div class="mdb-group-head">
                     <h2>仓栅<span class="mdb-group-sub">3 款公告车型</span></h2>
                     <a class="mdb-btn mdb-btn-primary" href="product-fence.html">品类详情页 →</a>
                 </div>
-                <div class="mdb-banner mdb-gsum"><div class="mdb-banner-txt"><p><i>一句话</i>分直梁式和鹅颈式两种类型;仓栏高度可按 1.6 米、1.8 米、2 米、2.2 米等规格定做,后开门样式有对开门、墙板加花栏、墙板加对开门等。</p></div><div class="mdb-gshared"><span class="mdb-gshared-lab">全系共有</span><span class="mdb-chip"><i>总质量</i>40000 kg</span><span class="mdb-chip"><i>轴数</i>3轴</span><span class="mdb-chip"><i>轮胎</i>11.00R20 12PR</span></div><button class="mdb-fold-btn" type="button" data-open-label="展开 3 款车型 ▾" data-close-label="收起车型 ▴">展开 3 款车型 ▾</button></div>
+                <div class="mdb-banner mdb-gsum"><div class="mdb-gsum-media"><img src="assets/images/models/grp-fence.webp" alt="" loading="lazy"></div><div class="mdb-gsum-body"><div class="mdb-banner-txt"><p><i>一句话</i>分直梁式和鹅颈式两种类型;仓栏高度可按 1.6 米、1.8 米、2 米、2.2 米等规格定做,后开门样式有对开门、墙板加花栏、墙板加对开门等。</p></div><div class="mdb-gshared"><span class="mdb-gshared-lab">全系共有</span><span class="mdb-chip"><i>总质量</i>40000 kg</span><span class="mdb-chip"><i>轴数</i>3轴</span><span class="mdb-chip"><i>轮胎</i>11.00R20 12PR</span></div><button class="mdb-fold-btn" type="button" data-open-label="展开 3 款车型 ▾" data-close-label="收起车型 ▴">展开 3 款车型 ▾</button></div></div>
                 <div class="mdb-fold"><div class="mdb-fold-in"><div class="mdb-card">
                     <div class="mdb-card-main">
                         <h4>EHJ9400CCY<span class="mdb-name">仓栅式运输半挂车</span><span class="mdb-brand">楚源牌</span></h4>
@@ -484,12 +476,12 @@
                     </div>
                 </div>            </div></div>
             </div>
-            <div class="mdb-group" id="cat-lowbed" style="background-image: url('assets/images/products/lowbed/mission.jpg')">
+            <div class="mdb-group" id="cat-lowbed">
                 <div class="mdb-group-head">
                     <h2>低平板<span class="mdb-group-sub">4 款公告车型</span></h2>
                     <a class="mdb-btn mdb-btn-primary" href="product-lowbed.html">品类详情页 →</a>
                 </div>
-                <div class="mdb-banner mdb-gsum"><div class="mdb-banner-txt"><p><i>一句话</i>货台低、重心稳的低平板系列,可选凹梁与爬梯结构,装卸工程机械便捷安全。</p></div><div class="mdb-gshared"><span class="mdb-gshared-lab">全系共有</span><span class="mdb-chip"><i>轴数</i>3轴</span></div><button class="mdb-fold-btn" type="button" data-open-label="展开 4 款车型 ▾" data-close-label="收起车型 ▴">展开 4 款车型 ▾</button></div>
+                <div class="mdb-banner mdb-gsum"><div class="mdb-gsum-media"><img src="assets/images/products/lowbed/mission.jpg" alt="" loading="lazy"></div><div class="mdb-gsum-body"><div class="mdb-banner-txt"><p><i>一句话</i>货台低、重心稳的低平板系列,可选凹梁与爬梯结构,装卸工程机械便捷安全。</p></div><div class="mdb-gshared"><span class="mdb-gshared-lab">全系共有</span><span class="mdb-chip"><i>轴数</i>3轴</span></div><button class="mdb-fold-btn" type="button" data-open-label="展开 4 款车型 ▾" data-close-label="收起车型 ▴">展开 4 款车型 ▾</button></div></div>
                 <div class="mdb-fold"><div class="mdb-fold-in"><div class="mdb-card">
                     <div class="mdb-card-main">
                         <h4>EHJ9400TDP<span class="mdb-name">低平板半挂车</span><span class="mdb-brand">楚源牌</span></h4>
@@ -531,12 +523,12 @@
                     </div>
                 </div>            </div></div>
             </div>
-            <div class="mdb-group" id="cat-skeleton" style="background-image: url('assets/images/models/grp-skeleton.webp')">
+            <div class="mdb-group" id="cat-skeleton">
                 <div class="mdb-group-head">
                     <h2>集装箱骨架<span class="mdb-group-sub">6 款公告车型</span></h2>
                     <a class="mdb-btn mdb-btn-primary" href="product-skeleton.html">品类详情页 →</a>
                 </div>
-                <div class="mdb-banner mdb-gsum"><div class="mdb-banner-txt"><p><i>一句话</i>集装箱直接装到底盘骨架上,由扭锁装置固定,成为半挂车的强度构件。</p></div><button class="mdb-fold-btn" type="button" data-open-label="展开 6 款车型 ▾" data-close-label="收起车型 ▴">展开 6 款车型 ▾</button></div>
+                <div class="mdb-banner mdb-gsum"><div class="mdb-gsum-media"><img src="assets/images/models/grp-skeleton.webp" alt="" loading="lazy"></div><div class="mdb-gsum-body"><div class="mdb-banner-txt"><p><i>一句话</i>集装箱直接装到底盘骨架上,由扭锁装置固定,成为半挂车的强度构件。</p></div><button class="mdb-fold-btn" type="button" data-open-label="展开 6 款车型 ▾" data-close-label="收起车型 ▴">展开 6 款车型 ▾</button></div></div>
                 <div class="mdb-fold"><div class="mdb-fold-in"><div class="mdb-card">
                     <div class="mdb-card-main">
                         <h4>EHJ9400TJZE<span class="mdb-name">集装箱运输半挂车</span><span class="mdb-brand">楚源牌</span></h4>
@@ -598,12 +590,12 @@
                     </div>
                 </div>            </div></div>
             </div>
-            <div class="mdb-group" id="cat-crane" style="background-image: url('assets/images/models/grp-crane.webp')">
+            <div class="mdb-group" id="cat-crane">
                 <div class="mdb-group-head">
                     <h2>随车起重<span class="mdb-group-sub">5 款公告车型</span></h2>
                     <a class="mdb-btn mdb-btn-primary" href="product-crane.html">品类详情页 →</a>
                 </div>
-                <div class="mdb-banner mdb-gsum"><div class="mdb-banner-txt"><p><i>一句话</i>随车起重运输一体,吊机分直臂式和折臂式两种,装卸吊装一车完成。</p></div><button class="mdb-fold-btn" type="button" data-open-label="展开 5 款车型 ▾" data-close-label="收起车型 ▴">展开 5 款车型 ▾</button></div>
+                <div class="mdb-banner mdb-gsum"><div class="mdb-gsum-media"><img src="assets/images/models/grp-crane.webp" alt="" loading="lazy"></div><div class="mdb-gsum-body"><div class="mdb-banner-txt"><p><i>一句话</i>随车起重运输一体,吊机分直臂式和折臂式两种,装卸吊装一车完成。</p></div><button class="mdb-fold-btn" type="button" data-open-label="展开 5 款车型 ▾" data-close-label="收起车型 ▴">展开 5 款车型 ▾</button></div></div>
                 <div class="mdb-fold"><div class="mdb-fold-in"><div class="mdb-card">
                     <div class="mdb-card-main">
                         <h4>JDV5310JSQS1<span class="mdb-name">随车起重运输车</span><span class="mdb-brand">襄汽牌</span></h4>
@@ -655,12 +647,12 @@
                     </div>
                 </div>            </div></div>
             </div>
-            <div class="mdb-group" id="cat-van" style="background-image: url('assets/images/models/grp-van.webp')">
+            <div class="mdb-group" id="cat-van">
                 <div class="mdb-group-head">
                     <h2>厢式 · 通信<span class="mdb-group-sub">3 款公告车型</span></h2>
                     
                 </div>
-                <div class="mdb-banner mdb-gsum"><div class="mdb-banner-txt"><p><i>一句话</i>厢体采用高强度冷轧瓦楞钢板、无骨架结构,X 型拉撑;厢顶有封闭式、推拉开启式、敞开式等多种形式。</p></div><button class="mdb-fold-btn" type="button" data-open-label="展开 3 款车型 ▾" data-close-label="收起车型 ▴">展开 3 款车型 ▾</button></div>
+                <div class="mdb-banner mdb-gsum"><div class="mdb-gsum-media"><img src="assets/images/models/grp-van.webp" alt="" loading="lazy"></div><div class="mdb-gsum-body"><div class="mdb-banner-txt"><p><i>一句话</i>厢体采用高强度冷轧瓦楞钢板、无骨架结构,X 型拉撑;厢顶有封闭式、推拉开启式、敞开式等多种形式。</p></div><button class="mdb-fold-btn" type="button" data-open-label="展开 3 款车型 ▾" data-close-label="收起车型 ▴">展开 3 款车型 ▾</button></div></div>
                 <div class="mdb-fold"><div class="mdb-fold-in"><div class="mdb-card">
                     <div class="mdb-card-main">
                         <h4>EHJ9400XXYE<span class="mdb-name">厢式运输半挂车</span><span class="mdb-brand">楚源牌</span></h4>
@@ -692,12 +684,12 @@
                     </div>
                 </div>            </div></div>
             </div>
-            <div class="mdb-group" id="cat-feed" style="background-image: url('assets/images/models/grp-feed.webp')">
+            <div class="mdb-group" id="cat-feed">
                 <div class="mdb-group-head">
                     <h2>散装饲料<span class="mdb-group-sub">2 款公告车型</span></h2>
                     
                 </div>
-                <div class="mdb-banner mdb-gsum"><div class="mdb-banner-txt"><p><i>一句话</i>全封闭罐体,顶部进料口密封压紧,内部圆弧过渡无尖锐棱角,缓落分料仓减少颗粒破碎。</p></div><div class="mdb-gshared"><span class="mdb-gshared-lab">全系共有</span><span class="mdb-chip"><i>总质量</i>40000 kg</span><span class="mdb-chip"><i>轴数</i>3轴</span><span class="mdb-chip"><i>轮胎</i>12R22.5 12PR</span></div><button class="mdb-fold-btn" type="button" data-open-label="展开 2 款车型 ▾" data-close-label="收起车型 ▴">展开 2 款车型 ▾</button></div>
+                <div class="mdb-banner mdb-gsum"><div class="mdb-gsum-media"><img src="assets/images/models/grp-feed.webp" alt="" loading="lazy"></div><div class="mdb-gsum-body"><div class="mdb-banner-txt"><p><i>一句话</i>全封闭罐体,顶部进料口密封压紧,内部圆弧过渡无尖锐棱角,缓落分料仓减少颗粒破碎。</p></div><div class="mdb-gshared"><span class="mdb-gshared-lab">全系共有</span><span class="mdb-chip"><i>总质量</i>40000 kg</span><span class="mdb-chip"><i>轴数</i>3轴</span><span class="mdb-chip"><i>轮胎</i>12R22.5 12PR</span></div><button class="mdb-fold-btn" type="button" data-open-label="展开 2 款车型 ▾" data-close-label="收起车型 ▴">展开 2 款车型 ▾</button></div></div>
                 <div class="mdb-fold"><div class="mdb-fold-in"><div class="mdb-card">
                     <div class="mdb-card-main">
                         <h4>EHJ9400ZSL<span class="mdb-name">散装饲料运输半挂车</span><span class="mdb-brand">楚源牌</span></h4>
@@ -719,12 +711,12 @@
                     </div>
                 </div>            </div></div>
             </div>
-            <div class="mdb-group" id="cat-timber" style="background-image: url('assets/images/vehicles/photo-JDV9400TWY.webp')">
+            <div class="mdb-group" id="cat-timber">
                 <div class="mdb-group-head">
                     <h2>运材 · 危险品罐箱<span class="mdb-group-sub">2 款公告车型</span></h2>
                     <a class="mdb-btn mdb-btn-primary" href="product-special.html">品类详情页 →</a>
                 </div>
-                <div class="mdb-banner mdb-gsum"><div class="mdb-banner-txt"><p><i>一句话</i>运材半挂车与危险品罐箱骨架运输半挂车两个公告系列,结构按货种专项设计。</p></div><div class="mdb-gshared"><span class="mdb-gshared-lab">全系共有</span><span class="mdb-chip"><i>总质量</i>40000 kg</span><span class="mdb-chip"><i>轴数</i>3轴</span></div><button class="mdb-fold-btn" type="button" data-open-label="展开 2 款车型 ▾" data-close-label="收起车型 ▴">展开 2 款车型 ▾</button></div>
+                <div class="mdb-banner mdb-gsum"><div class="mdb-gsum-media"><img src="assets/images/vehicles/photo-JDV9400TWY.webp" alt="" loading="lazy"></div><div class="mdb-gsum-body"><div class="mdb-banner-txt"><p><i>一句话</i>运材半挂车与危险品罐箱骨架运输半挂车两个公告系列,结构按货种专项设计。</p></div><div class="mdb-gshared"><span class="mdb-gshared-lab">全系共有</span><span class="mdb-chip"><i>总质量</i>40000 kg</span><span class="mdb-chip"><i>轴数</i>3轴</span></div><button class="mdb-fold-btn" type="button" data-open-label="展开 2 款车型 ▾" data-close-label="收起车型 ▴">展开 2 款车型 ▾</button></div></div>
                 <div class="mdb-fold"><div class="mdb-fold-in"><div class="mdb-card">
                     <div class="mdb-card-main">
                         <h4>EHJ9400TYC<span class="mdb-name">运材半挂车</span><span class="mdb-brand">楚源牌</span></h4>
@@ -746,12 +738,12 @@
                     </div>
                 </div>            </div></div>
             </div>
-            <div class="mdb-group" id="cat-special" style="background-image: url('assets/images/models/grp-special.webp')">
+            <div class="mdb-group" id="cat-special">
                 <div class="mdb-group-head">
                     <h2>专用车系列<span class="mdb-group-sub">6 款公告车型</span></h2>
                     <a class="mdb-btn mdb-btn-primary" href="product-special.html">品类详情页 →</a>
                 </div>
-                <div class="mdb-banner mdb-gsum"><div class="mdb-banner-txt"><p><i>一句话</i>应急救险、前突指挥、高空作业、垃圾转运等专项公告车系;其中蓝牌轻型车型 C1 驾照即可驾驶,城区不限行。</p></div><button class="mdb-fold-btn" type="button" data-open-label="展开 6 款车型 ▾" data-close-label="收起车型 ▴">展开 6 款车型 ▾</button></div>
+                <div class="mdb-banner mdb-gsum"><div class="mdb-gsum-media"><img src="assets/images/models/grp-special.webp" alt="" loading="lazy"></div><div class="mdb-gsum-body"><div class="mdb-banner-txt"><p><i>一句话</i>应急救险、前突指挥、高空作业、垃圾转运等专项公告车系;其中蓝牌轻型车型 C1 驾照即可驾驶,城区不限行。</p></div><button class="mdb-fold-btn" type="button" data-open-label="展开 6 款车型 ▾" data-close-label="收起车型 ▴">展开 6 款车型 ▾</button></div></div>
                 <div class="mdb-fold"><div class="mdb-fold-in"><div class="mdb-card">
                     <div class="mdb-card-main">
                         <h4>JDV5040JGKZZ6<span class="mdb-name">高空作业车</span><span class="mdb-brand">襄汽牌</span></h4>
