@@ -31,6 +31,13 @@
     .vh-sib a:hover{color:#fff;border-bottom-color:#fff}
     .vh-sib a.cur{color:#fff;font-weight:600;border-bottom:1px solid #fff}
     .vh-cat{margin-top:12px;font-size:14px} .vh-cat a{color:#e2e8f0;border-bottom:none}
+    .vh-toc{position:fixed;right:16px;top:50%;transform:translateY(-50%);z-index:40;background:rgba(5,5,5,.72);border:1px solid rgba(255,255,255,.14);border-radius:12px;padding:10px 8px;backdrop-filter:blur(14px);-webkit-backdrop-filter:blur(14px);max-height:72vh;overflow-y:auto;display:flex;flex-direction:column;gap:2px}
+    .vh-toc-head{font-size:11px;color:#64748b;letter-spacing:2px;padding:0 10px 6px;white-space:nowrap}
+    .vh-toc a{font-size:12px;color:#94a3b8;text-decoration:none;padding:5px 10px;border-radius:7px;font-family:Consolas,monospace;white-space:nowrap;transition:.15s}
+    .vh-toc a:hover{background:rgba(255,255,255,.08);color:#fff}
+    .vh-toc a.cur{background:#fff;color:#000;font-weight:600}
+    .vh-toc-all{margin-top:6px;border-top:1px solid rgba(255,255,255,.1);padding-top:8px!important;color:#cbd5e1!important;font-family:inherit!important}
+    @media(max-width:1279px){.vh-toc{display:none}}
     @media(max-width:768px){.vh-hero{height:52vh!important;min-height:360px}}
     </style>
 </head>
@@ -130,6 +137,11 @@
             <div class="vh-cat"></div>
         </div>
     </section>
+    <nav class="vh-toc" aria-label="同系车型速跳">
+        <div class="vh-toc-head">厢式 · 通信</div>
+        <a href="/vehicles/EHJ9400XXYE.html">EHJ9400XXYE</a><a href="/vehicles/EHJ9350XXY.html" class="cur">EHJ9350XXY</a><a href="/vehicles/JDV9180XTX.html">JDV9180XTX</a>
+        <a class="vh-toc-all" href="/models.html">全部 45 款 →</a>
+    </nav>
 <footer class="footer pf-footer">
         <div class="container">
             <div class="footer-bottom">
