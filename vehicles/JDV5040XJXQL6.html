@@ -33,10 +33,13 @@
     .vh-cat{margin-top:12px;font-size:14px} .vh-cat a{color:#e2e8f0;border-bottom:none}
     .vh-toc{position:fixed;right:16px;top:50%;transform:translateY(-50%);z-index:40;background:rgba(5,5,5,.72);border:1px solid rgba(255,255,255,.14);border-radius:12px;padding:10px 8px;backdrop-filter:blur(14px);-webkit-backdrop-filter:blur(14px);max-height:72vh;overflow-y:auto;display:flex;flex-direction:column;gap:2px}
     .vh-toc-head{font-size:11px;color:#64748b;letter-spacing:2px;padding:0 10px 6px;white-space:nowrap}
-    .vh-toc a{font-size:12px;color:#94a3b8;text-decoration:none;padding:5px 10px;border-radius:7px;font-family:Consolas,monospace;white-space:nowrap;transition:.15s}
-    .vh-toc a:hover{background:rgba(255,255,255,.08);color:#fff}
-    .vh-toc a.cur{background:#fff;color:#000;font-weight:600}
-    .vh-toc-all{margin-top:6px;border-top:1px solid rgba(255,255,255,.1);padding-top:8px!important;color:#cbd5e1!important;font-family:inherit!important}
+    .vh-toc a{display:flex;flex-direction:column;gap:1px;text-decoration:none;padding:6px 10px;border-radius:7px;white-space:nowrap;transition:.15s}
+    .vh-toc .t-name{font-size:12.5px;color:#cbd5e1}
+    .vh-toc .t-code{font-size:10.5px;color:#64748b;font-family:Consolas,monospace;letter-spacing:.5px}
+    .vh-toc a:hover{background:rgba(255,255,255,.08)} .vh-toc a:hover .t-name{color:#fff}
+    .vh-toc a.cur{background:#fff} .vh-toc a.cur .t-name{color:#000;font-weight:600} .vh-toc a.cur .t-code{color:#475569}
+    .vh-toc-all{margin-top:6px;border-top:1px solid rgba(255,255,255,.1);padding-top:8px!important}
+    .vh-toc-all .t-name{color:#cbd5e1}
     @media(max-width:1279px){.vh-toc{display:none}}
     @media(max-width:768px){.vh-hero{height:52vh!important;min-height:360px}}
     </style>
@@ -131,8 +134,8 @@
     </section>
     <nav class="vh-toc" aria-label="同系车型速跳">
         <div class="vh-toc-head">专用车系列</div>
-        <a href="/vehicles/JDV5040JGKZZ6.html">JDV5040JGKZZ6</a><a href="/vehicles/JDV5040XJXQL6.html" class="cur">JDV5040XJXQL6</a><a href="/vehicles/JDV5041XJXFT6.html">JDV5041XJXFT6</a><a href="/vehicles/JDV5030XXHQL6.html">JDV5030XXHQL6</a><a href="/vehicles/JDV5030XZH.html">JDV5030XZH</a><a href="/vehicles/JDV5030ZXXSC.html">JDV5030ZXXSC</a>
-        <a class="vh-toc-all" href="/models.html">全部 45 款 →</a>
+        <a href="/vehicles/JDV5040JGKZZ6.html"><span class="t-name">高空作业车</span><span class="t-code">JDV5040JGKZZ6</span></a><a href="/vehicles/JDV5040XJXQL6.html" class="cur"><span class="t-name">抽油机检修车</span><span class="t-code">JDV5040XJXQL6</span></a><a href="/vehicles/JDV5041XJXFT6.html"><span class="t-name">抽油机检修车</span><span class="t-code">JDV5041XJXFT6</span></a><a href="/vehicles/JDV5030XXHQL6.html"><span class="t-name">救险车</span><span class="t-code">JDV5030XXHQL6</span></a><a href="/vehicles/JDV5030XZH.html"><span class="t-name">指挥车</span><span class="t-code">JDV5030XZH</span></a><a href="/vehicles/JDV5030ZXXSC.html"><span class="t-name">车厢可卸式垃圾车</span><span class="t-code">JDV5030ZXXSC</span></a>
+        <a class="vh-toc-all" href="/models.html"><span class="t-name">全部 45 款 →</span></a>
     </nav>
 <footer class="footer pf-footer">
         <div class="container">
