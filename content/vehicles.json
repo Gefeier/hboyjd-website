@@ -1,0 +1,85 @@
+{
+  "_meta": {
+    "purpose": "产品详情页公告参数的唯一数据源存档。详情页 pf-spec-grid 的「工信部公告参数」节以本文件为准,改参数先改这里再同步页面。",
+    "source": "技术部钉盘《定型车型库/公告车型信息》公告页截图(豆包 Seed 2.0 Pro 提取) + 王力汽车网公告库(JDV5310JSQS1)",
+    "updated": "2026-07-11",
+    "pending": [
+      "EHJ9400LB 栏板半挂车 — product-flatbed.html 在用,公告文件在钉钉群文件(陈诚/马亚君),部门盘 API 够不着,待技术部提供",
+      "EHJ9400ZHX 自卸半挂车 — product-dump.html 在用(页面现写 EHJ9400ZH,疑漏 X,待公告核对),同上",
+      "EHJ9400CCY 仓栅式运输半挂车 — product-fence.html 在用,同上"
+    ]
+  },
+  "brands": {
+    "楚源牌": "湖北欧阳华俊机械设备有限公司(EHJ 系)",
+    "襄汽牌": "湖北欧阳聚德汽车有限公司(JDV 系)"
+  },
+  "pages": {
+    "product-lowbed.html": ["EHJ9400TDP", "JDV9380TDP", "JDV9382TDP"],
+    "product-skeleton.html": ["EHJ9400TJZE", "EHJ9350TJZE", "JDV9390TJZE"],
+    "product-crane.html": ["JDV5310JSQS1"],
+    "product-flatbed.html": [],
+    "product-dump.html": [],
+    "product-fence.html": []
+  },
+  "models": {
+    "EHJ9400TDP": {
+      "brand": "楚源牌", "name": "低平板半挂车",
+      "total_mass_kg": "40000", "rated_mass_kg": "33000,33300,33600", "curb_mass_kg": "7000,6700,6400",
+      "dimensions_mm": "13750,13740,13000,12990,12500,12000×3000,2800×1510,1550,1600,1650,1700,1750,1800,2900,3000,3100,3300",
+      "approach_departure_angle": "-/19,-/18,-/17,-/16",
+      "rear_overhang_mm": "2080,2280,2180,1880",
+      "axle_count": 3, "wheelbase_mm": "7300+1310+1310,7100+1310+1310,6900+1310+1310,6700+1310+1310",
+      "tire_count": 12, "tire_spec": "8.25R20 16PR,8.25-20 16PR",
+      "spring_leaves": "3,4,7,8,10", "axle_load_kg": "24000(三轴组)",
+      "notes": "仅运输不可拆卸物体;货台空载离地 950-1150mm;选装爬梯时高 2900-3300;侧后防护 Q235B;ABS 广州瑞立科密 CM2XL-4S/2M"
+    },
+    "JDV9380TDP": {
+      "brand": "襄汽牌", "name": "低平板半挂车",
+      "total_mass_kg": "38000", "curb_mass_kg": "8350,8000,7800,7600",
+      "axle_count": 3, "wheelbase_mm": "9000+1150+1150,8600+1150+1150,8500+1150+1150,8400+1150+1150"
+    },
+    "JDV9382TDP": {
+      "brand": "襄汽牌", "name": "低平板半挂车",
+      "total_mass_kg": "38000", "curb_mass_kg": "7580,7300,7100,6900",
+      "axle_count": 3, "wheelbase_mm": "6650+1150+1150,6450+1150+1150,6350+1150+1150,6250+1150+1150"
+    },
+    "EHJ9400TJZE": {
+      "brand": "楚源牌", "name": "集装箱运输半挂车",
+      "total_mass_kg": "40000", "rated_mass_kg": "34200,34500,34700", "curb_mass_kg": "5800,5500,5300",
+      "dimensions_mm": "13950×2550,2500,2480×1650,1600,1550,1500",
+      "axle_count": 3, "wheelbase_mm": "7660+1310+1310",
+      "tire_count": 12, "tire_spec": "11.00R20 12PR,12R22.5 12PR,8.25R20 16PR,275/70R22.5 16PR",
+      "spring_leaves": "3,4,7,8,10,12,13", "axle_load_kg": "24000(三轴组)",
+      "notes": "运输 45 英尺 1EE 型集装箱;侧后防护 Q345;后防离地 450mm;ABS 广州瑞立科密"
+    },
+    "EHJ9350TJZE": {
+      "brand": "楚源牌", "name": "集装箱运输半挂车",
+      "total_mass_kg": "35000", "rated_mass_kg": "30500,30700,30900", "curb_mass_kg": "4500,4300,4100",
+      "dimensions_mm": "13950×2480,2500,2550×1450-1750",
+      "axle_count": 2, "wheelbase_mm": "8200+1310,8400+1310,8600+1310,8800+1310,9000+1310",
+      "tire_count": 8, "tire_spec": "11R22.5 14PR,12R22.5 12PR,275/70R22.5 16PR",
+      "spring_leaves": "3,4,7,8,10,12,13", "axle_load_kg": "18000(二轴组)",
+      "notes": "小鹅颈结构,运 45 英尺 1EE 型集装箱;侧后防护 Q345,后防护截面 140×55mm、离地 410mm;ABS 广州瑞立科密"
+    },
+    "JDV9390TJZE": {
+      "brand": "襄汽牌", "name": "集装箱运输半挂车",
+      "total_mass_kg": "38800", "rated_mass_kg": "34000,33800,33530", "curb_mass_kg": "4800,5000,5270",
+      "dimensions_mm": "13950×2550,2500,2480×1450-1750",
+      "axle_count": 3, "wheelbase_mm": "7280+1310+1310,7400+1310+1310,7600+1310+1310,7800+1310+1310,8000+1310+1310,7630+1310+1310",
+      "tire_count": 12, "tire_spec": "11.00R20 12PR,12R22.5 12PR",
+      "axle_load_kg": "24000(三轴组)",
+      "notes": "运输 45 英尺 1EE 型集装箱;侧/后防护 Q235B,离地 440mm;ABS 广州瑞立科密"
+    },
+    "JDV5310JSQS1": {
+      "brand": "襄汽牌", "name": "随车起重运输车", "batch": 385,
+      "chassis": "SX1319MC6Z2",
+      "total_mass_kg": "31000", "rated_mass_kg": "10870,11270,10170", "curb_mass_kg": "20000,19600,20700",
+      "dimensions_mm": "12000×2550,2500×3980,3860,3750,3650,3930",
+      "tire_spec": "11.00R20 18PR,12.00R20 18PR",
+      "crane": "SQS350,最大起升载荷及质量 14000,5500 (kg)",
+      "engines": "WP9H350E62,WP10H375E62,WP10H400E62,WP9H336E62,WP9H310E62,WP8.350E61,WP7.300E61",
+      "speed_limit": "89km/h(随底盘选装限速装置)",
+      "notes": "后防护离地 495mm,截面 120×60mm;ABS 西安正昌 ZQFB-V / 广州科密 CM4XL-4S/4K;已装卫星定位行驶记录仪"
+    }
+  }
+}
