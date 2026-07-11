@@ -36,7 +36,7 @@ class Particle {
             this.twinkleSpeed = Math.random() * 0.04 + 0.005;
             this.twinklePhase = Math.random() * Math.PI * 2;
             var colorRand = Math.random();
-            this.color = colorRand < 0.35 ? `rgba(200, 225, 255, ALPHA)`  // 冷白星
+            this.color = colorRand < 0.35 ? `rgba(240, 210, 140, ALPHA)`  // 冷白星
                        : colorRand < 0.65 ? `rgba(120, 175, 255, ALPHA)`  // 淡蓝星
                        : colorRand < 0.85 ? `rgba(60, 130, 245, ALPHA)`   // 中蓝星
                        : `rgba(30, 90, 220, ALPHA)`;                       // 深蓝星
@@ -51,9 +51,9 @@ class Particle {
             this.speedY = (Math.random() - 0.5) * 0.4;
             this.opacity = Math.random() * 0.4 + 0.1;
             var cr = Math.random();
-            this.color = cr < 0.5 ? `rgba(60, 140, 255, ALPHA)`
+            this.color = cr < 0.5 ? `rgba(212, 168, 83, ALPHA)`
                        : cr < 0.8 ? `rgba(30, 100, 235, ALPHA)`
-                       : `rgba(100, 180, 255, ALPHA)`;
+                       : `rgba(180, 140, 60, ALPHA)`;
             this.life = Math.random() * 200 + 100;
             this.age = 0;
         }
@@ -149,7 +149,7 @@ document.addEventListener('mousemove', function(e) {
             speedY: (Math.random() - 0.5) * 2 - 0.5,
             life: 40 + Math.random() * 30,
             age: 0,
-            color: Math.random() > 0.5 ? [80, 160, 255] : [40, 120, 245]
+            color: Math.random() > 0.5 ? [212, 168, 83] : [180, 140, 60]
         });
     }
     // 限制总数
@@ -204,7 +204,7 @@ function spawnShootingStar() {
         width: Math.random() * 1.5 + 0.5,
         life: 100 + Math.random() * 60,
         age: 0,
-        color: Math.random() > 0.5 ? [100, 170, 255] : [150, 200, 255]
+        color: Math.random() > 0.5 ? [212, 168, 83] : [240, 210, 140]
     });
 }
 
