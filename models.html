@@ -10,40 +10,44 @@
     <link rel="stylesheet" href="about.css?v=20260615a">
     <link rel="stylesheet" href="product-detail.css?v=20260616g">
     <style>
-    .navbar{background:rgba(6,12,24,.94)!important;backdrop-filter:blur(12px)}
+    .navbar{background:rgba(5,8,16,.94)!important;backdrop-filter:blur(12px)}
+    body{background:#07070b}
     .mdb-wrap{max-width:1280px;margin:0 auto;padding:140px 24px 80px}
     .mdb-head{text-align:center;margin-bottom:48px}
-    .mdb-head .section-tag{letter-spacing:4px}
+    .mdb-head .section-tag{letter-spacing:4px;color:#94a3b8}
+    .mdb-head .section-title{color:#f8fafc!important}
+    .mdb-head .section-desc{color:#94a3b8}
     .mdb-layout{display:grid;grid-template-columns:230px minmax(0,1fr);gap:40px;align-items:start}
-    .mdb-side{position:sticky;top:96px;display:flex;flex-direction:column;gap:4px;background:#fff;border:1px solid #e2e8f0;border-radius:14px;padding:10px}
-    .mdb-side a{display:flex;justify-content:space-between;align-items:center;padding:10px 14px;border-radius:9px;font-size:14.5px;color:#334155;text-decoration:none;transition:.15s}
-    .mdb-side a:hover{background:#f1f5f9;color:#0f172a}
-    .mdb-side a.active{background:#0f172a;color:#fff}
+    .mdb-side{position:sticky;top:96px;display:flex;flex-direction:column;gap:4px;background:rgba(255,255,255,.035);border:1px solid rgba(255,255,255,.08);border-radius:14px;padding:10px}
+    .mdb-side a{display:flex;justify-content:space-between;align-items:center;padding:10px 14px;border-radius:9px;font-size:14.5px;color:#cbd5e1;text-decoration:none;transition:.15s}
+    .mdb-side a:hover{background:rgba(255,255,255,.07);color:#fff}
+    .mdb-side a.active{background:#c8102e;color:#fff}
     .mdb-count{font-size:12px;opacity:.55}
     .mdb-group{scroll-margin-top:96px;margin-bottom:44px}
-    .mdb-group-head{display:flex;justify-content:space-between;align-items:center;margin-bottom:14px;flex-wrap:wrap;gap:10px}
-    .mdb-group-head h2{font-size:22px;color:#0f172a;margin:0}
-    .mdb-group-sub{font-size:13px;color:#64748b;font-weight:400;margin-left:12px}
-    .mdb-card{display:flex;justify-content:space-between;align-items:center;gap:18px;background:#fff;border:1px solid #e2e8f0;border-radius:12px;padding:16px 20px;margin-bottom:10px;transition:.15s}
-    .mdb-card:hover{border-color:#94a3b8;box-shadow:0 4px 18px rgba(15,23,42,.06)}
-    .mdb-card h4{margin:0 0 8px;font-size:16.5px;color:#0f172a;display:flex;align-items:baseline;flex-wrap:wrap;gap:8px}
-    .mdb-name{font-size:14px;color:#475569;font-weight:500}
-    .mdb-brand{font-size:12px;color:#94a3b8;font-weight:400;border:1px solid #e2e8f0;border-radius:20px;padding:1px 9px}
+    .mdb-group-head{display:flex;justify-content:space-between;align-items:center;margin:48px 0 12px;flex-wrap:wrap;gap:10px}
+    .mdb-group-head h2{font-size:22px;color:#f1f5f9;margin:0}
+    .mdb-group-sub{font-size:13px;color:#94a3b8;font-weight:400;margin-left:12px}
+    .mdb-card{display:flex;justify-content:space-between;align-items:center;gap:18px;background:rgba(255,255,255,.035);border:1px solid rgba(255,255,255,.08);border-radius:12px;padding:16px 20px;margin-bottom:10px;transition:.15s}
+    .mdb-card:hover{border-color:rgba(255,255,255,.25);box-shadow:0 4px 22px rgba(0,0,0,.5)}
+    .mdb-card h4{margin:0 0 8px;font-size:16.5px;color:#f8fafc;display:flex;align-items:baseline;flex-wrap:wrap;gap:8px}
+    .mdb-name{font-size:14px;color:#cbd5e1;font-weight:500}
+    .mdb-brand{font-size:12px;color:#94a3b8;font-weight:400;border:1px solid rgba(255,255,255,.14);border-radius:20px;padding:1px 9px}
     .mdb-chips{display:flex;flex-wrap:wrap;gap:6px}
-    .mdb-chip{font-size:12.5px;color:#334155;background:#f8fafc;border:1px solid #eef2f7;border-radius:7px;padding:3px 9px}
-    .mdb-chip i{font-style:normal;color:#94a3b8;margin-right:5px}
+    .mdb-chip{font-size:12.5px;color:#cbd5e1;background:rgba(255,255,255,.05);border:1px solid rgba(255,255,255,.07);border-radius:7px;padding:3px 9px}
+    .mdb-chip i{font-style:normal;color:#64748b;margin-right:5px}
     .mdb-actions{display:flex;flex-direction:column;gap:8px;flex-shrink:0}
-    .mdb-btn{font-size:13px;text-decoration:none;text-align:center;padding:7px 16px;border-radius:8px;border:1px solid #cbd5e1;color:#0f172a;white-space:nowrap;transition:.15s}
-    .mdb-btn:hover{border-color:#0f172a}
-    .mdb-btn-primary{background:#0f172a;color:#fff;border-color:#0f172a}
+    .mdb-btn{font-size:13px;text-decoration:none;text-align:center;padding:7px 16px;border-radius:8px;border:1px solid rgba(255,255,255,.25);color:#e2e8f0;white-space:nowrap;transition:.15s}
+    .mdb-btn:hover{border-color:#fff;color:#fff}
+    .mdb-btn-primary{background:#f8fafc;color:#0b0b10;border-color:#f8fafc}
     .mdb-btn-primary:hover{opacity:.85}
     .mdb-btn-quote{background:#c8102e;color:#fff;border-color:#c8102e}
     .mdb-btn-quote:hover{opacity:.85}
     .mdb-note{margin-top:30px;font-size:13px;color:#64748b;line-height:1.8}
+    .mdb-note a{color:#94a3b8}
     @media (max-width:1023px){
       .mdb-wrap{padding-top:110px}
       .mdb-layout{display:block}
-      .mdb-side{position:sticky;top:60px;z-index:20;flex-direction:row;overflow-x:auto;gap:6px;margin-bottom:20px;padding:8px;-webkit-overflow-scrolling:touch}
+      .mdb-side{position:sticky;top:60px;z-index:20;flex-direction:row;overflow-x:auto;gap:6px;margin-bottom:20px;padding:8px;-webkit-overflow-scrolling:touch;background:#0b0b12}
       .mdb-side a{flex-shrink:0;padding:8px 13px}
       .mdb-card{flex-direction:column;align-items:stretch}
       .mdb-actions{flex-direction:row}
@@ -71,7 +75,7 @@
     <div class="mdb-wrap">
         <div class="mdb-head">
             <span class="section-tag">PRODUCT CENTER · TYPE APPROVAL DATABASE</span>
-            <h1 class="section-title" style="font-size:34px;color:#0f172a">产品中心 · 公告车型总库</h1>
+            <h1 class="section-title" style="font-size:34px">产品中心 · 公告车型总库</h1>
             <p class="section-desc">襄汽牌 · 楚源牌 全系 45 款工信部公告车型,参数为公告口径,全系支持定制选装</p>
         </div>
         <div class="mdb-layout">
