@@ -196,10 +196,17 @@ body {
     border-top: 1px solid #111 !important;
 }
 
-/* ====== Hero 顶部面包屑(返回出口,别让访客进得来出不去) ====== */
-.vh-crumb-top { position: absolute; top: 84px; left: 0; right: 0; z-index: 5; }
-.vh-crumb-top .container { font-size: 13px; color: #94a3b8; letter-spacing: 1px; }
-.vh-crumb-top a { color: #cbd5e1; text-decoration: none; transition: .2s; padding: 6px 0; }
-.vh-crumb-top a:hover { color: #fff; }
-.vh-crumb-sep { margin: 0 8px; color: #64748b; }
-@media (max-width: 768px) { .vh-crumb-top { top: 70px; } }
+/* ====== Hero 左上角返回胶囊(返回出口,别让访客进得来出不去) ====== */
+.vh-crumb-top { position: absolute; top: 84px; left: 24px; z-index: 5; display: flex; gap: 8px; }
+.vh-crumb-top .container { all: unset; display: flex; gap: 8px; }
+.vh-crumb-top a {
+    display: inline-flex; align-items: center;
+    font-size: 13px; color: #fff; text-decoration: none; letter-spacing: 1px;
+    background: rgba(5,5,5,.55); border: 1px solid rgba(255,255,255,.22);
+    border-radius: 999px; padding: 7px 16px;
+    backdrop-filter: blur(10px); -webkit-backdrop-filter: blur(10px);
+    transition: .2s;
+}
+.vh-crumb-top a:hover { background: rgba(255,255,255,.92); color: #000; border-color: #fff; }
+.vh-crumb-sep { display: none; }
+@media (max-width: 768px) { .vh-crumb-top { top: 70px; left: 14px; } .vh-crumb-top a { padding: 6px 13px; font-size: 12.5px; } }
