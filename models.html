@@ -10,131 +10,57 @@
     <link rel="stylesheet" href="about.css?v=20260615a">
     <link rel="stylesheet" href="product-detail.css?v=20260616g">
     <style>
-    /* Premium Aze Design - Deep Space Blue Edition (Simplified) */
-    @import url('https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700&display=swap');
-    
-    html, body { overflow: clip visible; scroll-behavior: smooth; }
-    body { 
-        background: #060B14; 
-        background-image: 
-            radial-gradient(circle at 15% 50%, rgba(0, 195, 255, 0.05), transparent 25%),
-            radial-gradient(circle at 85% 30%, rgba(0, 85, 255, 0.05), transparent 25%);
-        color: #e2e8f0; 
-        font-family: 'Outfit', -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
-    }
-    
-    .navbar { background: rgba(6, 11, 20, 0.85) !important; backdrop-filter: blur(24px); border-bottom: 1px solid rgba(0, 195, 255, 0.15) !important; box-shadow: 0 4px 30px rgba(0,0,0,0.3); }
-    .nav-links a { color: rgba(255,255,255,.7) !important; transition: all 0.3s ease; font-weight: 500; }
-    .nav-links a:hover, .nav-links a.active { color: #00C3FF !important; text-shadow: 0 0 10px rgba(0, 195, 255, 0.4); }
-    
-    .mdb-wrap { max-width: 1400px; margin: 0 auto; padding: 150px 30px 100px; }
-    
-    .mdb-head { text-align: center; margin-bottom: 70px; position: relative; }
-    .mdb-head::after {
-        content: ''; position: absolute; bottom: -25px; left: 50%; transform: translateX(-50%);
-        width: 60px; height: 3px; background: linear-gradient(90deg, transparent, #00C3FF, transparent);
-    }
-    .mdb-head .section-tag { letter-spacing: 8px; color: #00C3FF; font-weight: 600; text-transform: uppercase; font-size: 13px; text-shadow: 0 0 10px rgba(0,195,255,0.3); display: inline-block; margin-bottom: 15px; }
-    .mdb-head .section-title { color: #fff !important; font-weight: 700; letter-spacing: 2px; font-size: 40px !important; margin-bottom: 16px; background: linear-gradient(135deg, #FFF 0%, #E2E8F0 100%); -webkit-background-clip: text; -webkit-text-fill-color: transparent; }
-    .mdb-head .section-desc { color: #94A3B8; font-weight: 300; font-size: 16px; max-width: 600px; margin: 0 auto; line-height: 1.6; }
-    
-    .mdb-layout { display: grid; grid-template-columns: 260px minmax(0,1fr); gap: 48px; align-items: start; }
-    
-    .mdb-side { position: sticky; top: 100px; display: flex; flex-direction: column; gap: 8px; background: rgba(255,255,255,.01); border: 1px solid rgba(0, 195, 255, 0.1); border-radius: 16px; padding: 16px; backdrop-filter: blur(20px); box-shadow: inset 0 0 20px rgba(255,255,255,0.01), 0 8px 32px rgba(0,0,0,0.2); max-height: calc(100vh - 120px); overflow-y: auto; scrollbar-width: thin; scrollbar-color: rgba(0,195,255,0.3) transparent; }
-    .mdb-side::-webkit-scrollbar { width: 4px; }
-    .mdb-side::-webkit-scrollbar-thumb { background: rgba(0,195,255,0.3); border-radius: 4px; }
-    
-    .mdb-side>a { display: flex; justify-content: space-between; align-items: center; padding: 12px 18px; border-radius: 10px; font-size: 15px; color: #94A3B8; text-decoration: none; transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1); font-weight: 500; position: relative; overflow: hidden; }
-    .mdb-side>a::before { content: ''; position: absolute; left: 0; top: 0; width: 3px; height: 100%; background: #00C3FF; transform: scaleY(0); transition: transform 0.3s ease; transform-origin: center; }
-    .mdb-side>a:hover { background: rgba(0, 195, 255, 0.05); color: #fff; transform: translateX(4px); }
-    .mdb-side>a.active { background: linear-gradient(90deg, rgba(0,195,255,0.15) 0%, transparent 100%); color: #00C3FF; font-weight: 600; }
-    .mdb-side>a.active::before { transform: scaleY(1); }
-    .mdb-side>a::after { content: "▾"; font-size: 12px; color: #64748B; margin-left: 8px; transition: 0.3s ease; }
-    .mdb-side>a.exp::after { transform: rotate(-180deg) translateY(-2px); color: #00C3FF; }
-    .mdb-count { font-size: 11px; opacity: 0.6; margin-left: auto; padding-right: 4px; background: rgba(255,255,255,0.05); padding: 2px 8px; border-radius: 12px; }
-    
-    .mdb-side-ms { display: grid; grid-template-rows: 0fr; transition: grid-template-rows .4s cubic-bezier(.33,1,.4,1); margin: 0; }
-    .mdb-side-ms.open { grid-template-rows: 1fr; margin: 4px 0 8px; }
-    .ms-in { overflow: hidden; min-height: 0; display: flex; flex-direction: column; gap: 2px; }
-    .mdb-side-ms a { display: flex; justify-content: space-between; align-items: baseline; gap: 8px; font-size: 13px; color: #64748B; text-decoration: none; padding: 8px 16px 8px 30px; border-radius: 8px; opacity: 0; transform: translateX(-10px); transition: all 0.3s ease; position: relative; }
-    .mdb-side-ms a::before { content: ''; position: absolute; left: 16px; top: 50%; width: 4px; height: 4px; border-radius: 50%; background: #334155; transform: translateY(-50%); transition: 0.3s; }
-    .mdb-side-ms.open a { opacity: 1; transform: translateX(0); }
-    .mdb-side-ms.open a:nth-child(1){transition-delay:.05s} .mdb-side-ms.open a:nth-child(2){transition-delay:.08s}
-    .mdb-side-ms.open a:nth-child(3){transition-delay:.11s} .mdb-side-ms.open a:nth-child(4){transition-delay:.14s}
-    .mdb-side-ms.open a:nth-child(5){transition-delay:.17s} .mdb-side-ms.open a:nth-child(6){transition-delay:.20s}
-    .mdb-side-ms a:hover { background: rgba(255,255,255,.03); color: #fff; padding-left: 34px; }
-    .mdb-side-ms a:hover::before { background: #00C3FF; box-shadow: 0 0 8px #00C3FF; }
-    .ms-name { color: inherit; transition: color 0.2s; }
-    .ms-code { font-size: 11px; color: #475569; font-family: 'Consolas', monospace; flex-shrink: 0; transition: color 0.2s; }
-    .mdb-side-ms a:hover .ms-code { color: #94A3B8; }
-    
-    .mdb-group { scroll-margin-top: 110px; margin-bottom: 80px; animation: fadeIn 0.8s ease-out forwards; }
-    @keyframes fadeIn { from { opacity: 0; transform: translateY(20px); } to { opacity: 1; transform: translateY(0); } }
-    
-    .mdb-group-head { display: flex; justify-content: space-between; align-items: flex-end; margin-bottom: 24px; padding-bottom: 16px; border-bottom: 1px solid rgba(0,195,255,0.15); position: relative; flex-wrap: wrap; gap: 10px; }
-    .mdb-group-head::after { content: ''; position: absolute; bottom: -1px; left: 0; width: 80px; height: 2px; background: #00C3FF; box-shadow: 0 0 10px rgba(0,195,255,0.5); }
-    .mdb-group-head h2 { font-size: 28px; color: #fff; font-weight: 600; letter-spacing: 1px; margin: 0; display: flex; align-items: center; gap: 16px; }
-    .mdb-group-sub { font-size: 13px; color: #00C3FF; font-weight: 500; letter-spacing: 2px; background: rgba(0,195,255,0.1); padding: 4px 12px; border-radius: 20px; }
-    
-    .mdb-banner { background: linear-gradient(145deg, rgba(255,255,255,0.03) 0%, rgba(0,0,0,0.2) 100%); border: 1px solid rgba(255,255,255,0.05); border-left: 3px solid #00C3FF; border-radius: 12px; padding: 20px 24px; margin-bottom: 28px; backdrop-filter: blur(10px); box-shadow: 0 10px 30px rgba(0,0,0,0.2); }
-    .mdb-banner p { font-size: 14px; line-height: 1.8; color: #94A3B8; font-weight: 300; margin: 0 0 12px; display: flex; align-items: flex-start; gap: 12px; }
-    .mdb-banner p:last-child { margin-bottom: 0; }
-    .mdb-banner i { font-style: normal; font-size: 11px; font-weight: 600; color: #00C3FF; border: 1px solid rgba(0,195,255,0.3); background: rgba(0,195,255,0.05); border-radius: 6px; padding: 3px 10px; white-space: nowrap; letter-spacing: 1px; text-transform: uppercase; flex-shrink: 0; margin-top: 2px; }
-    
-    .mdb-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(280px, 1fr)); gap: 20px; }
-    
-    .mdb-card { position: relative; scroll-margin-top: 110px; border-radius: 12px; overflow: hidden; border: 1px solid rgba(255,255,255,.05); min-height: 140px; display: flex; align-items: flex-end; background: #000; box-shadow: 0 15px 35px rgba(0,0,0,0.3); transition: all 0.4s cubic-bezier(0.25, 0.8, 0.25, 1); cursor: pointer; }
-    .mdb-card::before { content: ''; position: absolute; inset: 0; border-radius: 12px; padding: 1px; background: linear-gradient(135deg, rgba(0,195,255,0.4) 0%, transparent 50%, rgba(0,195,255,0.1) 100%); -webkit-mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0); -webkit-mask-composite: xor; mask-composite: exclude; opacity: 0; transition: opacity 0.4s ease; z-index: 10; pointer-events: none; }
-    .mdb-card:hover { transform: translateY(-4px) scale(1.02); box-shadow: 0 20px 40px rgba(0,0,0,0.5), 0 0 20px rgba(0,195,255,0.15); border-color: rgba(0,195,255,0.3); }
-    .mdb-card:hover::before { opacity: 1; }
-    
-    .mdb-card-bg { position: absolute; inset: 0; background-size: cover; background-position: center; opacity: 0.6; filter: grayscale(10%) contrast(1.1); transition: all 0.7s cubic-bezier(0.33,1,0.4,1); }
-    .mdb-card:hover .mdb-card-bg { opacity: 1; transform: scale(1.1); filter: grayscale(0%) contrast(1.1); }
-    
-    .mdb-card-grad { position: absolute; inset: 0; background: linear-gradient(0deg, rgba(6,11,20,0.95) 0%, rgba(6,11,20,0.4) 60%, transparent 100%); transition: opacity 0.4s; }
-    .mdb-card:hover .mdb-card-grad { background: linear-gradient(0deg, rgba(6,11,20,0.85) 0%, rgba(6,11,20,0.2) 60%, transparent 100%); }
-    
-    .mdb-card-glass { position: relative; width: 100%; padding: 16px 20px; background: rgba(6,11,20,0.4); backdrop-filter: blur(8px); -webkit-backdrop-filter: blur(8px); border-top: 1px solid rgba(255,255,255,.05); transition: transform 0.4s ease, background 0.4s ease, border-color 0.4s ease; }
-    .mdb-card:hover .mdb-card-glass { background: rgba(6,11,20,0.2); border-top-color: rgba(0,195,255,0.2); backdrop-filter: blur(4px); -webkit-backdrop-filter: blur(4px); }
-    
-    .mdb-card h4 { margin: 0 0 4px; font-size: 17px; color: #fff; font-weight: 600; display: flex; align-items: center; gap: 8px; letter-spacing: 0.5px; text-shadow: 0 2px 4px rgba(0,0,0,0.8); }
-    .mdb-brand { font-size: 10px; color: #060B14; background: #00C3FF; font-weight: 700; border-radius: 4px; padding: 2px 6px; letter-spacing: 1px; text-transform: uppercase; box-shadow: 0 2px 8px rgba(0,195,255,0.3); margin-left: auto; }
-    
-    .mdb-code { font-size: 12px; color: #E2E8F0; font-family: 'Consolas', monospace; letter-spacing: 1px; margin: 0; text-shadow: 0 2px 4px rgba(0,0,0,0.8); }
-    
-    /* HIDE COMPLEX DETAILS AS REQUESTED */
-    .mdb-chips { display: none !important; }
-    .mdb-actions { display: block !important; } /* We need the link to work */
-    .mdb-actions .mdb-btn-quote { display: none !important; } /* Hide quote button */
-    .mdb-actions .mdb-btn:first-child { 
-        position: absolute; inset: 0; opacity: 0; z-index: 20; width: 100%; height: 100%; margin: 0; padding: 0; border: none;
-    } /* Makes the entire card clickable and navigate to the detail page */
-    
-    .mdb-note { margin-top: 48px; font-size: 13px; color: #64748B; line-height: 1.8; font-weight: 300; text-align: center; padding-top: 24px; border-top: 1px solid rgba(255,255,255,0.05); }
-    .mdb-note a { color: #00C3FF; text-decoration: none; transition: 0.3s; }
-    .mdb-note a:hover { color: #fff; text-shadow: 0 0 10px #00C3FF; }
-    
+    /* 浅色主基调(对齐首页 navy/blue 体系);产品详情页保持暗黑,总库承担导览职能 */
+    .navbar{background:rgba(10,22,40,.96)!important;backdrop-filter:blur(12px)}
+    body{background:#f7f9fc}
+    .mdb-wrap{max-width:1280px;margin:0 auto;padding:140px 24px 80px}
+    .mdb-head{text-align:center;margin-bottom:44px}
+    .mdb-head .section-tag{letter-spacing:4px;color:var(--blue-500);font-weight:600}
+    .mdb-head .section-title{color:var(--navy-900)!important}
+    .mdb-head .section-desc{color:var(--gray-500)}
+    .mdb-layout{display:grid;grid-template-columns:230px minmax(0,1fr);gap:40px;align-items:start}
+    .mdb-side{position:sticky;top:96px;display:flex;flex-direction:column;gap:4px;background:#fff;border:1px solid var(--gray-200);border-radius:14px;padding:10px;box-shadow:var(--shadow)}
+    .mdb-side a{display:flex;justify-content:space-between;align-items:center;padding:10px 14px;border-radius:9px;font-size:14.5px;color:var(--gray-700);text-decoration:none;transition:.15s}
+    .mdb-side a:hover{background:var(--gray-100);color:var(--navy-900)}
+    .mdb-side a.active{background:var(--blue-500);color:#fff}
+    .mdb-count{font-size:12px;opacity:.55}
+    .mdb-group{position:relative;scroll-margin-top:96px;margin-bottom:48px;border-radius:20px;padding:28px 32px;background-size:cover;background-position:center;box-shadow:0 12px 36px rgba(0,0,0,0.06);overflow:hidden;border:1px solid rgba(255,255,255,0.8)}
+    .mdb-group::before{content:'';position:absolute;inset:0;background:rgba(247, 249, 252, 0.75);backdrop-filter:blur(24px);-webkit-backdrop-filter:blur(24px);z-index:0}
+    .mdb-group > *{position:relative;z-index:1}
+    .mdb-group-head{display:flex;justify-content:space-between;align-items:center;margin:0 0 20px;flex-wrap:wrap;gap:10px;border-bottom:2px solid rgba(15,23,42,0.1);padding-bottom:12px}
+    .mdb-group-head h2{font-size:24px;color:var(--navy-900);margin:0;font-weight:700}
+    .mdb-group-sub{font-size:13px;color:var(--blue-600);font-weight:600;margin-left:12px;background:rgba(0,195,255,0.1);padding:4px 10px;border-radius:8px}
+    .mdb-banner{background:rgba(255,255,255,0.6);border:1px solid rgba(255,255,255,0.8);border-radius:12px;padding:20px;margin-bottom:24px;box-shadow:0 4px 12px rgba(0,0,0,0.02)}
+    .mdb-banner-txt p{font-size:14px;line-height:1.75;color:var(--gray-700);margin:0 0 10px}
+    .mdb-banner-txt p:last-child{margin-bottom:0}
+    .mdb-banner-txt i{font-style:normal;font-size:12px;font-weight:600;color:var(--blue-600);border:1px solid rgba(0,195,255,0.3);background:rgba(0,195,255,0.05);border-radius:6px;padding:2px 8px;margin-right:10px;white-space:nowrap}
+    .mdb-card{display:flex;justify-content:space-between;align-items:center;gap:18px;background:rgba(255,255,255,0.85);backdrop-filter:blur(8px);border:1px solid rgba(255,255,255,0.9);border-radius:12px;padding:18px 24px;margin-bottom:12px;transition:.25s cubic-bezier(0.4, 0, 0.2, 1);box-shadow:0 4px 15px rgba(0,0,0,0.03)}
+    .mdb-card:hover{border-color:var(--blue-300);box-shadow:var(--shadow-lg)}
+    .mdb-card h4{margin:0 0 8px;font-size:16.5px;color:var(--navy-900);display:flex;align-items:baseline;flex-wrap:wrap;gap:8px}
+    .mdb-name{font-size:14px;color:var(--gray-700);font-weight:500}
+    .mdb-brand{font-size:12px;color:var(--gray-500);font-weight:400;border:1px solid var(--gray-300);border-radius:20px;padding:1px 9px}
+    .mdb-chips{display:flex;flex-wrap:wrap;gap:6px}
+    .mdb-chip{font-size:12.5px;color:var(--gray-700);background:var(--gray-50);border:1px solid var(--gray-200);border-radius:7px;padding:3px 9px}
+    .mdb-chip i{font-style:normal;color:var(--gray-500);margin-right:5px}
+    .mdb-actions{display:flex;flex-direction:column;gap:8px;flex-shrink:0}
+    .mdb-btn{font-size:13px;text-decoration:none;text-align:center;padding:7px 16px;border-radius:8px;border:1px solid var(--gray-300);color:var(--gray-700);white-space:nowrap;transition:.15s;background:#fff}
+    .mdb-btn:hover{border-color:var(--blue-500);color:var(--blue-500)}
+    .mdb-btn-primary{background:var(--navy-900);color:#fff;border-color:var(--navy-900)}
+    .mdb-btn-primary:hover{opacity:.88;color:#fff;border-color:var(--navy-900)}
+    .mdb-btn-quote{background:var(--blue-500);color:#fff;border-color:var(--blue-500)}
+    .mdb-btn-quote:hover{opacity:.88;color:#fff;border-color:var(--blue-500)}
+    .mdb-note{margin-top:30px;font-size:13px;color:var(--gray-500);line-height:1.8}
+    .mdb-note a{color:var(--blue-500)}
     @media (max-width:1023px){
-      .mdb-wrap{padding-top:106px;padding-left:16px;padding-right:16px}
-      .mdb-head{margin-bottom:40px}
-      .mdb-head .section-title{font-size: 28px!important;}
+      .mdb-wrap{padding-top:110px}
       .mdb-layout{display:block}
-      .mdb-side{position:sticky;top:65px;z-index:20;flex-direction:row;overflow-x:auto;overflow-y:hidden;gap:8px;margin-bottom:24px;padding:12px;-webkit-overflow-scrolling:touch;background: rgba(6,11,20,0.95); backdrop-filter:blur(20px); border-radius: 12px; border: 1px solid rgba(0,195,255,0.2); box-shadow: 0 10px 30px rgba(0,0,0,0.5); max-height:none; scrollbar-width:none}
-      .mdb-side::-webkit-scrollbar{display:none}
-      .mdb-side>a{flex-shrink:0;padding:10px 16px;font-size:14px;background: rgba(255,255,255,0.03); border-radius: 8px;}
-      .mdb-side>a::before{content:none}
-      .mdb-side>a.active{background: rgba(0,195,255,0.15); border: 1px solid rgba(0,195,255,0.3);}
-      .mdb-side>a::after{content:none}
-      .mdb-side-ms{display:none}
-      .mdb-group{scroll-margin-top:140px;margin-bottom:48px}
-      .mdb-group-head{margin-bottom: 16px; margin-top: 34px;}
-      .mdb-group-head h2{font-size:22px}
-      .mdb-banner{padding:16px 18px}
-      .mdb-banner p{font-size:13px}
-      .mdb-grid{grid-template-columns:repeat(2, 1fr); gap:12px}
-      .mdb-card{min-height:120px;scroll-margin-top:140px}
-      .mdb-card-glass{padding: 12px}
-      .mdb-card h4{font-size: 15px;}
+      .mdb-side{position:sticky;top:60px;z-index:20;flex-direction:row;overflow-x:auto;gap:6px;margin-bottom:20px;padding:8px;-webkit-overflow-scrolling:touch}
+      .mdb-side a{flex-shrink:0;padding:8px 13px}
+      .mdb-group{padding:20px 16px; margin-bottom: 32px;}
+      .mdb-banner{padding:16px}
+      .mdb-card{flex-direction:column;align-items:stretch;padding:16px}
+      .mdb-actions{flex-direction:row}
+      .mdb-actions .mdb-btn{flex:1}
     }
     </style>
 </head>
@@ -163,716 +89,591 @@
         </div>
         <div class="mdb-layout">
             <aside class="mdb-side" id="mdbSide">
-                <a href="#cat-flatbed" data-cat="cat-flatbed">平板 · 栏板<span class="mdb-count">5</span></a><div class="mdb-side-ms"><div class="ms-in"><a href="#m-EHJ9400TPB"><span class="ms-name">平板运输半挂车</span><span class="ms-code">EHJ9400TPB</span></a><a href="#m-EHJ9400TPBE"><span class="ms-name">平板运输半挂车</span><span class="ms-code">EHJ9400TPBE</span></a><a href="#m-EHJ9401TPB"><span class="ms-name">平板运输半挂车</span><span class="ms-code">EHJ9401TPB</span></a><a href="#m-EHJ9400LB"><span class="ms-name">栏板半挂车</span><span class="ms-code">EHJ9400LB</span></a><a href="#m-EHJ9400LBE"><span class="ms-name">栏板半挂车</span><span class="ms-code">EHJ9400LBE</span></a></div></div><a href="#cat-dump" data-cat="cat-dump">自卸<span class="mdb-count">9</span></a><div class="mdb-side-ms"><div class="ms-in"><a href="#m-EHJ9400ZHX"><span class="ms-name">自卸半挂车</span><span class="ms-code">EHJ9400ZHX</span></a><a href="#m-EHJ9401ZHX"><span class="ms-name">自卸半挂车</span><span class="ms-code">EHJ9401ZHX</span></a><a href="#m-EHJ9402ZHX"><span class="ms-name">自卸半挂车</span><span class="ms-code">EHJ9402ZHX</span></a><a href="#m-EHJ9400Z"><span class="ms-name">自卸半挂车</span><span class="ms-code">EHJ9400Z</span></a><a href="#m-EHJ9401Z"><span class="ms-name">自卸半挂车</span><span class="ms-code">EHJ9401Z</span></a><a href="#m-EHJ9400ZZXP"><span class="ms-name">平板自卸半挂车</span><span class="ms-code">EHJ9400ZZXP</span></a><a href="#m-EHJ9401ZZXP"><span class="ms-name">平板自卸半挂车</span><span class="ms-code">EHJ9401ZZXP</span></a><a href="#m-JDV9400Z"><span class="ms-name">自卸半挂车</span><span class="ms-code">JDV9400Z</span></a><a href="#m-JDV9400ZHX"><span class="ms-name">自卸半挂车</span><span class="ms-code">JDV9400ZHX</span></a></div></div><a href="#cat-fence" data-cat="cat-fence">仓栅<span class="mdb-count">3</span></a><div class="mdb-side-ms"><div class="ms-in"><a href="#m-EHJ9400CCY"><span class="ms-name">仓栅式运输半挂车</span><span class="ms-code">EHJ9400CCY</span></a><a href="#m-EHJ9400CCYE"><span class="ms-name">仓栅式运输半挂车</span><span class="ms-code">EHJ9400CCYE</span></a><a href="#m-EHJ9400CCYEQ"><span class="ms-name">仓栅式运输半挂车</span><span class="ms-code">EHJ9400CCYEQ</span></a></div></div><a href="#cat-lowbed" data-cat="cat-lowbed">低平板<span class="mdb-count">4</span></a><div class="mdb-side-ms"><div class="ms-in"><a href="#m-EHJ9400TDP"><span class="ms-name">低平板半挂车</span><span class="ms-code">EHJ9400TDP</span></a><a href="#m-JDV9380TDP"><span class="ms-name">低平板半挂车</span><span class="ms-code">JDV9380TDP</span></a><a href="#m-JDV9381TDP"><span class="ms-name">低平板半挂车</span><span class="ms-code">JDV9381TDP</span></a><a href="#m-JDV9382TDP"><span class="ms-name">低平板半挂车</span><span class="ms-code">JDV9382TDP</span></a></div></div><a href="#cat-skeleton" data-cat="cat-skeleton">集装箱骨架<span class="mdb-count">6</span></a><div class="mdb-side-ms"><div class="ms-in"><a href="#m-EHJ9400TJZE"><span class="ms-name">集装箱运输半挂车</span><span class="ms-code">EHJ9400TJZE</span></a><a href="#m-EHJ9401TJZE"><span class="ms-name">集装箱运输半挂车</span><span class="ms-code">EHJ9401TJZE</span></a><a href="#m-EHJ9400TJZ"><span class="ms-name">集装箱运输半挂车</span><span class="ms-code">EHJ9400TJZ</span></a><a href="#m-EHJ9350TJZE"><span class="ms-name">集装箱运输半挂车</span><span class="ms-code">EHJ9350TJZE</span></a><a href="#m-JDV9390TJZE"><span class="ms-name">集装箱运输半挂车</span><span class="ms-code">JDV9390TJZE</span></a><a href="#m-JDV9350TJZE"><span class="ms-name">集装箱运输半挂车</span><span class="ms-code">JDV9350TJZE</span></a></div></div><a href="#cat-crane" data-cat="cat-crane">随车起重<span class="mdb-count">5</span></a><div class="mdb-side-ms"><div class="ms-in"><a href="#m-JDV5310JSQS1"><span class="ms-name">随车起重运输车</span><span class="ms-code">JDV5310JSQS1</span></a><a href="#m-JDV5250JSQS1"><span class="ms-name">随车起重运输车</span><span class="ms-code">JDV5250JSQS1</span></a><a href="#m-JDV9400JSQ"><span class="ms-name">随车起重运输半挂车</span><span class="ms-code">JDV9400JSQ</span></a><a href="#m-JDV9401JSQ"><span class="ms-name">随车起重运输半挂车</span><span class="ms-code">JDV9401JSQ</span></a><a href="#m-JDV9402JSQ"><span class="ms-name">随车起重运输半挂车</span><span class="ms-code">JDV9402JSQ</span></a></div></div><a href="#cat-van" data-cat="cat-van">厢式 · 通信<span class="mdb-count">3</span></a><div class="mdb-side-ms"><div class="ms-in"><a href="#m-EHJ9400XXYE"><span class="ms-name">厢式运输半挂车</span><span class="ms-code">EHJ9400XXYE</span></a><a href="#m-EHJ9350XXY"><span class="ms-name">厢式运输半挂车</span><span class="ms-code">EHJ9350XXY</span></a><a href="#m-JDV9180XTX"><span class="ms-name">通信半挂车</span><span class="ms-code">JDV9180XTX</span></a></div></div><a href="#cat-feed" data-cat="cat-feed">散装饲料<span class="mdb-count">2</span></a><div class="mdb-side-ms"><div class="ms-in"><a href="#m-EHJ9400ZSL"><span class="ms-name">散装饲料运输半挂车</span><span class="ms-code">EHJ9400ZSL</span></a><a href="#m-EHJ9405ZSLXND"><span class="ms-name">散装饲料运输半挂车</span><span class="ms-code">EHJ9405ZSLXND</span></a></div></div><a href="#cat-timber" data-cat="cat-timber">运材 · 危险品罐箱<span class="mdb-count">2</span></a><div class="mdb-side-ms"><div class="ms-in"><a href="#m-EHJ9400TYC"><span class="ms-name">运材半挂车</span><span class="ms-code">EHJ9400TYC</span></a><a href="#m-JDV9400TWY"><span class="ms-name">危险品罐箱骨架运输半挂车</span><span class="ms-code">JDV9400TWY</span></a></div></div><a href="#cat-special" data-cat="cat-special">专用车系列<span class="mdb-count">6</span></a><div class="mdb-side-ms"><div class="ms-in"><a href="#m-JDV5040JGKZZ6"><span class="ms-name">高空作业车</span><span class="ms-code">JDV5040JGKZZ6</span></a><a href="#m-JDV5040XJXQL6"><span class="ms-name">抽油机检修车</span><span class="ms-code">JDV5040XJXQL6</span></a><a href="#m-JDV5041XJXFT6"><span class="ms-name">抽油机检修车</span><span class="ms-code">JDV5041XJXFT6</span></a><a href="#m-JDV5030XXHQL6"><span class="ms-name">救险车</span><span class="ms-code">JDV5030XXHQL6</span></a><a href="#m-JDV5030XZH"><span class="ms-name">指挥车</span><span class="ms-code">JDV5030XZH</span></a><a href="#m-JDV5030ZXXSC"><span class="ms-name">车厢可卸式垃圾车</span><span class="ms-code">JDV5030ZXXSC</span></a></div></div>
+                <a href="#cat-flatbed" data-cat="cat-flatbed">平板 · 栏板<span class="mdb-count">5</span></a><a href="#cat-dump" data-cat="cat-dump">自卸<span class="mdb-count">9</span></a><a href="#cat-fence" data-cat="cat-fence">仓栅<span class="mdb-count">3</span></a><a href="#cat-lowbed" data-cat="cat-lowbed">低平板<span class="mdb-count">4</span></a><a href="#cat-skeleton" data-cat="cat-skeleton">集装箱骨架<span class="mdb-count">6</span></a><a href="#cat-crane" data-cat="cat-crane">随车起重<span class="mdb-count">5</span></a><a href="#cat-van" data-cat="cat-van">厢式 · 通信<span class="mdb-count">3</span></a><a href="#cat-feed" data-cat="cat-feed">散装饲料<span class="mdb-count">2</span></a><a href="#cat-timber" data-cat="cat-timber">运材 · 危险品罐箱<span class="mdb-count">2</span></a><a href="#cat-special" data-cat="cat-special">专用车系列<span class="mdb-count">6</span></a>
             </aside>
             <main>
 
-            <div class="mdb-group" id="cat-flatbed">
+            <div class="mdb-group" id="cat-flatbed" style="background-image: url('assets/images/models/grp-flatbed.webp')">
                 <div class="mdb-group-head">
                     <h2>平板 · 栏板<span class="mdb-group-sub">5 款公告车型</span></h2>
                     <a class="mdb-btn mdb-btn-primary" href="product-flatbed.html">品类详情页 →</a>
                 </div>
                 <div class="mdb-banner">
-                    <p><i>车型介绍</i>工作平台承载面低,车体重心稳,利于机器上下;上部提供较大装货空间,装载后重心低,运行安全可靠,可按实际需求定制车架承载面。</p>
-                    <p><i>适用范围</i>多种机械设备、大型物件、公路建设设备、大件罐体、超高集装箱及各种钢材的运输,是国内大件运输客户的主选车型。栏板式为开放式低栏结构,钢材、建材、散货一车多用。</p>
-                    <p><i>车型优点</i>整车自重轻,抗扭曲、抗震、抗颠簸;开放式栏板无遮挡,吊车、叉车均可快速作业。</p>
+                    
+                    <div class="mdb-banner-txt">
+                        <p><i>车型介绍</i>工作平台承载面低,车体重心稳,利于机器上下;上部提供较大装货空间,装载后重心低,运行安全可靠,可按实际需求定制车架承载面。</p>
+                        <p><i>适用范围</i>多种机械设备、大型物件、公路建设设备、大件罐体、超高集装箱及各种钢材的运输,是国内大件运输客户的主选车型。栏板式为开放式低栏结构,钢材、建材、散货一车多用。</p>
+                        <p><i>车型优点</i>整车自重轻,抗扭曲、抗震、抗颠簸;开放式栏板无遮挡,吊车、叉车均可快速作业。</p>
+                    </div>
                 </div>
-                <div class="mdb-grid">
-                    <div class="mdb-card" id="m-EHJ9400TPB">
-                        <div class="mdb-card-bg" style="background-image:url('assets/images/models/grp-flatbed.webp')"></div>
-                        <div class="mdb-card-grad"></div>
-                        <div class="mdb-card-glass">
-                            <h4>平板运输半挂车<span class="mdb-brand">楚源牌</span></h4>
-                            <div class="mdb-code">EHJ9400TPB</div>
-                            <div class="mdb-chips"><span class="mdb-chip"><i>总质量</i>40000 kg</span><span class="mdb-chip"><i>整备</i>5010 kg</span><span class="mdb-chip"><i>轴数</i>3轴</span><span class="mdb-chip"><i>轮胎</i>11.00R20 12PR</span></div>
-                            <div class="mdb-actions">
-                                <a href="vehicles/EHJ9400TPB.html" class="mdb-btn">详情 →</a>
-                                <a href="configurator.html?model=EHJ9400TPB&vname=%E5%B9%B3%E6%9D%BF%E8%BF%90%E8%BE%93%E5%8D%8A%E6%8C%82%E8%BD%A6" class="mdb-btn mdb-btn-quote">在线询价</a>
-                            </div>
-                        </div>
+                <div class="mdb-card">
+                    <div class="mdb-card-main">
+                        <h4>EHJ9400TPB<span class="mdb-name">平板运输半挂车</span><span class="mdb-brand">楚源牌</span></h4>
+                        <div class="mdb-chips"><span class="mdb-chip"><i>总质量</i>40000 kg</span><span class="mdb-chip"><i>整备</i>5010 kg</span><span class="mdb-chip"><i>轴数</i>3轴</span><span class="mdb-chip"><i>轮胎</i>11.00R20 12PR</span><span class="mdb-chip"><i>公告批次</i>第 338 批</span></div>
                     </div>
-                    <div class="mdb-card" id="m-EHJ9400TPBE">
-                        <div class="mdb-card-bg" style="background-image:url('assets/images/models/grp-flatbed.webp')"></div>
-                        <div class="mdb-card-grad"></div>
-                        <div class="mdb-card-glass">
-                            <h4>平板运输半挂车<span class="mdb-brand">楚源牌</span></h4>
-                            <div class="mdb-code">EHJ9400TPBE</div>
-                            <div class="mdb-chips"><span class="mdb-chip"><i>总质量</i>40000 kg</span><span class="mdb-chip"><i>整备</i>6500 kg</span><span class="mdb-chip"><i>轴数</i>3轴</span><span class="mdb-chip"><i>轮胎</i>11.00R20 12PR</span></div>
-                            <div class="mdb-actions">
-                                <a href="vehicles/EHJ9400TPBE.html" class="mdb-btn">详情 →</a>
-                                <a href="configurator.html?model=EHJ9400TPBE&vname=%E5%B9%B3%E6%9D%BF%E8%BF%90%E8%BE%93%E5%8D%8A%E6%8C%82%E8%BD%A6" class="mdb-btn mdb-btn-quote">在线询价</a>
-                            </div>
-                        </div>
+                    <div class="mdb-actions">
+                        <a href="vehicles/EHJ9400TPB.html" class="mdb-btn">详情 →</a>
+                        <a href="configurator.html?model=EHJ9400TPB&vname=%E5%B9%B3%E6%9D%BF%E8%BF%90%E8%BE%93%E5%8D%8A%E6%8C%82%E8%BD%A6" class="mdb-btn mdb-btn-quote">在线询价</a>
                     </div>
-                    <div class="mdb-card" id="m-EHJ9401TPB">
-                        <div class="mdb-card-bg" style="background-image:url('assets/images/models/grp-flatbed.webp')"></div>
-                        <div class="mdb-card-grad"></div>
-                        <div class="mdb-card-glass">
-                            <h4>平板运输半挂车<span class="mdb-brand">楚源牌</span></h4>
-                            <div class="mdb-code">EHJ9401TPB</div>
-                            <div class="mdb-chips"><span class="mdb-chip"><i>总质量</i>40000 kg</span><span class="mdb-chip"><i>整备</i>6590 kg</span><span class="mdb-chip"><i>轴数</i>3轴</span><span class="mdb-chip"><i>轮胎</i>11.00R20 12PR</span></div>
-                            <div class="mdb-actions">
-                                <a href="vehicles/EHJ9401TPB.html" class="mdb-btn">详情 →</a>
-                                <a href="configurator.html?model=EHJ9401TPB&vname=%E5%B9%B3%E6%9D%BF%E8%BF%90%E8%BE%93%E5%8D%8A%E6%8C%82%E8%BD%A6" class="mdb-btn mdb-btn-quote">在线询价</a>
-                            </div>
-                        </div>
+                </div>
+                <div class="mdb-card">
+                    <div class="mdb-card-main">
+                        <h4>EHJ9400TPBE<span class="mdb-name">平板运输半挂车</span><span class="mdb-brand">楚源牌</span></h4>
+                        <div class="mdb-chips"><span class="mdb-chip"><i>总质量</i>40000 kg</span><span class="mdb-chip"><i>整备</i>6500 kg</span><span class="mdb-chip"><i>轴数</i>3轴</span><span class="mdb-chip"><i>轮胎</i>11.00R20 12PR</span><span class="mdb-chip"><i>公告批次</i>第 338 批</span></div>
                     </div>
-                    <div class="mdb-card" id="m-EHJ9400LB">
-                        <div class="mdb-card-bg" style="background-image:url('assets/images/models/grp-flatbed.webp')"></div>
-                        <div class="mdb-card-grad"></div>
-                        <div class="mdb-card-glass">
-                            <h4>栏板半挂车<span class="mdb-brand">楚源牌</span></h4>
-                            <div class="mdb-code">EHJ9400LB</div>
-                            <div class="mdb-chips"><span class="mdb-chip"><i>总质量</i>40000 kg</span><span class="mdb-chip"><i>整备</i>5700 kg</span><span class="mdb-chip"><i>轴数</i>3轴</span><span class="mdb-chip"><i>轮胎</i>11.00R20 12PR</span></div>
-                            <div class="mdb-actions">
-                                <a href="vehicles/EHJ9400LB.html" class="mdb-btn">详情 →</a>
-                                <a href="configurator.html?model=EHJ9400LB&vname=%E6%A0%8F%E6%9D%BF%E5%8D%8A%E6%8C%82%E8%BD%A6" class="mdb-btn mdb-btn-quote">在线询价</a>
-                            </div>
-                        </div>
+                    <div class="mdb-actions">
+                        <a href="vehicles/EHJ9400TPBE.html" class="mdb-btn">详情 →</a>
+                        <a href="configurator.html?model=EHJ9400TPBE&vname=%E5%B9%B3%E6%9D%BF%E8%BF%90%E8%BE%93%E5%8D%8A%E6%8C%82%E8%BD%A6" class="mdb-btn mdb-btn-quote">在线询价</a>
                     </div>
-                    <div class="mdb-card" id="m-EHJ9400LBE">
-                        <div class="mdb-card-bg" style="background-image:url('assets/images/models/grp-flatbed.webp')"></div>
-                        <div class="mdb-card-grad"></div>
-                        <div class="mdb-card-glass">
-                            <h4>栏板半挂车<span class="mdb-brand">楚源牌</span></h4>
-                            <div class="mdb-code">EHJ9400LBE</div>
-                            <div class="mdb-chips"><span class="mdb-chip"><i>总质量</i>40000 kg</span><span class="mdb-chip"><i>整备</i>5700 kg</span><span class="mdb-chip"><i>轴数</i>3轴</span><span class="mdb-chip"><i>轮胎</i>11.00R20 12PR</span></div>
-                            <div class="mdb-actions">
-                                <a href="vehicles/EHJ9400LBE.html" class="mdb-btn">详情 →</a>
-                                <a href="configurator.html?model=EHJ9400LBE&vname=%E6%A0%8F%E6%9D%BF%E5%8D%8A%E6%8C%82%E8%BD%A6" class="mdb-btn mdb-btn-quote">在线询价</a>
-                            </div>
-                        </div>
-                    </div>                </div>
-            </div>
-            <div class="mdb-group" id="cat-dump">
+                </div>
+                <div class="mdb-card">
+                    <div class="mdb-card-main">
+                        <h4>EHJ9401TPB<span class="mdb-name">平板运输半挂车</span><span class="mdb-brand">楚源牌</span></h4>
+                        <div class="mdb-chips"><span class="mdb-chip"><i>总质量</i>40000 kg</span><span class="mdb-chip"><i>整备</i>6590 kg</span><span class="mdb-chip"><i>轴数</i>3轴</span><span class="mdb-chip"><i>轮胎</i>11.00R20 12PR</span><span class="mdb-chip"><i>公告批次</i>第 369 批</span></div>
+                    </div>
+                    <div class="mdb-actions">
+                        <a href="vehicles/EHJ9401TPB.html" class="mdb-btn">详情 →</a>
+                        <a href="configurator.html?model=EHJ9401TPB&vname=%E5%B9%B3%E6%9D%BF%E8%BF%90%E8%BE%93%E5%8D%8A%E6%8C%82%E8%BD%A6" class="mdb-btn mdb-btn-quote">在线询价</a>
+                    </div>
+                </div>
+                <div class="mdb-card">
+                    <div class="mdb-card-main">
+                        <h4>EHJ9400LB<span class="mdb-name">栏板半挂车</span><span class="mdb-brand">楚源牌</span></h4>
+                        <div class="mdb-chips"><span class="mdb-chip"><i>总质量</i>40000 kg</span><span class="mdb-chip"><i>整备</i>5700 kg</span><span class="mdb-chip"><i>轴数</i>3轴</span><span class="mdb-chip"><i>轮胎</i>11.00R20 12PR</span><span class="mdb-chip"><i>公告批次</i>第 369 批</span></div>
+                    </div>
+                    <div class="mdb-actions">
+                        <a href="vehicles/EHJ9400LB.html" class="mdb-btn">详情 →</a>
+                        <a href="configurator.html?model=EHJ9400LB&vname=%E6%A0%8F%E6%9D%BF%E5%8D%8A%E6%8C%82%E8%BD%A6" class="mdb-btn mdb-btn-quote">在线询价</a>
+                    </div>
+                </div>
+                <div class="mdb-card">
+                    <div class="mdb-card-main">
+                        <h4>EHJ9400LBE<span class="mdb-name">栏板半挂车</span><span class="mdb-brand">楚源牌</span></h4>
+                        <div class="mdb-chips"><span class="mdb-chip"><i>总质量</i>40000 kg</span><span class="mdb-chip"><i>整备</i>5700 kg</span><span class="mdb-chip"><i>轴数</i>3轴</span><span class="mdb-chip"><i>轮胎</i>11.00R20 12PR</span><span class="mdb-chip"><i>公告批次</i>第 369 批</span></div>
+                    </div>
+                    <div class="mdb-actions">
+                        <a href="vehicles/EHJ9400LBE.html" class="mdb-btn">详情 →</a>
+                        <a href="configurator.html?model=EHJ9400LBE&vname=%E6%A0%8F%E6%9D%BF%E5%8D%8A%E6%8C%82%E8%BD%A6" class="mdb-btn mdb-btn-quote">在线询价</a>
+                    </div>
+                </div>            </div>
+            <div class="mdb-group" id="cat-dump" style="background-image: url('assets/images/models/grp-dump.webp')">
                 <div class="mdb-group-head">
                     <h2>自卸<span class="mdb-group-sub">9 款公告车型</span></h2>
                     <a class="mdb-btn mdb-btn-primary" href="product-dump.html">品类详情页 →</a>
                 </div>
                 <div class="mdb-banner">
-                    <p><i>车型介绍</i>车厢采用侧翻或后翻自卸方式,多缸举升,另配自救缸;厢体采用高强度冷轧瓦楞钢板、无骨架结构,厢体高低多样可选,装货空间大。</p>
-                    <p><i>适用范围</i>矿石、砂石、泥土、煤炭、建筑物料等散装零散货物运输,与挖掘机、装载机配套作业。</p>
-                    <p><i>车型优点</i>强度高、举升力强、承载能力强不变形;举升高度高、卸货快,多拉重载。</p>
+                    
+                    <div class="mdb-banner-txt">
+                        <p><i>车型介绍</i>车厢采用侧翻或后翻自卸方式,多缸举升,另配自救缸;厢体采用高强度冷轧瓦楞钢板、无骨架结构,厢体高低多样可选,装货空间大。</p>
+                        <p><i>适用范围</i>矿石、砂石、泥土、煤炭、建筑物料等散装零散货物运输,与挖掘机、装载机配套作业。</p>
+                        <p><i>车型优点</i>强度高、举升力强、承载能力强不变形;举升高度高、卸货快,多拉重载。</p>
+                    </div>
                 </div>
-                <div class="mdb-grid">
-                    <div class="mdb-card" id="m-EHJ9400ZHX">
-                        <div class="mdb-card-bg" style="background-image:url('assets/images/models/grp-dump.webp')"></div>
-                        <div class="mdb-card-grad"></div>
-                        <div class="mdb-card-glass">
-                            <h4>自卸半挂车<span class="mdb-brand">楚源牌</span></h4>
-                            <div class="mdb-code">EHJ9400ZHX</div>
-                            <div class="mdb-chips"><span class="mdb-chip"><i>总质量</i>40000 kg</span><span class="mdb-chip"><i>整备</i>8500 kg</span><span class="mdb-chip"><i>轴数</i>3轴</span><span class="mdb-chip"><i>轮胎</i>11.00R20 12PR</span></div>
-                            <div class="mdb-actions">
-                                <a href="vehicles/EHJ9400ZHX.html" class="mdb-btn">详情 →</a>
-                                <a href="configurator.html?model=EHJ9400ZHX&vname=%E8%87%AA%E5%8D%B8%E5%8D%8A%E6%8C%82%E8%BD%A6" class="mdb-btn mdb-btn-quote">在线询价</a>
-                            </div>
-                        </div>
+                <div class="mdb-card">
+                    <div class="mdb-card-main">
+                        <h4>EHJ9400ZHX<span class="mdb-name">自卸半挂车</span><span class="mdb-brand">楚源牌</span></h4>
+                        <div class="mdb-chips"><span class="mdb-chip"><i>总质量</i>40000 kg</span><span class="mdb-chip"><i>整备</i>8500 kg</span><span class="mdb-chip"><i>轴数</i>3轴</span><span class="mdb-chip"><i>轮胎</i>11.00R20 12PR</span><span class="mdb-chip"><i>公告批次</i>第 340 批</span></div>
                     </div>
-                    <div class="mdb-card" id="m-EHJ9401ZHX">
-                        <div class="mdb-card-bg" style="background-image:url('assets/images/models/grp-dump.webp')"></div>
-                        <div class="mdb-card-grad"></div>
-                        <div class="mdb-card-glass">
-                            <h4>自卸半挂车<span class="mdb-brand">楚源牌</span></h4>
-                            <div class="mdb-code">EHJ9401ZHX</div>
-                            <div class="mdb-chips"><span class="mdb-chip"><i>总质量</i>40000 kg</span><span class="mdb-chip"><i>整备</i>6480 kg</span><span class="mdb-chip"><i>轴数</i>3轴</span><span class="mdb-chip"><i>轮胎</i>11.00R20 12PR</span></div>
-                            <div class="mdb-actions">
-                                <a href="vehicles/EHJ9401ZHX.html" class="mdb-btn">详情 →</a>
-                                <a href="configurator.html?model=EHJ9401ZHX&vname=%E8%87%AA%E5%8D%B8%E5%8D%8A%E6%8C%82%E8%BD%A6" class="mdb-btn mdb-btn-quote">在线询价</a>
-                            </div>
-                        </div>
+                    <div class="mdb-actions">
+                        <a href="vehicles/EHJ9400ZHX.html" class="mdb-btn">详情 →</a>
+                        <a href="configurator.html?model=EHJ9400ZHX&vname=%E8%87%AA%E5%8D%B8%E5%8D%8A%E6%8C%82%E8%BD%A6" class="mdb-btn mdb-btn-quote">在线询价</a>
                     </div>
-                    <div class="mdb-card" id="m-EHJ9402ZHX">
-                        <div class="mdb-card-bg" style="background-image:url('assets/images/models/grp-dump.webp')"></div>
-                        <div class="mdb-card-grad"></div>
-                        <div class="mdb-card-glass">
-                            <h4>自卸半挂车<span class="mdb-brand">楚源牌</span></h4>
-                            <div class="mdb-code">EHJ9402ZHX</div>
-                            <div class="mdb-chips"><span class="mdb-chip"><i>总质量</i>40000 kg</span><span class="mdb-chip"><i>整备</i>9000 kg</span><span class="mdb-chip"><i>轴数</i>3轴</span><span class="mdb-chip"><i>轮胎</i>11.00R20 12PR</span></div>
-                            <div class="mdb-actions">
-                                <a href="vehicles/EHJ9402ZHX.html" class="mdb-btn">详情 →</a>
-                                <a href="configurator.html?model=EHJ9402ZHX&vname=%E8%87%AA%E5%8D%B8%E5%8D%8A%E6%8C%82%E8%BD%A6" class="mdb-btn mdb-btn-quote">在线询价</a>
-                            </div>
-                        </div>
+                </div>
+                <div class="mdb-card">
+                    <div class="mdb-card-main">
+                        <h4>EHJ9401ZHX<span class="mdb-name">自卸半挂车</span><span class="mdb-brand">楚源牌</span></h4>
+                        <div class="mdb-chips"><span class="mdb-chip"><i>总质量</i>40000 kg</span><span class="mdb-chip"><i>整备</i>6480 kg</span><span class="mdb-chip"><i>轴数</i>3轴</span><span class="mdb-chip"><i>轮胎</i>11.00R20 12PR</span><span class="mdb-chip"><i>公告批次</i>第 338 批</span></div>
                     </div>
-                    <div class="mdb-card" id="m-EHJ9400Z">
-                        <div class="mdb-card-bg" style="background-image:url('assets/images/models/grp-dump.webp')"></div>
-                        <div class="mdb-card-grad"></div>
-                        <div class="mdb-card-glass">
-                            <h4>自卸半挂车<span class="mdb-brand">楚源牌</span></h4>
-                            <div class="mdb-code">EHJ9400Z</div>
-                            <div class="mdb-chips"><span class="mdb-chip"><i>总质量</i>40000 kg</span><span class="mdb-chip"><i>整备</i>7000 kg</span><span class="mdb-chip"><i>轴数</i>3轴</span><span class="mdb-chip"><i>轮胎</i>11.00R20 12PR</span></div>
-                            <div class="mdb-actions">
-                                <a href="vehicles/EHJ9400Z.html" class="mdb-btn">详情 →</a>
-                                <a href="configurator.html?model=EHJ9400Z&vname=%E8%87%AA%E5%8D%B8%E5%8D%8A%E6%8C%82%E8%BD%A6" class="mdb-btn mdb-btn-quote">在线询价</a>
-                            </div>
-                        </div>
+                    <div class="mdb-actions">
+                        <a href="vehicles/EHJ9401ZHX.html" class="mdb-btn">详情 →</a>
+                        <a href="configurator.html?model=EHJ9401ZHX&vname=%E8%87%AA%E5%8D%B8%E5%8D%8A%E6%8C%82%E8%BD%A6" class="mdb-btn mdb-btn-quote">在线询价</a>
                     </div>
-                    <div class="mdb-card" id="m-EHJ9401Z">
-                        <div class="mdb-card-bg" style="background-image:url('assets/images/models/grp-dump.webp')"></div>
-                        <div class="mdb-card-grad"></div>
-                        <div class="mdb-card-glass">
-                            <h4>自卸半挂车<span class="mdb-brand">楚源牌</span></h4>
-                            <div class="mdb-code">EHJ9401Z</div>
-                            <div class="mdb-chips"><span class="mdb-chip"><i>总质量</i>40000 kg</span><span class="mdb-chip"><i>整备</i>7400 kg</span><span class="mdb-chip"><i>轴数</i>3轴</span><span class="mdb-chip"><i>轮胎</i>11.00R20 12PR</span></div>
-                            <div class="mdb-actions">
-                                <a href="vehicles/EHJ9401Z.html" class="mdb-btn">详情 →</a>
-                                <a href="configurator.html?model=EHJ9401Z&vname=%E8%87%AA%E5%8D%B8%E5%8D%8A%E6%8C%82%E8%BD%A6" class="mdb-btn mdb-btn-quote">在线询价</a>
-                            </div>
-                        </div>
+                </div>
+                <div class="mdb-card">
+                    <div class="mdb-card-main">
+                        <h4>EHJ9402ZHX<span class="mdb-name">自卸半挂车</span><span class="mdb-brand">楚源牌</span></h4>
+                        <div class="mdb-chips"><span class="mdb-chip"><i>总质量</i>40000 kg</span><span class="mdb-chip"><i>整备</i>9000 kg</span><span class="mdb-chip"><i>轴数</i>3轴</span><span class="mdb-chip"><i>轮胎</i>11.00R20 12PR</span><span class="mdb-chip"><i>公告批次</i>第 352 批</span></div>
                     </div>
-                    <div class="mdb-card" id="m-EHJ9400ZZXP">
-                        <div class="mdb-card-bg" style="background-image:url('assets/images/models/grp-dump.webp')"></div>
-                        <div class="mdb-card-grad"></div>
-                        <div class="mdb-card-glass">
-                            <h4>平板自卸半挂车<span class="mdb-brand">楚源牌</span></h4>
-                            <div class="mdb-code">EHJ9400ZZXP</div>
-                            <div class="mdb-chips"><span class="mdb-chip"><i>总质量</i>40000 kg</span><span class="mdb-chip"><i>整备</i>7500 kg</span><span class="mdb-chip"><i>轴数</i>3轴</span><span class="mdb-chip"><i>轮胎</i>11.00R20 12PR</span></div>
-                            <div class="mdb-actions">
-                                <a href="vehicles/EHJ9400ZZXP.html" class="mdb-btn">详情 →</a>
-                                <a href="configurator.html?model=EHJ9400ZZXP&vname=%E5%B9%B3%E6%9D%BF%E8%87%AA%E5%8D%B8%E5%8D%8A%E6%8C%82%E8%BD%A6" class="mdb-btn mdb-btn-quote">在线询价</a>
-                            </div>
-                        </div>
+                    <div class="mdb-actions">
+                        <a href="vehicles/EHJ9402ZHX.html" class="mdb-btn">详情 →</a>
+                        <a href="configurator.html?model=EHJ9402ZHX&vname=%E8%87%AA%E5%8D%B8%E5%8D%8A%E6%8C%82%E8%BD%A6" class="mdb-btn mdb-btn-quote">在线询价</a>
                     </div>
-                    <div class="mdb-card" id="m-EHJ9401ZZXP">
-                        <div class="mdb-card-bg" style="background-image:url('assets/images/models/grp-dump.webp')"></div>
-                        <div class="mdb-card-grad"></div>
-                        <div class="mdb-card-glass">
-                            <h4>平板自卸半挂车<span class="mdb-brand">楚源牌</span></h4>
-                            <div class="mdb-code">EHJ9401ZZXP</div>
-                            <div class="mdb-chips"><span class="mdb-chip"><i>总质量</i>40000 kg</span><span class="mdb-chip"><i>整备</i>7200 kg</span><span class="mdb-chip"><i>轴数</i>3轴</span><span class="mdb-chip"><i>轮胎</i>11.00R20 12PR</span></div>
-                            <div class="mdb-actions">
-                                <a href="vehicles/EHJ9401ZZXP.html" class="mdb-btn">详情 →</a>
-                                <a href="configurator.html?model=EHJ9401ZZXP&vname=%E5%B9%B3%E6%9D%BF%E8%87%AA%E5%8D%B8%E5%8D%8A%E6%8C%82%E8%BD%A6" class="mdb-btn mdb-btn-quote">在线询价</a>
-                            </div>
-                        </div>
+                </div>
+                <div class="mdb-card">
+                    <div class="mdb-card-main">
+                        <h4>EHJ9400Z<span class="mdb-name">自卸半挂车</span><span class="mdb-brand">楚源牌</span></h4>
+                        <div class="mdb-chips"><span class="mdb-chip"><i>总质量</i>40000 kg</span><span class="mdb-chip"><i>整备</i>7000 kg</span><span class="mdb-chip"><i>轴数</i>3轴</span><span class="mdb-chip"><i>轮胎</i>11.00R20 12PR</span><span class="mdb-chip"><i>公告批次</i>第 358 批</span></div>
                     </div>
-                    <div class="mdb-card" id="m-JDV9400Z">
-                        <div class="mdb-card-bg" style="background-image:url('assets/images/models/grp-dump.webp')"></div>
-                        <div class="mdb-card-grad"></div>
-                        <div class="mdb-card-glass">
-                            <h4>自卸半挂车<span class="mdb-brand">襄汽牌</span></h4>
-                            <div class="mdb-code">JDV9400Z</div>
-                            <div class="mdb-chips"><span class="mdb-chip"><i>总质量</i>40000 kg</span><span class="mdb-chip"><i>整备</i>6200 kg</span><span class="mdb-chip"><i>轴数</i>3轴</span><span class="mdb-chip"><i>轮胎</i>11.00R20 12PR</span></div>
-                            <div class="mdb-actions">
-                                <a href="vehicles/JDV9400Z.html" class="mdb-btn">详情 →</a>
-                                <a href="configurator.html?model=JDV9400Z&vname=%E8%87%AA%E5%8D%B8%E5%8D%8A%E6%8C%82%E8%BD%A6" class="mdb-btn mdb-btn-quote">在线询价</a>
-                            </div>
-                        </div>
+                    <div class="mdb-actions">
+                        <a href="vehicles/EHJ9400Z.html" class="mdb-btn">详情 →</a>
+                        <a href="configurator.html?model=EHJ9400Z&vname=%E8%87%AA%E5%8D%B8%E5%8D%8A%E6%8C%82%E8%BD%A6" class="mdb-btn mdb-btn-quote">在线询价</a>
                     </div>
-                    <div class="mdb-card" id="m-JDV9400ZHX">
-                        <div class="mdb-card-bg" style="background-image:url('assets/images/models/grp-dump.webp')"></div>
-                        <div class="mdb-card-grad"></div>
-                        <div class="mdb-card-glass">
-                            <h4>自卸半挂车<span class="mdb-brand">襄汽牌</span></h4>
-                            <div class="mdb-code">JDV9400ZHX</div>
-                            <div class="mdb-chips"><span class="mdb-chip"><i>总质量</i>40000 kg</span><span class="mdb-chip"><i>整备</i>7140 kg</span><span class="mdb-chip"><i>轴数</i>3轴</span><span class="mdb-chip"><i>轮胎</i>11.00R20 12PR</span></div>
-                            <div class="mdb-actions">
-                                <a href="vehicles/JDV9400ZHX.html" class="mdb-btn">详情 →</a>
-                                <a href="configurator.html?model=JDV9400ZHX&vname=%E8%87%AA%E5%8D%B8%E5%8D%8A%E6%8C%82%E8%BD%A6" class="mdb-btn mdb-btn-quote">在线询价</a>
-                            </div>
-                        </div>
-                    </div>                </div>
-            </div>
-            <div class="mdb-group" id="cat-fence">
+                </div>
+                <div class="mdb-card">
+                    <div class="mdb-card-main">
+                        <h4>EHJ9401Z<span class="mdb-name">自卸半挂车</span><span class="mdb-brand">楚源牌</span></h4>
+                        <div class="mdb-chips"><span class="mdb-chip"><i>总质量</i>40000 kg</span><span class="mdb-chip"><i>整备</i>7400 kg</span><span class="mdb-chip"><i>轴数</i>3轴</span><span class="mdb-chip"><i>轮胎</i>11.00R20 12PR</span><span class="mdb-chip"><i>公告批次</i>第 338 批</span></div>
+                    </div>
+                    <div class="mdb-actions">
+                        <a href="vehicles/EHJ9401Z.html" class="mdb-btn">详情 →</a>
+                        <a href="configurator.html?model=EHJ9401Z&vname=%E8%87%AA%E5%8D%B8%E5%8D%8A%E6%8C%82%E8%BD%A6" class="mdb-btn mdb-btn-quote">在线询价</a>
+                    </div>
+                </div>
+                <div class="mdb-card">
+                    <div class="mdb-card-main">
+                        <h4>EHJ9400ZZXP<span class="mdb-name">平板自卸半挂车</span><span class="mdb-brand">楚源牌</span></h4>
+                        <div class="mdb-chips"><span class="mdb-chip"><i>总质量</i>40000 kg</span><span class="mdb-chip"><i>整备</i>7500 kg</span><span class="mdb-chip"><i>轴数</i>3轴</span><span class="mdb-chip"><i>轮胎</i>11.00R20 12PR</span><span class="mdb-chip"><i>公告批次</i>第 320 批</span></div>
+                    </div>
+                    <div class="mdb-actions">
+                        <a href="vehicles/EHJ9400ZZXP.html" class="mdb-btn">详情 →</a>
+                        <a href="configurator.html?model=EHJ9400ZZXP&vname=%E5%B9%B3%E6%9D%BF%E8%87%AA%E5%8D%B8%E5%8D%8A%E6%8C%82%E8%BD%A6" class="mdb-btn mdb-btn-quote">在线询价</a>
+                    </div>
+                </div>
+                <div class="mdb-card">
+                    <div class="mdb-card-main">
+                        <h4>EHJ9401ZZXP<span class="mdb-name">平板自卸半挂车</span><span class="mdb-brand">楚源牌</span></h4>
+                        <div class="mdb-chips"><span class="mdb-chip"><i>总质量</i>40000 kg</span><span class="mdb-chip"><i>整备</i>7200 kg</span><span class="mdb-chip"><i>轴数</i>3轴</span><span class="mdb-chip"><i>轮胎</i>11.00R20 12PR</span><span class="mdb-chip"><i>公告批次</i>第 312 批</span></div>
+                    </div>
+                    <div class="mdb-actions">
+                        <a href="vehicles/EHJ9401ZZXP.html" class="mdb-btn">详情 →</a>
+                        <a href="configurator.html?model=EHJ9401ZZXP&vname=%E5%B9%B3%E6%9D%BF%E8%87%AA%E5%8D%B8%E5%8D%8A%E6%8C%82%E8%BD%A6" class="mdb-btn mdb-btn-quote">在线询价</a>
+                    </div>
+                </div>
+                <div class="mdb-card">
+                    <div class="mdb-card-main">
+                        <h4>JDV9400Z<span class="mdb-name">自卸半挂车</span><span class="mdb-brand">襄汽牌</span></h4>
+                        <div class="mdb-chips"><span class="mdb-chip"><i>总质量</i>40000 kg</span><span class="mdb-chip"><i>整备</i>6200 kg</span><span class="mdb-chip"><i>轴数</i>3轴</span><span class="mdb-chip"><i>轮胎</i>11.00R20 12PR</span><span class="mdb-chip"><i>公告批次</i>第 365 批</span></div>
+                    </div>
+                    <div class="mdb-actions">
+                        <a href="vehicles/JDV9400Z.html" class="mdb-btn">详情 →</a>
+                        <a href="configurator.html?model=JDV9400Z&vname=%E8%87%AA%E5%8D%B8%E5%8D%8A%E6%8C%82%E8%BD%A6" class="mdb-btn mdb-btn-quote">在线询价</a>
+                    </div>
+                </div>
+                <div class="mdb-card">
+                    <div class="mdb-card-main">
+                        <h4>JDV9400ZHX<span class="mdb-name">自卸半挂车</span><span class="mdb-brand">襄汽牌</span></h4>
+                        <div class="mdb-chips"><span class="mdb-chip"><i>总质量</i>40000 kg</span><span class="mdb-chip"><i>整备</i>7140 kg</span><span class="mdb-chip"><i>轴数</i>3轴</span><span class="mdb-chip"><i>轮胎</i>11.00R20 12PR</span><span class="mdb-chip"><i>公告批次</i>第 374 批</span></div>
+                    </div>
+                    <div class="mdb-actions">
+                        <a href="vehicles/JDV9400ZHX.html" class="mdb-btn">详情 →</a>
+                        <a href="configurator.html?model=JDV9400ZHX&vname=%E8%87%AA%E5%8D%B8%E5%8D%8A%E6%8C%82%E8%BD%A6" class="mdb-btn mdb-btn-quote">在线询价</a>
+                    </div>
+                </div>            </div>
+            <div class="mdb-group" id="cat-fence" style="background-image: url('assets/images/models/grp-fence.webp')">
                 <div class="mdb-group-head">
                     <h2>仓栅<span class="mdb-group-sub">3 款公告车型</span></h2>
                     <a class="mdb-btn mdb-btn-primary" href="product-fence.html">品类详情页 →</a>
                 </div>
                 <div class="mdb-banner">
-                    <p><i>车型介绍</i>分直梁式和鹅颈式两种类型;仓栏高度可按 1.6 米、1.8 米、2 米、2.2 米等规格定做,后开门样式有对开门、墙板加花栏、墙板加对开门等。</p>
-                    <p><i>适用范围</i>农副产品及其他轻泡货物的运输。</p>
-                    <p><i>车型优点</i>载重情况下充分减轻车厢自重,结构简单适用、拆卸方便,为用户降低投资成本。</p>
+                    
+                    <div class="mdb-banner-txt">
+                        <p><i>车型介绍</i>分直梁式和鹅颈式两种类型;仓栏高度可按 1.6 米、1.8 米、2 米、2.2 米等规格定做,后开门样式有对开门、墙板加花栏、墙板加对开门等。</p>
+                        <p><i>适用范围</i>农副产品及其他轻泡货物的运输。</p>
+                        <p><i>车型优点</i>载重情况下充分减轻车厢自重,结构简单适用、拆卸方便,为用户降低投资成本。</p>
+                    </div>
                 </div>
-                <div class="mdb-grid">
-                    <div class="mdb-card" id="m-EHJ9400CCY">
-                        <div class="mdb-card-bg" style="background-image:url('assets/images/models/grp-fence.webp')"></div>
-                        <div class="mdb-card-grad"></div>
-                        <div class="mdb-card-glass">
-                            <h4>仓栅式运输半挂车<span class="mdb-brand">楚源牌</span></h4>
-                            <div class="mdb-code">EHJ9400CCY</div>
-                            <div class="mdb-chips"><span class="mdb-chip"><i>总质量</i>40000 kg</span><span class="mdb-chip"><i>整备</i>7000 kg</span><span class="mdb-chip"><i>轴数</i>3轴</span><span class="mdb-chip"><i>轮胎</i>11.00R20 12PR</span></div>
-                            <div class="mdb-actions">
-                                <a href="vehicles/EHJ9400CCY.html" class="mdb-btn">详情 →</a>
-                                <a href="configurator.html?model=EHJ9400CCY&vname=%E4%BB%93%E6%A0%85%E5%BC%8F%E8%BF%90%E8%BE%93%E5%8D%8A%E6%8C%82%E8%BD%A6" class="mdb-btn mdb-btn-quote">在线询价</a>
-                            </div>
-                        </div>
+                <div class="mdb-card">
+                    <div class="mdb-card-main">
+                        <h4>EHJ9400CCY<span class="mdb-name">仓栅式运输半挂车</span><span class="mdb-brand">楚源牌</span></h4>
+                        <div class="mdb-chips"><span class="mdb-chip"><i>总质量</i>40000 kg</span><span class="mdb-chip"><i>整备</i>7000 kg</span><span class="mdb-chip"><i>轴数</i>3轴</span><span class="mdb-chip"><i>轮胎</i>11.00R20 12PR</span><span class="mdb-chip"><i>公告批次</i>第 383 批</span></div>
                     </div>
-                    <div class="mdb-card" id="m-EHJ9400CCYE">
-                        <div class="mdb-card-bg" style="background-image:url('assets/images/models/grp-fence.webp')"></div>
-                        <div class="mdb-card-grad"></div>
-                        <div class="mdb-card-glass">
-                            <h4>仓栅式运输半挂车<span class="mdb-brand">楚源牌</span></h4>
-                            <div class="mdb-code">EHJ9400CCYE</div>
-                            <div class="mdb-chips"><span class="mdb-chip"><i>总质量</i>40000 kg</span><span class="mdb-chip"><i>整备</i>8000 kg</span><span class="mdb-chip"><i>轴数</i>3轴</span><span class="mdb-chip"><i>轮胎</i>11.00R20 12PR</span></div>
-                            <div class="mdb-actions">
-                                <a href="vehicles/EHJ9400CCYE.html" class="mdb-btn">详情 →</a>
-                                <a href="configurator.html?model=EHJ9400CCYE&vname=%E4%BB%93%E6%A0%85%E5%BC%8F%E8%BF%90%E8%BE%93%E5%8D%8A%E6%8C%82%E8%BD%A6" class="mdb-btn mdb-btn-quote">在线询价</a>
-                            </div>
-                        </div>
+                    <div class="mdb-actions">
+                        <a href="vehicles/EHJ9400CCY.html" class="mdb-btn">详情 →</a>
+                        <a href="configurator.html?model=EHJ9400CCY&vname=%E4%BB%93%E6%A0%85%E5%BC%8F%E8%BF%90%E8%BE%93%E5%8D%8A%E6%8C%82%E8%BD%A6" class="mdb-btn mdb-btn-quote">在线询价</a>
                     </div>
-                    <div class="mdb-card" id="m-EHJ9400CCYEQ">
-                        <div class="mdb-card-bg" style="background-image:url('assets/images/models/grp-fence.webp')"></div>
-                        <div class="mdb-card-grad"></div>
-                        <div class="mdb-card-glass">
-                            <h4>仓栅式运输半挂车<span class="mdb-brand">楚源牌</span></h4>
-                            <div class="mdb-code">EHJ9400CCYEQ</div>
-                            <div class="mdb-chips"><span class="mdb-chip"><i>总质量</i>40000 kg</span><span class="mdb-chip"><i>整备</i>6300 kg</span><span class="mdb-chip"><i>轴数</i>3轴</span><span class="mdb-chip"><i>轮胎</i>11.00R20 12PR</span></div>
-                            <div class="mdb-actions">
-                                <a href="vehicles/EHJ9400CCYEQ.html" class="mdb-btn">详情 →</a>
-                                <a href="configurator.html?model=EHJ9400CCYEQ&vname=%E4%BB%93%E6%A0%85%E5%BC%8F%E8%BF%90%E8%BE%93%E5%8D%8A%E6%8C%82%E8%BD%A6" class="mdb-btn mdb-btn-quote">在线询价</a>
-                            </div>
-                        </div>
-                    </div>                </div>
-            </div>
-            <div class="mdb-group" id="cat-lowbed">
+                </div>
+                <div class="mdb-card">
+                    <div class="mdb-card-main">
+                        <h4>EHJ9400CCYE<span class="mdb-name">仓栅式运输半挂车</span><span class="mdb-brand">楚源牌</span></h4>
+                        <div class="mdb-chips"><span class="mdb-chip"><i>总质量</i>40000 kg</span><span class="mdb-chip"><i>整备</i>8000 kg</span><span class="mdb-chip"><i>轴数</i>3轴</span><span class="mdb-chip"><i>轮胎</i>11.00R20 12PR</span><span class="mdb-chip"><i>公告批次</i>第 338 批</span></div>
+                    </div>
+                    <div class="mdb-actions">
+                        <a href="vehicles/EHJ9400CCYE.html" class="mdb-btn">详情 →</a>
+                        <a href="configurator.html?model=EHJ9400CCYE&vname=%E4%BB%93%E6%A0%85%E5%BC%8F%E8%BF%90%E8%BE%93%E5%8D%8A%E6%8C%82%E8%BD%A6" class="mdb-btn mdb-btn-quote">在线询价</a>
+                    </div>
+                </div>
+                <div class="mdb-card">
+                    <div class="mdb-card-main">
+                        <h4>EHJ9400CCYEQ<span class="mdb-name">仓栅式运输半挂车</span><span class="mdb-brand">楚源牌</span></h4>
+                        <div class="mdb-chips"><span class="mdb-chip"><i>总质量</i>40000 kg</span><span class="mdb-chip"><i>整备</i>6300 kg</span><span class="mdb-chip"><i>轴数</i>3轴</span><span class="mdb-chip"><i>轮胎</i>11.00R20 12PR</span><span class="mdb-chip"><i>公告批次</i>第 387 批</span></div>
+                    </div>
+                    <div class="mdb-actions">
+                        <a href="vehicles/EHJ9400CCYEQ.html" class="mdb-btn">详情 →</a>
+                        <a href="configurator.html?model=EHJ9400CCYEQ&vname=%E4%BB%93%E6%A0%85%E5%BC%8F%E8%BF%90%E8%BE%93%E5%8D%8A%E6%8C%82%E8%BD%A6" class="mdb-btn mdb-btn-quote">在线询价</a>
+                    </div>
+                </div>            </div>
+            <div class="mdb-group" id="cat-lowbed" style="background-image: url('assets/images/products/lowbed/mission.jpg')">
                 <div class="mdb-group-head">
                     <h2>低平板<span class="mdb-group-sub">4 款公告车型</span></h2>
                     <a class="mdb-btn mdb-btn-primary" href="product-lowbed.html">品类详情页 →</a>
                 </div>
                 <div class="mdb-banner">
-                    <p><i>车型介绍</i>货台低、重心稳的低平板系列,可选凹梁与爬梯结构,装卸工程机械便捷安全。</p>
-                    <p><i>适用范围</i>挖掘机、装载机、压路机等工程机械和不可拆解大件设备的运输。</p>
-                    <p><i>车型优点</i>多轴距、多轴荷公告可选,按设备吨位与外形匹配车型。</p>
+                    
+                    <div class="mdb-banner-txt">
+                        <p><i>车型介绍</i>货台低、重心稳的低平板系列,可选凹梁与爬梯结构,装卸工程机械便捷安全。</p>
+                        <p><i>适用范围</i>挖掘机、装载机、压路机等工程机械和不可拆解大件设备的运输。</p>
+                        <p><i>车型优点</i>多轴距、多轴荷公告可选,按设备吨位与外形匹配车型。</p>
+                    </div>
                 </div>
-                <div class="mdb-grid">
-                    <div class="mdb-card" id="m-EHJ9400TDP">
-                        <div class="mdb-card-bg" style="background-image:url('assets/images/vehicles/photo-EHJ9400TDP.webp')"></div>
-                        <div class="mdb-card-grad"></div>
-                        <div class="mdb-card-glass">
-                            <h4>低平板半挂车<span class="mdb-brand">楚源牌</span></h4>
-                            <div class="mdb-code">EHJ9400TDP</div>
-                            <div class="mdb-chips"><span class="mdb-chip"><i>总质量</i>40000 kg</span><span class="mdb-chip"><i>整备</i>7000 kg</span><span class="mdb-chip"><i>轴数</i>3轴</span><span class="mdb-chip"><i>轮胎</i>8.25R20 16PR</span></div>
-                            <div class="mdb-actions">
-                                <a href="vehicles/EHJ9400TDP.html" class="mdb-btn">详情 →</a>
-                                <a href="configurator.html?model=EHJ9400TDP&vname=%E4%BD%8E%E5%B9%B3%E6%9D%BF%E5%8D%8A%E6%8C%82%E8%BD%A6" class="mdb-btn mdb-btn-quote">在线询价</a>
-                            </div>
-                        </div>
+                <div class="mdb-card">
+                    <div class="mdb-card-main">
+                        <h4>EHJ9400TDP<span class="mdb-name">低平板半挂车</span><span class="mdb-brand">楚源牌</span></h4>
+                        <div class="mdb-chips"><span class="mdb-chip"><i>总质量</i>40000 kg</span><span class="mdb-chip"><i>整备</i>7000 kg</span><span class="mdb-chip"><i>轴数</i>3轴</span><span class="mdb-chip"><i>轮胎</i>8.25R20 16PR</span><span class="mdb-chip"><i>公告批次</i>第 393 批</span></div>
                     </div>
-                    <div class="mdb-card" id="m-JDV9380TDP">
-                        <div class="mdb-card-bg" style="background-image:url('assets/images/vehicles/photo-JDV9380TDP.webp')"></div>
-                        <div class="mdb-card-grad"></div>
-                        <div class="mdb-card-glass">
-                            <h4>低平板半挂车<span class="mdb-brand">襄汽牌</span></h4>
-                            <div class="mdb-code">JDV9380TDP</div>
-                            <div class="mdb-chips"><span class="mdb-chip"><i>总质量</i>38000 kg</span><span class="mdb-chip"><i>整备</i>8350 kg</span><span class="mdb-chip"><i>轴数</i>3轴</span><span class="mdb-chip"><i>轮胎</i>235/75R17.5 16PR</span></div>
-                            <div class="mdb-actions">
-                                <a href="vehicles/JDV9380TDP.html" class="mdb-btn">详情 →</a>
-                                <a href="configurator.html?model=JDV9380TDP&vname=%E4%BD%8E%E5%B9%B3%E6%9D%BF%E5%8D%8A%E6%8C%82%E8%BD%A6" class="mdb-btn mdb-btn-quote">在线询价</a>
-                            </div>
-                        </div>
+                    <div class="mdb-actions">
+                        <a href="vehicles/EHJ9400TDP.html" class="mdb-btn">详情 →</a>
+                        <a href="configurator.html?model=EHJ9400TDP&vname=%E4%BD%8E%E5%B9%B3%E6%9D%BF%E5%8D%8A%E6%8C%82%E8%BD%A6" class="mdb-btn mdb-btn-quote">在线询价</a>
                     </div>
-                    <div class="mdb-card" id="m-JDV9381TDP">
-                        <div class="mdb-card-bg" style="background-image:url('assets/images/products/lowbed/mission.jpg')"></div>
-                        <div class="mdb-card-grad"></div>
-                        <div class="mdb-card-glass">
-                            <h4>低平板半挂车<span class="mdb-brand">襄汽牌</span></h4>
-                            <div class="mdb-code">JDV9381TDP</div>
-                            <div class="mdb-chips"><span class="mdb-chip"><i>总质量</i>38000 kg</span><span class="mdb-chip"><i>整备</i>7690 kg</span><span class="mdb-chip"><i>轴数</i>3轴</span><span class="mdb-chip"><i>轮胎</i>235/75R17.5 16PR</span></div>
-                            <div class="mdb-actions">
-                                <a href="vehicles/JDV9381TDP.html" class="mdb-btn">详情 →</a>
-                                <a href="configurator.html?model=JDV9381TDP&vname=%E4%BD%8E%E5%B9%B3%E6%9D%BF%E5%8D%8A%E6%8C%82%E8%BD%A6" class="mdb-btn mdb-btn-quote">在线询价</a>
-                            </div>
-                        </div>
+                </div>
+                <div class="mdb-card">
+                    <div class="mdb-card-main">
+                        <h4>JDV9380TDP<span class="mdb-name">低平板半挂车</span><span class="mdb-brand">襄汽牌</span></h4>
+                        <div class="mdb-chips"><span class="mdb-chip"><i>总质量</i>38000 kg</span><span class="mdb-chip"><i>整备</i>8350 kg</span><span class="mdb-chip"><i>轴数</i>3轴</span><span class="mdb-chip"><i>轮胎</i>235/75R17.5 16PR</span><span class="mdb-chip"><i>公告批次</i>第 393 批</span></div>
                     </div>
-                    <div class="mdb-card" id="m-JDV9382TDP">
-                        <div class="mdb-card-bg" style="background-image:url('assets/images/vehicles/photo-JDV9382TDP.webp')"></div>
-                        <div class="mdb-card-grad"></div>
-                        <div class="mdb-card-glass">
-                            <h4>低平板半挂车<span class="mdb-brand">襄汽牌</span></h4>
-                            <div class="mdb-code">JDV9382TDP</div>
-                            <div class="mdb-chips"><span class="mdb-chip"><i>总质量</i>38000 kg</span><span class="mdb-chip"><i>整备</i>7580 kg</span><span class="mdb-chip"><i>轴数</i>3轴</span><span class="mdb-chip"><i>轮胎</i>235/75R17.5 16PR</span></div>
-                            <div class="mdb-actions">
-                                <a href="vehicles/JDV9382TDP.html" class="mdb-btn">详情 →</a>
-                                <a href="configurator.html?model=JDV9382TDP&vname=%E4%BD%8E%E5%B9%B3%E6%9D%BF%E5%8D%8A%E6%8C%82%E8%BD%A6" class="mdb-btn mdb-btn-quote">在线询价</a>
-                            </div>
-                        </div>
-                    </div>                </div>
-            </div>
-            <div class="mdb-group" id="cat-skeleton">
+                    <div class="mdb-actions">
+                        <a href="vehicles/JDV9380TDP.html" class="mdb-btn">详情 →</a>
+                        <a href="configurator.html?model=JDV9380TDP&vname=%E4%BD%8E%E5%B9%B3%E6%9D%BF%E5%8D%8A%E6%8C%82%E8%BD%A6" class="mdb-btn mdb-btn-quote">在线询价</a>
+                    </div>
+                </div>
+                <div class="mdb-card">
+                    <div class="mdb-card-main">
+                        <h4>JDV9381TDP<span class="mdb-name">低平板半挂车</span><span class="mdb-brand">襄汽牌</span></h4>
+                        <div class="mdb-chips"><span class="mdb-chip"><i>总质量</i>38000 kg</span><span class="mdb-chip"><i>整备</i>7690 kg</span><span class="mdb-chip"><i>轴数</i>3轴</span><span class="mdb-chip"><i>轮胎</i>235/75R17.5 16PR</span><span class="mdb-chip"><i>公告批次</i>第 393 批</span></div>
+                    </div>
+                    <div class="mdb-actions">
+                        <a href="vehicles/JDV9381TDP.html" class="mdb-btn">详情 →</a>
+                        <a href="configurator.html?model=JDV9381TDP&vname=%E4%BD%8E%E5%B9%B3%E6%9D%BF%E5%8D%8A%E6%8C%82%E8%BD%A6" class="mdb-btn mdb-btn-quote">在线询价</a>
+                    </div>
+                </div>
+                <div class="mdb-card">
+                    <div class="mdb-card-main">
+                        <h4>JDV9382TDP<span class="mdb-name">低平板半挂车</span><span class="mdb-brand">襄汽牌</span></h4>
+                        <div class="mdb-chips"><span class="mdb-chip"><i>总质量</i>38000 kg</span><span class="mdb-chip"><i>整备</i>7580 kg</span><span class="mdb-chip"><i>轴数</i>3轴</span><span class="mdb-chip"><i>轮胎</i>235/75R17.5 16PR</span><span class="mdb-chip"><i>公告批次</i>第 387 批</span></div>
+                    </div>
+                    <div class="mdb-actions">
+                        <a href="vehicles/JDV9382TDP.html" class="mdb-btn">详情 →</a>
+                        <a href="configurator.html?model=JDV9382TDP&vname=%E4%BD%8E%E5%B9%B3%E6%9D%BF%E5%8D%8A%E6%8C%82%E8%BD%A6" class="mdb-btn mdb-btn-quote">在线询价</a>
+                    </div>
+                </div>            </div>
+            <div class="mdb-group" id="cat-skeleton" style="background-image: url('assets/images/models/grp-skeleton.webp')">
                 <div class="mdb-group-head">
                     <h2>集装箱骨架<span class="mdb-group-sub">6 款公告车型</span></h2>
                     <a class="mdb-btn mdb-btn-primary" href="product-skeleton.html">品类详情页 →</a>
                 </div>
                 <div class="mdb-banner">
-                    <p><i>车型介绍</i>集装箱直接装到底盘骨架上,由扭锁装置固定,成为半挂车的强度构件。</p>
-                    <p><i>适用范围</i>集装箱转运:发货人仓库装货直达收货人仓库,中途换车、换船无须开箱换装,港口与多式联运主力。</p>
-                    <p><i>车型优点</i>快速装卸,可从一种运输工具直接换装到另一种;按客户需要工装保证,质量稳定性能可靠。</p>
+                    
+                    <div class="mdb-banner-txt">
+                        <p><i>车型介绍</i>集装箱直接装到底盘骨架上,由扭锁装置固定,成为半挂车的强度构件。</p>
+                        <p><i>适用范围</i>集装箱转运:发货人仓库装货直达收货人仓库,中途换车、换船无须开箱换装,港口与多式联运主力。</p>
+                        <p><i>车型优点</i>快速装卸,可从一种运输工具直接换装到另一种;按客户需要工装保证,质量稳定性能可靠。</p>
+                    </div>
                 </div>
-                <div class="mdb-grid">
-                    <div class="mdb-card" id="m-EHJ9400TJZE">
-                        <div class="mdb-card-bg" style="background-image:url('assets/images/vehicles/photo-EHJ9400TJZE.webp')"></div>
-                        <div class="mdb-card-grad"></div>
-                        <div class="mdb-card-glass">
-                            <h4>集装箱运输半挂车<span class="mdb-brand">楚源牌</span></h4>
-                            <div class="mdb-code">EHJ9400TJZE</div>
-                            <div class="mdb-chips"><span class="mdb-chip"><i>总质量</i>40000 kg</span><span class="mdb-chip"><i>整备</i>5800 kg</span><span class="mdb-chip"><i>轴数</i>3轴</span><span class="mdb-chip"><i>轮胎</i>11.00R20 12PR</span></div>
-                            <div class="mdb-actions">
-                                <a href="vehicles/EHJ9400TJZE.html" class="mdb-btn">详情 →</a>
-                                <a href="configurator.html?model=EHJ9400TJZE&vname=%E9%9B%86%E8%A3%85%E7%AE%B1%E8%BF%90%E8%BE%93%E5%8D%8A%E6%8C%82%E8%BD%A6" class="mdb-btn mdb-btn-quote">在线询价</a>
-                            </div>
-                        </div>
+                <div class="mdb-card">
+                    <div class="mdb-card-main">
+                        <h4>EHJ9400TJZE<span class="mdb-name">集装箱运输半挂车</span><span class="mdb-brand">楚源牌</span></h4>
+                        <div class="mdb-chips"><span class="mdb-chip"><i>总质量</i>40000 kg</span><span class="mdb-chip"><i>整备</i>5800 kg</span><span class="mdb-chip"><i>轴数</i>3轴</span><span class="mdb-chip"><i>轮胎</i>11.00R20 12PR</span><span class="mdb-chip"><i>公告批次</i>第 371 批</span></div>
                     </div>
-                    <div class="mdb-card" id="m-EHJ9401TJZE">
-                        <div class="mdb-card-bg" style="background-image:url('assets/images/models/grp-skeleton.webp')"></div>
-                        <div class="mdb-card-grad"></div>
-                        <div class="mdb-card-glass">
-                            <h4>集装箱运输半挂车<span class="mdb-brand">楚源牌</span></h4>
-                            <div class="mdb-code">EHJ9401TJZE</div>
-                            <div class="mdb-chips"><span class="mdb-chip"><i>总质量</i>40000 kg</span><span class="mdb-chip"><i>整备</i>5000 kg</span><span class="mdb-chip"><i>轴数</i>3轴</span><span class="mdb-chip"><i>轮胎</i>11.00R20 12PR</span></div>
-                            <div class="mdb-actions">
-                                <a href="vehicles/EHJ9401TJZE.html" class="mdb-btn">详情 →</a>
-                                <a href="configurator.html?model=EHJ9401TJZE&vname=%E9%9B%86%E8%A3%85%E7%AE%B1%E8%BF%90%E8%BE%93%E5%8D%8A%E6%8C%82%E8%BD%A6" class="mdb-btn mdb-btn-quote">在线询价</a>
-                            </div>
-                        </div>
+                    <div class="mdb-actions">
+                        <a href="vehicles/EHJ9400TJZE.html" class="mdb-btn">详情 →</a>
+                        <a href="configurator.html?model=EHJ9400TJZE&vname=%E9%9B%86%E8%A3%85%E7%AE%B1%E8%BF%90%E8%BE%93%E5%8D%8A%E6%8C%82%E8%BD%A6" class="mdb-btn mdb-btn-quote">在线询价</a>
                     </div>
-                    <div class="mdb-card" id="m-EHJ9400TJZ">
-                        <div class="mdb-card-bg" style="background-image:url('assets/images/vehicles/photo-EHJ9400TJZ.webp')"></div>
-                        <div class="mdb-card-grad"></div>
-                        <div class="mdb-card-glass">
-                            <h4>集装箱运输半挂车<span class="mdb-brand">楚源牌</span></h4>
-                            <div class="mdb-code">EHJ9400TJZ</div>
-                            <div class="mdb-chips"><span class="mdb-chip"><i>总质量</i>40000 kg</span><span class="mdb-chip"><i>整备</i>5500 kg</span><span class="mdb-chip"><i>轴数</i>3轴</span><span class="mdb-chip"><i>轮胎</i>11.00R20 12PR</span></div>
-                            <div class="mdb-actions">
-                                <a href="vehicles/EHJ9400TJZ.html" class="mdb-btn">详情 →</a>
-                                <a href="configurator.html?model=EHJ9400TJZ&vname=%E9%9B%86%E8%A3%85%E7%AE%B1%E8%BF%90%E8%BE%93%E5%8D%8A%E6%8C%82%E8%BD%A6" class="mdb-btn mdb-btn-quote">在线询价</a>
-                            </div>
-                        </div>
+                </div>
+                <div class="mdb-card">
+                    <div class="mdb-card-main">
+                        <h4>EHJ9401TJZE<span class="mdb-name">集装箱运输半挂车</span><span class="mdb-brand">楚源牌</span></h4>
+                        <div class="mdb-chips"><span class="mdb-chip"><i>总质量</i>40000 kg</span><span class="mdb-chip"><i>整备</i>5000 kg</span><span class="mdb-chip"><i>轴数</i>3轴</span><span class="mdb-chip"><i>轮胎</i>11.00R20 12PR</span><span class="mdb-chip"><i>公告批次</i>第 338 批</span></div>
                     </div>
-                    <div class="mdb-card" id="m-EHJ9350TJZE">
-                        <div class="mdb-card-bg" style="background-image:url('assets/images/vehicles/photo-EHJ9350TJZE.webp')"></div>
-                        <div class="mdb-card-grad"></div>
-                        <div class="mdb-card-glass">
-                            <h4>集装箱运输半挂车<span class="mdb-brand">楚源牌</span></h4>
-                            <div class="mdb-code">EHJ9350TJZE</div>
-                            <div class="mdb-chips"><span class="mdb-chip"><i>总质量</i>35000 kg</span><span class="mdb-chip"><i>整备</i>4500 kg</span><span class="mdb-chip"><i>轴数</i>2轴</span><span class="mdb-chip"><i>轮胎</i>11R22.5 14PR</span></div>
-                            <div class="mdb-actions">
-                                <a href="vehicles/EHJ9350TJZE.html" class="mdb-btn">详情 →</a>
-                                <a href="configurator.html?model=EHJ9350TJZE&vname=%E9%9B%86%E8%A3%85%E7%AE%B1%E8%BF%90%E8%BE%93%E5%8D%8A%E6%8C%82%E8%BD%A6" class="mdb-btn mdb-btn-quote">在线询价</a>
-                            </div>
-                        </div>
+                    <div class="mdb-actions">
+                        <a href="vehicles/EHJ9401TJZE.html" class="mdb-btn">详情 →</a>
+                        <a href="configurator.html?model=EHJ9401TJZE&vname=%E9%9B%86%E8%A3%85%E7%AE%B1%E8%BF%90%E8%BE%93%E5%8D%8A%E6%8C%82%E8%BD%A6" class="mdb-btn mdb-btn-quote">在线询价</a>
                     </div>
-                    <div class="mdb-card" id="m-JDV9390TJZE">
-                        <div class="mdb-card-bg" style="background-image:url('assets/images/vehicles/photo-JDV9390TJZE.webp')"></div>
-                        <div class="mdb-card-grad"></div>
-                        <div class="mdb-card-glass">
-                            <h4>集装箱运输半挂车<span class="mdb-brand">襄汽牌</span></h4>
-                            <div class="mdb-code">JDV9390TJZE</div>
-                            <div class="mdb-chips"><span class="mdb-chip"><i>总质量</i>38800 kg</span><span class="mdb-chip"><i>整备</i>4800 kg</span><span class="mdb-chip"><i>轴数</i>3轴</span><span class="mdb-chip"><i>轮胎</i>11.00R20 12PR</span></div>
-                            <div class="mdb-actions">
-                                <a href="vehicles/JDV9390TJZE.html" class="mdb-btn">详情 →</a>
-                                <a href="configurator.html?model=JDV9390TJZE&vname=%E9%9B%86%E8%A3%85%E7%AE%B1%E8%BF%90%E8%BE%93%E5%8D%8A%E6%8C%82%E8%BD%A6" class="mdb-btn mdb-btn-quote">在线询价</a>
-                            </div>
-                        </div>
+                </div>
+                <div class="mdb-card">
+                    <div class="mdb-card-main">
+                        <h4>EHJ9400TJZ<span class="mdb-name">集装箱运输半挂车</span><span class="mdb-brand">楚源牌</span></h4>
+                        <div class="mdb-chips"><span class="mdb-chip"><i>总质量</i>40000 kg</span><span class="mdb-chip"><i>整备</i>5500 kg</span><span class="mdb-chip"><i>轴数</i>3轴</span><span class="mdb-chip"><i>轮胎</i>11.00R20 12PR</span><span class="mdb-chip"><i>公告批次</i>第 369 批</span></div>
                     </div>
-                    <div class="mdb-card" id="m-JDV9350TJZE">
-                        <div class="mdb-card-bg" style="background-image:url('assets/images/vehicles/photo-JDV9350TJZE.webp')"></div>
-                        <div class="mdb-card-grad"></div>
-                        <div class="mdb-card-glass">
-                            <h4>集装箱运输半挂车<span class="mdb-brand">襄汽牌</span></h4>
-                            <div class="mdb-code">JDV9350TJZE</div>
-                            <div class="mdb-chips"><span class="mdb-chip"><i>总质量</i>34990 kg</span><span class="mdb-chip"><i>整备</i>4000 kg</span><span class="mdb-chip"><i>轴数</i>2轴</span><span class="mdb-chip"><i>轮胎</i>11.00R20 12PR</span></div>
-                            <div class="mdb-actions">
-                                <a href="vehicles/JDV9350TJZE.html" class="mdb-btn">详情 →</a>
-                                <a href="configurator.html?model=JDV9350TJZE&vname=%E9%9B%86%E8%A3%85%E7%AE%B1%E8%BF%90%E8%BE%93%E5%8D%8A%E6%8C%82%E8%BD%A6" class="mdb-btn mdb-btn-quote">在线询价</a>
-                            </div>
-                        </div>
-                    </div>                </div>
-            </div>
-            <div class="mdb-group" id="cat-crane">
+                    <div class="mdb-actions">
+                        <a href="vehicles/EHJ9400TJZ.html" class="mdb-btn">详情 →</a>
+                        <a href="configurator.html?model=EHJ9400TJZ&vname=%E9%9B%86%E8%A3%85%E7%AE%B1%E8%BF%90%E8%BE%93%E5%8D%8A%E6%8C%82%E8%BD%A6" class="mdb-btn mdb-btn-quote">在线询价</a>
+                    </div>
+                </div>
+                <div class="mdb-card">
+                    <div class="mdb-card-main">
+                        <h4>EHJ9350TJZE<span class="mdb-name">集装箱运输半挂车</span><span class="mdb-brand">楚源牌</span></h4>
+                        <div class="mdb-chips"><span class="mdb-chip"><i>总质量</i>35000 kg</span><span class="mdb-chip"><i>整备</i>4500 kg</span><span class="mdb-chip"><i>轴数</i>2轴</span><span class="mdb-chip"><i>轮胎</i>11R22.5 14PR</span><span class="mdb-chip"><i>公告批次</i>第 343 批</span></div>
+                    </div>
+                    <div class="mdb-actions">
+                        <a href="vehicles/EHJ9350TJZE.html" class="mdb-btn">详情 →</a>
+                        <a href="configurator.html?model=EHJ9350TJZE&vname=%E9%9B%86%E8%A3%85%E7%AE%B1%E8%BF%90%E8%BE%93%E5%8D%8A%E6%8C%82%E8%BD%A6" class="mdb-btn mdb-btn-quote">在线询价</a>
+                    </div>
+                </div>
+                <div class="mdb-card">
+                    <div class="mdb-card-main">
+                        <h4>JDV9390TJZE<span class="mdb-name">集装箱运输半挂车</span><span class="mdb-brand">襄汽牌</span></h4>
+                        <div class="mdb-chips"><span class="mdb-chip"><i>总质量</i>38800 kg</span><span class="mdb-chip"><i>整备</i>4800 kg</span><span class="mdb-chip"><i>轴数</i>3轴</span><span class="mdb-chip"><i>轮胎</i>11.00R20 12PR</span><span class="mdb-chip"><i>公告批次</i>第 381 批</span></div>
+                    </div>
+                    <div class="mdb-actions">
+                        <a href="vehicles/JDV9390TJZE.html" class="mdb-btn">详情 →</a>
+                        <a href="configurator.html?model=JDV9390TJZE&vname=%E9%9B%86%E8%A3%85%E7%AE%B1%E8%BF%90%E8%BE%93%E5%8D%8A%E6%8C%82%E8%BD%A6" class="mdb-btn mdb-btn-quote">在线询价</a>
+                    </div>
+                </div>
+                <div class="mdb-card">
+                    <div class="mdb-card-main">
+                        <h4>JDV9350TJZE<span class="mdb-name">集装箱运输半挂车</span><span class="mdb-brand">襄汽牌</span></h4>
+                        <div class="mdb-chips"><span class="mdb-chip"><i>总质量</i>34990 kg</span><span class="mdb-chip"><i>整备</i>4000 kg</span><span class="mdb-chip"><i>轴数</i>2轴</span><span class="mdb-chip"><i>轮胎</i>11.00R20 12PR</span><span class="mdb-chip"><i>公告批次</i>第 387 批</span></div>
+                    </div>
+                    <div class="mdb-actions">
+                        <a href="vehicles/JDV9350TJZE.html" class="mdb-btn">详情 →</a>
+                        <a href="configurator.html?model=JDV9350TJZE&vname=%E9%9B%86%E8%A3%85%E7%AE%B1%E8%BF%90%E8%BE%93%E5%8D%8A%E6%8C%82%E8%BD%A6" class="mdb-btn mdb-btn-quote">在线询价</a>
+                    </div>
+                </div>            </div>
+            <div class="mdb-group" id="cat-crane" style="background-image: url('assets/images/models/grp-crane.webp')">
                 <div class="mdb-group-head">
                     <h2>随车起重<span class="mdb-group-sub">5 款公告车型</span></h2>
                     <a class="mdb-btn mdb-btn-primary" href="product-crane.html">品类详情页 →</a>
                 </div>
                 <div class="mdb-banner">
-                    <p><i>车型介绍</i>随车起重运输一体,吊机分直臂式和折臂式两种,装卸吊装一车完成。</p>
-                    <p><i>适用范围</i>吊装、装卸货物和救援等领域,狭窄特殊工况优势明显。</p>
-                    <p><i>车型优点</i>装货灵活、装货量更大;作业半径大,必要时车头与货箱可分离作业。</p>
+                    
+                    <div class="mdb-banner-txt">
+                        <p><i>车型介绍</i>随车起重运输一体,吊机分直臂式和折臂式两种,装卸吊装一车完成。</p>
+                        <p><i>适用范围</i>吊装、装卸货物和救援等领域,狭窄特殊工况优势明显。</p>
+                        <p><i>车型优点</i>装货灵活、装货量更大;作业半径大,必要时车头与货箱可分离作业。</p>
+                    </div>
                 </div>
-                <div class="mdb-grid">
-                    <div class="mdb-card" id="m-JDV5310JSQS1">
-                        <div class="mdb-card-bg" style="background-image:url('assets/images/vehicles/photo-JDV5310JSQS1.webp')"></div>
-                        <div class="mdb-card-grad"></div>
-                        <div class="mdb-card-glass">
-                            <h4>随车起重运输车<span class="mdb-brand">襄汽牌</span></h4>
-                            <div class="mdb-code">JDV5310JSQS1</div>
-                            <div class="mdb-chips"><span class="mdb-chip"><i>总质量</i>31000 kg</span><span class="mdb-chip"><i>整备</i>20000 kg</span><span class="mdb-chip"><i>轮胎</i>11.00R20 18PR</span><span class="mdb-chip"><i>公告</i>第 385 批</span></div>
-                            <div class="mdb-actions">
-                                <a href="vehicles/JDV5310JSQS1.html" class="mdb-btn">详情 →</a>
-                                <a href="configurator.html?model=JDV5310JSQS1&vname=%E9%9A%8F%E8%BD%A6%E8%B5%B7%E9%87%8D%E8%BF%90%E8%BE%93%E8%BD%A6" class="mdb-btn mdb-btn-quote">在线询价</a>
-                            </div>
-                        </div>
+                <div class="mdb-card">
+                    <div class="mdb-card-main">
+                        <h4>JDV5310JSQS1<span class="mdb-name">随车起重运输车</span><span class="mdb-brand">襄汽牌</span></h4>
+                        <div class="mdb-chips"><span class="mdb-chip"><i>总质量</i>31000 kg</span><span class="mdb-chip"><i>整备</i>20000 kg</span><span class="mdb-chip"><i>底盘</i>SX1319MC6Z2</span><span class="mdb-chip"><i>轮胎</i>11.00R20 18PR</span><span class="mdb-chip"><i>公告批次</i>第 385 批</span></div>
                     </div>
-                    <div class="mdb-card" id="m-JDV5250JSQS1">
-                        <div class="mdb-card-bg" style="background-image:url('assets/images/vehicles/photo-JDV5250JSQS1.webp')"></div>
-                        <div class="mdb-card-grad"></div>
-                        <div class="mdb-card-glass">
-                            <h4>随车起重运输车<span class="mdb-brand">襄汽牌</span></h4>
-                            <div class="mdb-code">JDV5250JSQS1</div>
-                            <div class="mdb-chips"><span class="mdb-chip"><i>总质量</i>25000 kg</span><span class="mdb-chip"><i>整备</i>16900 kg</span><span class="mdb-chip"><i>轮胎</i>11.00R20 18PR</span><span class="mdb-chip"><i>公告</i>第 385 批</span></div>
-                            <div class="mdb-actions">
-                                <a href="vehicles/JDV5250JSQS1.html" class="mdb-btn">详情 →</a>
-                                <a href="configurator.html?model=JDV5250JSQS1&vname=%E9%9A%8F%E8%BD%A6%E8%B5%B7%E9%87%8D%E8%BF%90%E8%BE%93%E8%BD%A6" class="mdb-btn mdb-btn-quote">在线询价</a>
-                            </div>
-                        </div>
+                    <div class="mdb-actions">
+                        <a href="vehicles/JDV5310JSQS1.html" class="mdb-btn">详情 →</a>
+                        <a href="configurator.html?model=JDV5310JSQS1&vname=%E9%9A%8F%E8%BD%A6%E8%B5%B7%E9%87%8D%E8%BF%90%E8%BE%93%E8%BD%A6" class="mdb-btn mdb-btn-quote">在线询价</a>
                     </div>
-                    <div class="mdb-card" id="m-JDV9400JSQ">
-                        <div class="mdb-card-bg" style="background-image:url('assets/images/models/grp-crane.webp')"></div>
-                        <div class="mdb-card-grad"></div>
-                        <div class="mdb-card-glass">
-                            <h4>随车起重运输半挂车<span class="mdb-brand">襄汽牌</span></h4>
-                            <div class="mdb-code">JDV9400JSQ</div>
-                            <div class="mdb-chips"><span class="mdb-chip"><i>总质量</i>40000 kg</span><span class="mdb-chip"><i>整备</i>13000 kg</span><span class="mdb-chip"><i>轴数</i>3轴</span><span class="mdb-chip"><i>轮胎</i>11.00R20 12PR</span></div>
-                            <div class="mdb-actions">
-                                <a href="vehicles/JDV9400JSQ.html" class="mdb-btn">详情 →</a>
-                                <a href="configurator.html?model=JDV9400JSQ&vname=%E9%9A%8F%E8%BD%A6%E8%B5%B7%E9%87%8D%E8%BF%90%E8%BE%93%E5%8D%8A%E6%8C%82%E8%BD%A6" class="mdb-btn mdb-btn-quote">在线询价</a>
-                            </div>
-                        </div>
+                </div>
+                <div class="mdb-card">
+                    <div class="mdb-card-main">
+                        <h4>JDV5250JSQS1<span class="mdb-name">随车起重运输车</span><span class="mdb-brand">襄汽牌</span></h4>
+                        <div class="mdb-chips"><span class="mdb-chip"><i>总质量</i>25000 kg</span><span class="mdb-chip"><i>整备</i>16900 kg</span><span class="mdb-chip"><i>底盘</i>SX1259MB4F1</span><span class="mdb-chip"><i>轮胎</i>11.00R20 18PR</span><span class="mdb-chip"><i>公告批次</i>第 385 批</span></div>
                     </div>
-                    <div class="mdb-card" id="m-JDV9401JSQ">
-                        <div class="mdb-card-bg" style="background-image:url('assets/images/models/grp-crane.webp')"></div>
-                        <div class="mdb-card-grad"></div>
-                        <div class="mdb-card-glass">
-                            <h4>随车起重运输半挂车<span class="mdb-brand">襄汽牌</span></h4>
-                            <div class="mdb-code">JDV9401JSQ</div>
-                            <div class="mdb-chips"><span class="mdb-chip"><i>总质量</i>40000 kg</span><span class="mdb-chip"><i>整备</i>12200 kg</span><span class="mdb-chip"><i>轴数</i>3轴</span><span class="mdb-chip"><i>轮胎</i>11.00R20 12PR</span></div>
-                            <div class="mdb-actions">
-                                <a href="vehicles/JDV9401JSQ.html" class="mdb-btn">详情 →</a>
-                                <a href="configurator.html?model=JDV9401JSQ&vname=%E9%9A%8F%E8%BD%A6%E8%B5%B7%E9%87%8D%E8%BF%90%E8%BE%93%E5%8D%8A%E6%8C%82%E8%BD%A6" class="mdb-btn mdb-btn-quote">在线询价</a>
-                            </div>
-                        </div>
+                    <div class="mdb-actions">
+                        <a href="vehicles/JDV5250JSQS1.html" class="mdb-btn">详情 →</a>
+                        <a href="configurator.html?model=JDV5250JSQS1&vname=%E9%9A%8F%E8%BD%A6%E8%B5%B7%E9%87%8D%E8%BF%90%E8%BE%93%E8%BD%A6" class="mdb-btn mdb-btn-quote">在线询价</a>
                     </div>
-                    <div class="mdb-card" id="m-JDV9402JSQ">
-                        <div class="mdb-card-bg" style="background-image:url('assets/images/models/grp-crane.webp')"></div>
-                        <div class="mdb-card-grad"></div>
-                        <div class="mdb-card-glass">
-                            <h4>随车起重运输半挂车<span class="mdb-brand">襄汽牌</span></h4>
-                            <div class="mdb-code">JDV9402JSQ</div>
-                            <div class="mdb-chips"><span class="mdb-chip"><i>总质量</i>40000 kg</span><span class="mdb-chip"><i>整备</i>13000 kg</span><span class="mdb-chip"><i>轴数</i>3轴</span><span class="mdb-chip"><i>轮胎</i>11.00R20 12PR</span></div>
-                            <div class="mdb-actions">
-                                <a href="vehicles/JDV9402JSQ.html" class="mdb-btn">详情 →</a>
-                                <a href="configurator.html?model=JDV9402JSQ&vname=%E9%9A%8F%E8%BD%A6%E8%B5%B7%E9%87%8D%E8%BF%90%E8%BE%93%E5%8D%8A%E6%8C%82%E8%BD%A6" class="mdb-btn mdb-btn-quote">在线询价</a>
-                            </div>
-                        </div>
-                    </div>                </div>
-            </div>
-            <div class="mdb-group" id="cat-van">
+                </div>
+                <div class="mdb-card">
+                    <div class="mdb-card-main">
+                        <h4>JDV9400JSQ<span class="mdb-name">随车起重运输半挂车</span><span class="mdb-brand">襄汽牌</span></h4>
+                        <div class="mdb-chips"><span class="mdb-chip"><i>总质量</i>40000 kg</span><span class="mdb-chip"><i>整备</i>13000 kg</span><span class="mdb-chip"><i>轴数</i>3轴</span><span class="mdb-chip"><i>轮胎</i>11.00R20 12PR</span><span class="mdb-chip"><i>公告批次</i>第 362 批</span></div>
+                    </div>
+                    <div class="mdb-actions">
+                        <a href="vehicles/JDV9400JSQ.html" class="mdb-btn">详情 →</a>
+                        <a href="configurator.html?model=JDV9400JSQ&vname=%E9%9A%8F%E8%BD%A6%E8%B5%B7%E9%87%8D%E8%BF%90%E8%BE%93%E5%8D%8A%E6%8C%82%E8%BD%A6" class="mdb-btn mdb-btn-quote">在线询价</a>
+                    </div>
+                </div>
+                <div class="mdb-card">
+                    <div class="mdb-card-main">
+                        <h4>JDV9401JSQ<span class="mdb-name">随车起重运输半挂车</span><span class="mdb-brand">襄汽牌</span></h4>
+                        <div class="mdb-chips"><span class="mdb-chip"><i>总质量</i>40000 kg</span><span class="mdb-chip"><i>整备</i>12200 kg</span><span class="mdb-chip"><i>轴数</i>3轴</span><span class="mdb-chip"><i>轮胎</i>11.00R20 12PR</span><span class="mdb-chip"><i>公告批次</i>第 366 批</span></div>
+                    </div>
+                    <div class="mdb-actions">
+                        <a href="vehicles/JDV9401JSQ.html" class="mdb-btn">详情 →</a>
+                        <a href="configurator.html?model=JDV9401JSQ&vname=%E9%9A%8F%E8%BD%A6%E8%B5%B7%E9%87%8D%E8%BF%90%E8%BE%93%E5%8D%8A%E6%8C%82%E8%BD%A6" class="mdb-btn mdb-btn-quote">在线询价</a>
+                    </div>
+                </div>
+                <div class="mdb-card">
+                    <div class="mdb-card-main">
+                        <h4>JDV9402JSQ<span class="mdb-name">随车起重运输半挂车</span><span class="mdb-brand">襄汽牌</span></h4>
+                        <div class="mdb-chips"><span class="mdb-chip"><i>总质量</i>40000 kg</span><span class="mdb-chip"><i>整备</i>13000 kg</span><span class="mdb-chip"><i>轴数</i>3轴</span><span class="mdb-chip"><i>轮胎</i>11.00R20 12PR</span><span class="mdb-chip"><i>公告批次</i>第 383 批</span></div>
+                    </div>
+                    <div class="mdb-actions">
+                        <a href="vehicles/JDV9402JSQ.html" class="mdb-btn">详情 →</a>
+                        <a href="configurator.html?model=JDV9402JSQ&vname=%E9%9A%8F%E8%BD%A6%E8%B5%B7%E9%87%8D%E8%BF%90%E8%BE%93%E5%8D%8A%E6%8C%82%E8%BD%A6" class="mdb-btn mdb-btn-quote">在线询价</a>
+                    </div>
+                </div>            </div>
+            <div class="mdb-group" id="cat-van" style="background-image: url('assets/images/models/grp-van.webp')">
                 <div class="mdb-group-head">
                     <h2>厢式 · 通信<span class="mdb-group-sub">3 款公告车型</span></h2>
                     
                 </div>
                 <div class="mdb-banner">
-                    <p><i>车型介绍</i>厢体采用高强度冷轧瓦楞钢板、无骨架结构,X 型拉撑;厢顶有封闭式、推拉开启式、敞开式等多种形式。本系列另含通信专用车公告。</p>
-                    <p><i>适用范围</i>家用电器、轻纺货物及建筑材料运输,兼适海洋、铁路、公路多式联运。</p>
-                    <p><i>车型优点</i>货物免受风吹日晒雨淋,快速装卸转运,降低货损与运输成本。</p>
+                    
+                    <div class="mdb-banner-txt">
+                        <p><i>车型介绍</i>厢体采用高强度冷轧瓦楞钢板、无骨架结构,X 型拉撑;厢顶有封闭式、推拉开启式、敞开式等多种形式。本系列另含通信专用车公告。</p>
+                        <p><i>适用范围</i>家用电器、轻纺货物及建筑材料运输,兼适海洋、铁路、公路多式联运。</p>
+                        <p><i>车型优点</i>货物免受风吹日晒雨淋,快速装卸转运,降低货损与运输成本。</p>
+                    </div>
                 </div>
-                <div class="mdb-grid">
-                    <div class="mdb-card" id="m-EHJ9400XXYE">
-                        <div class="mdb-card-bg" style="background-image:url('assets/images/models/grp-van.webp')"></div>
-                        <div class="mdb-card-grad"></div>
-                        <div class="mdb-card-glass">
-                            <h4>厢式运输半挂车<span class="mdb-brand">楚源牌</span></h4>
-                            <div class="mdb-code">EHJ9400XXYE</div>
-                            <div class="mdb-chips"><span class="mdb-chip"><i>总质量</i>40000 kg</span><span class="mdb-chip"><i>整备</i>8500 kg</span><span class="mdb-chip"><i>轴数</i>3轴</span><span class="mdb-chip"><i>轮胎</i>11.00R20 12PR</span></div>
-                            <div class="mdb-actions">
-                                <a href="vehicles/EHJ9400XXYE.html" class="mdb-btn">详情 →</a>
-                                <a href="configurator.html?model=EHJ9400XXYE&vname=%E5%8E%A2%E5%BC%8F%E8%BF%90%E8%BE%93%E5%8D%8A%E6%8C%82%E8%BD%A6" class="mdb-btn mdb-btn-quote">在线询价</a>
-                            </div>
-                        </div>
+                <div class="mdb-card">
+                    <div class="mdb-card-main">
+                        <h4>EHJ9400XXYE<span class="mdb-name">厢式运输半挂车</span><span class="mdb-brand">楚源牌</span></h4>
+                        <div class="mdb-chips"><span class="mdb-chip"><i>总质量</i>40000 kg</span><span class="mdb-chip"><i>整备</i>8500 kg</span><span class="mdb-chip"><i>轴数</i>3轴</span><span class="mdb-chip"><i>轮胎</i>11.00R20 12PR</span><span class="mdb-chip"><i>公告批次</i>第 338 批</span></div>
                     </div>
-                    <div class="mdb-card" id="m-EHJ9350XXY">
-                        <div class="mdb-card-bg" style="background-image:url('assets/images/models/grp-van.webp')"></div>
-                        <div class="mdb-card-grad"></div>
-                        <div class="mdb-card-glass">
-                            <h4>厢式运输半挂车<span class="mdb-brand">楚源牌</span></h4>
-                            <div class="mdb-code">EHJ9350XXY</div>
-                            <div class="mdb-chips"><span class="mdb-chip"><i>总质量</i>35000 kg</span><span class="mdb-chip"><i>整备</i>6590 kg</span><span class="mdb-chip"><i>轴数</i>2轴</span><span class="mdb-chip"><i>轮胎</i>11R22.5 14PR</span></div>
-                            <div class="mdb-actions">
-                                <a href="vehicles/EHJ9350XXY.html" class="mdb-btn">详情 →</a>
-                                <a href="configurator.html?model=EHJ9350XXY&vname=%E5%8E%A2%E5%BC%8F%E8%BF%90%E8%BE%93%E5%8D%8A%E6%8C%82%E8%BD%A6" class="mdb-btn mdb-btn-quote">在线询价</a>
-                            </div>
-                        </div>
+                    <div class="mdb-actions">
+                        <a href="vehicles/EHJ9400XXYE.html" class="mdb-btn">详情 →</a>
+                        <a href="configurator.html?model=EHJ9400XXYE&vname=%E5%8E%A2%E5%BC%8F%E8%BF%90%E8%BE%93%E5%8D%8A%E6%8C%82%E8%BD%A6" class="mdb-btn mdb-btn-quote">在线询价</a>
                     </div>
-                    <div class="mdb-card" id="m-JDV9180XTX">
-                        <div class="mdb-card-bg" style="background-image:url('assets/images/vehicles/van.webp')"></div>
-                        <div class="mdb-card-grad"></div>
-                        <div class="mdb-card-glass">
-                            <h4>通信半挂车<span class="mdb-brand">襄汽牌</span></h4>
-                            <div class="mdb-code">JDV9180XTX</div>
-                            <div class="mdb-chips"><span class="mdb-chip"><i>总质量</i>17500 kg</span><span class="mdb-chip"><i>整备</i>17500 kg</span><span class="mdb-chip"><i>轴数</i>1轴</span><span class="mdb-chip"><i>轮胎</i>12R22.5 12PR</span></div>
-                            <div class="mdb-actions">
-                                <a href="vehicles/JDV9180XTX.html" class="mdb-btn">详情 →</a>
-                                <a href="configurator.html?model=JDV9180XTX&vname=%E9%80%9A%E4%BF%A1%E5%8D%8A%E6%8C%82%E8%BD%A6" class="mdb-btn mdb-btn-quote">在线询价</a>
-                            </div>
-                        </div>
-                    </div>                </div>
-            </div>
-            <div class="mdb-group" id="cat-feed">
+                </div>
+                <div class="mdb-card">
+                    <div class="mdb-card-main">
+                        <h4>EHJ9350XXY<span class="mdb-name">厢式运输半挂车</span><span class="mdb-brand">楚源牌</span></h4>
+                        <div class="mdb-chips"><span class="mdb-chip"><i>总质量</i>35000 kg</span><span class="mdb-chip"><i>整备</i>6590 kg</span><span class="mdb-chip"><i>轴数</i>2轴</span><span class="mdb-chip"><i>轮胎</i>11R22.5 14PR</span><span class="mdb-chip"><i>公告批次</i>第 343 批</span></div>
+                    </div>
+                    <div class="mdb-actions">
+                        <a href="vehicles/EHJ9350XXY.html" class="mdb-btn">详情 →</a>
+                        <a href="configurator.html?model=EHJ9350XXY&vname=%E5%8E%A2%E5%BC%8F%E8%BF%90%E8%BE%93%E5%8D%8A%E6%8C%82%E8%BD%A6" class="mdb-btn mdb-btn-quote">在线询价</a>
+                    </div>
+                </div>
+                <div class="mdb-card">
+                    <div class="mdb-card-main">
+                        <h4>JDV9180XTX<span class="mdb-name">通信半挂车</span><span class="mdb-brand">襄汽牌</span></h4>
+                        <div class="mdb-chips"><span class="mdb-chip"><i>总质量</i>17500 kg</span><span class="mdb-chip"><i>整备</i>17500 kg</span><span class="mdb-chip"><i>轴数</i>1轴</span><span class="mdb-chip"><i>轮胎</i>12R22.5 12PR</span><span class="mdb-chip"><i>公告批次</i>第 387 批</span></div>
+                    </div>
+                    <div class="mdb-actions">
+                        <a href="vehicles/JDV9180XTX.html" class="mdb-btn">详情 →</a>
+                        <a href="configurator.html?model=JDV9180XTX&vname=%E9%80%9A%E4%BF%A1%E5%8D%8A%E6%8C%82%E8%BD%A6" class="mdb-btn mdb-btn-quote">在线询价</a>
+                    </div>
+                </div>            </div>
+            <div class="mdb-group" id="cat-feed" style="background-image: url('assets/images/models/grp-feed.webp')">
                 <div class="mdb-group-head">
                     <h2>散装饲料<span class="mdb-group-sub">2 款公告车型</span></h2>
                     
                 </div>
                 <div class="mdb-banner">
-                    <p><i>车型介绍</i>全封闭罐体,顶部进料口密封压紧,内部圆弧过渡无尖锐棱角,缓落分料仓减少颗粒破碎。</p>
-                    <p><i>适用范围</i>畜禽、水产颗粒饲料长途转运,可直接对接养殖场料塔自动化上料。</p>
-                    <p><i>车型优点</i>螺旋绞龙推送卸料,无残留卸料快;可做独立分仓,一次分运多种配方饲料。</p>
-                </div>
-                <div class="mdb-grid">
-                    <div class="mdb-card" id="m-EHJ9400ZSL">
-                        <div class="mdb-card-bg" style="background-image:url('assets/images/vehicles/feed.webp')"></div>
-                        <div class="mdb-card-grad"></div>
-                        <div class="mdb-card-glass">
-                            <h4>散装饲料运输半挂车<span class="mdb-brand">楚源牌</span></h4>
-                            <div class="mdb-code">EHJ9400ZSL</div>
-                            <div class="mdb-chips"><span class="mdb-chip"><i>总质量</i>40000 kg</span><span class="mdb-chip"><i>整备</i>9800 kg</span><span class="mdb-chip"><i>轴数</i>3轴</span><span class="mdb-chip"><i>轮胎</i>12R22.5 12PR</span></div>
-                            <div class="mdb-actions">
-                                <a href="vehicles/EHJ9400ZSL.html" class="mdb-btn">详情 →</a>
-                                <a href="configurator.html?model=EHJ9400ZSL&vname=%E6%95%A3%E8%A3%85%E9%A5%B2%E6%96%99%E8%BF%90%E8%BE%93%E5%8D%8A%E6%8C%82%E8%BD%A6" class="mdb-btn mdb-btn-quote">在线询价</a>
-                            </div>
-                        </div>
+                    
+                    <div class="mdb-banner-txt">
+                        <p><i>车型介绍</i>全封闭罐体,顶部进料口密封压紧,内部圆弧过渡无尖锐棱角,缓落分料仓减少颗粒破碎。</p>
+                        <p><i>适用范围</i>畜禽、水产颗粒饲料长途转运,可直接对接养殖场料塔自动化上料。</p>
+                        <p><i>车型优点</i>螺旋绞龙推送卸料,无残留卸料快;可做独立分仓,一次分运多种配方饲料。</p>
                     </div>
-                    <div class="mdb-card" id="m-EHJ9405ZSLXND">
-                        <div class="mdb-card-bg" style="background-image:url('assets/images/vehicles/feed.webp')"></div>
-                        <div class="mdb-card-grad"></div>
-                        <div class="mdb-card-glass">
-                            <h4>散装饲料运输半挂车<span class="mdb-brand">楚源牌</span></h4>
-                            <div class="mdb-code">EHJ9405ZSLXND</div>
-                            <div class="mdb-chips"><span class="mdb-chip"><i>总质量</i>40000 kg</span><span class="mdb-chip"><i>整备</i>9500 kg</span><span class="mdb-chip"><i>轴数</i>3轴</span><span class="mdb-chip"><i>轮胎</i>12R22.5 12PR</span></div>
-                            <div class="mdb-actions">
-                                <a href="vehicles/EHJ9405ZSLXND.html" class="mdb-btn">详情 →</a>
-                                <a href="configurator.html?model=EHJ9405ZSLXND&vname=%E6%95%A3%E8%A3%85%E9%A5%B2%E6%96%99%E8%BF%90%E8%BE%93%E5%8D%8A%E6%8C%82%E8%BD%A6" class="mdb-btn mdb-btn-quote">在线询价</a>
-                            </div>
-                        </div>
-                    </div>                </div>
-            </div>
-            <div class="mdb-group" id="cat-timber">
+                </div>
+                <div class="mdb-card">
+                    <div class="mdb-card-main">
+                        <h4>EHJ9400ZSL<span class="mdb-name">散装饲料运输半挂车</span><span class="mdb-brand">楚源牌</span></h4>
+                        <div class="mdb-chips"><span class="mdb-chip"><i>总质量</i>40000 kg</span><span class="mdb-chip"><i>整备</i>9800 kg</span><span class="mdb-chip"><i>轴数</i>3轴</span><span class="mdb-chip"><i>轮胎</i>12R22.5 12PR</span><span class="mdb-chip"><i>公告批次</i>第 383 批</span></div>
+                    </div>
+                    <div class="mdb-actions">
+                        <a href="vehicles/EHJ9400ZSL.html" class="mdb-btn">详情 →</a>
+                        <a href="configurator.html?model=EHJ9400ZSL&vname=%E6%95%A3%E8%A3%85%E9%A5%B2%E6%96%99%E8%BF%90%E8%BE%93%E5%8D%8A%E6%8C%82%E8%BD%A6" class="mdb-btn mdb-btn-quote">在线询价</a>
+                    </div>
+                </div>
+                <div class="mdb-card">
+                    <div class="mdb-card-main">
+                        <h4>EHJ9405ZSLXND<span class="mdb-name">散装饲料运输半挂车</span><span class="mdb-brand">楚源牌</span></h4>
+                        <div class="mdb-chips"><span class="mdb-chip"><i>总质量</i>40000 kg</span><span class="mdb-chip"><i>整备</i>9500 kg</span><span class="mdb-chip"><i>轴数</i>3轴</span><span class="mdb-chip"><i>轮胎</i>12R22.5 12PR</span><span class="mdb-chip"><i>公告批次</i>第 391 批</span></div>
+                    </div>
+                    <div class="mdb-actions">
+                        <a href="vehicles/EHJ9405ZSLXND.html" class="mdb-btn">详情 →</a>
+                        <a href="configurator.html?model=EHJ9405ZSLXND&vname=%E6%95%A3%E8%A3%85%E9%A5%B2%E6%96%99%E8%BF%90%E8%BE%93%E5%8D%8A%E6%8C%82%E8%BD%A6" class="mdb-btn mdb-btn-quote">在线询价</a>
+                    </div>
+                </div>            </div>
+            <div class="mdb-group" id="cat-timber" style="background-image: url('assets/images/vehicles/photo-JDV9400TWY.webp')">
                 <div class="mdb-group-head">
                     <h2>运材 · 危险品罐箱<span class="mdb-group-sub">2 款公告车型</span></h2>
                     <a class="mdb-btn mdb-btn-primary" href="product-special.html">品类详情页 →</a>
                 </div>
                 <div class="mdb-banner">
-                    <p><i>车型介绍</i>运材半挂车与危险品罐箱骨架运输半挂车两个公告系列,结构按货种专项设计。</p>
-                    <p><i>适用范围</i>原木木材运输;罐式集装箱危化品运输,公告齐全合规上路。</p>
-                    <p><i>车型优点</i>专用绑扎与锁固结构,货种匹配度高,手续齐全省心。</p>
-                </div>
-                <div class="mdb-grid">
-                    <div class="mdb-card" id="m-EHJ9400TYC">
-                        <div class="mdb-card-bg" style="background-image:url('assets/images/products/container/01.jpg')"></div>
-                        <div class="mdb-card-grad"></div>
-                        <div class="mdb-card-glass">
-                            <h4>运材半挂车<span class="mdb-brand">楚源牌</span></h4>
-                            <div class="mdb-code">EHJ9400TYC</div>
-                            <div class="mdb-chips"><span class="mdb-chip"><i>总质量</i>40000 kg</span><span class="mdb-chip"><i>整备</i>4600 kg</span><span class="mdb-chip"><i>轴数</i>3轴</span><span class="mdb-chip"><i>轮胎</i>425/65R22.5 18PR</span></div>
-                            <div class="mdb-actions">
-                                <a href="vehicles/EHJ9400TYC.html" class="mdb-btn">详情 →</a>
-                                <a href="configurator.html?model=EHJ9400TYC&vname=%E8%BF%90%E6%9D%90%E5%8D%8A%E6%8C%82%E8%BD%A6" class="mdb-btn mdb-btn-quote">在线询价</a>
-                            </div>
-                        </div>
+                    
+                    <div class="mdb-banner-txt">
+                        <p><i>车型介绍</i>运材半挂车与危险品罐箱骨架运输半挂车两个公告系列,结构按货种专项设计。</p>
+                        <p><i>适用范围</i>原木木材运输;罐式集装箱危化品运输,公告齐全合规上路。</p>
+                        <p><i>车型优点</i>专用绑扎与锁固结构,货种匹配度高,手续齐全省心。</p>
                     </div>
-                    <div class="mdb-card" id="m-JDV9400TWY">
-                        <div class="mdb-card-bg" style="background-image:url('assets/images/vehicles/photo-JDV9400TWY.webp')"></div>
-                        <div class="mdb-card-grad"></div>
-                        <div class="mdb-card-glass">
-                            <h4>危险品罐箱骨架运输半挂车<span class="mdb-brand">襄汽牌</span></h4>
-                            <div class="mdb-code">JDV9400TWY</div>
-                            <div class="mdb-chips"><span class="mdb-chip"><i>总质量</i>40000 kg</span><span class="mdb-chip"><i>整备</i>5370 kg</span><span class="mdb-chip"><i>轴数</i>3轴</span><span class="mdb-chip"><i>轮胎</i>11.00R20 12PR</span></div>
-                            <div class="mdb-actions">
-                                <a href="vehicles/JDV9400TWY.html" class="mdb-btn">详情 →</a>
-                                <a href="configurator.html?model=JDV9400TWY&vname=%E5%8D%B1%E9%99%A9%E5%93%81%E7%BD%90%E7%AE%B1%E9%AA%A8%E6%9E%B6%E8%BF%90%E8%BE%93%E5%8D%8A%E6%8C%82%E8%BD%A6" class="mdb-btn mdb-btn-quote">在线询价</a>
-                            </div>
-                        </div>
-                    </div>                </div>
-            </div>
-            <div class="mdb-group" id="cat-special">
+                </div>
+                <div class="mdb-card">
+                    <div class="mdb-card-main">
+                        <h4>EHJ9400TYC<span class="mdb-name">运材半挂车</span><span class="mdb-brand">楚源牌</span></h4>
+                        <div class="mdb-chips"><span class="mdb-chip"><i>总质量</i>40000 kg</span><span class="mdb-chip"><i>整备</i>4600 kg</span><span class="mdb-chip"><i>轴数</i>3轴</span><span class="mdb-chip"><i>轮胎</i>425/65R22.5 18PR</span><span class="mdb-chip"><i>公告批次</i>第 338 批</span></div>
+                    </div>
+                    <div class="mdb-actions">
+                        <a href="vehicles/EHJ9400TYC.html" class="mdb-btn">详情 →</a>
+                        <a href="configurator.html?model=EHJ9400TYC&vname=%E8%BF%90%E6%9D%90%E5%8D%8A%E6%8C%82%E8%BD%A6" class="mdb-btn mdb-btn-quote">在线询价</a>
+                    </div>
+                </div>
+                <div class="mdb-card">
+                    <div class="mdb-card-main">
+                        <h4>JDV9400TWY<span class="mdb-name">危险品罐箱骨架运输半挂车</span><span class="mdb-brand">襄汽牌</span></h4>
+                        <div class="mdb-chips"><span class="mdb-chip"><i>总质量</i>40000 kg</span><span class="mdb-chip"><i>整备</i>5370 kg</span><span class="mdb-chip"><i>轴数</i>3轴</span><span class="mdb-chip"><i>轮胎</i>11.00R20 12PR</span><span class="mdb-chip"><i>公告批次</i>第 349 批</span></div>
+                    </div>
+                    <div class="mdb-actions">
+                        <a href="vehicles/JDV9400TWY.html" class="mdb-btn">详情 →</a>
+                        <a href="configurator.html?model=JDV9400TWY&vname=%E5%8D%B1%E9%99%A9%E5%93%81%E7%BD%90%E7%AE%B1%E9%AA%A8%E6%9E%B6%E8%BF%90%E8%BE%93%E5%8D%8A%E6%8C%82%E8%BD%A6" class="mdb-btn mdb-btn-quote">在线询价</a>
+                    </div>
+                </div>            </div>
+            <div class="mdb-group" id="cat-special" style="background-image: url('assets/images/models/grp-special.webp')">
                 <div class="mdb-group-head">
                     <h2>专用车系列<span class="mdb-group-sub">6 款公告车型</span></h2>
                     <a class="mdb-btn mdb-btn-primary" href="product-special.html">品类详情页 →</a>
                 </div>
                 <div class="mdb-banner">
-                    <p><i>车型介绍</i>应急救险、前突指挥、高空作业、垃圾转运等专项公告车系;其中蓝牌轻型车型 C1 驾照即可驾驶,城区不限行。</p>
-                    <p><i>适用范围</i>市政抢修、电力抢险、道路应急、防汛排涝、消防前置保障与突发事件现场指挥。</p>
-                    <p><i>车型优点</i>模块化密闭救援方舱分区收纳;整车预留标准化设备安装位,一车载全套抢险装备。</p>
+                    
+                    <div class="mdb-banner-txt">
+                        <p><i>车型介绍</i>应急救险、前突指挥、高空作业、垃圾转运等专项公告车系;其中蓝牌轻型车型 C1 驾照即可驾驶,城区不限行。</p>
+                        <p><i>适用范围</i>市政抢修、电力抢险、道路应急、防汛排涝、消防前置保障与突发事件现场指挥。</p>
+                        <p><i>车型优点</i>模块化密闭救援方舱分区收纳;整车预留标准化设备安装位,一车载全套抢险装备。</p>
+                    </div>
                 </div>
-                <div class="mdb-grid">
-                    <div class="mdb-card" id="m-JDV5040JGKZZ6">
-                        <div class="mdb-card-bg" style="background-image:url('assets/images/vehicles/photo-JDV5040JGKZZ6.webp')"></div>
-                        <div class="mdb-card-grad"></div>
-                        <div class="mdb-card-glass">
-                            <h4>高空作业车<span class="mdb-brand">襄汽牌</span></h4>
-                            <div class="mdb-code">JDV5040JGKZZ6</div>
-                            <div class="mdb-chips"><span class="mdb-chip"><i>总质量</i>4495 kg</span><span class="mdb-chip"><i>整备</i>4365 kg</span><span class="mdb-chip"><i>轮胎</i>7.00R16LT 10PR</span><span class="mdb-chip"><i>公告</i>第 393 批</span></div>
-                            <div class="mdb-actions">
-                                <a href="vehicles/JDV5040JGKZZ6.html" class="mdb-btn">详情 →</a>
-                                <a href="configurator.html?model=JDV5040JGKZZ6&vname=%E9%AB%98%E7%A9%BA%E4%BD%9C%E4%B8%9A%E8%BD%A6" class="mdb-btn mdb-btn-quote">在线询价</a>
-                            </div>
-                        </div>
+                <div class="mdb-card">
+                    <div class="mdb-card-main">
+                        <h4>JDV5040JGKZZ6<span class="mdb-name">高空作业车</span><span class="mdb-brand">襄汽牌</span></h4>
+                        <div class="mdb-chips"><span class="mdb-chip"><i>总质量</i>4495 kg</span><span class="mdb-chip"><i>整备</i>4365 kg</span><span class="mdb-chip"><i>底盘</i>ZZ1047F3215F145</span><span class="mdb-chip"><i>轮胎</i>7.00R16LT 10PR</span><span class="mdb-chip"><i>公告批次</i>第 393 批</span></div>
                     </div>
-                    <div class="mdb-card" id="m-JDV5040XJXQL6">
-                        <div class="mdb-card-bg" style="background-image:url('assets/images/vehicles/photo-JDV5040XJXQL6.webp')"></div>
-                        <div class="mdb-card-grad"></div>
-                        <div class="mdb-card-glass">
-                            <h4>抽油机检修车<span class="mdb-brand">襄汽牌</span></h4>
-                            <div class="mdb-code">JDV5040XJXQL6</div>
-                            <div class="mdb-chips"><span class="mdb-chip"><i>总质量</i>4495 kg</span><span class="mdb-chip"><i>整备</i>4365 kg</span><span class="mdb-chip"><i>轮胎</i>6.50R15LT 8PR</span><span class="mdb-chip"><i>公告</i>第 379 批</span></div>
-                            <div class="mdb-actions">
-                                <a href="vehicles/JDV5040XJXQL6.html" class="mdb-btn">详情 →</a>
-                                <a href="configurator.html?model=JDV5040XJXQL6&vname=%E6%8A%BD%E6%B2%B9%E6%9C%BA%E6%A3%80%E4%BF%AE%E8%BD%A6" class="mdb-btn mdb-btn-quote">在线询价</a>
-                            </div>
-                        </div>
+                    <div class="mdb-actions">
+                        <a href="vehicles/JDV5040JGKZZ6.html" class="mdb-btn">详情 →</a>
+                        <a href="configurator.html?model=JDV5040JGKZZ6&vname=%E9%AB%98%E7%A9%BA%E4%BD%9C%E4%B8%9A%E8%BD%A6" class="mdb-btn mdb-btn-quote">在线询价</a>
                     </div>
-                    <div class="mdb-card" id="m-JDV5041XJXFT6">
-                        <div class="mdb-card-bg" style="background-image:url('assets/images/vehicles/photo-JDV5041XJXFT6.webp')"></div>
-                        <div class="mdb-card-grad"></div>
-                        <div class="mdb-card-glass">
-                            <h4>抽油机检修车<span class="mdb-brand">襄汽牌</span></h4>
-                            <div class="mdb-code">JDV5041XJXFT6</div>
-                            <div class="mdb-chips"><span class="mdb-chip"><i>总质量</i>4495 kg</span><span class="mdb-chip"><i>整备</i>4365 kg</span><span class="mdb-chip"><i>轮胎</i>185R15LT 8PR</span><span class="mdb-chip"><i>公告</i>第 387 批</span></div>
-                            <div class="mdb-actions">
-                                <a href="vehicles/JDV5041XJXFT6.html" class="mdb-btn">详情 →</a>
-                                <a href="configurator.html?model=JDV5041XJXFT6&vname=%E6%8A%BD%E6%B2%B9%E6%9C%BA%E6%A3%80%E4%BF%AE%E8%BD%A6" class="mdb-btn mdb-btn-quote">在线询价</a>
-                            </div>
-                        </div>
+                </div>
+                <div class="mdb-card">
+                    <div class="mdb-card-main">
+                        <h4>JDV5040XJXQL6<span class="mdb-name">抽油机检修车</span><span class="mdb-brand">襄汽牌</span></h4>
+                        <div class="mdb-chips"><span class="mdb-chip"><i>总质量</i>4495 kg</span><span class="mdb-chip"><i>整备</i>4365 kg</span><span class="mdb-chip"><i>底盘</i>QL1041DCFAY</span><span class="mdb-chip"><i>轮胎</i>6.50R15LT 8PR</span><span class="mdb-chip"><i>公告批次</i>第 379 批</span></div>
                     </div>
-                    <div class="mdb-card" id="m-JDV5030XXHQL6">
-                        <div class="mdb-card-bg" style="background-image:url('assets/images/vehicles/photo-JDV5030XXHQL6.webp')"></div>
-                        <div class="mdb-card-grad"></div>
-                        <div class="mdb-card-glass">
-                            <h4>救险车<span class="mdb-brand">襄汽牌</span></h4>
-                            <div class="mdb-code">JDV5030XXHQL6</div>
-                            <div class="mdb-chips"><span class="mdb-chip"><i>总质量</i>3295 kg</span><span class="mdb-chip"><i>整备</i>2970 kg</span><span class="mdb-chip"><i>轮胎</i>245/70R17LT 10PR</span><span class="mdb-chip"><i>公告</i>第 404 批</span></div>
-                            <div class="mdb-actions">
-                                <a href="vehicles/JDV5030XXHQL6.html" class="mdb-btn">详情 →</a>
-                                <a href="configurator.html?model=JDV5030XXHQL6&vname=%E6%95%91%E9%99%A9%E8%BD%A6" class="mdb-btn mdb-btn-quote">在线询价</a>
-                            </div>
-                        </div>
+                    <div class="mdb-actions">
+                        <a href="vehicles/JDV5040XJXQL6.html" class="mdb-btn">详情 →</a>
+                        <a href="configurator.html?model=JDV5040XJXQL6&vname=%E6%8A%BD%E6%B2%B9%E6%9C%BA%E6%A3%80%E4%BF%AE%E8%BD%A6" class="mdb-btn mdb-btn-quote">在线询价</a>
                     </div>
-                    <div class="mdb-card" id="m-JDV5030XZH">
-                        <div class="mdb-card-bg" style="background-image:url('assets/images/vehicles/photo-JDV5030XZH.webp')"></div>
-                        <div class="mdb-card-grad"></div>
-                        <div class="mdb-card-glass">
-                            <h4>指挥车<span class="mdb-brand">襄汽牌</span></h4>
-                            <div class="mdb-code">JDV5030XZH</div>
-                            <div class="mdb-chips"><span class="mdb-chip"><i>总质量</i>3090 kg</span><span class="mdb-chip"><i>整备</i>2565 kg</span><span class="mdb-chip"><i>轮胎</i>265/65R17</span><span class="mdb-chip"><i>公告</i>第 403 批</span></div>
-                            <div class="mdb-actions">
-                                <a href="vehicles/JDV5030XZH.html" class="mdb-btn">详情 →</a>
-                                <a href="configurator.html?model=JDV5030XZH&vname=%E6%8C%87%E6%8C%A5%E8%BD%A6" class="mdb-btn mdb-btn-quote">在线询价</a>
-                            </div>
-                        </div>
+                </div>
+                <div class="mdb-card">
+                    <div class="mdb-card-main">
+                        <h4>JDV5041XJXFT6<span class="mdb-name">抽油机检修车</span><span class="mdb-brand">襄汽牌</span></h4>
+                        <div class="mdb-chips"><span class="mdb-chip"><i>总质量</i>4495 kg</span><span class="mdb-chip"><i>整备</i>4365 kg</span><span class="mdb-chip"><i>底盘</i>BJ1045V9JB5-24</span><span class="mdb-chip"><i>轮胎</i>185R15LT 8PR</span><span class="mdb-chip"><i>公告批次</i>第 387 批</span></div>
                     </div>
-                    <div class="mdb-card" id="m-JDV5030ZXXSC">
-                        <div class="mdb-card-bg" style="background-image:url('assets/images/vehicles/photo-JDV5030ZXXSC.webp')"></div>
-                        <div class="mdb-card-grad"></div>
-                        <div class="mdb-card-glass">
-                            <h4>车厢可卸式垃圾车<span class="mdb-brand">襄汽牌</span></h4>
-                            <div class="mdb-code">JDV5030ZXXSC</div>
-                            <div class="mdb-chips"><span class="mdb-chip"><i>总质量</i>2840 kg</span><span class="mdb-chip"><i>整备</i>1440 kg</span><span class="mdb-chip"><i>轮胎</i>175R14LT 8PR</span><span class="mdb-chip"><i>公告</i>第 331 批</span></div>
-                            <div class="mdb-actions">
-                                <a href="vehicles/JDV5030ZXXSC.html" class="mdb-btn">详情 →</a>
-                                <a href="configurator.html?model=JDV5030ZXXSC&vname=%E8%BD%A6%E5%8E%A2%E5%8F%AF%E5%8D%B8%E5%BC%8F%E5%9E%83%E5%9C%BE%E8%BD%A6" class="mdb-btn mdb-btn-quote">在线询价</a>
-                            </div>
-                        </div>
-                    </div>                </div>
-            </div>
-                <p class="mdb-note">公告参数为工信部《道路机动车辆生产企业及产品公告》口径(楚源牌 = 襄阳楚聚源汽车制造,襄汽牌 = 湖北欧阳聚德);具体规格与选装按订单约定。未标「实车照片」的卡片配图为同系列实车或渲染示意,以所选型号实车为准。需要完整参数或报价,点任意车型的「在线询价」,或直接联系页脚销售热线。</p>
+                    <div class="mdb-actions">
+                        <a href="vehicles/JDV5041XJXFT6.html" class="mdb-btn">详情 →</a>
+                        <a href="configurator.html?model=JDV5041XJXFT6&vname=%E6%8A%BD%E6%B2%B9%E6%9C%BA%E6%A3%80%E4%BF%AE%E8%BD%A6" class="mdb-btn mdb-btn-quote">在线询价</a>
+                    </div>
+                </div>
+                <div class="mdb-card">
+                    <div class="mdb-card-main">
+                        <h4>JDV5030XXHQL6<span class="mdb-name">救险车</span><span class="mdb-brand">襄汽牌</span></h4>
+                        <div class="mdb-chips"><span class="mdb-chip"><i>总质量</i>3295 kg</span><span class="mdb-chip"><i>整备</i>2970 kg</span><span class="mdb-chip"><i>底盘</i>QL1030CZHW2</span><span class="mdb-chip"><i>轮胎</i>245/70R17LT 10PR</span><span class="mdb-chip"><i>公告批次</i>第 404 批</span></div>
+                    </div>
+                    <div class="mdb-actions">
+                        <a href="vehicles/JDV5030XXHQL6.html" class="mdb-btn">详情 →</a>
+                        <a href="configurator.html?model=JDV5030XXHQL6&vname=%E6%95%91%E9%99%A9%E8%BD%A6" class="mdb-btn mdb-btn-quote">在线询价</a>
+                    </div>
+                </div>
+                <div class="mdb-card">
+                    <div class="mdb-card-main">
+                        <h4>JDV5030XZH<span class="mdb-name">指挥车</span><span class="mdb-brand">襄汽牌</span></h4>
+                        <div class="mdb-chips"><span class="mdb-chip"><i>总质量</i>3090 kg</span><span class="mdb-chip"><i>整备</i>2565 kg</span><span class="mdb-chip"><i>底盘</i>CC2030BN22D</span><span class="mdb-chip"><i>轮胎</i>265/65R17</span><span class="mdb-chip"><i>公告批次</i>第 403 批</span></div>
+                    </div>
+                    <div class="mdb-actions">
+                        <a href="vehicles/JDV5030XZH.html" class="mdb-btn">详情 →</a>
+                        <a href="configurator.html?model=JDV5030XZH&vname=%E6%8C%87%E6%8C%A5%E8%BD%A6" class="mdb-btn mdb-btn-quote">在线询价</a>
+                    </div>
+                </div>
+                <div class="mdb-card">
+                    <div class="mdb-card-main">
+                        <h4>JDV5030ZXXSC<span class="mdb-name">车厢可卸式垃圾车</span><span class="mdb-brand">襄汽牌</span></h4>
+                        <div class="mdb-chips"><span class="mdb-chip"><i>总质量</i>2840 kg</span><span class="mdb-chip"><i>整备</i>1440 kg</span><span class="mdb-chip"><i>底盘</i>SC1031XND64A</span><span class="mdb-chip"><i>轮胎</i>175R14LT 8PR</span><span class="mdb-chip"><i>公告批次</i>第 331 批</span></div>
+                    </div>
+                    <div class="mdb-actions">
+                        <a href="vehicles/JDV5030ZXXSC.html" class="mdb-btn">详情 →</a>
+                        <a href="configurator.html?model=JDV5030ZXXSC&vname=%E8%BD%A6%E5%8E%A2%E5%8F%AF%E5%8D%B8%E5%BC%8F%E5%9E%83%E5%9C%BE%E8%BD%A6" class="mdb-btn mdb-btn-quote">在线询价</a>
+                    </div>
+                </div>            </div>
+                <p class="mdb-note">公告参数为工信部《道路机动车辆生产企业及产品公告》口径(楚源牌 = 襄阳楚聚源汽车制造,襄汽牌 = 湖北欧阳聚德);具体规格与选装按订单约定。需要完整参数或报价,点任意车型的「在线询价」,或直接联系页脚销售热线。</p>
             </main>
         </div>
     </div>
@@ -887,23 +688,7 @@
 <script src="main.js?v=20260615a" defer></script>
 <script>
 (function(){
-  var deskAcc = window.matchMedia('(min-width:1024px)');
-  document.querySelectorAll('#mdbSide > a').forEach(function(cat){
-    cat.addEventListener('click', function(e){
-      if(!deskAcc.matches) return;
-      e.preventDefault();
-      var panel = cat.nextElementSibling;
-      var opening = !(panel && panel.classList.contains('open'));
-      document.querySelectorAll('#mdbSide .mdb-side-ms.open').forEach(function(x){ x.classList.remove('open'); });
-      document.querySelectorAll('#mdbSide > a.exp').forEach(function(x){ x.classList.remove('exp'); });
-      if(panel && opening){
-        panel.classList.add('open'); cat.classList.add('exp');
-        var g = document.getElementById(cat.dataset.cat);
-        if(g) g.scrollIntoView({behavior:'smooth'});
-      }
-    });
-  });
-  var links = document.querySelectorAll('#mdbSide > a');
+  var links = document.querySelectorAll('#mdbSide a');
   var map = {};
   links.forEach(function(a){ map[a.dataset.cat] = a; });
   var obs = new IntersectionObserver(function(es){
