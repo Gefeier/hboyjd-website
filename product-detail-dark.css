@@ -26,7 +26,7 @@ body {
 
 /* 极暗的底部渐变;顶部加重压住亮色厂房/天空,导航栏下不再透白条 */
 .about-hero-overlay {
-    background: linear-gradient(180deg, rgba(5,5,5,0.88) 0%, rgba(5,5,5,0.38) 22%, rgba(5,5,5,0.42) 60%, #050505 100%) !important;
+    background: linear-gradient(180deg, rgba(5,5,5,0.92) 0%, rgba(5,5,5,0.82) 16%, rgba(5,5,5,0.4) 34%, rgba(5,5,5,0.42) 60%, #050505 100%) !important;
 }
 
 .pf-hero .about-hero-eyebrow {
