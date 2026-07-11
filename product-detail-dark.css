@@ -195,3 +195,11 @@ body {
     background: #000000 !important;
     border-top: 1px solid #111 !important;
 }
+
+/* ====== Hero 顶部面包屑(返回出口,别让访客进得来出不去) ====== */
+.vh-crumb-top { position: absolute; top: 84px; left: 0; right: 0; z-index: 5; }
+.vh-crumb-top .container { font-size: 13px; color: #94a3b8; letter-spacing: 1px; }
+.vh-crumb-top a { color: #cbd5e1; text-decoration: none; transition: .2s; padding: 6px 0; }
+.vh-crumb-top a:hover { color: #fff; }
+.vh-crumb-sep { margin: 0 8px; color: #64748b; }
+@media (max-width: 768px) { .vh-crumb-top { top: 70px; } }

@@ -10,15 +10,17 @@
     <link rel="stylesheet" href="/style.css?v=20260615a">
     <link rel="stylesheet" href="/about.css?v=20260615a">
     <link rel="stylesheet" href="/product-detail.css?v=20260616g">
-    <link rel="stylesheet" href="/product-detail-dark.css?v=20260711c">
+    <link rel="stylesheet" href="/product-detail-dark.css?v=20260711d">
     <style>
     .vh-hero{height:64vh!important;min-height:440px;background:url('/assets/images/products/container/01.jpg') center/cover no-repeat}
     .vh-hero .about-hero-eyebrow{color:#94a3b8!important;letter-spacing:5px!important;font-weight:600!important}
     .vh-hero .about-hero-title{color:#fff!important;font-weight:800!important;letter-spacing:3px}
     .vh-hero .about-hero-tagline{color:#cbd5e1!important;letter-spacing:1px}
-    .vh-crumbbar{background:#050505;border-bottom:1px solid #111;padding:14px 0}
-    .vh-crumbbar .container{font-size:12.5px;color:#64748b;letter-spacing:1px}
-    .vh-crumbbar a{color:#64748b;text-decoration:none;transition:.2s} .vh-crumbbar a:hover{color:#fff}
+    .vh-crumb-top{position:absolute;top:84px;left:0;right:0;z-index:5}
+    .vh-crumb-top .container{font-size:13px;color:#94a3b8;letter-spacing:1px}
+    .vh-crumb-top a{color:#cbd5e1;text-decoration:none;transition:.2s;padding:6px 0} .vh-crumb-top a:hover{color:#fff}
+    .vh-crumb-sep{margin:0 8px;color:#64748b}
+    @media(max-width:768px){.vh-crumb-top{top:70px}}
     .vh-photo{background:#050505;padding:56px 0 8px;text-align:center}
     .vh-fig img{max-width:min(620px,92%);height:auto;filter:drop-shadow(0 18px 36px rgba(0,0,0,.7))}
     .vh-fig-photo img{border-radius:10px;filter:none;box-shadow:0 20px 60px rgba(0,0,0,.9);border:1px solid rgba(255,255,255,.05)}
@@ -56,13 +58,13 @@
     </nav>
     <section class="about-hero vh-hero">
         <div class="about-hero-overlay"></div>
+        <div class="vh-crumb-top"><div class="container"><a href="/models.html">← 产品中心</a><span class="vh-crumb-sep">/</span><a href="/product-special.html">运材 · 危险品罐箱</a><span class="vh-crumb-sep">/</span>JDV9400TWY</div></div>
         <div class="about-hero-content">
             <p class="about-hero-eyebrow">JDV9400TWY · 襄汽牌 · 第 349 批公告</p>
             <h1 class="about-hero-title">危险品罐箱骨架运输半挂车</h1>
             <p class="about-hero-tagline">襄汽牌危险品罐箱骨架运输半挂车，厂家直销</p>
         </div>
     </section>
-    <div class="vh-crumbbar"><div class="container"><a href="/models.html">产品中心</a> / <a href="/product-special.html">运材 · 危险品罐箱</a> / JDV9400TWY</div></div>
     <section class="about-stats pf-stats">
         <div class="container">
             <div class="section-header">
