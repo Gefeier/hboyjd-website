@@ -46,14 +46,14 @@
     .mdb-side::-webkit-scrollbar-thumb { background: rgba(255,255,255,0.2); border-radius: 4px; }
     
     /* Wind Organ animation for active sidebar items */
-    .mdb-side>a { position: relative; overflow: hidden; display: flex; justify-content: space-between; align-items: center; padding: 10px 14px; border-radius: 8px; font-size: 14.5px; color: rgba(255,255,255,0.6); text-decoration: none; transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1); font-weight: 500; }
-    .mdb-side>a::before { content: ''; position: absolute; left: 0; top: 0; width: 3px; height: 100%; background: var(--blue-500); box-shadow: 0 0 8px var(--blue-500); transform: scaleY(0); transition: transform 0.3s cubic-bezier(0.4, 0, 0.2, 1); transform-origin: center; }
-    .mdb-side>a:hover { background: rgba(255,255,255,0.05); color: #fff; transform: translateX(3px); }
-    .mdb-side>a.active { background: linear-gradient(90deg, rgba(37,99,235,0.15) 0%, transparent 100%); color: #fff; font-weight: 600; text-shadow: 0 0 10px rgba(255,255,255,0.2); }
-    .mdb-side>a.active::before { transform: scaleY(1); }
+    .mdb-side-item > a, .mdb-side > a { position: relative; overflow: hidden; display: flex; justify-content: space-between; align-items: center; padding: 10px 14px; border-radius: 8px; font-size: 14.5px; color: rgba(255,255,255,0.6); text-decoration: none; transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1); font-weight: 500; }
+    .mdb-side-item > a, .mdb-side > a::before { content: ''; position: absolute; left: 0; top: 0; width: 3px; height: 100%; background: var(--blue-500); box-shadow: 0 0 8px var(--blue-500); transform: scaleY(0); transition: transform 0.3s cubic-bezier(0.4, 0, 0.2, 1); transform-origin: center; }
+    .mdb-side-item > a, .mdb-side > a:hover { background: rgba(255,255,255,0.05); color: #fff; transform: translateX(3px); }
+    .mdb-side-item > a, .mdb-side > a.active { background: linear-gradient(90deg, rgba(37,99,235,0.15) 0%, transparent 100%); color: #fff; font-weight: 600; text-shadow: 0 0 10px rgba(255,255,255,0.2); }
+    .mdb-side-item > a, .mdb-side > a.active::before { transform: scaleY(1); }
     
     .mdb-count { font-size: 11px; opacity: 0.9; margin-left: auto; background: rgba(255,255,255,0.1); padding: 2px 8px; border-radius: 12px; color: rgba(255,255,255,0.7); transition: all 0.3s; }
-    .mdb-side>a.active .mdb-count { background: var(--blue-500); color: white; box-shadow: 0 0 8px rgba(37,99,235,0.5); }
+    .mdb-side-item > a, .mdb-side > a.active .mdb-count { background: var(--blue-500); color: white; box-shadow: 0 0 8px rgba(37,99,235,0.5); }
     
     /* Full-Width Parallax Categories */
     .mdb-group { position: relative; scroll-margin-top: 96px; margin-bottom: 0; padding: 80px 32px; border: none; border-radius: 0; z-index: 1; }
@@ -137,9 +137,9 @@
       .mdb-layout{display:block}
       .mdb-side{position:sticky;top:60px;z-index:20;flex-direction:row;overflow-x:auto;overflow-y:hidden;gap:8px;margin-bottom:24px;padding:12px; background: rgba(10, 15, 26, 0.95); border: 1px solid rgba(255,255,255,0.1); scrollbar-width:none; box-shadow: 0 10px 30px rgba(0,0,0,0.5);}
       .mdb-side::-webkit-scrollbar{display:none;}
-      .mdb-side>a{flex-shrink:0;padding:8px 16px; background: rgba(255,255,255,0.05); border: 1px solid transparent; border-radius: 6px; font-size: 14px;}
-      .mdb-side>a.active{background: rgba(37,99,235,0.2); border: 1px solid rgba(37,99,235,0.4); color: white;}
-      .mdb-side>a::before{content:none;}
+      .mdb-side-item > a, .mdb-side > a{flex-shrink:0;padding:8px 16px; background: rgba(255,255,255,0.05); border: 1px solid transparent; border-radius: 6px; font-size: 14px;}
+      .mdb-side-item > a, .mdb-side > a.active{background: rgba(37,99,235,0.2); border: 1px solid rgba(37,99,235,0.4); color: white;}
+      .mdb-side-item > a, .mdb-side > a::before{content:none;}
       
       .mdb-group{padding: 40px 16px; margin-bottom: 0;}
       .mdb-group::before { background-attachment: scroll; }
@@ -167,7 +167,7 @@
 
     /* --- Sidebar Accordion (Fan-out Submenu) --- */
     .mdb-side-item { display: flex; flex-direction: column; }
-    .mdb-side>a { margin-bottom: 0; } /* override old margin */
+    .mdb-side-item > a, .mdb-side > a { margin-bottom: 0; } /* override old margin */
     .mdb-sub-menu { 
         max-height: 0; overflow: hidden; transition: max-height 0.4s cubic-bezier(0.4, 0, 0.2, 1);
         display: flex; flex-direction: column; padding-left: 20px;
