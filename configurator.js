@@ -889,13 +889,8 @@ setTimeout(function() {
 }, 100);
 updateTags();
 
-// ====== 公告车型总库直达询价(2026-07-11):consumes ?model=公告型号&vname=车名 ======
+// ====== 公告车型直达询价(2026-07-11):URL ?model= 或页内下拉 #modelDirect ======
 (function() {
-    var params = new URLSearchParams(location.search);
-    var model = (params.get('model') || '').trim();
-    if (!model || !/^[A-Z]{2,4}\d{4}[A-Z0-9]*$/.test(model)) return;
-    var vname = (params.get('vname') || '').trim().slice(0, 30);
-
     function modelToType(m) {
         if (/TDP/.test(m)) return '高低平板';
         if (/TJZ/.test(m)) return '骨架';
@@ -904,22 +899,36 @@ updateTags();
         if (/TPB|LB/.test(m)) return '直梁平板';
         return '特种';
     }
-    var type = modelToType(model);
-    var radio = document.querySelector('input[name="vehicleType"][value="' + type + '"]');
-    if (radio && !radio.checked) {
-        radio.checked = true;
-        radio.dispatchEvent(new Event('change', { bubbles: true }));
+    function applyModel(model, vname, overwrite) {
+        if (!model || !/^[A-Z]{2,4}\d{4}[A-Z0-9]*$/.test(model)) return;
+        vname = (vname || '').slice(0, 30);
+        var type = modelToType(model);
+        var radio = document.querySelector('input[name="vehicleType"][value="' + type + '"]');
+        if (radio && !radio.checked) {
+            radio.checked = true;
+            radio.dispatchEvent(new Event('change', { bubbles: true }));
+        }
+        var remarks = document.querySelector('textarea[name="remarks"]');
+        if (remarks && (overwrite || !remarks.value || /^询价车型:/.test(remarks.value))) {
+            remarks.value = '询价车型:' + model + (vname ? ' ' + vname : '') + '(工信部公告型号)';
+        }
+        if (type === '特种' && vname) {
+            setTimeout(function() {
+                var usage = document.querySelector('textarea[name="customUsage"]');
+                if (usage && (overwrite || !usage.value)) usage.value = vname + ' ' + model;
+            }, 300);
+        }
     }
-    // 备注预填公告型号,询价 payload 自然带上
-    var remarks = document.querySelector('textarea[name="remarks"]');
-    if (remarks && !remarks.value) {
-        remarks.value = '询价车型:' + model + (vname ? ' ' + vname : '') + '(工信部公告型号)';
+    var params = new URLSearchParams(location.search);
+    var urlModel = (params.get('model') || '').trim();
+    if (urlModel) {
+        applyModel(urlModel, (params.get('vname') || '').trim(), false);
+        var sel0 = document.getElementById('modelDirect');
+        if (sel0) sel0.value = urlModel;
     }
-    // 特种类的用途说明也预填(渲染是异步的,等一拍)
-    if (type === '特种' && vname) {
-        setTimeout(function() {
-            var usage = document.querySelector('textarea[name="customUsage"]');
-            if (usage && !usage.value) usage.value = vname + ' ' + model;
-        }, 300);
-    }
+    var sel = document.getElementById('modelDirect');
+    if (sel) sel.addEventListener('change', function() {
+        var opt = sel.options[sel.selectedIndex];
+        applyModel(sel.value, opt ? (opt.dataset.vname || '') : '', true);
+    });
 })();

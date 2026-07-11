@@ -9,7 +9,7 @@
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Noto+Sans+SC:wght@300;400;500;700;900&family=Orbitron:wght@400;700;900&display=swap" media="print" onload="this.media='all'">
     <noscript><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Noto+Sans+SC:wght@300;400;500;700;900&family=Orbitron:wght@400;700;900&display=swap"></noscript>
-    <link rel="stylesheet" href="configurator.css?v=20260425a">
+    <link rel="stylesheet" href="configurator.css?v=20260711r">
     <!-- #105 v3 variant 图预加载,切 variant 时无闪烁 -->
     <link rel="preload" as="image" href="assets/images/product-variant-excavator-bed.webp?v=20260618m" type="image/webp">
     <link rel="preload" as="image" href="assets/images/product-variant-small-bee.webp?v=20260618m" type="image/webp">
@@ -169,6 +169,78 @@
                     </div>
                 </label>
             </div>
+            <div class="model-direct">
+                <span class="model-direct-label" data-en="Know your model? Pick directly:">已有意向公告型号?直接选(45 款):</span>
+                <select id="modelDirect">
+                    <option value="">按公告型号选择…</option>
+                    <optgroup label="平板 · 栏板">
+                        <option value="EHJ9400TPB" data-vname="平板运输半挂车">EHJ9400TPB · 平板运输半挂车</option>
+                        <option value="EHJ9400TPBE" data-vname="平板运输半挂车">EHJ9400TPBE · 平板运输半挂车</option>
+                        <option value="EHJ9401TPB" data-vname="平板运输半挂车">EHJ9401TPB · 平板运输半挂车</option>
+                        <option value="EHJ9400LB" data-vname="栏板半挂车">EHJ9400LB · 栏板半挂车</option>
+                        <option value="EHJ9400LBE" data-vname="栏板半挂车">EHJ9400LBE · 栏板半挂车</option>
+                    </optgroup>
+                    <optgroup label="自卸">
+                        <option value="EHJ9400ZHX" data-vname="自卸半挂车">EHJ9400ZHX · 自卸半挂车</option>
+                        <option value="EHJ9401ZHX" data-vname="自卸半挂车">EHJ9401ZHX · 自卸半挂车</option>
+                        <option value="EHJ9402ZHX" data-vname="自卸半挂车">EHJ9402ZHX · 自卸半挂车</option>
+                        <option value="EHJ9400Z" data-vname="自卸半挂车">EHJ9400Z · 自卸半挂车</option>
+                        <option value="EHJ9401Z" data-vname="自卸半挂车">EHJ9401Z · 自卸半挂车</option>
+                        <option value="EHJ9400ZZXP" data-vname="平板自卸半挂车">EHJ9400ZZXP · 平板自卸半挂车</option>
+                        <option value="EHJ9401ZZXP" data-vname="平板自卸半挂车">EHJ9401ZZXP · 平板自卸半挂车</option>
+                        <option value="JDV9400Z" data-vname="自卸半挂车">JDV9400Z · 自卸半挂车</option>
+                        <option value="JDV9400ZHX" data-vname="自卸半挂车">JDV9400ZHX · 自卸半挂车</option>
+                    </optgroup>
+                    <optgroup label="仓栅">
+                        <option value="EHJ9400CCY" data-vname="仓栅式运输半挂车">EHJ9400CCY · 仓栅式运输半挂车</option>
+                        <option value="EHJ9400CCYE" data-vname="仓栅式运输半挂车">EHJ9400CCYE · 仓栅式运输半挂车</option>
+                        <option value="EHJ9400CCYEQ" data-vname="仓栅式运输半挂车">EHJ9400CCYEQ · 仓栅式运输半挂车</option>
+                    </optgroup>
+                    <optgroup label="低平板">
+                        <option value="EHJ9400TDP" data-vname="低平板半挂车">EHJ9400TDP · 低平板半挂车</option>
+                        <option value="JDV9380TDP" data-vname="低平板半挂车">JDV9380TDP · 低平板半挂车</option>
+                        <option value="JDV9381TDP" data-vname="低平板半挂车">JDV9381TDP · 低平板半挂车</option>
+                        <option value="JDV9382TDP" data-vname="低平板半挂车">JDV9382TDP · 低平板半挂车</option>
+                    </optgroup>
+                    <optgroup label="集装箱骨架">
+                        <option value="EHJ9400TJZE" data-vname="集装箱运输半挂车">EHJ9400TJZE · 集装箱运输半挂车</option>
+                        <option value="EHJ9401TJZE" data-vname="集装箱运输半挂车">EHJ9401TJZE · 集装箱运输半挂车</option>
+                        <option value="EHJ9400TJZ" data-vname="集装箱运输半挂车">EHJ9400TJZ · 集装箱运输半挂车</option>
+                        <option value="EHJ9350TJZE" data-vname="集装箱运输半挂车">EHJ9350TJZE · 集装箱运输半挂车</option>
+                        <option value="JDV9390TJZE" data-vname="集装箱运输半挂车">JDV9390TJZE · 集装箱运输半挂车</option>
+                        <option value="JDV9350TJZE" data-vname="集装箱运输半挂车">JDV9350TJZE · 集装箱运输半挂车</option>
+                    </optgroup>
+                    <optgroup label="随车起重">
+                        <option value="JDV5310JSQS1" data-vname="随车起重运输车">JDV5310JSQS1 · 随车起重运输车</option>
+                        <option value="JDV5250JSQS1" data-vname="随车起重运输车">JDV5250JSQS1 · 随车起重运输车</option>
+                        <option value="JDV9400JSQ" data-vname="随车起重运输半挂车">JDV9400JSQ · 随车起重运输半挂车</option>
+                        <option value="JDV9401JSQ" data-vname="随车起重运输半挂车">JDV9401JSQ · 随车起重运输半挂车</option>
+                        <option value="JDV9402JSQ" data-vname="随车起重运输半挂车">JDV9402JSQ · 随车起重运输半挂车</option>
+                    </optgroup>
+                    <optgroup label="厢式 · 通信">
+                        <option value="EHJ9400XXYE" data-vname="厢式运输半挂车">EHJ9400XXYE · 厢式运输半挂车</option>
+                        <option value="EHJ9350XXY" data-vname="厢式运输半挂车">EHJ9350XXY · 厢式运输半挂车</option>
+                        <option value="JDV9180XTX" data-vname="通信半挂车">JDV9180XTX · 通信半挂车</option>
+                    </optgroup>
+                    <optgroup label="散装饲料">
+                        <option value="EHJ9400ZSL" data-vname="散装饲料运输半挂车">EHJ9400ZSL · 散装饲料运输半挂车</option>
+                        <option value="EHJ9405ZSLXND" data-vname="散装饲料运输半挂车">EHJ9405ZSLXND · 散装饲料运输半挂车</option>
+                    </optgroup>
+                    <optgroup label="运材 · 危险品罐箱">
+                        <option value="EHJ9400TYC" data-vname="运材半挂车">EHJ9400TYC · 运材半挂车</option>
+                        <option value="JDV9400TWY" data-vname="危险品罐箱骨架运输半挂车">JDV9400TWY · 危险品罐箱骨架运输半挂车</option>
+                    </optgroup>
+                    <optgroup label="专用车">
+                        <option value="JDV5040JGKZZ6" data-vname="高空作业车">JDV5040JGKZZ6 · 高空作业车</option>
+                        <option value="JDV5040XJXQL6" data-vname="抽油机检修车">JDV5040XJXQL6 · 抽油机检修车</option>
+                        <option value="JDV5041XJXFT6" data-vname="抽油机检修车">JDV5041XJXFT6 · 抽油机检修车</option>
+                        <option value="JDV5030XXHQL6" data-vname="救险车">JDV5030XXHQL6 · 救险车</option>
+                        <option value="JDV5030XZH" data-vname="指挥车">JDV5030XZH · 指挥车</option>
+                        <option value="JDV5030ZXXSC" data-vname="车厢可卸式垃圾车">JDV5030ZXXSC · 车厢可卸式垃圾车</option>
+                    </optgroup>
+                </select>
+                <a href="models.html" class="model-direct-link" data-en="Browse all →">逛车型总库 →</a>
+            </div>
         </div>
 
         <!-- Step 1: 规格（JS 按车型动态渲染） -->
@@ -261,6 +333,6 @@
         </div>
     </div>
 
-    <script src="configurator.js?v=20260711a" defer></script>
+    <script src="configurator.js?v=20260711r" defer></script>
 </body>
 </html>
