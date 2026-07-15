@@ -303,9 +303,13 @@ const typeVariantImages = {
         '罐式后翻(9.6米)': 'assets/images/product-variant-tank-dump.webp?v=20260715a',
         'U型后翻(8.5米三桥)': 'assets/images/product-variant-u-shape-dump.webp?v=20260715a',
         '小鹅颈侧翻(13米)': 'assets/images/product-variant-gooseneck-tipper.webp?v=20260715a',
+        '直梁侧翻': 'assets/images/product-variant-straight-side-tipper.webp?v=20260715a',
     },
     '骨架': {
         '集装箱不封顶(20英尺)': 'assets/images/product-variant-open-top-container.webp?v=20260715a',
+    },
+    '仓栅': {
+        '鹅颈仓栏(13米)': 'assets/images/product-variant-gooseneck-fence.webp?v=20260715a',
     },
 };
 
