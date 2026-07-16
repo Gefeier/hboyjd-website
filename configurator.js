@@ -774,11 +774,11 @@ function recolorVehicle(colorVal) {
         var hsl = rgbToHsl(d[i], d[i+1], d[i+2]);
         var h = hsl[0], s = hsl[1], l = hsl[2];
 
-        // 判断是否为"车身红色区域"：色相在红色范围且饱和度足够且非高亮低饱和(排除米白/奶油色罐体)
-        var isRedHue = (h < 25 || h > 335);
-        var isSaturatedEnough = s > 0.25;
-        var isNotCreamWhite = !(l > 0.65 && s < 0.45);
-        var isRed = isRedHue && isSaturatedEnough && l > 0.08 && l < 0.92 && isNotCreamWhite;
+        // 判断是否为"车身红色漆面"：必须是高饱和强红色,排除一切浅色/低饱和区域(罐体/米白/反光)
+        var isRedHue = (h < 20 || h > 340);
+        var isSaturatedEnough = s > 0.35;
+        var isNotLight = l < 0.75;
+        var isRed = isRedHue && isSaturatedEnough && isNotLight && l > 0.05;
 
         if (isRed) {
             // 替换为目标颜色，保留亮度关系
