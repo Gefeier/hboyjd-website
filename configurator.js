@@ -627,17 +627,12 @@ document.addEventListener('change', function(e) {
         if (variantPng) {
             var cacheKey = currentType + '::' + variant;
             if (pixelCache[cacheKey]) {
-                // 已缓存,如果当前非默认色直接换色
                 var color = getCurrentColor();
-                if (colorTargets[color]) {
-                    pixelCache[currentType] = pixelCache[cacheKey];
-                    recolorVehicle(color);
-                }
+                if (colorTargets[color]) recolorVehicle(color);
             } else {
                 loadVariantPixels(variantPng, function(data) {
                     if (!data) return;
                     pixelCache[cacheKey] = data;
-                    pixelCache[currentType] = data;
                     var color = getCurrentColor();
                     if (colorTargets[color]) recolorVehicle(color);
                 });
@@ -645,13 +640,6 @@ document.addEventListener('change', function(e) {
         }
     } else {
         currentVariant = null;
-        // 回到大类 base 图 + 恢复 base pixelCache
-        var basePng = typeImages[currentType];
-        if (basePng) {
-            loadPixelsForType(currentType, function(data) {
-                pixelCache[currentType] = data;
-            });
-        }
         var color = getCurrentColor();
         var baseDisplay = typeImagesDisplay[currentType] || typeImages[currentType];
         if (!colorTargets[color] || !pixelCache[currentType]) {
@@ -752,11 +740,20 @@ function recolorVehicle(colorVal) {
     var target = colorTargets[colorVal];
     var vImg = document.getElementById('vehicleImg');
     var rImg = document.getElementById('reflectionImg');
-    var baseSrc = typeImages[currentType];
 
-    // 原色或无像素缓存（如特种车）→ 直接显示 webp 原图
-    if (!target || !pixelCache[currentType]) {
-        var fallback = typeImagesDisplay[currentType] || baseSrc;
+    // 确定当前应该用哪套像素数据和 fallback 图
+    var cacheKey = currentVariant ? (currentType + '::' + currentVariant) : currentType;
+    var pixelData = pixelCache[cacheKey] || pixelCache[currentType];
+    var fallback;
+    if (currentVariant) {
+        var vm = typeVariantImages[currentType] || {};
+        fallback = vm[currentVariant] || typeImagesDisplay[currentType] || typeImages[currentType];
+    } else {
+        fallback = typeImagesDisplay[currentType] || typeImages[currentType];
+    }
+
+    // 原色或无像素缓存 → 显示对应的 webp 原图(变体或base)
+    if (!target || !pixelData) {
         vImg.src = fallback;
         rImg.src = fallback;
         vImg.style.filter = 'drop-shadow(0 20px 60px rgba(37,99,235,0.15))';
@@ -764,7 +761,7 @@ function recolorVehicle(colorVal) {
         return;
     }
 
-    var src = pixelCache[currentType];
+    var src = pixelData;
     colorCanvas.width = src.width;
     colorCanvas.height = src.height;
     var imgData = new ImageData(new Uint8ClampedArray(src.data), src.width, src.height);
