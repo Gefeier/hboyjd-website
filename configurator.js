@@ -296,20 +296,40 @@ const typeImages = {
 // 变种图走 webp 显示,Canvas 换色暂时不支持(后续可加 pixelCache)
 const typeVariantImages = {
     '高低平板': {
-        '钩机板(挖机专用 12×3×3.3)': 'assets/images/product-variant-excavator-bed.webp?v=20260618m',
+        '钩机板(挖机专用 12×3×3.3)': 'assets/images/product-variant-excavator-bed.webp?v=20260715b',
     },
     '自卸': {
-        '小蜜蜂(7.5米轻型后翻)': 'assets/images/product-variant-small-bee.webp?v=20260618m',
-        '罐式后翻(9.6米)': 'assets/images/product-variant-tank-dump.webp?v=20260715a',
-        'U型后翻(8.5米三桥)': 'assets/images/product-variant-u-shape-dump.webp?v=20260715a',
-        '小鹅颈侧翻(13米)': 'assets/images/product-variant-gooseneck-tipper.webp?v=20260715a',
-        '直梁侧翻': 'assets/images/product-variant-straight-side-tipper.webp?v=20260715a',
+        '小蜜蜂(7.5米轻型后翻)': 'assets/images/product-variant-small-bee.webp?v=20260715b',
+        '罐式后翻(9.6米)': 'assets/images/product-variant-tank-dump.webp?v=20260715b',
+        'U型后翻(8.5米三桥)': 'assets/images/product-variant-u-shape-dump.webp?v=20260715b',
+        '小鹅颈侧翻(13米)': 'assets/images/product-variant-gooseneck-tipper.webp?v=20260715b',
+        '直梁侧翻': 'assets/images/product-variant-straight-side-tipper.webp?v=20260715b',
     },
     '骨架': {
-        '集装箱不封顶(20英尺)': 'assets/images/product-variant-open-top-container.webp?v=20260715a',
+        '集装箱不封顶(20英尺)': 'assets/images/product-variant-open-top-container.webp?v=20260715b',
     },
     '仓栅': {
-        '鹅颈仓栏(13米)': 'assets/images/product-variant-gooseneck-fence.webp?v=20260715a',
+        '鹅颈仓栏(13米)': 'assets/images/product-variant-gooseneck-fence.webp?v=20260715b',
+    },
+};
+
+// 变体 PNG 路径(Canvas 换色用, webp 不能读像素)
+const typeVariantPng = {
+    '高低平板': {
+        '钩机板(挖机专用 12×3×3.3)': 'assets/images/product-variant-excavator-bed.png',
+    },
+    '自卸': {
+        '小蜜蜂(7.5米轻型后翻)': 'assets/images/product-variant-small-bee.png',
+        '罐式后翻(9.6米)': 'assets/images/product-variant-tank-dump.png',
+        'U型后翻(8.5米三桥)': 'assets/images/product-variant-u-shape-dump.png',
+        '小鹅颈侧翻(13米)': 'assets/images/product-variant-gooseneck-tipper.png',
+        '直梁侧翻': 'assets/images/product-variant-straight-side-tipper.png',
+    },
+    '骨架': {
+        '集装箱不封顶(20英尺)': 'assets/images/product-variant-open-top-container.png',
+    },
+    '仓栅': {
+        '鹅颈仓栏(13米)': 'assets/images/product-variant-gooseneck-fence.png',
     },
 };
 
@@ -572,20 +592,66 @@ document.querySelectorAll('input[name="vehicleType"]').forEach(radio => {
     });
 });
 
-// ====== 车型变种(variant) → "变形态"切图(#105 v3) ======
-// variant 选了某细分(钩机板/小蜜蜂等)→ vehicleImg 切到 product-variant-* webp
-// variant 选"标准xxx"或没图的变种 → 回到大类 config-base + 当前颜色
-// 注:变种图当前不进 pixelCache,选了变种后 Canvas 换色暂不工作
+// ====== 车型变种(variant) → "变形态"切图 + Canvas 换色支持 ======
+var currentVariant = null; // 当前选中的变体名,null=标准/base
+
+function loadVariantPixels(variantPngSrc, cb) {
+    var img = new Image();
+    img.crossOrigin = 'anonymous';
+    img.onload = function() {
+        var c = document.createElement('canvas');
+        c.width = img.width; c.height = img.height;
+        var cx = c.getContext('2d', { willReadFrequently: true });
+        cx.drawImage(img, 0, 0);
+        try { cb(cx.getImageData(0, 0, img.width, img.height)); }
+        catch(e) { cb(null); }
+    };
+    img.onerror = function() { cb(null); };
+    img.src = variantPngSrc;
+}
+
 document.addEventListener('change', function(e) {
     if (!e.target || e.target.name !== 'variant') return;
     var variant = e.target.value;
     var typeMap = typeVariantImages[currentType] || {};
     var variantSrc = typeMap[variant];
+    var pngMap = typeVariantPng[currentType] || {};
+    var variantPng = pngMap[variant];
+
     if (variantSrc) {
+        currentVariant = variant;
         vehicleImg.src = variantSrc;
         reflectionImg.src = variantSrc;
+
+        // 加载变体 PNG 进 pixelCache,支持换色
+        if (variantPng) {
+            var cacheKey = currentType + '::' + variant;
+            if (pixelCache[cacheKey]) {
+                // 已缓存,如果当前非默认色直接换色
+                var color = getCurrentColor();
+                if (colorTargets[color]) {
+                    pixelCache[currentType] = pixelCache[cacheKey];
+                    recolorVehicle(color);
+                }
+            } else {
+                loadVariantPixels(variantPng, function(data) {
+                    if (!data) return;
+                    pixelCache[cacheKey] = data;
+                    pixelCache[currentType] = data;
+                    var color = getCurrentColor();
+                    if (colorTargets[color]) recolorVehicle(color);
+                });
+            }
+        }
     } else {
-        // 回到大类 + 颜色
+        currentVariant = null;
+        // 回到大类 base 图 + 恢复 base pixelCache
+        var basePng = typeImages[currentType];
+        if (basePng) {
+            loadPixelsForType(currentType, function(data) {
+                pixelCache[currentType] = data;
+            });
+        }
         var color = getCurrentColor();
         var baseDisplay = typeImagesDisplay[currentType] || typeImages[currentType];
         if (!colorTargets[color] || !pixelCache[currentType]) {
