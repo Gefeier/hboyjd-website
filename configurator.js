@@ -553,6 +553,7 @@ document.querySelectorAll('input[name="vehicleType"]').forEach(radio => {
         const src = typeImages[type];
         const label = typeLabels[type];
         currentType = type;
+        currentVariant = null;
 
         // label 立即换(不影响视觉)
         vehicleLabel.querySelector('.label-en').textContent = label.en;
