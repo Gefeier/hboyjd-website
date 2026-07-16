@@ -362,7 +362,6 @@ const SPEC_SCHEMA = {
             // 7.5米小蜜蜂 130台/月;8.5米三桥U型 27台/月;9.6米罐式 65台/月;13米小鹅颈侧翻 194台/月
             { name: 'length',    label: '厢体长度', options: ['7.5米', '7.8米', '8米', '8.5米', '8.6米', '9.6米', '13米', '其他'], custom: true },
             { name: 'variant',   label: '车型变种', options: ['标准后翻自卸', '小蜜蜂(7.5米轻型后翻)', '小鹅颈侧翻(13米)', 'U型后翻(8.5米三桥)', '罐式后翻(9.6米)', '直梁侧翻', '其他'] },
-            { name: 'tipAngle',  label: '翻转角度', options: ['50°', '55°', '60°'] },
             { name: 'cylinder',  label: '油缸规格', options: ['前顶 16吨', '前顶 20吨', '中顶 16吨'] },
             { name: 'boardMat',  label: '厢板材质', options: ['普通钢板', '锰板', '高强度钢'] },
             { name: 'rearDoor',  label: '后门类型', options: ['上翻门', '侧翻门', '双开门'] },
