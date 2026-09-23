@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
-<url><loc>https://hboyjd.com/</loc><lastmod>2026-07-11</lastmod><changefreq>weekly</changefreq><priority>1.0</priority></url>
-<url><loc>https://hboyjd.com/about.html</loc><lastmod>2026-06-15</lastmod><changefreq>monthly</changefreq><priority>0.9</priority></url>
+<url><loc>https://hboyjd.com/</loc><lastmod>2026-09-23</lastmod><changefreq>weekly</changefreq><priority>1.0</priority></url>
+<url><loc>https://hboyjd.com/about.html</loc><lastmod>2026-09-23</lastmod><changefreq>monthly</changefreq><priority>0.9</priority></url>
 <url><loc>https://hboyjd.com/news.html</loc><lastmod>2026-07-10</lastmod><changefreq>daily</changefreq><priority>0.8</priority></url>
 <url><loc>https://hboyjd.com/configurator.html</loc><lastmod>2026-07-11</lastmod><changefreq>monthly</changefreq><priority>0.8</priority></url>
 <url><loc>https://hboyjd.com/product-flatbed.html</loc><lastmod>2026-07-11</lastmod><changefreq>monthly</changefreq><priority>0.8</priority></url>
@@ -10,8 +10,8 @@
 <url><loc>https://hboyjd.com/product-lowbed.html</loc><lastmod>2026-07-11</lastmod><changefreq>monthly</changefreq><priority>0.8</priority></url>
 <url><loc>https://hboyjd.com/product-crane.html</loc><lastmod>2026-07-11</lastmod><changefreq>monthly</changefreq><priority>0.8</priority></url>
 <url><loc>https://hboyjd.com/product-skeleton.html</loc><lastmod>2026-07-11</lastmod><changefreq>monthly</changefreq><priority>0.8</priority></url>
-<url><loc>https://hboyjd.com/product-special.html</loc><lastmod>2026-07-11</lastmod><changefreq>monthly</changefreq><priority>0.8</priority></url>
-<url><loc>https://hboyjd.com/models.html</loc><lastmod>2026-07-11</lastmod><changefreq>monthly</changefreq><priority>0.7</priority></url>
+<url><loc>https://hboyjd.com/product-special.html</loc><lastmod>2026-09-23</lastmod><changefreq>monthly</changefreq><priority>0.8</priority></url>
+<url><loc>https://hboyjd.com/models.html</loc><lastmod>2026-09-23</lastmod><changefreq>monthly</changefreq><priority>0.7</priority></url>
 <url><loc>https://hboyjd.com/vehicles/JDV5030ZXXSC.html</loc><lastmod>2026-07-11</lastmod><changefreq>monthly</changefreq><priority>0.6</priority></url>
 <url><loc>https://hboyjd.com/vehicles/JDV5310JSQS1.html</loc><lastmod>2026-07-11</lastmod><changefreq>monthly</changefreq><priority>0.6</priority></url>
 <url><loc>https://hboyjd.com/vehicles/JDV5250JSQS1.html</loc><lastmod>2026-07-11</lastmod><changefreq>monthly</changefreq><priority>0.6</priority></url>
@@ -57,4 +57,6 @@
 <url><loc>https://hboyjd.com/vehicles/JDV5030XXHQL6.html</loc><lastmod>2026-07-11</lastmod><changefreq>monthly</changefreq><priority>0.6</priority></url>
 <url><loc>https://hboyjd.com/vehicles/JDV5040XJXQL6.html</loc><lastmod>2026-07-11</lastmod><changefreq>monthly</changefreq><priority>0.6</priority></url>
 <url><loc>https://hboyjd.com/vehicles/JDV5041XJXFT6.html</loc><lastmod>2026-07-11</lastmod><changefreq>monthly</changefreq><priority>0.6</priority></url>
+<url><loc>https://hboyjd.com/en/</loc><lastmod>2026-09-23</lastmod><changefreq>monthly</changefreq><priority>0.9</priority></url>
+<url><loc>https://hboyjd.com/en/about.html</loc><lastmod>2026-09-23</lastmod><changefreq>monthly</changefreq><priority>0.8</priority></url>
 </urlset>
