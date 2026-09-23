@@ -107,7 +107,7 @@ document.querySelectorAll('.stats, .about, .products, .advantages, .news, .cta-s
     let allNews = [];
 
     // 加时间戳破缓存,新闻栏内容由公众号自动同步,客户首次/刷新都拿最新
-    fetch('news.json?t=' + Date.now())
+    fetch('/news.json?t=' + Date.now())
         .then(r => r.json())
         .then(data => {
             // 过滤掉 site_visible:false(市场部标记不上官网的:价格喊话/内部梗/抽奖大促)
@@ -134,7 +134,7 @@ document.querySelectorAll('.stats, .about, .products, .advantages, .news, .cta-s
                 : `<div class="news-column-empty">${isEn ? 'Coming soon' : '即将更新'}</div>`;
 
             const moreHTML = totalForCat > PER_COL
-                ? `<div class="news-column-more"><a href="news.html?cat=${cat.key}">${isEn ? `View all ${totalForCat} →` : `查看全部 ${totalForCat} 条 →`}</a></div>`
+                ? `<div class="news-column-more"><a href="/news.html?cat=${cat.key}">${isEn ? `View all ${totalForCat} →` : `查看全部 ${totalForCat} 条 →`}</a></div>`
                 : '';
 
             return `<div>

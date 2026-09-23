@@ -3,6 +3,7 @@ from __future__ import annotations
 import json
 import re
 from pathlib import Path
+from scripts.build_english import build_english
 
 
 ROOT = Path(__file__).resolve().parent
@@ -21,6 +22,7 @@ def main() -> None:
     _build_index(data)
     _build_about(data)
     _build_news(data)
+    build_english(ROOT)
 
 
 def _build_index(data: dict) -> None:

@@ -1,23 +1,42 @@
-# Search and language pages
+# Shared bilingual pages
 
-The Chinese homepage `/` and company page `/about.html` link to the static
-English pages `/en/` and `/en/about.html`. Each page has a self-referencing
-canonical and reciprocal `zh-CN`, `en`, and `x-default` alternate links.
-The English pages render their content without JavaScript.
+`index.html` and `about.html` are the shared templates. Their existing `data-en`
+translations are rendered into `/en/` and `/en/about.html` by
+`scripts/build_english.py`, called at the end of `build_pages.py`.
+The English pages use the original sections, images, styles and interactions;
+do not edit generated files under `en/` directly or create separate English CSS.
 
-English content is maintained directly in `en/index.html` and `en/about.html`.
-The current CMS builds only the Chinese pages; it does not translate or overwrite
-the English pages. When changing company facts, products or contact details,
-update both languages and review the English text. Use the official English
-name **Hubei Ouyang Jude Automobile Co., Ltd.** and shared organization ID
-`https://hboyjd.com/#organization`. Do not invent certifications or aliases.
+For CMS-managed fields, edit the existing Chinese and English fields in
+`content/index.json` through the normal content editor. For other page text,
+edit the shared HTML and its `data-en` attribute. English metadata uses `data-en`
+on `title` and `meta`; translated attributes use `data-en-placeholder`,
+`data-en-alt`, `data-en-title` or `data-en-aria-label`.
 
-Before publishing, run `python3 scripts/check_seo.py`, check desktop/mobile
-navigation, and preserve the existing Google verification token. Add new public
-URLs to `sitemap.xml`; update `lastmod` only when the corresponding page changes.
-English CSS changes require a new version query in both English HTML files.
+Run `python3 build_pages.py` after editing. The CMS publisher runs this build and
+includes `en/` in its commit, so both language versions ship together. News still
+uses the shared `/news.json` feed and the existing translated-title fallback.
+Product detail pages, news pages and the configurator retain their current URLs.
 
-Deployment: push `master`, then verify the production commit and public pages.
-Submit the updated sitemap in Google Search Console and request indexing of new
-or materially changed pages. An accepted indexing request is not proof of
-indexing or of ranking for a particular query. Check those separately.
+The existing language control links between matching Chinese and English URLs.
+Both pages have self-referencing canonicals and reciprocal `zh-CN`, `en`, and
+`x-default` alternate links. Keep the shared organization ID
+`https://hboyjd.com/#organization` and preserve the Google verification token.
+
+Before publishing, run:
+
+```
+python3 build_pages.py
+python3 -m unittest discover -s tests
+python3 scripts/check_seo.py
+node --check main.js
+```
+
+Check desktop/mobile navigation, language controls, news, images and videos.
+Changed shared JS/CSS needs a version query update in its source templates;
+regenerating English propagates that version. Add new public URLs to sitemap.xml
+and update lastmod only for pages that change.
+
+Push master for automatic deployment. The webhook updates the public site and
+the CMS checkout/runtime, then restarts the CMS backend. Verify both repository
+revisions and the live pages. An accepted Google indexing request is not proof
+of indexing or ranking; those remain separate checks.
