@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+  <title>栏板半挂车 · 360° 互动看车 | 湖北欧阳聚德汽车</title>
+  <meta name="description" content="栏板半挂车互动外观示意：旋转、缩放、车身换色，点击了解栏板、货台、车桥与支腿。实际规格以车型公告与订单为准。">
+  <link rel="canonical" href="https://hboyjd.com/vehicle-experience.html">
+  <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
+  <link rel="stylesheet" href="/vehicle-experience.css?v=20260926a">
+  <script type="importmap">{"imports":{"three":"/assets/vendor/three-r182/three.module.min.js"}}</script>
+  <script type="module" src="/vehicle-experience.js?v=20260926a"></script>
+</head>
+<body>
+  <a class="skip-link" href="#experience" data-i18n="skip">跳到互动展示</a>
+  <header class="experience-header">
+    <a class="brand" id="homeLink" href="/" aria-label="湖北欧阳聚德汽车首页"><img src="/assets/images/logo-white.png" width="148" height="42" alt="欧阳聚德"></a>
+    <a class="header-back" id="backLink" href="/vehicles/EHJ9400LB.html"><span aria-hidden="true">←</span> <span data-i18n="back">返回车型详情</span></a>
+    <button class="language-switch" id="languageSwitch" type="button" aria-label="Switch to English"><span lang="zh-CN" class="active">中</span><span lang="en">EN</span></button>
+  </header>
+  <main id="experience">
+    <section class="experience-intro" aria-labelledby="pageTitle">
+      <div><p class="eyebrow">OYJD · INTERACTIVE SHOWROOM</p><h1 id="pageTitle" data-i18n="title">栏板半挂车</h1><p class="intro-copy" data-i18n="subtitle">换个角度，看见整车。</p></div>
+      <div class="model-id"><span>EHJ9400LB</span><span data-i18n="modelLabel">楚源牌 · 栏板系列</span></div>
+    </section>
+
+    <div class="experience-layout">
+      <section class="viewer" id="viewer" aria-label="车辆互动展示">
+        <div class="viewer-topline">
+          <span class="viewer-badge"><span class="status-dot"></span><span id="viewBadge" data-i18n="badge3d">360° 外观示意</span></span>
+          <div class="view-mode" role="group" aria-label="展示方式" data-i18n-aria="viewMode">
+            <button id="mode3d" type="button" aria-pressed="true" data-i18n="mode3d">3D 看车</button>
+            <button id="modePhoto" type="button" aria-pressed="false" data-i18n="modePhoto">实车参考</button>
+          </div>
+        </div>
+        <div class="render-surface" id="renderSurface" hidden></div>
+        <div class="hotspots" id="hotspots" hidden aria-label="点击查看整车部位" data-i18n-aria="hotspots">
+          <button class="hotspot" type="button" data-focus="side" aria-label="放大查看栏板" data-i18n-aria="focusSide"><span>1</span></button>
+          <button class="hotspot" type="button" data-focus="deck" aria-label="放大查看货台" data-i18n-aria="focusDeck"><span>2</span></button>
+          <button class="hotspot" type="button" data-focus="axles" aria-label="放大查看车桥" data-i18n-aria="focusAxles"><span>3</span></button>
+          <button class="hotspot" type="button" data-focus="legs" aria-label="放大查看支腿" data-i18n-aria="focusLegs"><span>4</span></button>
+        </div>
+        <figure class="photo-reference" id="photoReference" hidden>
+          <img src="/assets/images/products/fence/01.webp" width="1072" height="565" alt="同系列栏板半挂车实车参考，具体外形以所选型号实车为准" data-i18n-alt="photoAlt">
+          <figcaption data-i18n="photoCaption">同系列实车参考 · 具体外形与配置以所选型号实车为准</figcaption>
+        </figure>
+        <div class="viewer-launch" id="viewerLaunch">
+          <img class="launch-photo" src="/assets/images/products/fence/01.webp" width="1072" height="565" alt="同系列栏板半挂车实车参考" data-i18n-alt="launchAlt">
+          <div class="launch-content"><span class="launch-orbit" aria-hidden="true">360°</span><p data-i18n="launchTitle">整车外观，一手掌握</p><button id="startViewer" class="button-primary" type="button"><span data-i18n="launchButton">开启 3D 看车</span><span aria-hidden="true">↗</span></button><span class="launch-hint" data-i18n="launchHint">自由旋转 · 点击放大 · 车身换色</span></div>
+        </div>
+        <div class="viewer-tools" id="viewerTools" hidden role="group" aria-label="视角控制" data-i18n-aria="viewControls">
+          <button id="zoomOut" type="button" aria-label="缩小" data-i18n-aria="zoomOut">−</button>
+          <button id="resetView" type="button" data-i18n="reset">全车视角</button>
+          <button id="zoomIn" type="button" aria-label="放大" data-i18n-aria="zoomIn">+</button>
+        </div>
+        <p class="viewer-instructions" id="viewerInstructions" hidden data-i18n="instructions">拖动旋转 · 双指或滚轮缩放 · 点击圆点看局部</p>
+        <p class="viewer-status" id="viewerStatus" role="status" aria-live="polite"></p>
+        <noscript><p class="noscript-message">开启浏览器 JavaScript 后可使用 3D 互动；实车参考与车型详情仍可查看。<a href="/vehicles/EHJ9400LB.html">查看车型详情 →</a></p></noscript>
+      </section>
+
+      <aside class="experience-panel" aria-label="外观与部位选择" data-i18n-aria="options">
+        <div class="panel-heading"><span class="eyebrow" data-i18n="explore">EXPLORE THE DETAILS</span><h2 data-i18n="chooseDetail">从整车，到每一处。</h2></div>
+        <div class="focus-options" role="group" aria-label="查看部位" data-i18n-aria="choosePart">
+          <button class="focus-option is-active" type="button" data-focus="overview" aria-pressed="true"><span class="part-number">↗</span><span data-i18n="overview">整车外观</span><span class="part-arrow" aria-hidden="true">↗</span></button>
+          <button class="focus-option" type="button" data-focus="side" aria-pressed="false"><span class="part-number">01</span><span data-i18n="side">分段栏板</span><span class="part-arrow" aria-hidden="true">↗</span></button>
+          <button class="focus-option" type="button" data-focus="deck" aria-pressed="false"><span class="part-number">02</span><span data-i18n="deck">开放式货台</span><span class="part-arrow" aria-hidden="true">↗</span></button>
+          <button class="focus-option" type="button" data-focus="axles" aria-pressed="false"><span class="part-number">03</span><span data-i18n="axles">三轴行走部分</span><span class="part-arrow" aria-hidden="true">↗</span></button>
+          <button class="focus-option" type="button" data-focus="legs" aria-pressed="false"><span class="part-number">04</span><span data-i18n="legs">前部支腿</span><span class="part-arrow" aria-hidden="true">↗</span></button>
+        </div>
+        <div class="detail-copy" aria-live="polite" aria-atomic="true"><h3 id="detailTitle">把整车看清楚</h3><p id="detailDescription">转动查看栏板、货台和三轴布局。点击数字圆点，或选择上方部位，镜头会带你靠近。</p></div>
+        <fieldset class="color-options" id="colorOptions"><legend data-i18n="bodyColor">车身配色</legend><div class="color-row">
+          <button class="color-swatch is-active" type="button" data-color="blue" style="--swatch:#247bc1" aria-label="海湾蓝" data-i18n-aria="blue" aria-pressed="true"></button>
+          <button class="color-swatch" type="button" data-color="red" style="--swatch:#ae3441" aria-label="朱砂红" data-i18n-aria="red" aria-pressed="false"></button>
+          <button class="color-swatch" type="button" data-color="white" style="--swatch:#dce4ec" aria-label="珍珠白" data-i18n-aria="white" aria-pressed="false"></button>
+          <button class="color-swatch" type="button" data-color="gray" style="--swatch:#526170" aria-label="石墨灰" data-i18n-aria="gray" aria-pressed="false"></button>
+          <span id="colorName">海湾蓝</span>
+        </div><p class="color-note" data-i18n="colorNote">屏幕颜色仅作搭配参考，实车色以色卡为准。</p></fieldset>
+        <a id="specLink" class="spec-link" href="/vehicles/EHJ9400LB.html" data-i18n="specLink">查看完整车型参数 <span aria-hidden="true">↗</span></a>
+      </aside>
+    </div>
+    <div class="experience-footnote"><p data-i18n="disclaimer">3D 为简化外观示意，非该型号精确模型；不表示具体选装或交付配置，以实车及订单为准。</p><span class="footnote-label">DESIGNED TO EXPLORE</span></div>
+    <section class="spec-strip" aria-label="型号参数摘要" data-i18n-aria="specSummary">
+      <div><span data-i18n="specModel">参考型号</span><strong>EHJ9400LB</strong></div><div><span data-i18n="specGross">公告总质量</span><strong>40,000 <small>kg</small></strong></div><div><span data-i18n="specAxles">轴数</span><strong>3 <small data-i18n="axleUnit">轴</small></strong></div><div><span data-i18n="specBatch">工信部公告</span><strong>369 <small data-i18n="batchUnit">批</small></strong></div>
+    </section>
+    <section class="experience-cta"><div><p class="eyebrow" data-i18n="nextStep">NEXT STEP</p><h2 data-i18n="ctaTitle">让这台车，适合你的运输。</h2><p data-i18n="ctaText">把车型与需求告诉我们，一起确认适合的配置。</p></div><a id="quoteLink" class="button-primary" href="/configurator.html?model=EHJ9400LB&amp;vname=%E6%A0%8F%E6%9D%BF%E5%8D%8A%E6%8C%82%E8%BD%A6"><span data-i18n="quote">配置与询价</span><span aria-hidden="true">↗</span></a></section>
+  </main>
+  <footer class="experience-footer"><span data-i18n="company">湖北欧阳聚德汽车有限公司</span><a href="tel:+8613396121288">86-13396121288</a><a href="https://beian.miit.gov.cn/" rel="noopener" target="_blank">鄂ICP备17030635号-1</a></footer>
+</body>
+</html>

@@ -766,3 +766,6 @@ body::after {
 .model-direct-link { font-size: 13px; color: var(--text-dim); text-decoration: none; border-bottom: 1px dashed var(--glass-border); }
 .model-direct-link:hover { color: var(--text); }
 @media (max-width: 768px) { .model-direct { flex-direction: column; align-items: stretch; } }
+
+.appearance-caption{font-size:11px;color:#9aabc1;line-height:1.6;margin-top:10px;max-width:360px;letter-spacing:0}
+@media(max-width:1024px){.appearance-caption{font-size:9px;max-width:90vw;margin-top:5px}}

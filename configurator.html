@@ -9,7 +9,7 @@
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Noto+Sans+SC:wght@300;400;500;700;900&family=Orbitron:wght@400;700;900&display=swap" media="print" onload="this.media='all'">
     <noscript><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Noto+Sans+SC:wght@300;400;500;700;900&family=Orbitron:wght@400;700;900&display=swap"></noscript>
-    <link rel="stylesheet" href="configurator.css?v=20260711r">
+    <link rel="stylesheet" href="configurator.css?v=20260926a">
     <!-- #105 v3 variant 图预加载,切 variant 时无闪烁 -->
     <link rel="preload" as="image" href="assets/images/product-variant-excavator-bed.webp?v=20260618m" type="image/webp">
     <link rel="preload" as="image" href="assets/images/product-variant-small-bee.webp?v=20260618m" type="image/webp">
@@ -94,16 +94,17 @@
     <!-- 车辆展示区 -->
     <div class="vehicle-stage" id="vehicleStage">
         <div class="vehicle-wrapper" id="vehicleWrapper">
-            <img src="assets/images/config-base.webp?v=20260618m" alt="车辆" id="vehicleImg" class="vehicle-img" loading="lazy" decoding="async">
+            <img src="/assets/images/visuals/container-flatbed-40ft-v2.webp" alt="车辆" id="vehicleImg" class="vehicle-img" loading="lazy" decoding="async">
         </div>
         <!-- 车辆下方的光影反射 -->
         <div class="vehicle-reflection" id="vehicleReflection">
-            <img src="assets/images/config-base.webp?v=20260618m" alt="" class="reflection-img" id="reflectionImg" loading="lazy" decoding="async">
+            <img src="/assets/images/visuals/container-flatbed-40ft-v2.webp" alt="" class="reflection-img" id="reflectionImg" loading="lazy" decoding="async">
         </div>
         <!-- 车辆名称 -->
         <div class="vehicle-label" id="vehicleLabel">
             <span class="label-en">FLATBED SEMI-TRAILER</span>
             <span class="label-zh">平板半挂车</span>
+            <p class="appearance-caption">AI 类别外观示意 · 配置、部件与颜色以实车及订单为准</p>
         </div>
         <!-- 配置标签 -->
         <div class="config-tags" id="configTags">
@@ -125,7 +126,7 @@
                 <label class="type-option">
                     <input type="radio" name="vehicleType" value="直梁平板" checked>
                     <div class="type-inner">
-                        <picture><source type="image/webp" srcset="assets/images/config-base.webp?v=20260618m"><img src="assets/images/config-base.png" alt="平板半挂车" loading="lazy" decoding="async"></picture>
+                        <picture><source type="image/webp" srcset="/assets/images/visuals/container-flatbed-40ft-v2.webp"><img src="assets/images/config-base.png" alt="平板半挂车" loading="lazy" decoding="async"></picture>
                         <span class="type-name">平板半挂车</span>
                         <span class="type-desc">直梁平板 · 通用运输</span>
                     </div>
@@ -133,7 +134,7 @@
                 <label class="type-option">
                     <input type="radio" name="vehicleType" value="高低平板">
                     <div class="type-inner">
-                        <picture><source type="image/webp" srcset="assets/images/config-base-lowbed-768.webp 768w, assets/images/config-base-lowbed.webp 1600w" sizes="(max-width: 768px) 100vw, 1200px"><source type="image/jpeg" srcset="assets/images/config-base-lowbed-768.jpg 768w, assets/images/config-base-lowbed.png 1600w" sizes="(max-width: 768px) 100vw, 1200px"><img src="assets/images/config-base-lowbed.png" alt="高低平板" loading="lazy" decoding="async"></picture>
+                        <picture><img src="/assets/images/visuals/lowbed-3axle-thumb.webp" alt="车型外观示意" loading="lazy" decoding="async"></picture>
                         <span class="type-name">高低平板</span>
                         <span class="type-desc">高低结构 · 工程机械</span>
                     </div>
@@ -141,7 +142,7 @@
                 <label class="type-option">
                     <input type="radio" name="vehicleType" value="自卸">
                     <div class="type-inner">
-                        <picture><source type="image/webp" srcset="assets/images/config-base-dump-768.webp 768w, assets/images/config-base-dump.webp 1600w" sizes="(max-width: 768px) 100vw, 1200px"><source type="image/jpeg" srcset="assets/images/config-base-dump-768.jpg 768w, assets/images/config-base-dump.png 1600w" sizes="(max-width: 768px) 100vw, 1200px"><img src="assets/images/config-base-dump.png" alt="自卸半挂车" loading="lazy" decoding="async"></picture>
+                        <picture><img src="/assets/images/visuals/dump-3axle-thumb.webp" alt="车型外观示意" loading="lazy" decoding="async"></picture>
                         <span class="type-name">自卸半挂车</span>
                         <span class="type-desc">液压翻转 · 散料运输</span>
                     </div>
@@ -149,7 +150,7 @@
                 <label class="type-option">
                     <input type="radio" name="vehicleType" value="骨架">
                     <div class="type-inner">
-                        <picture><source type="image/webp" srcset="assets/images/config-base-skeleton-768.webp 768w, assets/images/config-base-skeleton.webp 1600w" sizes="(max-width: 768px) 100vw, 1200px"><source type="image/jpeg" srcset="assets/images/config-base-skeleton-768.jpg 768w, assets/images/config-base-skeleton.png 1600w" sizes="(max-width: 768px) 100vw, 1200px"><img src="assets/images/config-base-skeleton.png" alt="骨架车" loading="lazy" decoding="async"></picture>
+                        <picture><img src="/assets/images/visuals/tri-axle-skeleton-v2-thumb.webp" alt="车型外观示意" loading="lazy" decoding="async"></picture>
                         <span class="type-name">骨架车</span>
                         <span class="type-desc">集装箱 · 专用运输</span>
                     </div>
@@ -165,9 +166,7 @@
                 <label class="type-option">
                     <input type="radio" name="vehicleType" value="特种">
                     <div class="type-inner type-inner--custom">
-                        <div class="type-placeholder">
-                            <span class="placeholder-icon">?</span>
-                        </div>
+                        <picture><img src="/assets/images/visuals/crane-semitrailer-thumb.webp" alt="专用车型外观示意" loading="lazy" decoding="async"></picture>
                         <span class="type-name">特种车</span>
                         <span class="type-desc">定制化 · 请联系销售</span>
                     </div>
@@ -337,6 +336,7 @@
         </div>
     </div>
 
-    <script src="configurator.js?v=20260716c" defer></script>
+    <script src="vehicle-visual-data.js?v=20260926a"></script>
+    <script src="configurator.js?v=20260926a" defer></script>
 </body>
 </html>

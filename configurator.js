@@ -291,9 +291,7 @@ const typeImages = {
     '特种':    'assets/images/product-special.jpg'
 };
 
-// 车型变种图(#105 v3 增量,选 variant 时触发"变形态")
-// 标准变种(走 typeImages 大类图)不写在这里;只列"非标"变种独立图
-// 变种图走 webp 显示,Canvas 换色暂时不支持(后续可加 pixelCache)
+// Appearance variants use a display image plus a separate colour-preview source.
 const typeVariantImages = {
     '高低平板': {
         '钩机板(挖机专用 12×3×3.3)': 'assets/images/product-variant-excavator-bed.webp?v=20260715b',
@@ -342,6 +340,22 @@ const typeImagesDisplay = {
     '仓栅':    'assets/images/config-base-fence.webp?v=20260618m',
     '特种':    'assets/images/product-special.jpg'
 };
+
+const visualAssets = window.OYJD_VISUALS || [];
+[['直梁平板','container-flatbed-40ft-v2'],['高低平板','lowbed-3axle'],['自卸','dump-3axle'],['骨架','tri-axle-skeleton-v2']].forEach(function([type,id]) {
+    typeImages[type] = '/assets/images/visuals/' + id + '.png';
+    typeImagesDisplay[type] = '/assets/images/visuals/' + id + '.webp';
+});
+visualAssets.forEach(function(asset) {
+    (typeVariantImages[asset.type] ||= {})[asset.variant] = asset.image;
+    (typeVariantPng[asset.type] ||= {})[asset.variant] = asset.pixels;
+});
+// The same stepped stake body can be selected from either relevant category.
+const steppedStake = visualAssets.find(a => a.id === 'drop-deck-stake');
+if (steppedStake) {
+    typeVariantImages['仓栅']['高低仓栏'] = steppedStake.image;
+    typeVariantPng['仓栅']['高低仓栏'] = steppedStake.pixels;
+}
 
 // ====== 每车型规格 Schema（按车型动态渲染 Step1 / Step2） ======
 const COMMON = {
@@ -415,6 +429,7 @@ const SPEC_SCHEMA = {
     },
     '特种': {
         step1: { title: '需求描述', groups: [
+            { name: 'variant', label: '车型外观示意', options: ['其他', ...visualAssets.filter(a => a.type === '特种').map(a => a.variant)] },
             { name: 'customUsage', label: '用途说明', type: 'textarea', placeholder: '例：高空作业车、随车吊、中置轴车架、全挂车等' },
             { name: 'customLoad',  label: '载重需求', options: ['≤30吨', '30-50吨', '50-80吨', '80吨以上'] },
             { name: 'length',      label: '预计长度', options: ['8米以内', '8-12米', '12-15米', '15米以上'] },
@@ -422,6 +437,12 @@ const SPEC_SCHEMA = {
         step2: { title: '悬挂与轮胎（可选）', groups: [ COMMON.axles, COMMON.suspension, COMMON.tire, COMMON.hub ]}
     }
 };
+
+// Keep the shared visual catalogue and the selectable shape options in sync.
+visualAssets.forEach(function(asset) {
+    const group = SPEC_SCHEMA[asset.type].step1.groups.find(g => g.name === 'variant');
+    if (group && !group.options.includes(asset.variant)) group.options.push(asset.variant);
+});
 
 // 颜色 → CSS滤镜映射（基于红色基础图，hue≈0°）
 // 红色是原色，其他颜色从红色出发偏移
@@ -573,8 +594,11 @@ document.querySelectorAll('input[name="vehicleType"]').forEach(radio => {
             // 同步 recolor — 切换瞬间 src 就是新车型新颜色
             recolorVehicle(currentColor);
         } else {
-            // pixelCache 还没加载完(首次切到陌生车型),保持上一帧,异步加载完再 recolor
-            loadPixelsForType(type, function() { recolorVehicle(getCurrentColor()); });
+            vehicleImg.src = displaySrc;
+            reflectionImg.src = displaySrc;
+            loadPixelsForType(type, function() {
+                if (currentType === type && !currentVariant) recolorVehicle(getCurrentColor());
+            });
         }
 
         // 驶出 + 驶入动画(无论哪种情况都立即跑)
@@ -634,6 +658,7 @@ document.addEventListener('change', function(e) {
                 loadVariantPixels(variantPng, function(data) {
                     if (!data) return;
                     pixelCache[cacheKey] = data;
+                    if (currentType + '::' + currentVariant !== cacheKey) return;
                     var color = getCurrentColor();
                     if (colorTargets[color]) recolorVehicle(color);
                 });
@@ -744,7 +769,7 @@ function recolorVehicle(colorVal) {
 
     // 确定当前应该用哪套像素数据和 fallback 图
     var cacheKey = currentVariant ? (currentType + '::' + currentVariant) : currentType;
-    var pixelData = pixelCache[cacheKey] || pixelCache[currentType];
+    var pixelData = pixelCache[cacheKey];
     var fallback;
     if (currentVariant) {
         var vm = typeVariantImages[currentType] || {};
@@ -971,12 +996,25 @@ updateTags();
     function applyModel(model, vname, overwrite) {
         if (!model || !/^[A-Z]{2,4}\d{4}[A-Z0-9]*$/.test(model)) return;
         vname = (vname || '').slice(0, 30);
-        var type = modelToType(model);
+        var appearance = visualAssets.find(a => a.models.includes(model));
+        var type = appearance ? appearance.type : modelToType(model);
         var radio = document.querySelector('input[name="vehicleType"][value="' + type + '"]');
         if (radio && !radio.checked) {
             radio.checked = true;
             radio.dispatchEvent(new Event('change', { bubbles: true }));
         }
+        // Changing between approval models in the same category must also change the body.
+        renderSpecsForType(type);
+        var variant = appearance ? appearance.variant : '';
+        var choice = Array.from(document.querySelectorAll('input[name="variant"]')).find(r => r.value === variant);
+        if (choice) {
+            choice.checked = true;
+            choice.dispatchEvent(new Event('change', {bubbles: true}));
+        } else {
+            currentVariant = null;
+            recolorVehicle(getCurrentColor());
+        }
+        updateTags();
         var remarks = document.querySelector('textarea[name="remarks"]');
         if (remarks && (overwrite || !remarks.value || /^询价车型:/.test(remarks.value))) {
             remarks.value = '询价车型:' + model + (vname ? ' ' + vname : '') + '(工信部公告型号)';
@@ -994,6 +1032,17 @@ updateTags();
         applyModel(urlModel, (params.get('vname') || '').trim(), false);
         var sel0 = document.getElementById('modelDirect');
         if (sel0) sel0.value = urlModel;
+    } else {
+        var aliases = {flatbed:'直梁平板',lowbed:'高低平板',dump:'自卸',skeleton:'骨架',fence:'仓栅',special:'特种',crane:'特种'};
+        var requested = params.get('type') || '';
+        var type = aliases[requested] || requested;
+        if (SPEC_SCHEMA[type]) {
+            var radio = Array.from(document.querySelectorAll('input[name="vehicleType"]')).find(r => r.value === type);
+            if (radio) {radio.checked = true; radio.dispatchEvent(new Event('change', {bubbles:true}));}
+            var variant = params.get('variant') || '';
+            var choice = Array.from(document.querySelectorAll('input[name="variant"]')).find(r => r.value === variant);
+            if (choice) {choice.checked = true; choice.dispatchEvent(new Event('change', {bubbles:true}));}
+        }
     }
     var sel = document.getElementById('modelDirect');
     if (sel) sel.addEventListener('change', function() {
