@@ -4,6 +4,7 @@ Run from any directory: python3 scripts/check_seo.py
 Uses the standard library; does not request indexing or contact external services.
 """
 import json
+import re
 from html.parser import HTMLParser
 from pathlib import Path
 from urllib.parse import unquote, urljoin, urlsplit
@@ -64,6 +65,25 @@ def main():
             assert any(t == "a" and a.get("href") == other for t, a in page.tags), "Missing visible language link"
             assert "Hubei Ouyang Jude Automobile Co., Ltd." in " ".join(page.visible_text)
 
+            data = [json.loads(item) for item in re.findall(
+                r'<script type="application/ld\+json">(.*?)</script>',
+                local_file(ORIGIN + path).read_text(), re.S)]
+            organizations = [item for item in data if item.get("@type") == "Organization"]
+            assert len(organizations) == 1, "Expected one company identity: " + path
+            company = organizations[0]
+            assert company["@id"] == ORIGIN + "/#organization"
+            assert "湖北欧阳聚德" in company["alternateName"]
+            assert company["legalName"] == "湖北欧阳聚德汽车有限公司"
+            if path in ("/", "/en/"):
+                websites = [item for item in data if item.get("@type") == "WebSite"]
+                assert len(websites) == 1, "Expected one site identity: " + path
+                site = websites[0]
+                assert site["@id"] == ORIGIN + "/#website"
+                assert site["url"] == ORIGIN + "/"
+                assert site["publisher"]["@id"] == company["@id"]
+                assert site["name"] == "欧阳聚德"
+                assert "湖北欧阳聚德" in site["alternateName"]
+
     for path in ("/en/", "/en/about.html"):
         url = ORIGIN + path
         page = Page(local_file(url))
@@ -77,11 +97,7 @@ def main():
                 if fragment:
                     target_page = Page(local_file(target))
                     assert any(a.get("id") == fragment for _, a in target_page.tags), "Broken anchor: " + target
-        # JSON-LD must parse independently of JavaScript execution.
-        import re
-        for data in re.findall(r'<script type="application/ld\+json">(.*?)</script>', local_file(url).read_text(), re.S):
-            assert json.loads(data)["@id"] == ORIGIN + "/#organization"
-    print("PASS: %s sitemap targets/canonicals; bilingual links; static company name; English links/assets/JSON-LD" % len(urls))
+    print("PASS: %s sitemap targets/canonicals; bilingual links; static company name; English links/assets; company/site JSON-LD" % len(urls))
 
 
 if __name__ == "__main__":
