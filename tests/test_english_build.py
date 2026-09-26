@@ -10,11 +10,49 @@ from unittest.mock import patch
 
 ROOT = Path(__file__).resolve().parents[1]
 sys.path.insert(0, str(ROOT / "scripts"))
-from build_english import EnglishPage
+from build_english import EnglishPage, bilingual_pages
 from check_seo import Page
 
 
 class EnglishBuildTests(unittest.TestCase):
+    def test_nested_vehicle_links_keep_language_and_model_query(self):
+        pages = {"models.html": ("/models.html", "/en/models.html"),
+                 "vehicles/A.html": ("/vehicles/A.html", "/en/vehicles/A.html"),
+                 "vehicles/B.html": ("/vehicles/B.html", "/en/vehicles/B.html")}
+        page = EnglishPage("/vehicles/A.html", "/en/vehicles/A.html", {"参数": "Specifications"}, pages)
+        page.feed('<h2>参数</h2><a href="B.html#spec">Next</a>'
+                  '<a href="../models.html">Models</a><img src="../assets/test.webp">'
+                  '<a href="../configurator.html?model=A&amp;vname=test">Quote</a>'
+                  '<a class="lang-toggle" href="/en/vehicles/A.html"><span>中</span></a>')
+        output = "".join(page.output)
+        self.assertIn('<h2>Specifications</h2>', output)
+        self.assertIn('href="/en/vehicles/B.html#spec"', output)
+        self.assertIn('href="/en/models.html"', output)
+        self.assertIn('src="/assets/test.webp"', output)
+        self.assertIn('href="/configurator.html?model=A&amp;vname=test"', output)
+        self.assertIn('href="/vehicles/A.html"', output)
+
+    def test_unknown_product_copy_fails_instead_of_publishing_mixed_languages(self):
+        page = EnglishPage("/vehicles/A.html", "/en/vehicles/A.html", {})
+        with self.assertRaisesRegex(ValueError, "Missing English translation"):
+            page.feed('<h1>未翻译的新车型</h1>')
+
+    def test_product_layout_and_numeric_specifications_are_preserved(self):
+        import re
+        from html import unescape
+        for name in bilingual_pages(ROOT):
+            if name in ("index.html", "about.html"):
+                continue
+            chinese = Page(ROOT / name)
+            english = Page(ROOT / "en" / name)
+            for tag in ("section", "img", "source", "form"):
+                self.assertEqual(sum(t == tag for t, _ in chinese.tags),
+                                 sum(t == tag for t, _ in english.tags), (name, tag))
+            def spec_numbers(path):
+                values = re.findall(r'<span class="pf-spec-val">(.*?)</span>', path.read_text(), re.S)
+                return [re.findall(r'\d+(?:\.\d+)?', unescape(re.sub('<[^>]+>', '', v))) for v in values]
+            self.assertEqual(spec_numbers(ROOT / name), spec_numbers(ROOT / "en" / name), name)
+
     def test_translation_escapes_text_and_keeps_sibling_media(self):
         page = EnglishPage("/", "/en/")
         page.feed('<section><p data-en="R&amp;D &lt;team&gt;">中文<strong>旧内容</strong></p>'

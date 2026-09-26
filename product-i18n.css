@@ -1,0 +1,40 @@
+/* Shared catalog layout: both languages keep the same imagery and sections. */
+.navbar .lang-toggle { flex: 0 0 auto; min-height: 44px; box-sizing: border-box; position: relative; z-index: 1001; }
+.navbar .lang-toggle:focus-visible { outline: 2px solid #fff; outline-offset: 4px; }
+.navbar .nav-toggle { flex-shrink: 0; }
+.vh-crumb-top { top: 96px !important; }
+html[lang="en"] .stat-unit { margin-left: .25em; }
+html[lang="en"] .about-hero-title {
+    font-size: clamp(32px, 4.8vw, 68px) !important;
+    line-height: 1.12 !important;
+    letter-spacing: -.025em !important;
+    overflow-wrap: break-word;
+}
+html[lang="en"] .about-hero-content { max-width: 1000px; margin-inline: auto; }
+html[lang="en"] .about-hero-tagline { letter-spacing: .025em !important; line-height: 1.6; }
+html[lang="en"] .about-hero-eyebrow { letter-spacing: .14em !important; }
+html[lang="en"] .pf-spec-key,
+html[lang="en"] .pf-spec-val { min-width: 0; overflow-wrap: anywhere; }
+html[lang="en"] .vh-toc { max-width: 172px; }
+html[lang="en"] .vh-toc a,
+html[lang="en"] .vh-toc-head { white-space: normal; }
+html[lang="en"] .vh-crumb-top { flex-wrap: wrap; }
+html[lang="en"] .mdb-side a { white-space: normal; }
+html[lang="en"] .mdb-gshared { flex-wrap: wrap; }
+@media (min-width: 1024px) {
+    html[lang="en"] .nav-links { gap: 18px; }
+    html[lang="en"] .nav-links a { font-size: 12px; letter-spacing: 0; white-space: nowrap; }
+    html[lang="en"] .nav-cta { font-size: 12px; padding: 10px 14px; white-space: nowrap; }
+}
+@media (max-width: 1023px) {
+    .navbar .lang-toggle { margin-left: auto; margin-right: 18px; }
+    html[lang="en"] .about-hero-content { padding-inline: 24px; }
+}
+@media (max-width: 600px) {
+    html[lang="en"] .vh-hero { height: auto !important; min-height: 440px; padding: 156px 0 56px; box-sizing: border-box; }
+    html[lang="en"] .about-hero-title { font-size: clamp(30px, 8vw, 44px) !important; }
+    html[lang="en"] .about-hero-eyebrow { font-size: 10px; letter-spacing: .08em !important; }
+    html[lang="en"] .about-hero-tagline { font-size: 13px; }
+    html[lang="en"] .pf-cta-btn { white-space: normal; text-align: center; }
+    html[lang="en"] .pf-spec-row { grid-template-columns: minmax(0, 1fr); }
+}

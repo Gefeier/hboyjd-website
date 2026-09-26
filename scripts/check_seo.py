@@ -9,6 +9,7 @@ from html.parser import HTMLParser
 from pathlib import Path
 from urllib.parse import unquote, urljoin, urlsplit
 from xml.etree import ElementTree
+from build_english import bilingual_pages
 
 ROOT = Path(__file__).resolve().parents[1]
 ORIGIN = "https://hboyjd.com"
@@ -84,7 +85,22 @@ def main():
                 assert site["name"] == "欧阳聚德"
                 assert "湖北欧阳聚德" in site["alternateName"]
 
-    for path in ("/en/", "/en/about.html"):
+    for name, (zh, en) in bilingual_pages(ROOT).items():
+        expected = {"zh-CN": ORIGIN + zh, "en": ORIGIN + en, "x-default": ORIGIN + zh}
+        for path, lang, other in [(zh, "zh-CN", en), (en, "en", zh)]:
+            page = Page(local_file(ORIGIN + path))
+            assert next(a["lang"] for t, a in page.tags if t == "html") == lang
+            assert {a["hreflang"]: a["href"] for a in page.links("alternate")} == expected, path
+            assert any(t == "a" and "lang-toggle" in a.get("class", "").split()
+                       and a.get("href") == other for t, a in page.tags), "Missing switch: " + path
+        if name not in ("index.html", "about.html"):
+            english = Page(local_file(ORIGIN + en))
+            remaining = [t.strip() for t in english.visible_text
+                         if re.search(r"[\u4e00-\u9fff]", re.sub(
+                             r"欧阳聚德汽车|鄂ICP备17030635号-1", "", t)) and t.strip() != "中"]
+            assert not remaining, "Untranslated product content: " + en + str(remaining[:3])
+
+    for _, path in bilingual_pages(ROOT).values():
         url = ORIGIN + path
         page = Page(local_file(url))
         for tag, attrs in page.tags:
