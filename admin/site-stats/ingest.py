@@ -265,7 +265,7 @@ PV_COLS = ("ts", "day", "hour", "src", "pid", "vid", "sid", "seq", "is_new", "in
 
 def insert_pv(con, row):
     con.execute("INSERT OR IGNORE INTO pv (%s) VALUES (%s)" % (",".join(PV_COLS), ",".join("?" * len(PV_COLS))),
-                [row.get(c) for c in PV_COLS])
+                [row.get(c, 0 if c == "bot" else None) for c in PV_COLS])
 
 
 def rebuild_sessions(con, sids):
@@ -385,7 +385,7 @@ LOG_LINE = re.compile(
     r'^(?P<ip>\S+) \S+ \S+ \[(?P<time>[^\]]+)\] "(?P<method>[A-Z]+) (?P<url>\S+) [^"]*" (?P<status>\d{3}) \S+ '
     r'"(?P<ref>[^"]*)" "(?P<ua>[^"]*)"')
 PAGE_RE = re.compile(r"^/(en/)?(|[a-z0-9-]+\.html|vehicles/[A-Za-z0-9-]+\.html)$")
-TITLE_RE = re.compile(r"<title>(.*?)</title>", re.S | re.I)
+TITLE_RE = re.compile(r"<title[^>]*>(.*?)</title>", re.S | re.I)
 
 
 def page_titles():
@@ -399,7 +399,7 @@ def page_titles():
                 continue
             try:
                 with open(os.path.join(folder, name), encoding="utf-8", errors="replace") as f:
-                    m = TITLE_RE.search(f.read(6000))
+                    m = TITLE_RE.search(f.read())
             except OSError:
                 continue
             if m:
@@ -531,6 +531,7 @@ def main():
     if "--backfill" in sys.argv:
         n, s = backfill(con)
         con.commit()
+        con.execute("VACUUM")
         print("backfill: %d page views, %d sessions" % (n, s))
         return
     if "--rebuild-sess" in sys.argv:

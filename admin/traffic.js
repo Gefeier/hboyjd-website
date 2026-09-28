@@ -199,7 +199,11 @@
     }
 
     function renderPages(pages) {
+        var btn = el('tr-pages-more');
+        btn.hidden = pages.length <= 10;
+        btn.textContent = state.allPages ? '只看前 10 个' : '展开全部 ' + pages.length + ' 个页面';
         if (!pages.length) { el('tr-pages').innerHTML = '<tr><td class="tr-empty">这段时间没有数据</td></tr>'; return; }
+        if (!state.allPages) pages = pages.slice(0, 10);
         el('tr-pages').innerHTML = '<thead><tr><th>页面</th><th class="n">浏览量</th><th class="n">访客</th><th class="n">作为入口</th><th class="n">平均停留</th></tr></thead><tbody>' +
             pages.map(function (x) {
                 return '<tr><td>' + esc(pageName(x.title, x.path)) + '<div class="path">' + esc(x.path) + '</div></td><td class="n">' + num(x.pv) + '</td><td class="n">' + num(x.uv) +
@@ -208,8 +212,13 @@
     }
 
     function renderActions(d) {
-        var tiles = d.actions.map(function (a) {
-            return '<div class="tr-act"><div class="v">' + num(a.clicks) + '</div><div class="l">' + esc(ACT[a.kind] || a.kind) + ' · ' + num(a.sessions) + ' 次访问里</div></div>';
+        var seen = {};
+        d.actions.forEach(function (a) { seen[a.kind] = a; });
+        var kinds = ['tel', 'douyin', 'whatsapp', 'form', 'mail', 'out'];
+        d.actions.forEach(function (a) { if (kinds.indexOf(a.kind) < 0) kinds.push(a.kind); });
+        var tiles = kinds.map(function (k) {
+            var a = seen[k] || { clicks: 0, sessions: 0 };
+            return '<div class="tr-act"><div class="v">' + num(a.clicks) + '</div><div class="l">' + esc(ACT[k] || k) + (a.sessions ? ' · ' + num(a.sessions) + ' 次访问里' : '') + '</div></div>';
         });
         tiles.push('<div class="tr-act"><div class="v">' + num(d.inquiries.length) + '</div><div class="l">官网询价表单收到</div></div>');
         el('tr-actions').innerHTML = tiles.join('');
@@ -219,21 +228,22 @@
     }
 
     // ---------- 图 ----------
-    function niceMax(v) {
-        if (v <= 4) return 4;
-        var p = Math.pow(10, Math.floor(Math.log10(v))), n = v / p;
-        var step = n <= 1 ? 1 : n <= 2 ? 2 : n <= 5 ? 5 : 10;
-        return step * p;
+    function niceScale(v) {
+        var raw = Math.max(v, 1) / 4;
+        var p = Math.pow(10, Math.floor(Math.log10(raw))), n = raw / p;
+        var step = Math.max(1, (n <= 1 ? 1 : n <= 2 ? 2 : n <= 5 ? 5 : 10) * p);
+        var ticks = Math.max(1, Math.ceil(Math.max(v, 1) / step));
+        return { max: step * ticks, ticks: ticks };
     }
     function frame(box, opts) {
         var W = Math.max(280, box.clientWidth), H = opts.height;
         var m = { l: 40, r: 12, t: 18, b: 26 };
         return { W: W, H: H, m: m, pw: W - m.l - m.r, ph: H - m.t - m.b };
     }
-    function yAxis(f, max) {
+    function yAxis(f, sc) {
         var s = '';
-        for (var i = 0; i <= 4; i++) {
-            var v = max / 4 * i, y = f.m.t + f.ph - f.ph * i / 4;
+        for (var i = 0; i <= sc.ticks; i++) {
+            var v = sc.max / sc.ticks * i, y = f.m.t + f.ph - f.ph * i / sc.ticks;
             s += '<line class="grid" x1="' + f.m.l + '" x2="' + (f.W - f.m.r) + '" y1="' + y + '" y2="' + y + '"/>';
             s += '<text class="axis" x="' + (f.m.l - 8) + '" y="' + (y + 4) + '" text-anchor="end">' + num(Math.round(v)) + '</text>';
         }
@@ -250,8 +260,10 @@
         return s;
     }
     function markerSvg(f, x, label) {
+        var right = x > f.m.l + f.pw * 0.7;
         return '<line class="mark-line" x1="' + x + '" x2="' + x + '" y1="' + (f.m.t - 6) + '" y2="' + (f.m.t + f.ph) + '"/>' +
-            '<text class="mark-text" x="' + (x + 6) + '" y="' + (f.m.t + 4) + '">' + esc(label) + ' →</text>';
+            '<text class="mark-text" x="' + (right ? x - 6 : x + 6) + '" y="' + (f.m.t + 4) + '" text-anchor="' + (right ? 'end' : 'start') + '">' +
+            esc(label) + ' →</text>';
     }
     function tipAt(box, html, x, y) {
         var tip = box.querySelector('.tr-tip');
@@ -267,12 +279,12 @@
 
     function columnChart(box, pts, opts) {
         var f = frame(box, opts);
-        var max = niceMax(Math.max.apply(null, pts.map(function (p) { return p.value; })) || 0);
+        var sc = niceScale(Math.max.apply(null, pts.map(function (p) { return p.value; })) || 0), max = sc.max;
         var band = f.pw / pts.length, bw = Math.max(2, Math.min(24, band * 0.62));
         var xAt = function (i) { return f.m.l + band * i + band / 2; };
         var peak = -1, pv = 0;
         pts.forEach(function (p, i) { if (p.value > pv) { pv = p.value; peak = i; } });
-        var s = yAxis(f, max);
+        var s = yAxis(f, sc);
         pts.forEach(function (p, i) {
             var h = p.value / max * f.ph, x = xAt(i) - bw / 2, y0 = f.m.t + f.ph;
             if (h > 0) {
@@ -306,7 +318,7 @@
 
     function lineChart(box, pts, opts) {
         var f = frame(box, opts);
-        var max = niceMax(Math.max.apply(null, pts.map(function (p) { return p.value; })) || 0);
+        var sc = niceScale(Math.max.apply(null, pts.map(function (p) { return p.value; })) || 0), max = sc.max;
         var step = f.pw / Math.max(1, pts.length - 1);
         var xAt = function (i) { return f.m.l + step * i; };
         var yAt = function (v) { return f.m.t + f.ph - v / max * f.ph; };
@@ -314,7 +326,7 @@
         var area = line + 'L' + xAt(pts.length - 1) + ',' + (f.m.t + f.ph) + 'L' + xAt(0) + ',' + (f.m.t + f.ph) + 'Z';
         var peak = 0;
         pts.forEach(function (p, i) { if (p.value > pts[peak].value) peak = i; });
-        var s = yAxis(f, max);
+        var s = yAxis(f, sc);
         s += '<path d="' + area + '" fill="var(--blue-500)" fill-opacity="0.1"/>';
         s += '<path d="' + line + '" fill="none" stroke="var(--blue-500)" stroke-width="2" stroke-linejoin="round" stroke-linecap="round"/>';
         if (pts[peak].value > 0) s += '<text class="peak" x="' + xAt(peak) + '" y="' + (yAt(pts[peak].value) - 8) + '" text-anchor="middle">' + num(pts[peak].value) + '</text>';
@@ -355,7 +367,7 @@
         box.innerHTML = res.items.map(function (s) {
             var place = [s.province || (s.country !== '中国' ? s.country : ''), s.city && s.city !== s.province ? s.city : ''].filter(Boolean).join(' ');
             var geo = s.ip
-                ? '<div class="g">' + esc(place || '地区未知') + '<small>' + esc([s.isp, s.ip].filter(Boolean).join(' · ')) + '</small></div>'
+                ? '<div class="g">' + esc(place || '地区未知') + (s.isp ? '<small>' + esc(s.isp) + '</small>' : '') + '<small class="ip">' + esc(s.ip) + '</small></div>'
                 : '<div class="g">地区未知<small>这段历史只有 Cloudflare 节点地址</small></div>';
             var tags = [];
             if (s.src === 'log') tags.push('<span class="tr-tag est">日志估算</span>');
@@ -367,7 +379,7 @@
             return '<div class="tr-sess" data-sid="' + esc(s.sid) + '"><div class="tr-sess-row">' +
                 '<div class="t">' + when(s.start_ts) + '<small>' + (s.visit_no > 1 ? '回头客' : '新访客') + '</small></div>' + geo +
                 '<div class="c">' + esc(s.channel) + '<small>' + esc(s.ref_host || '') + '</small></div>' +
-                '<div class="p"><div class="ttl">' + esc(pageName(s.landing_title, s.landing)) + '</div><div class="more">' + more + '</div>' + tags.join('') + '</div>' +
+                '<div class="p"><div class="mob">' + esc([place || (s.ip ? '' : '地区未知'), s.channel].filter(Boolean).join(' · ')) + '</div><div class="ttl">' + esc(pageName(s.landing_title, s.landing)) + '</div><div class="more">' + more + '</div>' + tags.join('') + '</div>' +
                 '<div class="d">' + (d == null ? '—' : dur(d)) + '<small>' + esc([s.device, s.os, s.browser].filter(Boolean).join(' · ')) + '</small></div>' +
                 '</div></div>';
         }).join('');
@@ -438,6 +450,10 @@
         renderTrend(state.data);
     });
     el('tr-internal').addEventListener('change', function () { state.internal = this.checked; state.page = 1; load(); });
+    el('tr-pages-more').addEventListener('click', function () {
+        state.allPages = !state.allPages;
+        if (state.data) renderPages(state.data.pages);
+    });
     el('tr-trend-table-btn').addEventListener('click', function () {
         var t = el('tr-trend-table');
         t.hidden = !t.hidden;

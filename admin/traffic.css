@@ -7,7 +7,7 @@
 .tr-seg { display: inline-flex; background: white; border: 1px solid var(--gray-200); border-radius: 8px; padding: 3px; }
 .tr-seg button {
     border: 0; background: transparent; font: inherit; font-size: 13px; color: var(--gray-700);
-    padding: 7px 14px; border-radius: 6px; cursor: pointer; letter-spacing: 1px;
+    padding: 7px 14px; border-radius: 6px; cursor: pointer; letter-spacing: 1px; white-space: nowrap;
 }
 .tr-seg button:hover { color: var(--navy-900); background: var(--gray-50); }
 .tr-seg button.on { background: var(--navy-900); color: white; }
@@ -89,17 +89,21 @@
 .tr-stream-tools input[type=search], .tr-stream-tools select {
     font: inherit; font-size: 13px; padding: 7px 10px; border: 1px solid var(--gray-200); border-radius: 8px; background: white;
 }
-.tr-stream-tools input[type=search] { width: 240px; }
+.traffic-page .tr-stream-tools select { width: auto; min-width: 120px; margin: 0; padding: 7px 10px; font-size: 13px; }
+.traffic-page .tr-check input { width: auto; margin: 0; padding: 0; }
+.traffic-page .tr-stream-tools input[type=search] { width: 260px; margin: 0; }
 .tr-sess { border-bottom: 1px solid var(--gray-100); }
 .tr-sess-row {
-    display: grid; grid-template-columns: 92px 170px 150px minmax(0, 1fr) 96px;
+    display: grid; grid-template-columns: 92px 190px 140px minmax(0, 1fr) 110px;
     gap: 12px; padding: 11px 6px; font-size: 13px; cursor: pointer; align-items: start;
 }
 .tr-sess-row:hover { background: var(--gray-50); }
 .tr-sess.open .tr-sess-row { background: #f5f8ff; }
 .tr-sess-row .t { font-variant-numeric: tabular-nums; color: var(--gray-700); }
-.tr-sess-row .t small, .tr-sess-row .g small, .tr-sess-row .c small { display: block; color: var(--gray-500); font-size: 11px; margin-top: 2px; word-break: break-all; }
+.tr-sess-row .t small, .tr-sess-row .g small, .tr-sess-row .c small { display: block; color: var(--gray-500); font-size: 11px; margin-top: 2px; overflow-wrap: anywhere; }
+.tr-sess-row .g small.ip { font-variant-numeric: tabular-nums; }
 .tr-sess-row .p { min-width: 0; }
+.tr-sess-row .p .mob { display: none; font-size: 12px; color: var(--gray-700); margin-bottom: 2px; }
 .tr-sess-row .p .ttl { color: var(--gray-900); overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
 .tr-sess-row .p .more { font-size: 11px; color: var(--gray-500); margin-top: 2px; }
 .tr-sess-row .d { text-align: right; color: var(--gray-700); font-variant-numeric: tabular-nums; }
@@ -128,6 +132,7 @@
     .tr-grid, .tr-mini3 { grid-template-columns: minmax(0, 1fr); }
     .tr-sess-row { grid-template-columns: 78px minmax(0, 1fr) 70px; }
     .tr-sess-row .g, .tr-sess-row .c { display: none; }
+    .tr-sess-row .p .mob { display: block; }
     .tr-detail { padding-left: 6px; }
 }
 @media (max-width: 760px) {
@@ -139,5 +144,7 @@
     .tr-page .admin-main { padding: 20px 16px; }
     .tr-kpis { grid-template-columns: repeat(2, minmax(0, 1fr)); }
     .tr-updated { margin-left: 0; width: 100%; }
-    .tr-stream-tools input[type=search] { width: 100%; }
+    .tr-seg { flex-wrap: wrap; }
+    .tr-seg button { padding: 6px 9px; letter-spacing: 0; }
+    .traffic-page .tr-stream-tools input[type=search] { width: 100%; }
 }
