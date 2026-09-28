@@ -1,8 +1,9 @@
 // ====== Hero 视频延迟加载 ======
 // 首屏立刻显示 poster,等页面 load 完后再下载视频,避免阻塞首屏
-window.addEventListener('load', () => {
+// 国内连不上 Google Fonts 时字体样式表挂起,load 会拖几十秒,所以最多等 3 秒兜底
+function startHeroVideo() {
     const video = document.querySelector('.hero-video');
-    if (!video || !video.dataset.src) return;
+    if (!video || !video.dataset.src || video.querySelector('source')) return;
     // 移动端 .hero-video display:none,跳过加载
     if (getComputedStyle(video).display === 'none') return;
     const source = document.createElement('source');
@@ -13,7 +14,9 @@ window.addEventListener('load', () => {
     // autoplay 浏览器策略:muted+playsinline 一般允许自动播放
     const playPromise = video.play();
     if (playPromise) playPromise.catch(() => { /* 用户手动触发 */ });
-});
+}
+window.addEventListener('load', startHeroVideo);
+setTimeout(startHeroVideo, 3000);
 
 // ====== 导航栏滚动效果 ======
 const navbar = document.getElementById('navbar');

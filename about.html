@@ -709,17 +709,19 @@
 
     <script src="main.js?v=20260923b" defer></script>
     <script>
-    // about-hero 视频延迟加载(同首页 hero)
-    window.addEventListener('load', () => {
+    // about-hero 视频延迟加载(同首页 hero):load 或 3 秒兜底,谁先到用谁
+    function startAboutVideo() {
         const v = document.querySelector('.about-hero-video');
-        if (!v || !v.dataset.src) return;
+        if (!v || !v.dataset.src || v.querySelector('source')) return;
         if (getComputedStyle(v).display === 'none') return;
         const s = document.createElement('source');
         s.src = v.dataset.src; s.type = 'video/mp4';
         v.appendChild(s);
         v.load();
         const p = v.play(); if (p) p.catch(() => {});
-    });
+    }
+    window.addEventListener('load', startAboutVideo);
+    setTimeout(startAboutVideo, 3000);
     </script>
 </body>
 </html>

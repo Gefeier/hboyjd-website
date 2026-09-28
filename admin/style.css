@@ -1,9 +1,7 @@
 /* admin 后台样式 — 跟主站 OPPO Sans+navy 对齐 */
 /* 详见 SPRINT.md 视觉调性章节 */
 
-@import url("https://chinese-fonts-cdn.deno.dev/packages/opposans/dist/OPPOSans-Regular/result.css");
-@import url("https://chinese-fonts-cdn.deno.dev/packages/opposans/dist/OPPOSans-Bold/result.css");
-@import url("https://chinese-fonts-cdn.deno.dev/packages/opposans/dist/OPPOSans-Heavy/result.css");
+/* 原先这里 @import 了 chinese-fonts-cdn.deno.dev 的 OPPO Sans:@import 会阻塞渲染,且该 CDN 已随 Deno Deploy Classic 下线(全部 404),删掉;字体栈自动回退系统字体 */
 
 :root {
     --navy-900: #0a1628;
