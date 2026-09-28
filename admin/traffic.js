@@ -80,10 +80,7 @@
         renderTrend(d);
         var total = d.kpi.sessions;
         bars(el('tr-channels'), d.channels.map(function (x) { return { name: x.name, value: x.sessions }; }), total);
-        bars(el('tr-regions'), d.regions.map(function (x) { return { name: x.name, value: x.sessions }; }), total);
-        el('tr-regions-foot').textContent = d.unknown_geo_sessions > 0
-            ? '另有 ' + num(d.unknown_geo_sessions) + ' 次访问看不到地区:7 月 21 日网站接入 Cloudflare 加速后,服务器只记下了 Cloudflare 节点的地址,这段历史无法还原。统计上线后已修好。'
-            : '';
+        renderRegions(d, total);
         renderPages(d.pages);
         bars(el('tr-referrers'), d.referrers.map(function (x) { return { name: x.name, value: x.sessions }; }), total);
         renderHours(d.hours);
@@ -196,6 +193,22 @@
                 '<div class="track"><div class="fill" style="width:' + (x.value / max * 100).toFixed(1) + '%"></div></div>' +
                 '<div class="num">' + num(x.value) + (compact ? '' : '<span>' + share + '%</span>') + '</div></div>';
         }).join('');
+    }
+
+    function renderRegions(d, total) {
+        var foot = el('tr-regions-foot');
+        if (!d.regions.length && d.unknown_geo_sessions > 0) {
+            el('tr-regions').innerHTML = '<div class="tr-geo-gap"><b>这段时间的 ' + num(d.unknown_geo_sessions) + ' 次访问看不到地区</b>' +
+                '7 月 21 日网站接入 Cloudflare 加速后,服务器只记下了 Cloudflare 节点的地址,真实访客 IP 丢了,这段补不回来。' +
+                '9 月 28 日已修好,之后的新访问都能看到省市和运营商。' +
+                '<button type="button" class="btn btn-outline btn-mini" data-range-jump="all">看 7 月 21 日以前的地区分布</button></div>';
+            foot.textContent = '';
+            return;
+        }
+        bars(el('tr-regions'), d.regions.map(function (x) { return { name: x.name, value: x.sessions }; }), total);
+        foot.textContent = d.unknown_geo_sessions > 0
+            ? '另有 ' + num(d.unknown_geo_sessions) + ' 次访问看不到地区:7 月 21 日到 9 月 28 日之间服务器只记下了 Cloudflare 节点地址,这段补不回来。'
+            : '';
     }
 
     function renderPages(pages) {
@@ -448,6 +461,12 @@
         setOn(this, b);
         state.metric = b.getAttribute('data-metric');
         renderTrend(state.data);
+    });
+    el('tr-regions').addEventListener('click', function (e) {
+        var b = e.target.closest('button[data-range-jump]');
+        if (!b) return;
+        var target = document.querySelector('#tr-range button[data-range="' + b.getAttribute('data-range-jump') + '"]');
+        if (target) target.click();
     });
     el('tr-internal').addEventListener('change', function () { state.internal = this.checked; state.page = 1; load(); });
     el('tr-pages-more').addEventListener('click', function () {
