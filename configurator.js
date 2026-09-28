@@ -963,7 +963,7 @@ btnSubmit.addEventListener('click', () => {
         }
     }).catch(err => {
         console.error('[inquiry] submit failed:', err);
-        alert('提交失败：' + (err.message || '网络异常') + '\n\n您也可以直接拨打销售热线 400-1588-106');
+        alert('提交失败：' + (err.message || '网络异常') + '\n\n您也可以直接拨打销售热线 86-13396121288');
     }).finally(() => {
         btnSubmit.disabled = false;
         btnSubmit.textContent = origText;
