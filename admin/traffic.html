@@ -1,0 +1,121 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="robots" content="noindex, nofollow">
+<title>访客统计 · 欧阳聚德管理后台</title>
+<link rel="stylesheet" href="style.css">
+<link rel="stylesheet" href="traffic.css?v=20260928a">
+</head>
+<body class="tr-page">
+<div class="admin-shell">
+    <aside class="sidebar">
+        <div class="sidebar-logo">欧阳聚德 · 后台</div>
+        <nav class="sidebar-nav">
+            <a href="dashboard.html">工作台</a>
+            <a href="traffic.html" class="active">访客统计</a>
+            <a href="news.html">新闻管理</a>
+            <a href="workshop.html">创作工坊</a>
+            <a href="editor.html">页面内容</a>
+            <a href="images.html">图片库</a>
+            <a href="logs.html">操作日志</a>
+        </nav>
+    </aside>
+    <main class="admin-main traffic-page" id="traffic-page">
+        <h1 class="page-title">访客统计</h1>
+        <p class="page-subtitle">hboyjd.com 的访客从哪来、在哪、看了什么、停了多久 · 每分钟更新</p>
+
+        <div class="tr-filters">
+            <div class="tr-seg" id="tr-range">
+                <button type="button" data-range="today">今天</button>
+                <button type="button" data-range="yesterday">昨天</button>
+                <button type="button" data-range="7d" class="on">近 7 天</button>
+                <button type="button" data-range="30d">近 30 天</button>
+                <button type="button" data-range="90d">近 90 天</button>
+                <button type="button" data-range="all">全部</button>
+            </div>
+            <label class="tr-check"><input type="checkbox" id="tr-internal"> 包含内部访问</label>
+            <span class="tr-updated" id="tr-updated"></span>
+        </div>
+
+        <div class="tr-note" id="tr-note" hidden></div>
+
+        <div class="tr-kpis" id="tr-kpis"></div>
+
+        <div class="card">
+            <div class="tr-card-head">
+                <h2>访问趋势</h2>
+                <div class="tr-seg" id="tr-metric">
+                    <button type="button" data-metric="uv" class="on">访客</button>
+                    <button type="button" data-metric="pv">浏览量</button>
+                    <button type="button" data-metric="sessions">访问次数</button>
+                </div>
+            </div>
+            <div class="tr-chart" id="tr-trend"></div>
+            <div class="tr-foot"><button type="button" class="tr-link" id="tr-trend-table-btn">查看数据表</button></div>
+            <div class="tr-scroll" id="tr-trend-table" hidden></div>
+        </div>
+
+        <div class="tr-grid">
+            <div class="card">
+                <div class="tr-card-head"><h2>来源渠道</h2><span class="sub">按访问次数</span></div>
+                <div class="tr-bars" id="tr-channels"></div>
+                <div class="tr-foot">"直接访问"指没有来源信息的访问:手动输入网址、收藏夹、名片二维码,以及部分 App 内打开。</div>
+            </div>
+            <div class="card">
+                <div class="tr-card-head"><h2>访客地区</h2><span class="sub">按访问次数</span></div>
+                <div class="tr-bars" id="tr-regions"></div>
+                <div class="tr-foot" id="tr-regions-foot"></div>
+            </div>
+        </div>
+
+        <div class="card">
+            <div class="tr-card-head"><h2>热门页面</h2><span class="sub">停留时长只统计精确统计期间</span></div>
+            <div class="tr-scroll"><table class="tr-table" id="tr-pages"></table></div>
+        </div>
+
+        <div class="tr-grid">
+            <div class="card">
+                <div class="tr-card-head"><h2>从哪些网站点进来</h2><span class="sub">来源网址</span></div>
+                <div class="tr-bars" id="tr-referrers"></div>
+            </div>
+            <div class="card">
+                <div class="tr-card-head"><h2>什么时候来</h2><span class="sub">一天 24 小时的访问次数</span></div>
+                <div class="tr-chart" id="tr-hours"></div>
+            </div>
+        </div>
+
+        <div class="card">
+            <div class="tr-card-head"><h2>用什么看</h2><span class="sub">按访问次数</span></div>
+            <div class="tr-mini3">
+                <div><h3>设备</h3><div class="tr-bars" id="tr-devices"></div></div>
+                <div><h3>系统</h3><div class="tr-bars" id="tr-systems"></div></div>
+                <div><h3>浏览器 / App</h3><div class="tr-bars" id="tr-browsers"></div></div>
+            </div>
+        </div>
+
+        <div class="card">
+            <div class="tr-card-head"><h2>关键动作</h2><span class="sub">访客点了电话、抖音、提交询价等</span></div>
+            <div class="tr-acts" id="tr-actions"></div>
+            <div class="tr-foot" id="tr-actions-foot"></div>
+        </div>
+
+        <div class="card">
+            <div class="tr-card-head"><h2>访客流水</h2><span class="sub" id="tr-stream-count"></span></div>
+            <div class="tr-stream-tools">
+                <input type="search" id="tr-q" placeholder="搜 IP / 城市 / 运营商 / 页面 / 来源网站">
+                <select id="tr-channel"><option value="">全部渠道</option></select>
+                <select id="tr-device"><option value="">全部设备</option><option>手机</option><option>电脑</option><option>平板</option></select>
+                <label class="tr-check"><input type="checkbox" id="tr-acted"> 只看有动作的</label>
+                <label class="tr-check"><input type="checkbox" id="tr-multi"> 只看浏览多页的</label>
+            </div>
+            <div id="tr-stream"></div>
+            <div class="tr-pager" id="tr-pager"></div>
+        </div>
+    </main>
+</div>
+<script src="app.js"></script>
+<script src="traffic.js?v=20260928a"></script>
+</body>
+</html>

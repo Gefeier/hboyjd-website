@@ -56,6 +56,7 @@ SSH接入看 skill `website-deploy` 或 `aliyun-deploy`——走 `ssh.moiralili.
 - **选配器 v1**：6车型动态规格 + AI基图 + Canvas HSL 换色 + 询价提交
 - **百度统计**（国内）: HM_ID `65c76ffcec5fffefc264800dccf23f1b` 三页注入
 - **Google Analytics 4**（海外）: `G-7XYYMJZCMZ` 三页注入
+- **自有访问统计**（2026-09-28 上线）: 所有公开页挂 `/assets/js/hit.js` → Nginx `/_hit` 记日志 → `/opt/site-stats` 每分钟入库 → admin 后台「访客统计」页。**新增或重新生成页面后必须跑 `python scripts/inject_tracker.py`**,否则新页面不计数。详见 `admin/site-stats/README.md`
 - **销售 WhatsApp**: `+86 15334225597` 覆盖 index / configurator 弹窗 / parts CTA
 - **询价→钉钉推送链路**（2026-04-24 上线）: `POST /api/inquiry` → Nginx → Flask 9003（/opt/inquiry-proxy）→ 查 IP 地理 + 查手机归属 + 落库 `/var/log/inquiries.jsonl` → 钉钉"销售+市场工作群"机器人
 - **首页新闻栏**: 12 条初始内容（公司动态/行业资讯/技术分享 各 4 条）

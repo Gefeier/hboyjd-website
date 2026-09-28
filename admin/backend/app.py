@@ -14,10 +14,12 @@ from wechat_fetcher import fetch_wechat_article
 from translate import translate_batch as do_translate_batch
 import workshop_io
 import ai_draft as ai_draft_module
+from stats_api import bp as stats_bp
 
 
 app = Flask(__name__, static_folder=None)
 app.secret_key = os.getenv("ADMIN_SECRET_KEY", "local-demo-change-me")
+app.register_blueprint(stats_bp)
 ensure_content_files()
 
 
