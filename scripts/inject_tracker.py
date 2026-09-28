@@ -11,8 +11,9 @@ from pathlib import Path
 VERSION = "20260928a"
 ROOT = Path(__file__).resolve().parent.parent
 GLOBS = ["*.html", "en/*.html", "vehicles/*.html", "en/vehicles/*.html"]
-TAG = f'<script src="/assets/js/hit.js?v={VERSION}" defer></script>'
-EXISTING = re.compile(r'<script src="/assets/js/hit\.js(\?v=[^"]*)?" defer></script>')
+# async 而非 defer:defer 要等前面所有样式表加载完,国内打不开的外链样式表会把它拖几十秒
+TAG = f'<script src="/assets/js/hit.js?v={VERSION}" async></script>'
+EXISTING = re.compile(r'<script src="/assets/js/hit\.js(\?v=[^"]*)?" (?:defer|async)></script>')
 
 
 def main() -> int:
