@@ -16,6 +16,8 @@ DB_PATH = os.getenv("STATS_DB", "/opt/site-stats/stats.db")
 INQUIRY_LOG = os.getenv("INQUIRY_LOG", "/var/log/inquiries.jsonl")
 
 RANGES = {"today": 0, "yesterday": 1, "7d": 6, "30d": 29, "90d": 89}
+# 站点接入 Cloudflare 后、Nginx 还原真实 IP 之前:服务器没有访客地区,这段用百度统计补(baidu_geo 表)
+GEO_GAP = ("2026-07-21", "2026-09-27")
 
 
 def _db() -> sqlite3.Connection:
@@ -92,6 +94,31 @@ def _rows(cur) -> list[dict]:
     return [dict(r) for r in cur.fetchall()]
 
 
+def _baidu_geo(con: sqlite3.Connection, start: str, end: str) -> dict | None:
+    lo, hi = max(start, GEO_GAP[0]), min(end, GEO_GAP[1])
+    if lo > hi:
+        return None
+    args = (lo, hi)
+    try:
+        provinces = _rows(con.execute(
+            "SELECT province AS name, SUM(uv) visitors, SUM(pv) pv FROM baidu_geo WHERE level='province' "
+            "AND day BETWEEN ? AND ? AND province NOT IN ('其他', '') GROUP BY province ORDER BY visitors DESC LIMIT 15", args))
+    except sqlite3.OperationalError:
+        return None
+    cities = _rows(con.execute(
+        "SELECT province, city AS name, SUM(uv) visitors FROM baidu_geo WHERE level='city' AND day BETWEEN ? AND ? "
+        "AND city NOT IN ('其他', '') GROUP BY province, city ORDER BY visitors DESC LIMIT 12", args))
+    countries = _rows(con.execute(
+        "SELECT country AS name, SUM(uv) visitors FROM baidu_geo WHERE level='country' AND day BETWEEN ? AND ? "
+        "AND country NOT IN ('中国', '其他', '') GROUP BY country ORDER BY visitors DESC LIMIT 8", args))
+    total, unknown = con.execute(
+        "SELECT SUM(uv), SUM(CASE WHEN province='其他' THEN uv ELSE 0 END) FROM baidu_geo "
+        "WHERE level='province' AND day BETWEEN ? AND ?", args).fetchone()
+    days = con.execute("SELECT COUNT(DISTINCT day) FROM baidu_geo WHERE day BETWEEN ? AND ?", args).fetchone()[0]
+    return {"from": lo, "to": hi, "days": days, "provinces": provinces, "cities": cities, "countries": countries,
+            "total": total or 0, "unknown": unknown or 0}
+
+
 @bp.route("/api/stats/overview")
 def overview():
     auth.require_user()
@@ -136,6 +163,7 @@ def overview():
         f"SELECT province, city AS name, COUNT(*) sessions FROM sess WHERE {w} AND city<>'' "
         f"GROUP BY province, city ORDER BY sessions DESC LIMIT 15", args))
     unknown_geo = con.execute(f"SELECT COUNT(*) FROM sess WHERE {w} AND ip=''", args).fetchone()[0]
+    baidu = _baidu_geo(con, start, end)
     pages = _rows(con.execute(
         f"SELECT path, MAX(title) title, COUNT(*) pv, COUNT(DISTINCT vid) uv, "
         f"ROUND(AVG(CASE WHEN src='js' AND active_ms>0 THEN active_ms END)/1000.0) avg_active_s, "
@@ -165,7 +193,7 @@ def overview():
             "last_ingest": int(state["last_ingest"]) if state.get("last_ingest") else None,
         },
         "kpi": kpi, "kpi_prev": prev, "trend": trend, "channels": channels, "referrers": referrers,
-        "regions": regions, "cities": cities, "unknown_geo_sessions": unknown_geo, "pages": pages,
+        "regions": regions, "cities": cities, "unknown_geo_sessions": unknown_geo, "baidu_geo": baidu, "pages": pages,
         "devices": devices, "systems": systems, "browsers": browsers, "hours": hours, "actions": actions,
         "inquiries": _inquiries(start, end),
     })

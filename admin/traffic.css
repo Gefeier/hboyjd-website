@@ -69,6 +69,8 @@
 .tr-geo-gap { font-size: 13px; line-height: 1.75; color: var(--gray-700); background: var(--gray-50); border-radius: 8px; padding: 14px 16px; }
 .tr-geo-gap b { display: block; color: var(--navy-900); margin-bottom: 4px; }
 .tr-geo-gap .btn { margin-top: 10px; }
+.tr-subhead { font-size: 13px; font-weight: 700; color: var(--navy-900); margin: 18px 0 4px; padding-top: 14px; border-top: 1px solid var(--gray-100); }
+.tr-subnote { font-size: 12px; color: var(--gray-500); line-height: 1.6; margin-bottom: 10px; }
 .tr-foot { font-size: 12px; color: var(--gray-500); margin-top: 12px; line-height: 1.6; }
 
 .tr-table { width: 100%; border-collapse: collapse; font-size: 13px; }

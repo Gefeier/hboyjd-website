@@ -41,6 +41,16 @@
 - 再去掉云服务器 IP、已知扫描机房(徐州电信 221.229 段等)、同一 /24 冒出 10 个以上 IP 的轮换机房(带搜索/微信/抖音来源或具体手机型号的真人访问保留)、一天超过 6 次访问的监控程序
 - 2026-07-21 起站点接入 Cloudflare 代理,Nginx 当时没配真实 IP 还原,这段历史只有 Cloudflare 节点地址:地区为空,访客按"UA+日期"估。2026-09-28 已修好
 
+## 断档期地区:百度统计补
+
+2026-07-21 ~ 09-27 服务器没有真实访客 IP,地区卡这段改用百度统计「地域分布」(表 `baidu_geo`,省/市/国家三级,按天)。
+百度统计账号是丽丽的(站点 hboyjd.com,siteId 23126050),要她在 Chrome 里登录后才能拉:
+
+- 接口:页面内 `POST /web5/<userId>/ajax/post`,`method=visit/district/a`(省,`viewType=province|country`)、
+  `method=visit/district/top` + `area=province,<id>` + `viewType=city`(某省下的城市);`st`/`et` 用当天 0 点(北京时间)的毫秒时间戳
+- 拉下来存成 JSON 后 `python3 import_baidu.py baidu_geo.json`(同一天重复导入会覆盖)
+- 口径:按天累计的访客人次,只含装了 hm.js 的页面(首页/关于/选配/新闻/产品分类),产品中心和车型页没装
+
 ## 改埋点脚本
 
 改 `assets/js/hit.js` 后,改 `scripts/inject_tracker.py` 里的 VERSION 再跑一次,所有公开页面的引用版本号一起换。新增页面或重新生成英文版、车型页后也跑一次。

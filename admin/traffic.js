@@ -184,31 +184,47 @@
         columnChart(el('tr-hours'), pts, { height: 170, marker: -1, name: '访问次数', everyLabel: 3 });
     }
 
-    function bars(box, rows, total, compact) {
-        if (!rows.length) { box.innerHTML = '<div class="tr-empty">这段时间没有数据</div>'; return; }
+    function barsHtml(rows, total, compact) {
+        if (!rows.length) return '<div class="tr-empty">这段时间没有数据</div>';
         var max = Math.max.apply(null, rows.map(function (x) { return x.value; })) || 1;
-        box.innerHTML = rows.map(function (x) {
+        return rows.map(function (x) {
             var share = total ? pct(x.value, total) : 0;
             return '<div class="tr-bar-row" title="' + esc(x.name) + ' · ' + num(x.value) + '"><div class="nm">' + esc(x.name || '未知') + '</div>' +
                 '<div class="track"><div class="fill" style="width:' + (x.value / max * 100).toFixed(1) + '%"></div></div>' +
                 '<div class="num">' + num(x.value) + (compact ? '' : '<span>' + share + '%</span>') + '</div></div>';
         }).join('');
     }
+    function bars(box, rows, total, compact) { box.innerHTML = barsHtml(rows, total, compact); }
 
     function renderRegions(d, total) {
-        var foot = el('tr-regions-foot');
-        if (!d.regions.length && d.unknown_geo_sessions > 0) {
-            el('tr-regions').innerHTML = '<div class="tr-geo-gap"><b>这段时间的 ' + num(d.unknown_geo_sessions) + ' 次访问看不到地区</b>' +
-                '7 月 21 日网站接入 Cloudflare 加速后,服务器只记下了 Cloudflare 节点的地址,真实访客 IP 丢了,这段补不回来。' +
+        var box = el('tr-regions'), foot = el('tr-regions-foot'), bd = d.baidu_geo, html = '';
+        var hasBaidu = bd && bd.provinces && bd.provinces.length;
+        if (d.regions.length) {
+            html += barsHtml(d.regions.map(function (x) { return { name: x.name, value: x.sessions }; }), total);
+        } else if (d.unknown_geo_sessions > 0 && !hasBaidu) {
+            html += '<div class="tr-geo-gap"><b>这段时间的 ' + num(d.unknown_geo_sessions) + ' 次访问看不到地区</b>' +
+                '7 月 21 日网站接入 Cloudflare 加速后,服务器只记下了 Cloudflare 节点的地址,真实访客 IP 丢了。' +
                 '9 月 28 日已修好,之后的新访问都能看到省市和运营商。' +
                 '<button type="button" class="btn btn-outline btn-mini" data-range-jump="all">看 7 月 21 日以前的地区分布</button></div>';
-            foot.textContent = '';
-            return;
         }
-        bars(el('tr-regions'), d.regions.map(function (x) { return { name: x.name, value: x.sessions }; }), total);
-        foot.textContent = d.unknown_geo_sessions > 0
-            ? '另有 ' + num(d.unknown_geo_sessions) + ' 次访问看不到地区:7 月 21 日到 9 月 28 日之间服务器只记下了 Cloudflare 节点地址,这段补不回来。'
-            : '';
+        if (hasBaidu) {
+            html += '<div class="tr-subhead"' + (d.regions.length ? '' : ' style="margin-top:0"') + '>' + mmdd(bd.from) + ' - ' + mmdd(bd.to) + ' · 百度统计补的地区</div>' +
+                '<div class="tr-subnote">服务器这段没记下真实 IP,改用百度统计的数据:按天累计的访客人次,只含装了百度统计的首页、关于、选配、新闻和产品分类页。</div>' +
+                barsHtml(bd.provinces.map(function (x) { return { name: x.name, value: x.visitors }; }), bd.total);
+            if (bd.cities.length) {
+                html += '<div class="tr-subnote" style="margin-top:12px">城市:' + bd.cities.map(function (c) {
+                    return esc(c.name) + ' ' + num(c.visitors);
+                }).join(' · ') + '</div>';
+            }
+            if (bd.countries.length) {
+                html += '<div class="tr-subnote">海外:' + bd.countries.map(function (c) { return esc(c.name) + ' ' + num(c.visitors); }).join(' · ') + '</div>';
+            }
+        }
+        box.innerHTML = html || '<div class="tr-empty">这段时间没有数据</div>';
+        var notes = [];
+        if (d.regions.length && d.unknown_geo_sessions > 0 && !hasBaidu) notes.push('另有 ' + num(d.unknown_geo_sessions) + ' 次访问看不到地区(7 月 21 日到 9 月 28 日服务器只记下了 Cloudflare 节点地址)。');
+        if (hasBaidu && bd.unknown) notes.push('百度统计那段另有 ' + num(bd.unknown) + ' 人次认不出省份。');
+        foot.textContent = notes.join(' ');
     }
 
     function renderPages(pages) {
