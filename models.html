@@ -13,9 +13,13 @@
     <link rel="stylesheet" href="style.css?v=20260615a">
     <link rel="stylesheet" href="about.css?v=20260615a">
     <link rel="stylesheet" href="product-detail.css?v=20260616g">
+    <!-- Outfit 异步加载:原 <style> 里的 @import 会阻塞渲染,国内连不上 Google Fonts 时整页干等到超时 -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700&display=swap" media="print" onload="this.media='all'">
+    <noscript><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700&display=swap"></noscript>
     <style>
     /* Premium Aze Design - Dark Obsidian Automotive (Tesla/Porsche Vibe) */
-    @import url('https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700&display=swap');
     
     /* FIX STICKY SIDEBAR & PREVENT HORIZONTAL SCROLL */
     html, body { overflow: clip visible; scroll-behavior: smooth; }
