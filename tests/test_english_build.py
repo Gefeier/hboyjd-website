@@ -10,11 +10,41 @@ from unittest.mock import patch
 
 ROOT = Path(__file__).resolve().parents[1]
 sys.path.insert(0, str(ROOT / "scripts"))
-from build_english import EnglishPage, bilingual_pages
+from build_english import EnglishPage, bilingual_pages, build_english
 from check_seo import Page
 
 
 class EnglishBuildTests(unittest.TestCase):
+    def test_selected_build_localizes_schema_routes_without_changing_company_identity(self):
+        import re
+        with tempfile.TemporaryDirectory() as directory:
+            target = Path(directory)
+            (target / "content").mkdir()
+            (target / "vehicles").mkdir()
+            (target / "en").mkdir()
+            (target / "content/product-translations.json").write_text("{}")
+            (target / "vehicles/A.html").write_text("<h1>A</h1>")
+            (target / "product-other.html").write_text("<h1>Other</h1>")
+            untouched = target / "en/product-other.html"
+            untouched.write_text("Keep this generated page untouched")
+            schema = {"@type": "CollectionPage", "url": "https://hboyjd.com/product-test.html",
+                      "publisher": {"@type": "Organization", "@id": "https://hboyjd.com/#organization",
+                                    "url": "https://hboyjd.com/"},
+                      "mainEntity": {"@type": "ItemList", "itemListElement": [
+                          {"@type": "ListItem", "url": "https://hboyjd.com/vehicles/A.html"}]}}
+            (target / "product-test.html").write_text(
+                '<script type="application/ld+json">' + json.dumps(schema) + '</script>'
+                '<a href="/vehicles/A.html">A</a>')
+            build_english(target, only=["product-test.html"])
+            output = (target / "en/product-test.html").read_text()
+            translated = json.loads(re.search(r'<script[^>]*>(.*?)</script>', output).group(1))
+            self.assertEqual(translated["url"], "https://hboyjd.com/en/product-test.html")
+            self.assertEqual(translated["publisher"], schema["publisher"])
+            self.assertEqual(translated["mainEntity"]["itemListElement"][0]["url"],
+                             "https://hboyjd.com/en/vehicles/A.html")
+            self.assertIn('href="/en/vehicles/A.html"', output)
+            self.assertEqual(untouched.read_text(), "Keep this generated page untouched")
+
     def test_nested_vehicle_links_keep_language_and_model_query(self):
         pages = {"models.html": ("/models.html", "/en/models.html"),
                  "vehicles/A.html": ("/vehicles/A.html", "/en/vehicles/A.html"),

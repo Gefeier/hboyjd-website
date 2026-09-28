@@ -53,7 +53,9 @@
       const href=detailLink?.getAttribute('href');
       const label=card.querySelector('.pf-variant-name')?.textContent || card.textContent;
       const match=rules.find(([re])=>re.test(label));
-      const asset=href ? byModel(href.match(/vehicles\/([^/]+)\.html/)?.[1]) : assets.find(a=>a.id===match?.[1]);
+      const asset=card.dataset.visualId
+        ? assets.find(a=>a.id===card.dataset.visualId)
+        : href ? byModel(href.match(/vehicles\/([^/]+)\.html/)?.[1]) : assets.find(a=>a.id===match?.[1]);
       if(asset) {
         const preview = previewButton(asset,'pv-series-image',href?.match(/vehicles\/([^/]+)\.html/)?.[1]);
         // A whole-card detail link must not contain another interactive control.

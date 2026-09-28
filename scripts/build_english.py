@@ -166,13 +166,16 @@ class EnglishPage(HTMLParser):
         self.handle_data("<!" + decl + ">")
 
 
-def build_english(root):
+def build_english(root, only=None):
     root = Path(root)
     (root / "en").mkdir(exist_ok=True)
     pages = bilingual_pages(root)
     catalog = root / "content" / "product-translations.json"
     translations = json.loads(catalog.read_text(encoding="utf-8")) if catalog.exists() else None
-    for name, (chinese_url, english_url) in pages.items():
+    # Keep the full route map when rebuilding selected pages, so nested links
+    # still resolve to English while unrelated generated files remain untouched.
+    selected = pages if only is None else {name: pages[name] for name in only}
+    for name, (chinese_url, english_url) in selected.items():
         product_page = name not in PAGES
         if product_page and translations is None:
             raise ValueError("Missing content/product-translations.json")
@@ -185,7 +188,13 @@ def build_english(root):
                 data = json.loads(match.group(1))
                 def visit(value):
                     if isinstance(value, dict):
-                        return {k: visit(v) for k, v in value.items()}
+                        translated = {k: visit(v) for k, v in value.items()}
+                        # Localize document links, while keeping organization
+                        # identity URLs and @ids shared across languages.
+                        if value.get("@type") in ("CollectionPage", "WebPage", "ListItem") and isinstance(value.get("url"), str):
+                            route = english_link(value["url"], chinese_url, pages)
+                            translated["url"] = urljoin(ORIGIN, route)
+                        return translated
                     if isinstance(value, list):
                         return [visit(v) for v in value]
                     return parser.translate(value) if isinstance(value, str) else value
@@ -200,4 +209,5 @@ def build_english(root):
 
 
 if __name__ == "__main__":
-    build_english(Path(__file__).resolve().parents[1])
+    import sys
+    build_english(Path(__file__).resolve().parents[1], only=sys.argv[1:] or None)

@@ -1,0 +1,43 @@
+/* Purchasing information shared by the three existing product series pages. */
+.buyer-page .pf-hero{height:72vh!important;min-height:440px;max-height:780px}
+.buyer-page .about-hero-title{font-size:clamp(34px,4.8vw,68px)!important;letter-spacing:1px!important}
+.buyer-page .about-hero-tagline{max-width:780px;margin-inline:auto;padding-inline:20px;line-height:1.9}
+.buyer-page-dump .pf-hero{background:linear-gradient(180deg,#080e1c80,#080e1c60 50%,#080e1cb3),url('/assets/images/products/dump/mission.webp') center/cover no-repeat}
+.buyer-nav{background:#0b111b;border-block:1px solid #ffffff10;position:relative;z-index:2}
+.buyer-nav .container{display:flex;gap:10px 28px;flex-wrap:wrap;padding-block:16px}
+.buyer-nav a{font-size:12px;color:#b9c9dd;text-decoration:none;min-height:28px;display:flex;align-items:center}
+.buyer-nav a:hover{color:white}.buyer-nav a:focus-visible,.buyer-model a:focus-visible,.buyer-guide a:focus-visible{outline:2px solid #7aaff5;outline-offset:4px}
+.buyer-page section[id]{scroll-margin-top:105px}
+.buyer-photo{margin:0;min-width:0}.buyer-photo picture{display:block}.buyer-photo figcaption{font-size:11px;line-height:1.8;color:#8e9caf;margin-top:12px}
+.buyer-page .mission-headline{font-size:clamp(25px,2.8vw,37px)!important;line-height:1.45!important}
+.buyer-page .mission-text p{line-height:1.95!important;margin-bottom:17px!important}
+.buyer-page .mission-trinity{gap:12px}.buyer-page .mission-trinity .trinity-item p{font-size:22px;line-height:1.4;margin-bottom:6px}.buyer-trinity-note{font-size:10px;line-height:1.8;color:#8293aa}
+.buyer-guide{padding:72px 0;background:#050505;color:#d8e3f1}.buyer-guide:nth-of-type(even){background:#080d14}
+.buyer-guide .section-header{margin-bottom:34px}.buyer-guide .section-title{color:#fff!important;font-size:clamp(25px,3vw,36px)!important}
+.buyer-guide .section-desc{color:#95a6bc!important;max-width:880px;font-size:13px;line-height:1.9;letter-spacing:0!important}
+.buyer-grid{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:18px}
+.buyer-card{border:1px solid #ffffff13;border-radius:12px;padding:27px;background:#ffffff03;min-width:0}
+.buyer-number{font-size:11px;letter-spacing:2px;color:#82a5d0;margin:0 0 15px}.buyer-card h3{font-size:19px;line-height:1.5;font-weight:600;color:#edf4ff;margin:0 0 13px}
+.buyer-card p,.buyer-card li{font-size:13px;color:#9eaec4;line-height:1.9}.buyer-card ul{padding-left:18px;margin:13px 0 0}.buyer-card li+li{margin-top:8px}
+.buyer-note{font-size:12px;line-height:1.9;color:#93a6be;margin-top:23px;padding:16px 20px;background:#101a29;border-left:2px solid #476f9f}
+.buyer-model-grid{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:16px}
+.buyer-model{min-width:0;padding:25px;border:1px solid #2a3648;border-radius:10px;background:linear-gradient(145deg,#101925,#080d14)}
+.buyer-model-kind{font-size:10px;color:#87a3c5;letter-spacing:.5px;margin:0 0 8px}.buyer-model h3{margin:0 0 18px;font-size:19px;font-weight:550;letter-spacing:.5px;line-height:1.5}
+.buyer-model h3 a{color:#f1f6fe;text-decoration:none;display:flex;justify-content:space-between;gap:8px}.buyer-model h3 a:hover{color:#8ebeff}
+.buyer-model dl{margin:0}.buyer-model dl>div{border-top:1px solid #ffffff0c;padding:10px 0;display:grid;grid-template-columns:92px minmax(0,1fr);gap:10px}
+.buyer-model dt{font-size:10px;color:#7f93ad;line-height:1.8}.buyer-model dd{margin:0;font-size:12px;color:#d6e3f3;line-height:1.7;overflow-wrap:anywhere}
+.buyer-model-company{font-size:10px;line-height:1.8;color:#8296b1;margin:15px 0 0;padding-top:10px;border-top:1px solid #ffffff0c}
+.buyer-model-image{display:block;width:100%;height:135px;object-fit:contain;margin:0 0 18px;background:#0a1018;border-radius:5px}
+.buyer-facts{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1fr);gap:30px;align-items:center}
+.buyer-facts img{width:100%;display:block;border-radius:10px;max-height:300px;object-fit:cover}
+.buyer-facts h3{font-size:24px;line-height:1.5;color:#edf4ff;font-weight:550;margin:0 0 16px}
+.buyer-facts p{font-size:13px;line-height:1.9;color:#9aadc6;margin-bottom:14px}.buyer-facts a,.buyer-note a{color:#aecff8;text-underline-offset:4px}
+.buyer-facts figure{margin:0}.buyer-facts figcaption{font-size:10px;color:#7e91ac;line-height:1.8;margin-top:10px}
+.buyer-inquiry-grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:16px}
+.buyer-inquiry-grid .buyer-card{padding:23px}.buyer-inquiry-grid h3{font-size:16px;margin-bottom:8px}
+.buyer-contact{display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:18px;margin-top:27px;border-top:1px solid #ffffff14;padding-top:25px}
+.buyer-contact p{font-size:12px;color:#8c9fb9;max-width:680px;margin:0;line-height:1.9}.buyer-contact a{display:inline-flex;align-items:center;justify-content:center;min-height:46px;border:1px solid #4c76ac;border-radius:6px;padding:11px 21px;color:#dbeaff;font-size:12px;text-decoration:none;gap:12px;background:#1a2d47}
+.buyer-page .pf-variants .section-desc{max-width:880px;line-height:1.9;letter-spacing:0!important}.buyer-page .pf-variants-note{line-height:1.9}.buyer-page .pf-variant-note{line-height:1.8}
+html[lang=en] .buyer-model h3{font-size:17px}html[lang=en] .buyer-model dl>div{grid-template-columns:96px minmax(0,1fr)}
+@media(max-width:1000px){.buyer-model-grid{grid-template-columns:repeat(2,minmax(0,1fr))}.buyer-card{padding:21px}.buyer-grid{gap:13px}.buyer-card h3{font-size:17px}.buyer-model{padding:22px}}
+@media(max-width:720px){.buyer-page .pf-hero{height:62vh!important;min-height:390px}.buyer-page .about-hero-eyebrow{font-size:10px!important;letter-spacing:2px!important}.buyer-page .about-hero-title{font-size:36px!important;line-height:1.2!important}.buyer-page .about-hero-tagline{font-size:12px!important}.buyer-nav .container{gap:9px 19px}.buyer-nav a{font-size:11px;min-height:32px}.buyer-guide{padding:48px 0}.buyer-grid,.buyer-facts,.buyer-inquiry-grid{grid-template-columns:minmax(0,1fr)}.buyer-facts{gap:22px}.buyer-card{padding:24px}.buyer-model-grid{grid-template-columns:minmax(0,1fr)}.buyer-model h3{font-size:21px}.buyer-model dl>div{grid-template-columns:105px minmax(0,1fr)}.buyer-model dd{font-size:13px}.buyer-model-image{height:175px}.buyer-contact{align-items:stretch;flex-direction:column}.buyer-contact a{width:100%}.buyer-note{padding:15px;font-size:11px}.buyer-page .mission-trinity{grid-template-columns:minmax(0,1fr)}.buyer-page .mission-trinity .trinity-item p{font-size:20px}html[lang=en] .buyer-model h3{font-size:20px}html[lang=en] .buyer-page .about-hero-title{font-size:33px!important}}

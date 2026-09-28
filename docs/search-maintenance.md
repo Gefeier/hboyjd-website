@@ -52,3 +52,24 @@ Push master for automatic deployment. The webhook updates the public site and
 the CMS checkout/runtime, then restarts the CMS backend. Verify both repository
 revisions and the live pages. An accepted Google indexing request is not proof
 of indexing or ranking; those remain separate checks.
+
+## Purchasing content on the three main series pages
+
+The flatbed/drop-side, container-chassis and tipper series use the existing
+Chinese HTML as their source and `buyer-guide.css` for the added selection,
+model comparison, company-reference and enquiry sections. Their 5/6/9 model
+cards are excerpts from `content/vehicles.json`, with separate gross mass,
+payload and curb mass. When vehicle data changes, update these excerpts too.
+`docs/seo-evidence-2026-09-28.md` records the public photo and article sources.
+
+These are collection pages, represented as `CollectionPage` with an `ItemList`,
+not a single priced product. Keep English list-item URLs in `/en/vehicles/`
+while preserving the shared organization `@id`. Do not add prices or ratings
+without real supported data.
+
+Appearance cards may specify `data-visual-id` from `vehicle-visual-data.js`.
+This avoids binding an image by translated text alone. Match the body type and
+axle count; keep text-only cards when a matching illustration is unavailable.
+Both languages retain the same images and colour/3D controls. For a focused
+preview, run `python3 scripts/build_english.py product-flatbed.html
+product-skeleton.html product-dump.html`; run the full build before publishing.
