@@ -6,7 +6,7 @@ r182 / 0.182.0, MIT, and served locally under `assets/vendor/three-r182/`.
 | Route | Display | Specification page |
 | --- | --- | --- |
 | `/vehicle-experience.html` | Existing procedural drop-side illustration | `/vehicles/EHJ9400LB.html` |
-| `/vehicle-experience.html?model=JDV9382TDP` | Lowbed exterior GLB, V13 | `/vehicles/JDV9382TDP.html` |
+| `/vehicle-experience.html?model=JDV9382TDP` | Lowbed exterior GLB, V14 | `/vehicles/JDV9382TDP.html` |
 
 Add `lang=en` for English, and optionally `paint=<id>` for a selected finish. For
 example: `/vehicle-experience.html?model=JDV9382TDP&paint=jude-red&lang=en`.
@@ -24,12 +24,16 @@ that photo shows a different deck variant and must not be described as this exac
 model.
 
 The JDV9382TDP route uses the independently authored exterior at
-`assets/models/jdv9382tdp-exterior-v13.glb`, through `lowbed-viewer.js`. It shows the
+`assets/models/jdv9382tdp-exterior-v14.glb`, through `lowbed-viewer.js`. It shows the
 raised gooseneck, closed underside, cargo deck, three-axle wheel group and twin
 loading ramps, with generic axle and mechanical-suspension detail beneath the
-vehicle. V13 retains the V12 body outline, narrowed gooseneck, side rails, closed
-front underside, wheels, ramps and branding. The new underbody includes axle
-bodies, leaf springs, clamps, hangers, equalizers and links. These describe a
+vehicle. V14 refines seven visible front components: the two gooseneck side webs,
+their lower flanges and upper lips, and the closed underside skin. The front web
+remains shallow at the nose and deepens along a curved lower edge; flange layers
+and small bevels improve edge reflections. Approved exterior proportions, front
+width, closed bottom, wheels, deck, ramps and branding remain unchanged. V13's
+generic axle bodies, leaf springs, clamps, hangers, equalizers and links remain
+in the asset, but there are no public underbody inspection controls. These describe a
 display arrangement, not confirmed equipment for an individual delivered vehicle.
 Wheel backs are neutral closed shells; no drum/disc brake type is established.
 Photographs informed the exterior; it is not a production
@@ -37,8 +41,8 @@ CAD conversion, measured manufacturing model or exact certified configuration.
 Its screen proportions are not product measurements. Options, dimensions and
 delivery details remain subject to the actual vehicle and order.
 
-The initial lowbed poster at `assets/images/3d/jdv9382tdp-red-v13.webp` is rendered from
-this actual display model in Jude Red. Photo mode uses
+The lowbed launch poster is `assets/images/3d/jdv9382tdp-red-v14.webp`, rendered from
+the approved V14 display model in Jude Red with the public studio lighting. Photo mode uses
 `assets/images/3d/jdv9382tdp-photo.webp` and keeps the original photo colors.
 Asset URLs and the common paint palette are defined in `vehicle-3d-data.js`.
 
@@ -47,33 +51,42 @@ Private drawings, STEP/SolidWorks sources, study linework, engineering component
 maps and earlier CAD-derived conversions are not public assets. Any browser GLB
 is downloadable; the protection comes from authoring a separate display model,
 not from making browser geometry inaccessible. This GLB contains no external
-resource URI, extras, source paths or drawing metadata.
+resource URI, extras, source paths or drawing metadata. The V14 builder reads the
+approved public V13 asset and authors replacement display geometry; it does not
+import original CAD geometry. Camera restrictions are a presentation boundary,
+not data redaction or a claim of confidentiality.
 
 ## Loading and interaction
 
 The first page view displays its static launch image. Three.js, OrbitControls,
 GLTFLoader and the lowbed GLB load only when the visitor activates 3D or selects
-a 3D option. The uncompressed V13 is **8,825,500 bytes (about 8.8 MB), 300,202
-triangles, 22 meshes and 14 materials**. It adds the new underbody detail while
-preserving V12's exterior geometry and embedded textures; no lossy mesh
+a 3D option. The uncompressed V14 is **9,915,920 bytes (about 9.9 MB), 305,194
+triangles, 29 meshes and 14 materials**. It replaces only the seven front
+components while preserving all other V13 geometry and embedded textures; no lossy mesh
 compression or automatic model
 download on first page view is required. No runtime request goes to a CDN.
 
 - Drag / one finger orbits; wheel / pinch zooms. Buttons provide zoom and reset.
 - Focused canvas supports arrow keys, plus/minus and Home.
-- Lowbed focus points cover gooseneck, deck, axle group and loading ramps, with
-  separate gooseneck underside (`underside`), whole underbody (`underbody`) and
-  axle/suspension (`runningGear`) views. The camera can orbit beneath the vehicle;
-  the shadow floor hides below its plane rather than moving the model or wheels.
+- Lowbed exposes only five exterior focus ids: `overview`, `side` (gooseneck),
+  `deck`, `axles` (wheel-group exterior) and `legs` (loading ramps). Removed ids
+  `underside`, `underbody` and `runningGear` resolve to `overview`; they have no
+  public buttons or detail panels. The camera is constrained to exterior
+  viewing: polar angle is at most 86.4 degrees and world camera Y is at least
+  2.10 in the grounded display scene. The target is bounded to the model, and
+  close zooms tighten the angle or distance as necessary. Shared constraints
+  apply to dragging, touch, keyboard, zoom, focus, restored view state, resize
+  and capture. These are display coordinates, not vehicle measurements.
   The original route retains its sideboard,
   deck, axle and landing-leg focus areas.
 - Hotspot and paint controls are native keyboard-accessible buttons. Lowbed
   hotspot occlusion uses a few analytic boxes, not a raycast over every mesh.
 - Language switches update text and links without rebuilding the model.
-- Lowbed display environments are `studio` (浅灰展厅 / Light studio, default),
-  `graphite` (深色展厅 / Dark studio) and `daylight` (暖光展台 / Warm studio).
-  Switching changes backdrop, lights and floor appearance while retaining the
-  camera, selected finish and geometry. Environments are not inquiry options.
+- Lowbed uses one clean white/light-grey `studio` background and the approved
+  lab glossy baked-paint response. There is no public environment selector or
+  atelier dark-band environment. `setEnvironment(id)` remains compatible with
+  older hosts but every id resolves to `studio`, retaining camera, finish and
+  geometry. Lighting experiments are not public options or inquiry fields.
 - Rendering occurs on interaction, resizing and short focus transitions. There
   is no auto-rotation; reduced motion skips transitions. Hidden views stop
   rendering, and canvas pixel ratio is capped at 1.5 for small surfaces and 2
@@ -84,7 +97,7 @@ download on first page view is required. No runtime request goes to a CDN.
   checks remain necessary. Deliberate cancellation does not show failure UI.
 
 The lowbed is already Y-up with nose toward -X. Only centering and grounding are
-applied. Preserve the display-environment setup, material values and thin-surface
+applied. Preserve the fixed studio setup, glossy paint values and thin-surface
 shadow handling when integrating another host. Full module API, screenshot and
 lifecycle details are in [lowbed-viewer-contract.md](lowbed-viewer-contract.md).
 
@@ -153,8 +166,8 @@ line. Summary and inquiry use the same returned value; no separate HEX order
 field or environment field is submitted. Existing user remarks are preserved.
 
 Links between the full experience and configurator carry the model and either
-a recognized classic paint id or the validated custom-color pair. Color and
-environment changes retain the current view. Choices made during loading are
+a recognized classic paint id or the validated custom-color pair. Color changes
+retain the current view. Color choices made during loading are
 reapplied after the viewer resolves. Length, suspension and other structural form
 options do not change the display geometry; the page retains its illustration
 notice, and incompatible axle/ramp selections still remove the viewer.
@@ -165,12 +178,38 @@ parameters; the display model does not redefine them.
 
 Syntax checks: `node --check` for `vehicle-experience.js`, `lowbed-viewer.js`,
 `vehicle-3d-data.js` and `configurator-3d.js`. Browser acceptance must also cover:
-desktop and 375 px layouts, all focus areas including the whole underbody and
-suspension, classic/free paint selection, HEX validation, environments, keyboard reset,
+desktop and 375 px layouts, all five exterior focus areas, absence of removed
+underbody controls, the camera boundary across pointer/touch/keyboard/zoom and
+restored view state, classic/free paint selection, HEX validation, fixed studio,
+keyboard reset,
 language changes (including during loading), photo/3D switching, reduced motion,
 load failure, context loss and canceled/stale configurator loads. Confirm a fresh
 page does not request the GLB until 3D is requested, and changing model during a
 download does not leave a canvas or failure message for the old vehicle.
+
+Local V14 asset checks on 2026-09-29:
+
+- SHA256: `99dcbbf3f938dd8b471ecf6e2ef2720d4daeeed97866371b4ed3aff3afbb6221`.
+- 9,915,920 bytes; glTF Validator 0 errors / 0 warnings (14 informational messages).
+- 29 meshes, 14 materials, 305,194 triangles, counted as each TRIANGLES
+  primitive's index count divided by three.
+- Seven front components replace 1,164 old triangles with 6,156 new triangles.
+  The other 61,616 triangles of the original painted-frame primitive retain
+  their index values and order; the other 21 meshes are unchanged.
+- The original 8,804,820-byte binary buffer is an identical prefix. All 77 old
+  accessors, original node definitions, materials, textures, images and samplers
+  are preserved. The four embedded brand PNGs retain their hashes.
+- Whole-vehicle bounds are unchanged. The seven new components are closed
+  connected solids, with no boundary edges, non-manifold edges or zero-area
+  triangles in the independent geometry readback.
+- No external URI fields, extras, source paths or engineering file references.
+
+### Historical V13 / v2.10 checks
+
+The following records the earlier V13 asset and the v2.10 interaction scope.
+That release offered gooseneck-underside, whole-underbody and running-gear views,
+and three environment choices. Their past verification does not describe the
+current public controls or prove the new camera boundary.
 
 Local V13 asset checks on 2026-09-29:
 
@@ -187,7 +226,7 @@ Local V13 asset checks on 2026-09-29:
   EXIF chunks. The only asset-level metadata is glTF version and Blender exporter
   version.
 
-The offline configurator adapter passes 59 assertions for cancellation/late
+The earlier offline configurator adapter passed 59 assertions for cancellation/late
 results, color and environment changes during loading, strict HEX/URL validation,
 classic/custom form synchronization and stable remarks composition. It does not
 render WebGL or send inquiry requests.

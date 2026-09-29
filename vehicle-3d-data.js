@@ -18,8 +18,8 @@
     },
     paints: Object.freeze(paints),
     models: Object.freeze({JDV9382TDP: Object.freeze({
-      modelUrl:'/assets/models/jdv9382tdp-exterior-v13.glb',
-      posterUrl:'/assets/images/3d/jdv9382tdp-red-v13.webp',
+      modelUrl:'/assets/models/jdv9382tdp-exterior-v14.glb',
+      posterUrl:'/assets/images/3d/jdv9382tdp-red-v14.webp',
       photoUrl:'/assets/images/3d/jdv9382tdp-photo.webp',
       detailUrl:'/vehicles/JDV9382TDP.html'
     })})

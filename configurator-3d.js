@@ -16,7 +16,6 @@ function initConfigurator3d() {
   const customColor = byId('cfg3dCustomColor');
   const customHex = byId('cfg3dCustomHex');
   const screenColor = byId('customScreenColor');
-  const environmentSelect = byId('cfg3dEnvironment');
   const checked = name => document.querySelector(`input[name="${name}"]:checked`)?.value || '';
   let engine = null;
   let pending = null;
@@ -137,7 +136,7 @@ function initConfigurator3d() {
     pending = (async () => {
       let viewer;
       try {
-        const module = await import('/lowbed-viewer.js?v=20260929b');
+        const module = await import('/lowbed-viewer.js?v=20260929c');
         if (token !== generation || !matchesModel()) return;
         // Each load owns a separate surface. A late result cannot replace a new model.
         viewer = await module.createLowbedViewer({
@@ -216,11 +215,6 @@ function initConfigurator3d() {
   customHex.addEventListener('change', () => applyCustomColor(customHex.value));
   customHex.addEventListener('keydown', event => {
     if (event.key === 'Enter') { event.preventDefault(); applyCustomColor(customHex.value); }
-  });
-  environmentSelect.addEventListener('change', () => {
-    if (!['studio', 'graphite', 'daylight'].includes(environmentSelect.value)) return;
-    environment = environmentSelect.value;
-    engine?.setEnvironment(environment);
   });
   start.addEventListener('click', () => activate());
   photo.addEventListener('click', () => {

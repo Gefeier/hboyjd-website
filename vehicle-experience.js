@@ -42,13 +42,10 @@ if (isLowbed) {
     canvasLabel:'挖机板3D外观展示。方向键旋转，加减键缩放，Home恢复全车视角。',
     detail:{
       overview:['从鹅颈，到双列爬梯','拖动查看整车外观，点击圆点或部位名称放大查看。选择经典配色，感受不同的车身效果。'],
-      side:['渐深鹅颈，连贯的车身轮廓','靠近观察前台、弧形下沿和根部外观，也可切换底面视角。'],
+      side:['渐深鹅颈，连贯的车身轮廓','靠近观察前台、弧形下沿和上下翼板的外观层次。'],
       deck:['开放货台，看清装载空间','俯视货台与花纹板表面，了解整车布局。具体尺寸及选装按实际运输需求确认。'],
       axles:['三轴布局，完整呈现','查看三轴轮组与侧边轮口。轮胎、轮毂及灯具保持各自材质，车身换色更直观。'],
-      legs:['双列爬梯，近距离查看','转到车尾观察双列爬梯、尾灯和品牌挡泥皮。展示外观不代表所有选装配置。'],
-      underside:['从下方，查看鹅颈外观','低视角查看鹅颈底面与根部凹口，拖动可继续调整观察角度。'],
-      underbody:['换到车底，看清布局','从下方观察纵梁、横梁和三轴布局，地面会自动隐藏。展示结构经过简化，具体底盘配置以实车及订单为准。'],
-      runningGear:['车桥与悬挂，近一点看','查看桥体、板簧、吊架和平衡架的外观关系。这里呈现机械悬架示意，所选悬挂与交付配置需按订单确认。']
+      legs:['双列爬梯，近距离查看','转到车尾观察双列爬梯、尾灯和品牌挡泥皮。展示外观不代表所有选装配置。']
     }
   });
   Object.assign(text.en, {
@@ -62,13 +59,10 @@ if (isLowbed) {
     canvasLabel:'Excavator lowbed 3D exterior. Arrow keys rotate, plus and minus zoom, Home restores the whole vehicle.',
     detail:{
       overview:['From gooseneck to twin ramps','Drag to explore the exterior. Select a point or an area for a closer view, and try our classic body colors.'],
-      side:['A continuous gooseneck profile','Explore the upper platform, curved lower edge and root. An underside view is also available.'],
+      side:['A continuous gooseneck profile','Explore the upper platform, curved lower edge and the layered upper and lower flanges.'],
       deck:['An open view of the loading deck','Look over the platform and tread plate. Confirm dimensions and equipment for your transport needs.'],
       axles:['See the three-axle layout','Explore the wheel groups and wheel openings. Tires, rims and lights keep their own finishes when body colors change.'],
-      legs:['Explore the twin loading ramps','Move around the rear to view the ramps, tail lights and branded mudflaps. The display does not represent every equipment option.'],
-      underside:['See the gooseneck underside','Use this lower viewpoint to inspect the exterior skin and recessed root. Drag to change the angle.'],
-      underbody:['Explore beneath the vehicle','View the main beams, crossmembers and axle layout from below. The ground hides automatically. The simplified exterior is subject to the actual vehicle and order.'],
-      runningGear:['A closer look at axles and suspension','Explore the axle bodies, leaf springs, hangers and equalizers. This illustrates mechanical suspension; actual equipment depends on the confirmed order.']
+      legs:['Explore the twin loading ramps','Move around the rear to view the ramps, tail lights and branded mudflaps. The display does not represent every equipment option.']
     }
   });
 }
@@ -94,12 +88,6 @@ if (isLowbed) {
   document.querySelectorAll('.spec-strip strong')[0].textContent=modelId;
   document.querySelectorAll('.spec-strip strong')[1].innerHTML='38,000 <small>kg</small>';
   document.querySelectorAll('.spec-strip strong')[3].innerHTML='387 <small data-i18n="batchUnit">批</small>';
-  const button=document.createElement('button');button.type='button';button.className='focus-option';button.dataset.focus='underside';button.setAttribute('aria-pressed','false');button.id='undersideButton';
-  document.querySelector('.focus-options').append(button);
-  for(const part of ['underbody','runningGear']){
-    const control=document.createElement('button');control.type='button';control.className='focus-option';control.dataset.focus=part;control.setAttribute('aria-pressed','false');control.id=part+'Button';document.querySelector('.focus-options').append(control);
-  }
-  $('environmentOptions').hidden=false;
 }
 let engine = null;
 let pendingLoad = null;
@@ -152,9 +140,6 @@ function applyLanguage() {
   $('homeLink').setAttribute('aria-label', strings.homeLabel);
   $('backLink').href = `${prefix}/vehicles/${modelId}.html`;
   $('specLink').href = `${prefix}/vehicles/${modelId}.html`;
-  if ($('undersideButton')) $('undersideButton').textContent = state.lang === 'en' ? '05   Gooseneck underside ↗' : '05   鹅颈底面 ↗';
-  if ($('underbodyButton')) $('underbodyButton').textContent=state.lang==='en'?'06   Whole underbody ↗':'06   整车车底 ↗';
-  if ($('runningGearButton')) $('runningGearButton').textContent=state.lang==='en'?'07   Axles & suspension ↗':'07   车桥与悬挂 ↗';
   $('viewBadge').textContent = state.mode === 'photo' ? strings.badgePhoto : strings.badge3d;
   if (engine) engine.canvas.setAttribute('aria-label', strings.canvasLabel);
   updateColor(); updateDetail(); setStatus(statusKey);
@@ -193,7 +178,7 @@ async function loadViewer() {
   pendingLoad = (async () => {
     try {
       if (isLowbed) {
-        const {createLowbedViewer}=await import('/lowbed-viewer.js?v=20260929b');
+        const {createLowbedViewer}=await import('/lowbed-viewer.js?v=20260929c');
         engine=await createLowbedViewer({surface:$('renderSurface'),color:currentColor(),environment:state.environment,modelUrl:lowbedAsset.modelUrl,label:text[state.lang].canvasLabel,
           onError:()=>{state.error=true;engine?.dispose();engine=null;showMode('photo');setStatus('failed');},
           onHotspots:points=>document.querySelectorAll('.hotspot').forEach(button=>{
@@ -252,11 +237,6 @@ async function applyCustomColor(value){
 $('customPaint').addEventListener('input',event=>{void applyCustomColor(event.target.value);});
 $('customHex').addEventListener('change',event=>{void applyCustomColor(event.target.value.trim());});
 $('customHex').addEventListener('keydown',event=>{if(event.key==='Enter'){event.preventDefault();void applyCustomColor(event.target.value.trim());}});
-document.querySelectorAll('[data-environment]').forEach(button=>button.addEventListener('click',async()=>{
-  state.environment=button.dataset.environment;
-  document.querySelectorAll('[data-environment]').forEach(control=>control.setAttribute('aria-pressed',String(control===button)));
-  showMode('3d');if(await loadViewer())engine.setEnvironment?.(state.environment);
-}));
 $('resetView').addEventListener('click', () => activatePart('overview'));
 $('zoomIn').addEventListener('click', () => engine?.zoom(0.8));
 $('zoomOut').addEventListener('click', () => engine?.zoom(1.25));
