@@ -769,3 +769,54 @@ body::after {
 
 .appearance-caption{font-size:11px;color:#9aabc1;line-height:1.6;margin-top:10px;max-width:360px;letter-spacing:0}
 @media(max-width:1024px){.appearance-caption{font-size:9px;max-width:90vw;margin-top:5px}}
+
+/* A lazy, model-specific 3D stage; the enquiry panel remains independent. */
+.cfg3d[hidden],.cfg3d [hidden],.cfg3d-unavailable[hidden]{display:none!important}
+.vehicle-stage.has-lowbed-preview>.vehicle-wrapper,
+.vehicle-stage.has-lowbed-preview>.vehicle-reflection,
+.vehicle-stage.has-lowbed-preview>.vehicle-label,
+.vehicle-stage.has-lowbed-preview>.config-tags{visibility:hidden}
+.cfg3d{position:absolute;inset:22px 22px 28px;display:grid;grid-template-rows:auto minmax(0,1fr) auto;min-width:0;overflow:hidden;border:1px solid #ffffff20;border-radius:14px;background:#111a27;box-shadow:0 24px 70px #0004;pointer-events:auto}
+.cfg3d-header{display:flex;align-items:center;justify-content:space-between;gap:14px;padding:17px 20px;min-width:0;border-bottom:1px solid #ffffff12}
+.cfg3d-eyebrow{display:block;color:#c6a773;font-size:10px;letter-spacing:2px;margin-bottom:4px}
+.cfg3d-header h2{font-size:16px;line-height:1.45;font-weight:600;color:#f1f4f8;letter-spacing:.2px}
+.cfg3d-header>a{color:#dce5f0;font-size:12px;white-space:nowrap;padding:10px 0;text-underline-offset:5px}
+.cfg3d-view{position:relative;min-height:0;min-width:0;background:#e9edf1;overflow:hidden}
+.cfg3d-poster,.cfg3d-surface-host,.cfg3d-surface{position:absolute;inset:0;width:100%;height:100%}
+.cfg3d-poster{object-fit:contain;object-position:center}
+.cfg3d-surface-host{z-index:1}
+.cfg3d-surface canvas{display:block;width:100%;height:100%;touch-action:none;outline-offset:-4px}
+.cfg3d-launch{position:absolute;z-index:3;left:50%;top:65%;transform:translate(-50%,-50%);display:flex;align-items:center;justify-content:center;gap:12px;min-height:46px;padding:10px 22px;border:1px solid #ffffff65;border-radius:5px;background:#192c40;color:#fff;font:600 14px var(--font);white-space:nowrap;cursor:pointer;box-shadow:0 8px 24px #12203130}
+.cfg3d-launch:disabled{cursor:progress;opacity:.8}.cfg3d-launch span{font-size:24px;font-weight:400}
+.cfg3d-zoom{position:absolute;z-index:3;right:14px;top:50%;transform:translateY(-50%);display:grid;background:#ffffffea;box-shadow:0 2px 14px #1c2c4215;border:1px solid #172a3f20;border-radius:6px;overflow:hidden}
+.cfg3d-zoom button{border:0;border-bottom:1px solid #172a3f15;background:transparent;color:#172a3f;font-size:22px;width:40px;min-height:40px;cursor:pointer}.cfg3d-zoom button:last-child{border-bottom:0;font-size:19px}
+.cfg3d-photo{position:absolute;z-index:3;left:14px;top:13px;border:1px solid #172a3f30;border-radius:4px;background:#ffffffea;color:#172a3f;font:500 11px var(--font);min-height:34px;padding:6px 12px;cursor:pointer}
+.cfg3d-photo[aria-pressed=true]{background:#172a3f;color:#fff}
+.cfg3d-status{position:absolute;z-index:3;bottom:0;left:0;right:0;padding:8px 12px;color:#34465b;background:#eff3f7e8;font-size:11px;line-height:1.45;text-align:center;pointer-events:none}
+.cfg3d-options{min-width:0;padding:12px 16px 13px}
+.cfg3d-parts{display:flex;gap:5px;overflow-x:auto;padding:0 0 6px;scrollbar-width:thin;overscroll-behavior-x:contain}
+.cfg3d-parts button{flex:0 0 auto;min-height:34px;padding:5px 11px;border:1px solid #ffffff25;border-radius:4px;background:transparent;color:#d8e1ec;font:500 12px var(--font);cursor:pointer}
+.cfg3d-parts button[aria-pressed=true]{background:#ecf1f7;color:#142539;border-color:#ecf1f7}
+.cfg3d-paint-row{display:flex;align-items:center;gap:10px;min-width:0;margin-top:3px}
+.cfg3d-paints{display:flex;align-items:center;gap:5px;min-width:0;overflow-x:auto;padding:3px;scrollbar-width:thin;overscroll-behavior-x:contain}
+.cfg3d-paints button{flex:0 0 26px;width:26px;height:26px;padding:0;border:4px solid #111a27;outline:1px solid #586270;outline-offset:-1px;border-radius:50%;background:var(--paint);cursor:pointer}
+.cfg3d-paints button[aria-pressed=true]{outline:2px solid #f5f8fc;outline-offset:1px}
+#cfg3dPaintName{font-size:11px;line-height:1.4;color:#cbd6e3;flex:0 0 auto;max-width:90px}
+.cfg3d-note{font-size:10px;line-height:1.65;color:#90a1b6;margin-top:7px}
+.cfg3d button:focus-visible,.cfg3d a:focus-visible{outline:3px solid #7fbcff;outline-offset:2px}
+.cfg3d button:hover:not(:disabled){filter:brightness(1.12)}
+.cfg3d-unavailable{position:absolute;bottom:7%;left:8%;right:8%;font-size:11px;line-height:1.5;color:#aabbd0;text-align:center}
+@media(max-width:1024px){
+  body.has-configurator-3d{--cfg3d-stage-height:clamp(296px,44dvh,420px)}
+  .vehicle-stage.has-lowbed-preview{height:var(--cfg3d-stage-height)}
+  body.has-configurator-3d .config-panel{top:calc(64px + var(--cfg3d-stage-height));height:calc(100dvh - 64px - var(--cfg3d-stage-height))}
+  .cfg3d{inset:6px 10px 8px;border-radius:8px}
+  .cfg3d-header{padding:7px 12px;gap:8px}.cfg3d-header h2{font-size:12px}.cfg3d-eyebrow{font-size:8px;letter-spacing:1px;margin-bottom:1px}.cfg3d-header>a{font-size:11px;padding:7px 0}
+  .cfg3d-options{padding:5px 10px 6px}.cfg3d-parts{padding-bottom:3px}.cfg3d-parts button{min-height:30px;font-size:11px;padding:3px 10px}
+  .cfg3d-paint-row{margin-top:0;gap:7px}.cfg3d-paints{gap:4px;padding:3px}.cfg3d-paints button{flex-basis:24px;width:24px;height:24px;border-width:3px}
+  #cfg3dPaintName{font-size:10px;max-width:65px}.cfg3d-note{font-size:9px;line-height:1.4;margin-top:3px}
+  .cfg3d-launch{top:58%;min-height:38px;padding:7px 15px;font-size:12px}.cfg3d-photo{top:6px;left:7px;min-height:28px;font-size:10px;padding:4px 8px}
+  .cfg3d-zoom{right:7px}.cfg3d-zoom button{width:32px;min-height:30px;font-size:18px}.cfg3d-zoom button:last-child{font-size:16px}
+  .cfg3d-status{font-size:9px;padding:4px 7px}.cfg3d-unavailable{bottom:0;left:4%;right:4%;font-size:9px}
+}
+@media(max-width:1024px) and (max-height:600px){body.has-configurator-3d{--cfg3d-stage-height:250px}.cfg3d-note{display:none}}

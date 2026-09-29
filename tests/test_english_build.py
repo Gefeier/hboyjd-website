@@ -10,11 +10,20 @@ from unittest.mock import patch
 
 ROOT = Path(__file__).resolve().parents[1]
 sys.path.insert(0, str(ROOT / "scripts"))
-from build_english import EnglishPage, bilingual_pages, build_english
+from build_english import EnglishPage, bilingual_pages, build_english, english_link
 from check_seo import Page
 
 
 class EnglishBuildTests(unittest.TestCase):
+    def test_interactive_links_keep_model_and_paint_with_english_ui(self):
+        from urllib.parse import parse_qs, urlsplit
+        route = english_link('/vehicle-experience.html?model=JDV9382TDP&paint=jude-red&lang=zh#viewer')
+        parsed = urlsplit(route)
+        self.assertEqual(parsed.path, '/vehicle-experience.html')
+        self.assertEqual(parsed.fragment, 'viewer')
+        self.assertEqual(parse_qs(parsed.query), {'model': ['JDV9382TDP'], 'paint': ['jude-red'], 'lang': ['en']})
+        self.assertEqual(english_link('/vehicle-experience.html'), '/vehicle-experience.html?lang=en')
+
     def test_selected_build_localizes_schema_routes_without_changing_company_identity(self):
         import re
         with tempfile.TemporaryDirectory() as directory:

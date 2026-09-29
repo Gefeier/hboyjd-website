@@ -9,7 +9,7 @@ from html.parser import HTMLParser
 import json
 import re
 from pathlib import Path
-from urllib.parse import urljoin, urlsplit, urlunsplit
+from urllib.parse import parse_qsl, urlencode, urljoin, urlsplit, urlunsplit
 
 ORIGIN = "https://hboyjd.com"
 PAGES = {"index.html": ("/", "/en/"), "about.html": ("/about.html", "/en/about.html")}
@@ -40,7 +40,12 @@ def english_link(value, source_url="/", pages=None):
     routes = {zh: en for zh, en in (pages or PAGES).values()}
     routes["/index.html"] = "/en/"
     path = routes.get(absolute.path, absolute.path)
-    return urlunsplit(("", "", path, absolute.query, absolute.fragment))
+    query = absolute.query
+    # This interactive page has one bilingual route rather than an /en/ copy.
+    if path == "/vehicle-experience.html":
+        pairs = [(key, value) for key, value in parse_qsl(query, keep_blank_values=True) if key != "lang"]
+        query = urlencode([*pairs, ("lang", "en")])
+    return urlunsplit(("", "", path, query, absolute.fragment))
 
 
 class EnglishPage(HTMLParser):

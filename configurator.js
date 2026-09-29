@@ -1049,4 +1049,12 @@ updateTags();
         var opt = sel.options[sel.selectedIndex];
         applyModel(sel.value, opt ? (opt.dataset.vname || '') : '', true);
     });
+    // Only a shared, known paint ID may preselect an enquiry colour.
+    var requestedPaint = params.get('paint');
+    var paint = (window.OYJD_3D?.paints || []).find(p => p.id === requestedPaint);
+    var paintRadio = paint && Array.from(document.querySelectorAll('input[name="color"]')).find(r => r.value === paint.name);
+    if (paintRadio) {
+        paintRadio.checked = true;
+        paintRadio.dispatchEvent(new Event('change', {bubbles: true}));
+    }
 })();

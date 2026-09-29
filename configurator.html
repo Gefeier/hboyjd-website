@@ -9,7 +9,8 @@
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Noto+Sans+SC:wght@300;400;500;700;900&family=Orbitron:wght@400;700;900&display=swap" media="print" onload="this.media='all'">
     <noscript><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Noto+Sans+SC:wght@300;400;500;700;900&family=Orbitron:wght@400;700;900&display=swap"></noscript>
-    <link rel="stylesheet" href="configurator.css?v=20260926a">
+    <link rel="stylesheet" href="configurator.css?v=20260929a">
+    <script type="importmap">{"imports":{"three":"/assets/vendor/three-r182/three.module.min.js"}}</script>
     <!-- #105 v3 variant 图预加载,切 variant 时无闪烁 -->
     <link rel="preload" as="image" href="assets/images/product-variant-excavator-bed.webp?v=20260618m" type="image/webp">
     <link rel="preload" as="image" href="assets/images/product-variant-small-bee.webp?v=20260618m" type="image/webp">
@@ -111,6 +112,36 @@
         <div class="config-tags" id="configTags">
             <span class="tag">请选择配置</span>
         </div>
+        <p class="cfg3d-unavailable" id="cfg3dUnavailable" hidden>当前选配暂无对应 3D，已显示外观图片。</p>
+        <section class="cfg3d" id="configurator3d" aria-labelledby="cfg3dTitle" hidden>
+            <header class="cfg3d-header">
+                <div><span class="cfg3d-eyebrow">3D 外观示意</span><h2 id="cfg3dTitle">JDV9382TDP · 低平板</h2></div>
+                <a id="cfg3dFull" href="/vehicle-experience.html?model=JDV9382TDP">完整查看 ↗</a>
+            </header>
+            <div class="cfg3d-view">
+                <img class="cfg3d-poster" id="cfg3dPoster" alt="JDV9382TDP 低平板半挂车 3D 外观示意，静态聚德红预览" loading="lazy" decoding="async">
+                <div class="cfg3d-surface-host" id="cfg3dSurfaceHost" hidden></div>
+                <button class="cfg3d-launch" id="cfg3dStart" type="button"><span aria-hidden="true">↻</span> 开启 3D 看车</button>
+                <div class="cfg3d-zoom" id="cfg3dZoom" aria-label="3D 视角控制" hidden>
+                    <button type="button" data-cfg3d-zoom="0.8" aria-label="放大模型">+</button>
+                    <button type="button" data-cfg3d-zoom="1.25" aria-label="缩小模型">−</button>
+                    <button type="button" data-cfg3d-focus="overview" aria-label="恢复全车视角">↺</button>
+                </div>
+                <button class="cfg3d-photo" id="cfg3dPhoto" type="button" aria-pressed="false">实车参考</button>
+                <p class="cfg3d-status" id="cfg3dStatus" role="status" aria-live="polite">点击开启，拖动旋转，双指或滚轮缩放。</p>
+            </div>
+            <div class="cfg3d-options">
+                <div class="cfg3d-parts" aria-label="放大查看部位">
+                    <button type="button" data-cfg3d-focus="side">鹅颈</button>
+                    <button type="button" data-cfg3d-focus="deck">货台</button>
+                    <button type="button" data-cfg3d-focus="axles">轮组</button>
+                    <button type="button" data-cfg3d-focus="legs">爬梯</button>
+                    <button type="button" data-cfg3d-focus="underside">鹅颈底面</button>
+                </div>
+                <div class="cfg3d-paint-row"><div class="cfg3d-paints" id="cfg3dPaints" role="group" aria-label="车身配色，与选配表同步"></div><span id="cfg3dPaintName"></span></div>
+                <p class="cfg3d-note">外观示意不随尺寸、悬挂等选项变形；配色以色卡、交付配置以订单为准。</p>
+            </div>
+        </section>
     </div>
 
     <!-- 右侧毛玻璃选配面板 -->
@@ -262,7 +293,7 @@
             <div class="config-group">
                 <label class="group-label">车身颜色</label>
                 <div class="color-grid">
-                    <label class="color-opt" title="聚德大红"><input type="radio" name="color" value="聚德大红 RAL3020"><span class="swatch" style="background:#c1272d"></span><span class="cname">聚德大红</span></label>
+                    <label class="color-opt" title="聚德大红"><input type="radio" name="color" value="聚德大红 RAL3020" checked><span class="swatch" style="background:#c1272d"></span><span class="cname">聚德大红</span></label>
                     <label class="color-opt" title="赤焰红"><input type="radio" name="color" value="赤焰红 RAL3000"><span class="swatch" style="background:#af2b1e"></span><span class="cname">赤焰红</span></label>
                     <label class="color-opt" title="桔红"><input type="radio" name="color" value="桔红 RAL2017"><span class="swatch" style="background:#fa842b"></span><span class="cname">桔红</span></label>
                     <label class="color-opt" title="聚德黄"><input type="radio" name="color" value="聚德黄色 RAL1007"><span class="swatch" style="background:#e88c00"></span><span class="cname">聚德黄</span></label>
@@ -338,6 +369,8 @@
     </div>
 
     <script src="vehicle-visual-data.js?v=20260926a"></script>
-    <script src="configurator.js?v=20260928b" defer></script>
+    <script src="/vehicle-3d-data.js?v=20260929a"></script>
+    <script src="configurator.js?v=20260929a" defer></script>
+    <script type="module" src="/configurator-3d.js?v=20260929a"></script>
 </body>
 </html>

@@ -22,8 +22,72 @@ const text = {
     }
   }
 };
-const state = { lang: new URLSearchParams(location.search).get('lang') === 'en' ? 'en' : 'zh', part: 'overview', color: 'blue', mode: '3d', loading: false, error: false };
-const colors = { blue: 0x247bc1, red: 0xae3441, white: 0xdce4ec, gray: 0x526170 };
+const parameters = new URLSearchParams(location.search);
+const isLowbed = parameters.get('model') === 'JDV9382TDP';
+const modelId = isLowbed ? 'JDV9382TDP' : 'EHJ9400LB';
+const palette = window.OYJD_3D.paints;
+const lowbedAsset = window.OYJD_3D.models.JDV9382TDP;
+if (isLowbed) {
+  Object.assign(text.zh, {
+    pageTitle:'挖机板 · 360° 互动看车 | 湖北欧阳聚德汽车',title:'挖机板 · 低平板半挂车',
+    modelLabel:'襄汽牌 · JDV9382TDP', badgePhoto:'车型实拍参考',
+    focusSide:'放大查看鹅颈',focusLegs:'放大查看双爬梯',side:'鹅颈外观',legs:'双列爬梯',
+    photoAlt:'JDV9382TDP低平板半挂车实拍参考',launchAlt:'聚德大红挖机板3D外观展示',
+    photoCaption:'车型实拍参考 · 具体配置以实车及订单为准',
+    failed:'暂时无法载入3D，已显示车型实拍。你仍可查看参数和配置询价。',
+    disclaimer:'3D 为车型外观展示，配色仅作参考；选装、尺寸及交付配置以实车、色卡和订单为准。',
+    canvasLabel:'挖机板3D外观展示。方向键旋转，加减键缩放，Home恢复全车视角。',
+    detail:{
+      overview:['从鹅颈，到双列爬梯','拖动查看整车外观，点击圆点或部位名称放大查看。选择经典配色，感受不同的车身效果。'],
+      side:['渐深鹅颈，连贯的车身轮廓','靠近观察前台、弧形下沿和根部外观，也可切换底面视角。'],
+      deck:['开放货台，看清装载空间','俯视货台与花纹板表面，了解整车布局。具体尺寸及选装按实际运输需求确认。'],
+      axles:['三轴布局，完整呈现','查看三轴轮组与侧边轮口。轮胎、轮毂及灯具保持各自材质，车身换色更直观。'],
+      legs:['双列爬梯，近距离查看','转到车尾观察双列爬梯、尾灯和品牌挡泥皮。展示外观不代表所有选装配置。'],
+      underside:['从下方，查看鹅颈外观','低视角查看鹅颈底面与根部凹口，拖动可继续调整观察角度。']
+    }
+  });
+  Object.assign(text.en, {
+    pageTitle:'Excavator Lowbed · 360° Interactive View | Hubei Ouyang Jude',title:'Excavator Lowbed',
+    modelLabel:'Xiangqi · JDV9382TDP',badgePhoto:'Vehicle Photo Reference',
+    focusSide:'Look closer at the gooseneck',focusLegs:'Look closer at the loading ramps',side:'Gooseneck',legs:'Twin loading ramps',
+    photoAlt:'JDV9382TDP lowbed semi-trailer photo reference',launchAlt:'Jude Red excavator lowbed 3D exterior',
+    photoCaption:'Vehicle photo reference · Equipment is subject to the actual vehicle and order',
+    failed:'3D is unavailable. A vehicle photo is shown; specifications and enquiries remain available.',
+    disclaimer:'3D exterior display. Colors are illustrative. Options, dimensions and delivered equipment are subject to the actual vehicle, color sample and order.',
+    canvasLabel:'Excavator lowbed 3D exterior. Arrow keys rotate, plus and minus zoom, Home restores the whole vehicle.',
+    detail:{
+      overview:['From gooseneck to twin ramps','Drag to explore the exterior. Select a point or an area for a closer view, and try our classic body colors.'],
+      side:['A continuous gooseneck profile','Explore the upper platform, curved lower edge and root. An underside view is also available.'],
+      deck:['An open view of the loading deck','Look over the platform and tread plate. Confirm dimensions and equipment for your transport needs.'],
+      axles:['See the three-axle layout','Explore the wheel groups and wheel openings. Tires, rims and lights keep their own finishes when body colors change.'],
+      legs:['Explore the twin loading ramps','Move around the rear to view the ramps, tail lights and branded mudflaps. The display does not represent every equipment option.'],
+      underside:['See the gooseneck underside','Use this lower viewpoint to inspect the exterior skin and recessed root. Drag to change the angle.']
+    }
+  });
+}
+const initialPaint = palette.find(paint => paint.id === parameters.get('paint')) || palette[0];
+const state = { lang: parameters.get('lang') === 'en' ? 'en' : 'zh', part: 'overview', color: initialPaint.id, mode: '3d', loading: false, error: false };
+const colors = Object.fromEntries(palette.map(paint => [paint.id, paint.hex]));
+const colorRow = document.querySelector('.color-row');
+colorRow.replaceChildren(...palette.map(paint => {
+  const button = document.createElement('button');
+  button.type = 'button';button.className = 'color-swatch';button.dataset.color = paint.id;
+  button.style.setProperty('--swatch',paint.hex);
+  const chip = document.createElement('span');chip.className='paint-chip';chip.setAttribute('aria-hidden','true');
+  const label = document.createElement('span');label.className='paint-label';button.append(chip,label);return button;
+}));
+const colorName = document.createElement('span');colorName.id='colorName';colorRow.append(colorName);
+document.querySelector('.experience-layout').insertAdjacentElement('afterend', document.querySelector('.color-options'));
+if (isLowbed) {
+  $('modelId').textContent=modelId;
+  document.querySelector('#photoReference img').src=lowbedAsset.photoUrl;
+  document.querySelector('.launch-photo').src=lowbedAsset.posterUrl;
+  document.querySelectorAll('.spec-strip strong')[0].textContent=modelId;
+  document.querySelectorAll('.spec-strip strong')[1].innerHTML='38,000 <small>kg</small>';
+  document.querySelectorAll('.spec-strip strong')[3].innerHTML='387 <small data-i18n="batchUnit">批</small>';
+  const button=document.createElement('button');button.type='button';button.className='focus-option';button.dataset.focus='underside';button.setAttribute('aria-pressed','false');button.id='undersideButton';
+  document.querySelector('.focus-options').append(button);
+}
 let engine = null;
 let pendingLoad = null;
 let statusKey = '';
@@ -41,12 +105,20 @@ function updateDetail() {
   });
 }
 function updateColor() {
-  $('colorName').textContent = text[state.lang][state.color];
+  const selected = palette.find(paint => paint.id === state.color);
+  $('colorName').textContent = state.lang === 'en' ? selected.labelEn : selected.label;
   document.querySelectorAll('[data-color]').forEach((button) => {
     const active = button.dataset.color === state.color;
     button.classList.toggle('is-active', active);
     button.setAttribute('aria-pressed', String(active));
+    const paint=palette.find(paint=>paint.id===button.dataset.color);
+    const label=state.lang==='en'?paint.labelEn:paint.label;
+    button.setAttribute('aria-label',label);button.title=paint.name;
+    button.querySelector('.paint-label').textContent=label;
   });
+  const quote=new URL('/configurator.html',location.origin);
+  quote.searchParams.set('model',modelId);quote.searchParams.set('paint',state.color);
+  $('quoteLink').href=quote.pathname+quote.search;
 }
 function applyLanguage() {
   const strings = text[state.lang];
@@ -60,8 +132,9 @@ function applyLanguage() {
   const prefix = state.lang === 'en' ? '/en' : '';
   $('homeLink').href = `${prefix}/`;
   $('homeLink').setAttribute('aria-label', strings.homeLabel);
-  $('backLink').href = `${prefix}/vehicles/EHJ9400LB.html`;
-  $('specLink').href = `${prefix}/vehicles/EHJ9400LB.html`;
+  $('backLink').href = `${prefix}/vehicles/${modelId}.html`;
+  $('specLink').href = `${prefix}/vehicles/${modelId}.html`;
+  if ($('undersideButton')) $('undersideButton').textContent = state.lang === 'en' ? '05   Gooseneck underside ↗' : '05   鹅颈底面 ↗';
   $('viewBadge').textContent = state.mode === 'photo' ? strings.badgePhoto : strings.badge3d;
   if (engine) engine.canvas.setAttribute('aria-label', strings.canvasLabel);
   updateColor(); updateDetail(); setStatus(statusKey);
@@ -99,12 +172,26 @@ async function loadViewer() {
   setStatus('loading');
   pendingLoad = (async () => {
     try {
+      if (isLowbed) {
+        const {createLowbedViewer}=await import('/lowbed-viewer.js?v=20260929a');
+        engine=await createLowbedViewer({surface:$('renderSurface'),color:colors[state.color],modelUrl:lowbedAsset.modelUrl,label:text[state.lang].canvasLabel,
+          onError:()=>{state.error=true;engine?.dispose();engine=null;showMode('photo');setStatus('failed');},
+          onHotspots:points=>document.querySelectorAll('.hotspot').forEach(button=>{
+            const point=points[button.dataset.focus];
+            button.hidden=!point?.visible;
+            if(point) button.style.transform=`translate(${point.x}px,${point.y}px) translate(-50%,-50%)`;
+          })
+        });
+      } else {
       const [THREE, controlsModule] = await Promise.all([
         import('/assets/vendor/three-r182/three.module.min.js'),
         import('/assets/vendor/three-r182/OrbitControls.js')
       ]);
       engine = createViewer(THREE, controlsModule.OrbitControls);
+      }
       engine.setColor(colors[state.color]);
+      engine.canvas.setAttribute('aria-label',text[state.lang].canvasLabel);
+      if(isLowbed) engine.canvas.addEventListener('keydown',event=>{if(event.key==='Home'){state.part='overview';updateDetail();}});
       showMode(state.mode);
       if (state.mode === '3d') setStatus('ready');
       window.setTimeout(() => { if (statusKey === 'ready') setStatus(''); }, 2800);
@@ -178,8 +265,8 @@ function createViewer(T, OrbitControls) {
   const groundRing = new T.Mesh(new T.RingGeometry(7.6, 7.615, 128), new T.MeshBasicMaterial({ color: 0x8ca2b9, transparent: true, opacity: 0.22, side: T.DoubleSide }));
   groundRing.rotation.x = -Math.PI / 2; groundRing.position.y = 0.015; groundRing.scale.y = 0.5; scene.add(groundRing);
 
-  const bodyMaterial = new T.MeshStandardMaterial({ color: colors.blue, metalness: 0.34, roughness: 0.33 });
-  const edgeMaterial = new T.MeshStandardMaterial({ color: colors.blue, metalness: 0.36, roughness: 0.3 });
+  const bodyMaterial = new T.MeshStandardMaterial({ color: colors['jude-red'], metalness: 0.34, roughness: 0.33 });
+  const edgeMaterial = new T.MeshStandardMaterial({ color: colors['jude-red'], metalness: 0.36, roughness: 0.3 });
   const chassisMaterial = new T.MeshStandardMaterial({ color: 0x293546, metalness: 0.4, roughness: 0.5 });
   const deckMaterial = new T.MeshStandardMaterial({ color: 0x738294, metalness: 0.4, roughness: 0.72 });
   const tireMaterial = new T.MeshStandardMaterial({ color: 0x192028, metalness: 0.03, roughness: 0.82 });
@@ -379,7 +466,7 @@ function createViewer(T, OrbitControls) {
   },{ once: true });
   const start = overview(); camera.position.copy(start.position); controls.target.copy(start.target); controls.update();
   return { canvas, focus, zoom,
-    setColor(color) { bodyMaterial.color.setHex(color); edgeMaterial.color.setHex(color); edgeMaterial.color.multiplyScalar(1.06); requestRender(); },
+    setColor(color) { bodyMaterial.color.set(color); edgeMaterial.color.set(color); edgeMaterial.color.multiplyScalar(1.06); requestRender(); },
     setVisible(value) { visible = value; if (value) requestRender(); else { cancelAnimationFrame(frame); frame = 0; } }
   };
 }

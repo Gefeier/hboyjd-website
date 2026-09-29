@@ -15,7 +15,7 @@
     <link rel="stylesheet" href="https://chinese-fonts-cdn.deno.dev/packages/opposans/dist/OPPOSans-Heavy/result.css" media="print" onload="this.media='all'">
     <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Noto+Sans+SC:wght@300;400;500;700;900&display=swap" media="print" onload="this.media='all'">
     <noscript><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Noto+Sans+SC:wght@300;400;500;700;900&display=swap"></noscript>
-    <link rel="stylesheet" href="style.css?v=20260923b">
+    <link rel="stylesheet" href="style.css?v=20260929a">
     <!-- LCP preload: 首屏背景按设备走对应格式/尺寸 -->
     <link rel="preload" as="image" href="assets/images/factory-gate-768.webp" type="image/webp" media="(max-width: 768px)" fetchpriority="high">
     <link rel="preload" as="image" href="assets/images/factory-gate.webp" type="image/webp" media="(min-width: 769px)" fetchpriority="high">
@@ -431,6 +431,30 @@
                         <span class="m-card-cta" data-en="View Details →">查看详情 →</span>
                     </div>
                 </a>
+            </div>
+        </div>
+    </section>
+
+    <!-- Lazy poster only: the home page does not load a 3D engine or model. -->
+    <section class="home-3d" id="interactive-showroom" aria-labelledby="home3dTitle">
+        <div class="container">
+            <div class="home-3d-card">
+                <a class="home-3d-visual" href="/vehicle-experience.html?model=JDV9382TDP" aria-label="打开 JDV9382TDP 低平板 3D 看车" data-en-aria-label="Explore the JDV9382TDP low-bed trailer in 3D">
+                    <img src="/assets/images/3d/jdv9382tdp-red.webp" alt="聚德红低平板半挂车 3D 外观示意" data-en-alt="Low-bed trailer exterior illustration in Jude Red" width="1200" height="750" loading="lazy" decoding="async">
+                    <span class="home-3d-badge" data-en="3D exterior illustration">3D 外观示意</span>
+                    <span class="home-3d-open"><span aria-hidden="true">↻</span><span data-en="Explore in 360°">360° 看车</span></span>
+                </a>
+                <div class="home-3d-copy">
+                    <span class="home-3d-eyebrow">JDV9382TDP / INTERACTIVE VIEW</span>
+                    <h2 id="home3dTitle" data-en="Look closer. From every angle.">换个角度，<br>看清每一面。</h2>
+                    <p data-en="Rotate the low-bed trailer, zoom into its exterior and explore our signature body colours.">转动低平板，放大鹅颈、货台与爬梯，试试聚德大红等经典配色。</p>
+                    <div class="home-3d-features" aria-label="展示功能" data-en-aria-label="Interactive features"><span data-en="Free rotation">自由旋转</span><span data-en="Close-up views">局部放大</span><span data-en="Body colours">经典配色</span></div>
+                    <div class="home-3d-actions">
+                        <a class="home-3d-primary" href="/vehicle-experience.html?model=JDV9382TDP" data-en="Explore in 3D ↗">开启 3D 看车 ↗</a>
+                        <a href="/configurator.html?model=JDV9382TDP&amp;vname=%E4%BD%8E%E5%B9%B3%E6%9D%BF%E5%8D%8A%E6%8C%82%E8%BD%A6" data-en="Configure this vehicle →">选配这台车 →</a>
+                    </div>
+                    <small data-en="Simplified exterior illustration. Final equipment and finishes are subject to the confirmed order.">简化外观示意，具体配置与涂装以订单确认为准。</small>
+                </div>
             </div>
         </div>
     </section>

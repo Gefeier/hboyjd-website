@@ -7,6 +7,7 @@
   const name = a => en ? a.en : a.zh;
   const note = t('AI 外观示意 · 颜色仅供参考，外形与配置以实车及订单为准。','AI appearance illustration. Colours are indicative; actual vehicles and agreed specifications take precedence.');
   const viewerURL = '/vehicle-experience.html' + (en ? '?lang=en' : '');
+  const lowbedViewerURL = '/vehicle-experience.html?' + new URLSearchParams({model:'JDV9382TDP',...(en ? {lang:'en'} : {})});
   const byModel = model => assets.find(a => a.models.includes(model));
   const el = (tag, className, text) => { const n = document.createElement(tag); if (className) n.className = className; if (text) n.textContent = text; return n; };
   const link = (text, href) => { const n = el('a','pv-link',text); n.href = href; return n; };
@@ -29,13 +30,14 @@
     const href = card.querySelector('a[href*="vehicles/"]')?.getAttribute('href');
     const a = href && byModel(href.match(/vehicles\/([^/]+)\.html/)?.[1]);
     if (a) card.prepend(previewButton(a,'pv-card-preview',href.match(/vehicles\/([^/]+)\.html/)?.[1]));
+    if (href?.match(/vehicles\/JDV9382TDP\.html/)) card.append(link(t('低平板 · 3D 看车 ↗','Low-bed · Explore in 3D ↗'),lowbedViewerURL));
   });
   const model = location.pathname.match(/\/vehicles\/([^/]+)\.html/)?.[1];
   const a = model && byModel(model);
   if (a) {
     const section = el('section','pv-detail'); const copy = el('div');
     copy.append(el('span','pv-kicker','COLOUR & FORM'),el('h2','',t('看看它的另一种颜色','Explore its colours')),el('p','pv-note',note));
-    if (/^EHJ9400LB/.test(model)) {const actions=el('div','pv-detail-actions'); actions.append(link(t('360° 互动看车 ↗','Explore in 3D ↗'),viewerURL)); copy.append(actions);}
+    if (/^EHJ9400LB/.test(model) || model === 'JDV9382TDP') {const actions=el('div','pv-detail-actions'); actions.append(link(t('360° 互动看车 ↗','Explore in 3D ↗'),model === 'JDV9382TDP' ? lowbedViewerURL : viewerURL)); copy.append(actions);}
     section.append(copy,previewButton(a,'pv-card-preview',model)); document.querySelector('.vh-photo')?.after(section);
   }
   const group = location.pathname.match(/product-([^/]+)\.html/)?.[1];
@@ -74,6 +76,7 @@
     const head=el('div','pv-heading'), copy=el('div');
     copy.append(el('span','pv-kicker','VISUAL COLLECTION'),el('h2','',t('先看外观，再选车型','Explore the shape. Find your vehicle.')),el('p','',note));
     head.append(copy,link(t('栏板半挂车 · 360° 互动 ↗','Drop-side trailer · Explore in 3D ↗'),viewerURL));
+    head.append(link(t('JDV9382TDP 低平板 · 3D 看车 ↗','JDV9382TDP low-bed · Explore in 3D ↗'),lowbedViewerURL));
     const filters=el('div','pv-filters'); filters.setAttribute('role','group'); filters.setAttribute('aria-label',t('外观分类','Filter appearances'));
     const grid=el('div','pv-grid');grid.id='appearance-grid';
     const galleryActions=el('div','pv-gallery-actions');
@@ -129,7 +132,10 @@
     zoom.disabled=true;zoom.textContent=t('放大查看','Zoom in');zoom.setAttribute('aria-pressed','false');
     const params = {type:asset.type,variant:asset.variant};
     if(button.dataset.model) params.model=button.dataset.model;
-    configure.href='/configurator.html?'+new URLSearchParams(params);three.hidden=asset.id!=='straight-drop-side';
+    configure.href='/configurator.html?'+new URLSearchParams(params);
+    const isReviewedLowbed=button.dataset.model==='JDV9382TDP';
+    three.hidden=asset.id!=='straight-drop-side'&&!isReviewedLowbed;
+    three.href=isReviewedLowbed?lowbedViewerURL:viewerURL;
     dialog.showModal();document.body.classList.add('pv-modal-open');dialog.scrollTop=0;close.focus();applyColour(0);
   }
   retry.addEventListener('click',()=>applyColour(0));
