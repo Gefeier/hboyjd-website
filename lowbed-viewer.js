@@ -1,6 +1,6 @@
 // Approved public exterior asset only. Geometry is illustrative, not production CAD.
 // Three.js modules and the GLB are fetched only when this function is invoked.
-export async function createLowbedViewer({ surface, color = '#247bc1', modelUrl, onError, onHotspots, label, signal } = {}) {
+export async function createLowbedViewer({ surface, color = '#247bc1', environment: initialEnvironment = 'studio', modelUrl, onError, onHotspots, label, signal } = {}) {
   if (!(surface instanceof HTMLElement)) throw new TypeError('A viewer surface is required.');
   const assetUrl = new URL(modelUrl, location.href);
   if (assetUrl.origin !== location.origin) throw new Error('The vehicle asset must use the same origin.');
@@ -47,7 +47,14 @@ export async function createLowbedViewer({ surface, color = '#247bc1', modelUrl,
   const [T, { OrbitControls }, { GLTFLoader }] = modules;
   const events = new AbortController();
   const reducedMotion = matchMedia('(prefers-reduced-motion: reduce)');
-  let renderer, controls, environment, resizeObserver, model;
+  let renderer, controls, environment, resizeObserver, model, backgroundTexture;
+  let key, fill, hemisphere, underFill;
+  let environmentId = 'studio';
+  const environments = {
+    studio: {top:'#f4f7fa',bottom:'#d4dde5',glow:'#ffffff',key:'#fff4e6',keyPower:2,fill:'#d4e4ff',fillPower:1,ambient:0.7,reflection:0.45,shadow:'#526578',opacity:0.20},
+    graphite: {top:'#141d2a',bottom:'#465365',glow:'#718397',key:'#eef5ff',keyPower:2.35,fill:'#c7dbff',fillPower:1.4,ambient:0.85,reflection:0.62,shadow:'#020711',opacity:0.35},
+    daylight: {top:'#eff5f8',bottom:'#ddd5c8',glow:'#fffaf0',key:'#ffe4bf',keyPower:2.05,fill:'#dceeff',fillPower:1.25,ambient:0.82,reflection:0.48,shadow:'#77716a',opacity:0.21}
+  };
   let disposed = false, visible = true, contextLost = false, frame = 0, tween = null;
   let width = 1, height = 1, activePart = 'overview';
   const scene = new T.Scene();
@@ -69,7 +76,9 @@ export async function createLowbedViewer({ surface, color = '#247bc1', modelUrl,
     deck: { target: [0.65, 1.2, 0], direction: [-0.55, 1, 1], extent: [5.4, 0.8, 3.5] },
     axles: { target: [3.65, 0.64, 0], direction: [0.65, 0.36, 1], extent: [4.3, 1.9, 3.6] },
     legs: { target: [5.26, 2.14, 0], direction: [1, 0.3, 0.9], extent: [1.9, 4.35, 3.55] },
-    underside: { target: [-3.9, 1.45, 0], direction: [-0.7, -0.2, 1.2], extent: [3.5, 1.6, 2] }
+    underside: { target: [-3.9, 1.45, 0], direction: [-0.7, -0.2, 1.2], extent: [3.5, 1.6, 2] },
+    underbody: { target: [0, 0.9, 0], direction: [-0.4, -1.1, 1], extent: [12.1, 3.6, 3.6] },
+    runningGear: { target: [3.65, 0.56, 0], direction: [0.3, -0.68, 1], extent: [4.2, 1.8, 3.6] }
   };
   let floor;
 
@@ -98,7 +107,7 @@ export async function createLowbedViewer({ surface, color = '#247bc1', modelUrl,
     signal?.removeEventListener('abort', externalAbort); cancelViewer = null;
     fetchController.abort(); events.abort(); cancelAnimationFrame(frame); frame = 0;
     resizeObserver?.disconnect(); controls?.dispose();
-    releaseObject(scene); environment?.dispose();
+    releaseObject(scene); environment?.dispose(); backgroundTexture?.dispose();
     renderer?.dispose(); renderer?.domElement.remove();
     hideHotspots();
   }
@@ -114,7 +123,7 @@ export async function createLowbedViewer({ surface, color = '#247bc1', modelUrl,
       const x = (pointVector.x * 0.5 + 0.5) * width;
       const y = (-pointVector.y * 0.5 + 0.5) * height;
       let show = pointVector.z > -1 && pointVector.z < 1 && x > 26 && x < width - 26 && y > 66 && y < height - 76;
-      // Constant-cost occlusion against exterior proxy boxes. Never raycast the 242k faces.
+      // Constant-cost occlusion against exterior proxy boxes, not dense model triangles.
       if (show) {
         direction.subVectors(point, camera.position).normalize(); ray.set(camera.position, direction);
         const distance = camera.position.distanceTo(point);
@@ -139,6 +148,7 @@ export async function createLowbedViewer({ surface, color = '#247bc1', modelUrl,
     }
     controls.update();
     if (floor) floor.visible = camera.position.y > floor.position.y;
+    underFill.intensity = camera.position.y < controls.target.y ? 1.1 : 0.2;
     renderer.render(scene, camera); updateHotspots();
     if (tween) requestRender();
   }
@@ -179,10 +189,28 @@ export async function createLowbedViewer({ surface, color = '#247bc1', modelUrl,
     for (const material of paintMaterials) material.color.set(value);
     requestRender();
   }
+  function setEnvironment(id) {
+    if (disposed) return;
+    environmentId = Object.hasOwn(environments,id) ? id : 'studio';
+    const preset = environments[environmentId];
+    const backdrop = document.createElement('canvas'); backdrop.width=64;backdrop.height=512;
+    const ctx=backdrop.getContext('2d');
+    const gradient=ctx.createLinearGradient(0,0,0,512);
+    gradient.addColorStop(0,preset.top);gradient.addColorStop(0.52,preset.glow);gradient.addColorStop(1,preset.bottom);
+    ctx.fillStyle=gradient;ctx.fillRect(0,0,64,512);
+    const texture=new T.CanvasTexture(backdrop);texture.colorSpace=T.SRGBColorSpace;
+    backgroundTexture?.dispose();backgroundTexture=texture;scene.background=texture;
+    key.color.set(preset.key);key.intensity=preset.keyPower;
+    fill.color.set(preset.fill);fill.intensity=preset.fillPower;
+    hemisphere.intensity=preset.ambient;scene.environmentIntensity=preset.reflection;
+    if(floor){floor.material.color.set(preset.shadow);floor.material.opacity=preset.opacity;}
+    requestRender();
+  }
   function capture() {
     if (disposed || contextLost || !model) throw new Error('The viewer is not available for capture.');
     controls.update();
     if (floor) floor.visible = camera.position.y > floor.position.y;
+    underFill.intensity = camera.position.y < controls.target.y ? 1.1 : 0.2;
     // Render and read in the same task; no persistent drawing buffer is needed.
     renderer.render(scene, camera);
     return renderer.domElement.toDataURL('image/png');
@@ -216,7 +244,7 @@ export async function createLowbedViewer({ surface, color = '#247bc1', modelUrl,
   try {
     renderer = new T.WebGLRenderer({ antialias: true, alpha: false, powerPreference: 'low-power' });
     renderer.outputColorSpace = T.SRGBColorSpace; renderer.toneMapping = T.ACESFilmicToneMapping;
-    renderer.toneMappingExposure = 0.95; renderer.shadowMap.enabled = true; renderer.shadowMap.type = T.PCFSoftShadowMap;
+    renderer.toneMappingExposure = 0.95; renderer.shadowMap.enabled = true; renderer.shadowMap.type = T.VSMShadowMap;
     const canvas = renderer.domElement;
     canvas.tabIndex = 0; canvas.setAttribute('role', 'img');
     canvas.setAttribute('aria-label', label || '低平板半挂车 3D 外观。方向键旋转，加减键缩放，Home 恢复全车视角。');
@@ -240,12 +268,13 @@ export async function createLowbedViewer({ surface, color = '#247bc1', modelUrl,
     try { environment = pmrem.fromScene(studio, 0.03); }
     finally { releaseObject(studio); pmrem.dispose(); }
     scene.environment = environment.texture; scene.environmentIntensity = 0.45;
-    scene.add(new T.HemisphereLight(0xffffff, 0x788897, 0.7));
-    const key = new T.DirectionalLight(0xfff4e6, 2);
+    hemisphere = new T.HemisphereLight(0xffffff, 0x788897, 0.7);scene.add(hemisphere);
+    key = new T.DirectionalLight(0xfff4e6, 2);
     key.castShadow = true; key.shadow.mapSize.set(2048, 2048);
-    key.shadow.bias = -0.00015; key.shadow.normalBias = 0.007; key.shadow.radius = 3;
+    key.shadow.bias = -0.00015; key.shadow.normalBias = 0.007; key.shadow.radius = 7; key.shadow.blurSamples = 8;
     scene.add(key, key.target);
-    const fill = new T.DirectionalLight(0xd4e4ff, 1); fill.position.set(8, 4, -7); scene.add(fill);
+    fill = new T.DirectionalLight(0xd4e4ff, 1); fill.position.set(8, 4, -7); scene.add(fill);
+    underFill = new T.DirectionalLight(0xf2f6ff, 0.2);underFill.position.set(1,-5,4);scene.add(underFill);
     const signal = events.signal;
     canvas.addEventListener('webglcontextlost', event => {
       event.preventDefault(); contextLost = true;
@@ -329,14 +358,14 @@ export async function createLowbedViewer({ surface, color = '#247bc1', modelUrl,
       [[2.2, 0.22, -1.61], [5.30, 1.04, -0.95]],
       [[2.2, 0.22, 0.95], [5.30, 1.04, 1.61]]
     ]) proxies.push(new T.Box3(new T.Vector3(...min).add(root.position), new T.Vector3(...max).add(root.position)));
-    floor = new T.Mesh(new T.PlaneGeometry(radius * 30, radius * 30), new T.MeshStandardMaterial({ color: 0xe9edf0, roughness: 1, metalness: 0 }));
+    floor = new T.Mesh(new T.PlaneGeometry(radius * 30, radius * 30), new T.ShadowMaterial({ color: '#526578', opacity:0.20, depthWrite:false }));
     floor.rotation.x = -Math.PI / 2; floor.position.y = -radius * 0.002; floor.receiveShadow = true; scene.add(floor);
     key.position.copy(center).add(new T.Vector3(-radius, radius * 2.2, radius)); key.target.position.copy(center);
     key.shadow.camera.left = key.shadow.camera.bottom = -radius * 1.35;
     key.shadow.camera.right = key.shadow.camera.top = radius * 1.35;
     key.shadow.camera.near = radius * 0.1; key.shadow.camera.far = radius * 6; key.shadow.camera.updateProjectionMatrix();
-    setColor(color); focus('overview', false);
-    return { canvas, focus, zoom, setColor, setVisible, capture, dispose };
+    setEnvironment(initialEnvironment);setColor(color); focus('overview', false);
+    return { canvas, focus, zoom, setColor, setEnvironment, setVisible, capture, dispose };
   } catch (error) {
     dispose();
     throw error;

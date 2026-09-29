@@ -9,7 +9,7 @@
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Noto+Sans+SC:wght@300;400;500;700;900&family=Orbitron:wght@400;700;900&display=swap" media="print" onload="this.media='all'">
     <noscript><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Noto+Sans+SC:wght@300;400;500;700;900&family=Orbitron:wght@400;700;900&display=swap"></noscript>
-    <link rel="stylesheet" href="configurator.css?v=20260929a">
+    <link rel="stylesheet" href="configurator.css?v=20260929b">
     <script type="importmap">{"imports":{"three":"/assets/vendor/three-r182/three.module.min.js"}}</script>
     <!-- #105 v3 variant 图预加载,切 variant 时无闪烁 -->
     <link rel="preload" as="image" href="assets/images/product-variant-excavator-bed.webp?v=20260618m" type="image/webp">
@@ -137,9 +137,20 @@
                     <button type="button" data-cfg3d-focus="axles">轮组</button>
                     <button type="button" data-cfg3d-focus="legs">爬梯</button>
                     <button type="button" data-cfg3d-focus="underside">鹅颈底面</button>
+                    <button type="button" data-cfg3d-focus="underbody">整车车底</button>
+                    <button type="button" data-cfg3d-focus="runningGear">桥与悬挂</button>
                 </div>
                 <div class="cfg3d-paint-row"><div class="cfg3d-paints" id="cfg3dPaints" role="group" aria-label="车身配色，与选配表同步"></div><span id="cfg3dPaintName"></span></div>
-                <p class="cfg3d-note">外观示意不随尺寸、悬挂等选项变形；配色以色卡、交付配置以订单为准。</p>
+                <div class="cfg3d-controls-row">
+                    <div class="cfg3d-custom-paint">
+                        <label for="cfg3dCustomColor">自由配色</label>
+                        <input id="cfg3dCustomColor" type="color" value="#c1272d" aria-describedby="cfg3dColorHint">
+                        <input id="cfg3dCustomHex" type="text" value="#C1272D" maxlength="7" spellcheck="false" autocomplete="off" aria-label="自定义颜色 HEX" aria-describedby="cfg3dColorHint cfg3dColorError">
+                    </div>
+                    <label class="cfg3d-environment" for="cfg3dEnvironment"><span>环境</span><select id="cfg3dEnvironment"><option value="studio">浅灰展厅</option><option value="graphite">深色展厅</option><option value="daylight">暖光展台</option></select></label>
+                </div>
+                <p class="cfg3d-color-error" id="cfg3dColorError" role="status" hidden>请输入 6 位 HEX，例如 #C1272D。</p>
+                <p class="cfg3d-note" id="cfg3dColorHint">屏幕配色以色卡确认为准；外观不随尺寸、悬挂等选项变形，交付配置以订单为准。</p>
             </div>
         </section>
     </div>
@@ -305,6 +316,7 @@
                     <label class="color-opt" title="黑色"><input type="radio" name="color" value="黑色 RAL9005"><span class="swatch" style="background:#0a0a0a"></span><span class="cname">黑色</span></label>
                     <label class="color-opt" title="其他"><input type="radio" name="color" value="其他"><span class="swatch other">?</span><span class="cname">其他</span></label>
                 </div>
+                <input type="hidden" id="customScreenColor" name="customScreenColor" value="">
             </div>
             <div class="config-group">
                 <label class="group-label">其他需求（选填）</label>
@@ -369,8 +381,8 @@
     </div>
 
     <script src="vehicle-visual-data.js?v=20260926a"></script>
-    <script src="/vehicle-3d-data.js?v=20260929a"></script>
-    <script src="configurator.js?v=20260929a" defer></script>
-    <script type="module" src="/configurator-3d.js?v=20260929a"></script>
+    <script src="/vehicle-3d-data.js?v=20260929b"></script>
+    <script src="configurator.js?v=20260929b" defer></script>
+    <script type="module" src="/configurator-3d.js?v=20260929b"></script>
 </body>
 </html>

@@ -7,10 +7,10 @@
   <meta name="description" content="欧阳聚德半挂车3D互动展示：挖机板与栏板车型，自由旋转、局部放大，体验聚德大红、聚德黄、东岳蓝等经典配色，并进入车型配置。实际规格与涂装以实车及订单为准。">
   <link rel="canonical" href="https://hboyjd.com/vehicle-experience.html">
   <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
-  <link rel="stylesheet" href="/vehicle-experience.css?v=20260929a">
-  <script src="/vehicle-3d-data.js?v=20260929a"></script>
+  <link rel="stylesheet" href="/vehicle-experience.css?v=20260929b">
+  <script src="/vehicle-3d-data.js?v=20260929b"></script>
   <script type="importmap">{"imports":{"three":"/assets/vendor/three-r182/three.module.min.js"}}</script>
-  <script type="module" src="/vehicle-experience.js?v=20260929a"></script>
+  <script type="module" src="/vehicle-experience.js?v=20260929b"></script>
     <script src="/assets/js/hit.js?v=20260928a" async></script>
 </head>
 <body>
@@ -76,10 +76,24 @@
           <button class="color-swatch" type="button" data-color="white" style="--swatch:#dce4ec" aria-label="珍珠白" data-i18n-aria="white" aria-pressed="false"></button>
           <button class="color-swatch" type="button" data-color="gray" style="--swatch:#526170" aria-label="石墨灰" data-i18n-aria="gray" aria-pressed="false"></button>
           <span id="colorName">海湾蓝</span>
-        </div><p class="color-note" data-i18n="colorNote">屏幕颜色仅作搭配参考，实车色以色卡为准。</p></fieldset>
+        </div>
+        <div class="custom-paint-row">
+          <label for="customPaint" data-i18n="customPaint">自由配色</label>
+          <input id="customPaint" type="color" value="#c1272d" aria-label="选择任意车身颜色" data-i18n-aria="customPaintLabel">
+          <label class="sr-only" for="customHex" data-i18n="hexLabel">颜色值</label>
+          <input id="customHex" type="text" value="#C1272D" maxlength="7" spellcheck="false" autocomplete="off" pattern="#?[0-9A-Fa-f]{6}" aria-describedby="customColorHelp">
+          <span id="customColorHelp" data-i18n="customHelp">使用色盘或输入六位颜色值，例如 #286B82。</span>
+        </div>
+        <p class="color-note" data-i18n="colorNote">屏幕颜色仅作搭配参考，实车色以色卡为准。</p></fieldset>
         <a id="specLink" class="spec-link" href="/vehicles/EHJ9400LB.html" data-i18n="specLink">查看完整车型参数 <span aria-hidden="true">↗</span></a>
       </aside>
     </div>
+    <fieldset id="environmentOptions" class="environment-options" hidden>
+      <legend data-i18n="environment">展示环境</legend>
+      <button type="button" data-environment="studio" aria-pressed="true" data-i18n="studio">浅灰展厅</button>
+      <button type="button" data-environment="graphite" aria-pressed="false" data-i18n="graphite">深色展厅</button>
+      <button type="button" data-environment="daylight" aria-pressed="false" data-i18n="daylight">暖光展台</button>
+    </fieldset>
     <div class="experience-footnote"><p data-i18n="disclaimer">3D 为简化外观示意，非该型号精确模型；不表示具体选装或交付配置，以实车及订单为准。</p><span class="footnote-label">DESIGNED TO EXPLORE</span></div>
     <section class="spec-strip" aria-label="型号参数摘要" data-i18n-aria="specSummary">
       <div><span data-i18n="specModel">参考型号</span><strong>EHJ9400LB</strong></div><div><span data-i18n="specGross">公告总质量</span><strong>40,000 <small>kg</small></strong></div><div><span data-i18n="specAxles">轴数</span><strong>3 <small data-i18n="axleUnit">轴</small></strong></div><div><span data-i18n="specBatch">工信部公告</span><strong>369 <small data-i18n="batchUnit">批</small></strong></div>

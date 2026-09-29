@@ -893,11 +893,19 @@ function getSelections() {
         const el = document.querySelector(`input[name="${name}"]:checked`);
         return el ? el.value : '';
     };
+    const color = get('color');
+    let remarks = document.querySelector('textarea[name="remarks"]')?.value || '';
+    const customColor = color === '其他' && window.OYJD_3D?.normalizeColor?.(document.getElementById('customScreenColor')?.value);
+    if (customColor) {
+        const reference = `屏幕配色参考 ${customColor}，以色卡确认为准`;
+        // Compose the submitted/summary value without changing the customer's textarea.
+        if (!remarks.split(/\r?\n/).includes(reference)) remarks += (remarks ? '\n' : '') + reference;
+    }
     return {
         vehicleType: get('vehicleType'),
         specs: collectSpecs(),
-        color: get('color'),
-        remarks: document.querySelector('textarea[name="remarks"]')?.value || '',
+        color,
+        remarks,
         customerName: document.querySelector('input[name="customerName"]')?.value || '',
         customerPhone: document.querySelector('input[name="customerPhone"]')?.value || '',
         customerCompany: document.querySelector('input[name="customerCompany"]')?.value || '',
@@ -1049,11 +1057,15 @@ updateTags();
         var opt = sel.options[sel.selectedIndex];
         applyModel(sel.value, opt ? (opt.dataset.vname || '') : '', true);
     });
-    // Only a shared, known paint ID may preselect an enquiry colour.
+    // Named paints and strictly validated screen colors may preselect the form.
     var requestedPaint = params.get('paint');
     var paint = (window.OYJD_3D?.paints || []).find(p => p.id === requestedPaint);
-    var paintRadio = paint && Array.from(document.querySelectorAll('input[name="color"]')).find(r => r.value === paint.name);
+    var customColor = requestedPaint === 'custom' && window.OYJD_3D?.normalizeColor?.(params.get('customColor'));
+    var paintValue = paint ? paint.name : customColor ? '其他' : null;
+    var paintRadio = paintValue && Array.from(document.querySelectorAll('input[name="color"]')).find(r => r.value === paintValue);
     if (paintRadio) {
+        var screenColor = document.getElementById('customScreenColor');
+        if (screenColor) screenColor.value = customColor || '';
         paintRadio.checked = true;
         paintRadio.dispatchEvent(new Event('change', {bubbles: true}));
     }

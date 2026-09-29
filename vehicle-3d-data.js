@@ -13,10 +13,13 @@
     ['black','黑色 RAL9005','黑色','Black','#0a0a0a']
   ].map(([id,name,label,labelEn,hex]) => Object.freeze({id,name,label,labelEn,hex}));
   window.OYJD_3D = Object.freeze({
+    normalizeColor(value) {
+      return typeof value === 'string' && /^#?[0-9a-f]{6}$/i.test(value) ? '#' + value.replace(/^#/, '').toUpperCase() : null;
+    },
     paints: Object.freeze(paints),
     models: Object.freeze({JDV9382TDP: Object.freeze({
-      modelUrl:'/assets/models/jdv9382tdp-exterior-v12.glb',
-      posterUrl:'/assets/images/3d/jdv9382tdp-red.webp',
+      modelUrl:'/assets/models/jdv9382tdp-exterior-v13.glb',
+      posterUrl:'/assets/images/3d/jdv9382tdp-red-v13.webp',
       photoUrl:'/assets/images/3d/jdv9382tdp-photo.webp',
       detailUrl:'/vehicles/JDV9382TDP.html'
     })})

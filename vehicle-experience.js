@@ -27,6 +27,9 @@ const isLowbed = parameters.get('model') === 'JDV9382TDP';
 const modelId = isLowbed ? 'JDV9382TDP' : 'EHJ9400LB';
 const palette = window.OYJD_3D.paints;
 const lowbedAsset = window.OYJD_3D.models.JDV9382TDP;
+const normalizeColor = window.OYJD_3D.normalizeColor;
+Object.assign(text.zh,{customPaint:'自由配色',customPaintLabel:'选择任意车身颜色',hexLabel:'颜色值',customHelp:'使用色盘或输入六位颜色值，例如 #286B82。',customInvalid:'请输入六位颜色值，例如 #286B82。',environment:'展示环境',studio:'浅灰展厅',graphite:'深色展厅',daylight:'暖光展台'});
+Object.assign(text.en,{customPaint:'Custom color',customPaintLabel:'Choose any body color',hexLabel:'Hex color',customHelp:'Use the picker or enter a six-digit color, e.g. #286B82.',customInvalid:'Enter a six-digit color, e.g. #286B82.',environment:'Display environment',studio:'Light studio',graphite:'Dark studio',daylight:'Warm studio'});
 if (isLowbed) {
   Object.assign(text.zh, {
     pageTitle:'挖机板 · 360° 互动看车 | 湖北欧阳聚德汽车',title:'挖机板 · 低平板半挂车',
@@ -43,7 +46,9 @@ if (isLowbed) {
       deck:['开放货台，看清装载空间','俯视货台与花纹板表面，了解整车布局。具体尺寸及选装按实际运输需求确认。'],
       axles:['三轴布局，完整呈现','查看三轴轮组与侧边轮口。轮胎、轮毂及灯具保持各自材质，车身换色更直观。'],
       legs:['双列爬梯，近距离查看','转到车尾观察双列爬梯、尾灯和品牌挡泥皮。展示外观不代表所有选装配置。'],
-      underside:['从下方，查看鹅颈外观','低视角查看鹅颈底面与根部凹口，拖动可继续调整观察角度。']
+      underside:['从下方，查看鹅颈外观','低视角查看鹅颈底面与根部凹口，拖动可继续调整观察角度。'],
+      underbody:['换到车底，看清布局','从下方观察纵梁、横梁和三轴布局，地面会自动隐藏。展示结构经过简化，具体底盘配置以实车及订单为准。'],
+      runningGear:['车桥与悬挂，近一点看','查看桥体、板簧、吊架和平衡架的外观关系。这里呈现机械悬架示意，所选悬挂与交付配置需按订单确认。']
     }
   });
   Object.assign(text.en, {
@@ -61,13 +66,17 @@ if (isLowbed) {
       deck:['An open view of the loading deck','Look over the platform and tread plate. Confirm dimensions and equipment for your transport needs.'],
       axles:['See the three-axle layout','Explore the wheel groups and wheel openings. Tires, rims and lights keep their own finishes when body colors change.'],
       legs:['Explore the twin loading ramps','Move around the rear to view the ramps, tail lights and branded mudflaps. The display does not represent every equipment option.'],
-      underside:['See the gooseneck underside','Use this lower viewpoint to inspect the exterior skin and recessed root. Drag to change the angle.']
+      underside:['See the gooseneck underside','Use this lower viewpoint to inspect the exterior skin and recessed root. Drag to change the angle.'],
+      underbody:['Explore beneath the vehicle','View the main beams, crossmembers and axle layout from below. The ground hides automatically. The simplified exterior is subject to the actual vehicle and order.'],
+      runningGear:['A closer look at axles and suspension','Explore the axle bodies, leaf springs, hangers and equalizers. This illustrates mechanical suspension; actual equipment depends on the confirmed order.']
     }
   });
 }
 const initialPaint = palette.find(paint => paint.id === parameters.get('paint')) || palette[0];
-const state = { lang: parameters.get('lang') === 'en' ? 'en' : 'zh', part: 'overview', color: initialPaint.id, mode: '3d', loading: false, error: false };
+const initialCustom = parameters.get('paint')==='custom' ? normalizeColor(parameters.get('customColor')) : null;
+const state = { lang: parameters.get('lang') === 'en' ? 'en' : 'zh', part: 'overview', color: initialCustom ? 'custom' : initialPaint.id, customColor:initialCustom || '#C1272D', environment:'studio',mode: '3d', loading: false, error: false };
 const colors = Object.fromEntries(palette.map(paint => [paint.id, paint.hex]));
+const currentColor = () => state.color === 'custom' ? state.customColor : colors[state.color];
 const colorRow = document.querySelector('.color-row');
 colorRow.replaceChildren(...palette.map(paint => {
   const button = document.createElement('button');
@@ -87,6 +96,10 @@ if (isLowbed) {
   document.querySelectorAll('.spec-strip strong')[3].innerHTML='387 <small data-i18n="batchUnit">批</small>';
   const button=document.createElement('button');button.type='button';button.className='focus-option';button.dataset.focus='underside';button.setAttribute('aria-pressed','false');button.id='undersideButton';
   document.querySelector('.focus-options').append(button);
+  for(const part of ['underbody','runningGear']){
+    const control=document.createElement('button');control.type='button';control.className='focus-option';control.dataset.focus=part;control.setAttribute('aria-pressed','false');control.id=part+'Button';document.querySelector('.focus-options').append(control);
+  }
+  $('environmentOptions').hidden=false;
 }
 let engine = null;
 let pendingLoad = null;
@@ -106,7 +119,11 @@ function updateDetail() {
 }
 function updateColor() {
   const selected = palette.find(paint => paint.id === state.color);
-  $('colorName').textContent = state.lang === 'en' ? selected.labelEn : selected.label;
+  $('colorName').textContent = selected ? (state.lang === 'en' ? selected.labelEn : selected.label) : `${text[state.lang].customPaint} ${state.customColor}`;
+  $('customPaint').value=currentColor();$('customHex').value=currentColor().toUpperCase();
+  $('customHex').setAttribute('aria-invalid','false');
+  document.querySelector('.custom-paint-row').classList.toggle('is-active',state.color==='custom');
+  $('customColorHelp').textContent=text[state.lang].customHelp;
   document.querySelectorAll('[data-color]').forEach((button) => {
     const active = button.dataset.color === state.color;
     button.classList.toggle('is-active', active);
@@ -118,6 +135,7 @@ function updateColor() {
   });
   const quote=new URL('/configurator.html',location.origin);
   quote.searchParams.set('model',modelId);quote.searchParams.set('paint',state.color);
+  if(state.color==='custom') quote.searchParams.set('customColor',state.customColor.slice(1));
   $('quoteLink').href=quote.pathname+quote.search;
 }
 function applyLanguage() {
@@ -135,6 +153,8 @@ function applyLanguage() {
   $('backLink').href = `${prefix}/vehicles/${modelId}.html`;
   $('specLink').href = `${prefix}/vehicles/${modelId}.html`;
   if ($('undersideButton')) $('undersideButton').textContent = state.lang === 'en' ? '05   Gooseneck underside ↗' : '05   鹅颈底面 ↗';
+  if ($('underbodyButton')) $('underbodyButton').textContent=state.lang==='en'?'06   Whole underbody ↗':'06   整车车底 ↗';
+  if ($('runningGearButton')) $('runningGearButton').textContent=state.lang==='en'?'07   Axles & suspension ↗':'07   车桥与悬挂 ↗';
   $('viewBadge').textContent = state.mode === 'photo' ? strings.badgePhoto : strings.badge3d;
   if (engine) engine.canvas.setAttribute('aria-label', strings.canvasLabel);
   updateColor(); updateDetail(); setStatus(statusKey);
@@ -173,8 +193,8 @@ async function loadViewer() {
   pendingLoad = (async () => {
     try {
       if (isLowbed) {
-        const {createLowbedViewer}=await import('/lowbed-viewer.js?v=20260929a');
-        engine=await createLowbedViewer({surface:$('renderSurface'),color:colors[state.color],modelUrl:lowbedAsset.modelUrl,label:text[state.lang].canvasLabel,
+        const {createLowbedViewer}=await import('/lowbed-viewer.js?v=20260929b');
+        engine=await createLowbedViewer({surface:$('renderSurface'),color:currentColor(),environment:state.environment,modelUrl:lowbedAsset.modelUrl,label:text[state.lang].canvasLabel,
           onError:()=>{state.error=true;engine?.dispose();engine=null;showMode('photo');setStatus('failed');},
           onHotspots:points=>document.querySelectorAll('.hotspot').forEach(button=>{
             const point=points[button.dataset.focus];
@@ -189,7 +209,7 @@ async function loadViewer() {
       ]);
       engine = createViewer(THREE, controlsModule.OrbitControls);
       }
-      engine.setColor(colors[state.color]);
+      engine.setColor(currentColor());engine.setEnvironment?.(state.environment);
       engine.canvas.setAttribute('aria-label',text[state.lang].canvasLabel);
       if(isLowbed) engine.canvas.addEventListener('keydown',event=>{if(event.key==='Home'){state.part='overview';updateDetail();}});
       showMode(state.mode);
@@ -221,7 +241,21 @@ $('modePhoto').addEventListener('click', () => showMode('photo'));
 document.querySelectorAll('[data-focus]').forEach((button) => button.addEventListener('click', () => activatePart(button.dataset.focus)));
 document.querySelectorAll('[data-color]').forEach((button) => button.addEventListener('click', async () => {
   state.color = button.dataset.color; updateColor(); showMode('3d');
-  if (await loadViewer()) engine.setColor(colors[state.color]);
+  if (await loadViewer()) engine.setColor(currentColor());
+}));
+async function applyCustomColor(value){
+  const color=normalizeColor(value);
+  if(!color){$('customHex').setAttribute('aria-invalid','true');$('customColorHelp').textContent=text[state.lang].customInvalid;return;}
+  state.color='custom';state.customColor=color;updateColor();showMode('3d');
+  if(await loadViewer()) engine.setColor(currentColor());
+}
+$('customPaint').addEventListener('input',event=>{void applyCustomColor(event.target.value);});
+$('customHex').addEventListener('change',event=>{void applyCustomColor(event.target.value.trim());});
+$('customHex').addEventListener('keydown',event=>{if(event.key==='Enter'){event.preventDefault();void applyCustomColor(event.target.value.trim());}});
+document.querySelectorAll('[data-environment]').forEach(button=>button.addEventListener('click',async()=>{
+  state.environment=button.dataset.environment;
+  document.querySelectorAll('[data-environment]').forEach(control=>control.setAttribute('aria-pressed',String(control===button)));
+  showMode('3d');if(await loadViewer())engine.setEnvironment?.(state.environment);
 }));
 $('resetView').addEventListener('click', () => activatePart('overview'));
 $('zoomIn').addEventListener('click', () => engine?.zoom(0.8));

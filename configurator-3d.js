@@ -13,6 +13,10 @@ function initConfigurator3d() {
   const photo = byId('cfg3dPhoto');
   const zoom = byId('cfg3dZoom');
   const palette = byId('cfg3dPaints');
+  const customColor = byId('cfg3dCustomColor');
+  const customHex = byId('cfg3dCustomHex');
+  const screenColor = byId('customScreenColor');
+  const environmentSelect = byId('cfg3dEnvironment');
   const checked = name => document.querySelector(`input[name="${name}"]:checked`)?.value || '';
   let engine = null;
   let pending = null;
@@ -22,9 +26,35 @@ function initConfigurator3d() {
   let photoMode = false;
   let failed = false;
   let activePart = 'overview';
+  let environment = 'studio';
 
   function currentPaint() {
+    const hex = checked('color') === '其他' && data.normalizeColor(screenColor.value);
+    if (hex) return {id: 'custom', name: '其他', label: '自由配色', hex};
     return data.paints.find(paint => paint.name === checked('color')) || null;
+  }
+  function colorError(invalid) {
+    customHex.setAttribute('aria-invalid', String(invalid));
+    byId('cfg3dColorError').hidden = !invalid;
+  }
+  function syncColorControls() {
+    const paint = currentPaint();
+    if (paint) {
+      customColor.value = paint.hex;
+      customHex.value = paint.hex.toUpperCase();
+    }
+    colorError(false);
+  }
+  function applyCustomColor(value) {
+    const hex = data.normalizeColor(value);
+    colorError(!hex);
+    if (!hex) return false;
+    const radio = Array.from(document.querySelectorAll('input[name="color"]')).find(input => input.value === '其他');
+    if (!radio) return false;
+    screenColor.value = hex;
+    radio.checked = true;
+    radio.dispatchEvent(new Event('change', {bubbles: true}));
+    return true;
   }
   function matchesModel() {
     const axles = checked('axles');
@@ -37,10 +67,11 @@ function initConfigurator3d() {
   }
   function paintLabel() {
     const paint = currentPaint();
-    byId('cfg3dPaintName').textContent = paint ? paint.label : '其他颜色 · 请确认色卡';
+    byId('cfg3dPaintName').textContent = paint?.id === 'custom' ? '自由配色 · ' + paint.hex : paint ? paint.label : '其他颜色 · 请确认色卡';
     palette.querySelectorAll('button').forEach(button => button.setAttribute('aria-pressed', String(button.dataset.paint === paint?.id)));
     const params = new URLSearchParams({model: 'JDV9382TDP'});
     if (paint) params.set('paint', paint.id);
+    if (paint?.id === 'custom') params.set('customColor', paint.hex.slice(1));
     byId('cfg3dFull').href = '/vehicle-experience.html?' + params;
   }
   function updateMode() {
@@ -106,12 +137,13 @@ function initConfigurator3d() {
     pending = (async () => {
       let viewer;
       try {
-        const module = await import('/lowbed-viewer.js?v=20260929a');
+        const module = await import('/lowbed-viewer.js?v=20260929b');
         if (token !== generation || !matchesModel()) return;
         // Each load owns a separate surface. A late result cannot replace a new model.
         viewer = await module.createLowbedViewer({
           surface, modelUrl: definition.modelUrl,
           signal: controller.signal,
+          environment,
           color: (currentPaint() || data.paints[0]).hex,
           label: 'JDV9382TDP 低平板 3D 外观示意，可拖动旋转及缩放',
           onError: () => { if (token === generation && eligible) failViewer(); }
@@ -122,6 +154,7 @@ function initConfigurator3d() {
           if (event.key === 'Home') selectPart('overview');
         }, {signal: controller.signal});
         engine.setColor((currentPaint() || data.paints[0]).hex);
+        engine.setEnvironment(environment);
         engine.focus(activePart);
         status.textContent = currentPaint() ? '拖动旋转 · 双指或滚轮缩放 · 点击部位放大' : '其他颜色需确认色卡，3D 暂以聚德大红示意。';
       } catch (error) {
@@ -174,6 +207,21 @@ function initConfigurator3d() {
     });
     palette.append(button);
   });
+  customColor.addEventListener('input', () => applyCustomColor(customColor.value));
+  customHex.addEventListener('input', () => {
+    // Keep incomplete typing in the text field; only a full, valid HEX changes paint.
+    if (data.normalizeColor(customHex.value)) applyCustomColor(customHex.value);
+    else colorError(true);
+  });
+  customHex.addEventListener('change', () => applyCustomColor(customHex.value));
+  customHex.addEventListener('keydown', event => {
+    if (event.key === 'Enter') { event.preventDefault(); applyCustomColor(customHex.value); }
+  });
+  environmentSelect.addEventListener('change', () => {
+    if (!['studio', 'graphite', 'daylight'].includes(environmentSelect.value)) return;
+    environment = environmentSelect.value;
+    engine?.setEnvironment(environment);
+  });
   start.addEventListener('click', () => activate());
   photo.addEventListener('click', () => {
     photoMode = !photoMode;
@@ -189,12 +237,17 @@ function initConfigurator3d() {
   panel.querySelectorAll('[data-cfg3d-zoom]').forEach(button => button.addEventListener('click', () => engine?.zoom(Number(button.dataset.cfg3dZoom))));
   document.addEventListener('change', event => {
     if (!event.target.matches('#modelDirect, input[name="vehicleType"], input[name="variant"], input[name="axles"], input[name="ladder"], input[name="color"]')) return;
+    if (event.target.name === 'color') {
+      if (checked('color') !== '其他') screenColor.value = '';
+      syncColorControls();
+    }
     // Base form handlers finish their synchronous model/variant changes first.
     reconcile();
     if (event.target.name === 'color' && eligible) void activate();
   });
   document.addEventListener('visibilitychange', () => engine?.setVisible(eligible && !photoMode && !document.hidden));
   window.addEventListener('pagehide', event => { if (!event.persisted) disposeViewer(); });
+  syncColorControls();
   reconcile();
 }
 
