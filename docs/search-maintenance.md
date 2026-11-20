@@ -19,8 +19,9 @@ translations live in `content/product-translations.json`, keyed by Chinese text
 with normalized whitespace. Add an English translation whenever changing product
 copy; the build fails on untranslated text. Keep model codes, numeric parameters,
 photos, and the registered ICP identifier intact. Product JSON-LD is translated
-from the same dictionary. Chinese sales contact displays as `400-158-8106` and links to
-`tel:4001588106`. Mark domestic-only contact blocks with `data-zh-only` so
+from the same dictionary. Chinese pages list `400-158-8106` (`tel:4001588106`) first,
+then `0710-3780666` (`tel:07103780666`). The Organization schema lists only the 400 hotline.
+Mark domestic-only contact blocks with `data-zh-only` so
 the English build omits them. Overseas inquiries use the existing WhatsApp contact.
 
 Run `python3 build_pages.py` after editing. The CMS publisher runs this build and

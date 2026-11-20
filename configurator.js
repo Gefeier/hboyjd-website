@@ -971,7 +971,7 @@ btnSubmit.addEventListener('click', () => {
         }
     }).catch(err => {
         console.error('[inquiry] submit failed:', err);
-        alert('提交失败：' + (err.message || '网络异常') + '\n\n您也可以直接拨打销售热线 400-158-8106');
+        alert('提交失败：' + (err.message || '网络异常') + '\n\n您也可以直接拨打销售热线 400-158-8106 或公司座机 0710-3780666');
     }).finally(() => {
         btnSubmit.disabled = false;
         btnSubmit.textContent = origText;

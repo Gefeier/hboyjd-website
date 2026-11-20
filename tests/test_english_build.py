@@ -18,7 +18,8 @@ class EnglishBuildTests(unittest.TestCase):
     def test_english_contact_keeps_overseas_link_and_email(self):
         parser = EnglishPage("/", "/en/")
         parser.feed(
-            '<div data-zh-only><span>Phone</span><a href="tel:4001588106">400-158-8106</a></div>'
+            '<div data-zh-only><span>Phone</span><a href="tel:4001588106">400-158-8106</a><br>'
+            '<a href="tel:07103780666">0710-3780666</a></div>'
             '<a href="https://wa.me/8615334225597">WhatsApp</a>'
             '<script type="application/ld+json">'
             '{"@type":"Organization","telephone":"+86-400-158-8106","email":"505766636@qq.com"}'
@@ -27,6 +28,7 @@ class EnglishBuildTests(unittest.TestCase):
         output = "".join(parser.output)
         self.assertTrue(output.startswith('<a href="https://wa.me/8615334225597">WhatsApp</a>'))
         self.assertNotIn('400', output)
+        self.assertNotIn('3780666', output)
         self.assertNotIn('telephone', output)
         self.assertIn('"email":"505766636@qq.com"', output)
 
