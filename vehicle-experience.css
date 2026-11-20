@@ -30,3 +30,5 @@
 .environment-options button{border:1px solid #40526b;border-radius:6px;background:#182438;color:#bccce1;min-height:44px;padding:9px 17px;font-size:12px}
 .environment-options button[aria-pressed=true]{background:#2b4669;color:#fff;border-color:#8ab5e7}
 @media(max-width:540px){.environment-options{padding:12px}.environment-options button{flex:1;padding-inline:8px;font-size:11px}#customColorHelp{flex-basis:100%;font-size:10px}.custom-paint-row{gap:9px}.focus-option{min-height:44px}}
+
+html:lang(en) [data-zh-only], html:not(:lang(en)) [data-en-only] { display: none; }

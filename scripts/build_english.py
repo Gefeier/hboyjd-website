@@ -59,6 +59,8 @@ class EnglishPage(HTMLParser):
         self.translations = translations
         self.pages = pages
         self.raw_tag = None
+        self.omit_element = False
+        self.organization_schema = False
 
     def translate(self, value):
         if self.translations is None or not re.search(r"[\u4e00-\u9fff]", value):
@@ -82,8 +84,16 @@ class EnglishPage(HTMLParser):
                 self.skip_depth += 1
             return
         attrs = dict(attrs)
+        if "data-zh-only" in attrs:
+            if self.output and self.output[-1].isspace():
+                self.output[-1] = self.output[-1].rstrip(" \t")
+            if tag not in VOID and not closed:
+                self.skip_depth = 1
+                self.omit_element = True
+            return
         if tag in ("script", "style"):
             self.raw_tag = tag
+            self.organization_schema = attrs.get("type") == "application/ld+json"
         translated = attrs.get("data-en")
         if tag == "html":
             attrs["lang"] = "en"
@@ -141,9 +151,13 @@ class EnglishPage(HTMLParser):
     def handle_endtag(self, tag):
         if tag == self.raw_tag:
             self.raw_tag = None
+            self.organization_schema = False
         if self.skip_depth:
             self.skip_depth -= 1
             if self.skip_depth:
+                return
+            if self.omit_element:
+                self.omit_element = False
                 return
         if tag == "select":
             self.select_first = None
@@ -151,6 +165,11 @@ class EnglishPage(HTMLParser):
 
     def handle_data(self, data):
         if not self.skip_depth:
+            if self.organization_schema and '"telephone"' in data:
+                schema = json.loads(data)
+                if isinstance(schema, dict) and schema.get("@type") == "Organization":
+                    schema.pop("telephone", None)
+                    data = json.dumps(schema, ensure_ascii=False, separators=(",", ":"))
             if not self.raw_tag and self.translations is not None and re.search(r"[\u4e00-\u9fff]", data):
                 translated = self.translate(data)
                 self.output.append(escape(translated, quote=False))

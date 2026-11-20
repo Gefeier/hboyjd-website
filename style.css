@@ -1941,3 +1941,5 @@ body.news-page-body {
   .home-3d-copy{padding:26px 23px 28px}.home-3d-eyebrow{margin-bottom:13px;font-size:8px}.home-3d-copy h2{font-size:29px;margin-bottom:12px}.home-3d-copy>p{max-width:none}.home-3d-features{margin:18px 0}.home-3d-actions{gap:10px 17px;margin-bottom:16px}
 }
 @media(prefers-reduced-motion:reduce){.home-3d-visual img{transition:none}.home-3d-visual:hover img{transform:none}}
+
+html:lang(en) [data-zh-only] { display: none; }
